@@ -1,0 +1,10 @@
+name: oath
+description: Swear a Paladin's Oath to code righteousness by enforcing lints.
+version: 0.1.0
+repository: https://github.com/matanlurey/oath.dart
+
+environment:
+  sdk: ^3.3.0
+
+dependencies:
+  lints: ^3.0.0

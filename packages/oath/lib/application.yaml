@@ -1,0 +1,20 @@
+#    ____        _   _     
+#  / __ \      | | | |    
+# | |  | | __ _| |_| |__  
+# | |  | |/ _` | __| '_ \ 
+# | |__| | (_| | |_| | | |
+#  \____/ \__,_|\__|_| |_| of Application.
+# ------------------------------------------------------------------------------
+#
+# Flexible linting for applications:
+# - Removes the need to document all public APIs
+#
+# Format: https://dart.dev/tools/analysis#the-analysis-options-file
+
+# Start with an "Oath of Library".
+include: package:oath/library.yaml
+
+linter:
+  rules:
+    public_member_api_docs: false
+    package_api_docs: false
