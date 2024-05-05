@@ -13,3 +13,11 @@ of valor:
 
 include: package:oath/library.yaml
 ```
+
+Or, for Flutter packages:
+
+```yaml
+# analysis_options.yaml
+
+include: package:oath/flutter/library.yaml
+```
