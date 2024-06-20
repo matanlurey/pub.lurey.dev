@@ -11,7 +11,7 @@ of valor:
 ```yaml
 # analysis_options.yaml
 
-include: package:oath/library.yaml
+include: package:oath/strict.yaml
 ```
 
 Or, for Flutter packages:
@@ -19,5 +19,21 @@ Or, for Flutter packages:
 ```yaml
 # analysis_options.yaml
 
-include: package:oath/flutter/library.yaml
+include: package:oath/flutter/strict.yaml
+```
+
+As an alternative, use a _relaxed_ set of lints:
+
+```yaml
+# analysis_options.yaml
+
+include: package:oath/relaxed.yaml
+```
+
+Or, for Flutter:
+
+```yaml
+# analysis_options.yaml
+
+include: package:oath/flutter/relaxed.yaml
 ```
