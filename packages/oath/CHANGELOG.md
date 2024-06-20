@@ -35,6 +35,10 @@ Removed the following lints:
 - [`unnecessary_raw_strings`](https://dart.dev/tools/linter-rules/unnecessary_raw_strings):
   Too prescriptive, raw strings can be useful for readability.
 
+In addition, _updated [`package:lints` to `^4.0.0`][lints-4.0.0] (was `^3.0.0`)_.
+
+[lints-4.0.0]: https://pub.dev/packages/lints/changelog#400
+
 ## 0.1.1
 
 Added a new set, `package:oath/flutter/*.yaml`, for Flutter packages.
