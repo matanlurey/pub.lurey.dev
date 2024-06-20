@@ -3,7 +3,7 @@
 # | |  | | __ _| |_| |__  
 # | |  | |/ _` | __| '_ \ 
 # | |__| | (_| | |_| | | |
-#  \____/ \__,_|\__|_| |_| of Library.
+#  \____/ \__,_|\__|_| |_| of Strictness.
 # ------------------------------------------------------------------------------
 #
 # Our most popular covenant. Includes:
@@ -44,12 +44,10 @@ linter:
     - avoid_redundant_argument_values
     - avoid_returning_this
     - avoid_setters_without_getters
-    - avoid_types_on_closure_parameters
     - avoid_unused_constructor_parameters
     - avoid_void_async
-    - cascade_invocations
-    - cast_nullable_to_non_nullable
     - combinators_ordering
+    - comment_references
     - conditional_uri_does_not_exist
     - deprecated_consistency
     - directives_ordering
@@ -58,10 +56,10 @@ linter:
     - implicit_reopen
     - leading_newlines_in_multiline_strings
     - matching_super_parameters
+    - missing_code_block_language_in_doc_comment
     - no_literal_bool_comparisons
     - noop_primitive_operations
     - omit_local_variable_types
-    - one_member_abstracts
     - only_throw_errors
     - package_api_docs
     - prefer_asserts_in_initializer_lists
@@ -80,6 +78,7 @@ linter:
     - unnecessary_breaks
     - unnecessary_lambdas
     - unnecessary_library_directive
+    - unnecessary_library_name
     - unnecessary_parenthesis
     - unnecessary_raw_strings
     - unreachable_from_main

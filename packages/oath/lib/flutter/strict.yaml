@@ -3,13 +3,13 @@
 # | |  | | __ _| |_| |__  
 # | |  | |/ _` | __| '_ \ 
 # | |__| | (_| | |_| | | |
-#  \____/ \__,_|\__|_| |_| of (Flutter) Library.
+#  \____/ \__,_|\__|_| |_| of Strictness (Flutter Edition)
 # ------------------------------------------------------------------------------
 #
 # Format: https://dart.dev/tools/analysis#the-analysis-options-file
 
-# Start with an "Oath of Library".
-include: package:oath/library.yaml
+# Start with the same strict base lints.
+include: package:oath/strict.yaml
 
 # Add flutter-specific prohibitions.
 linter:

@@ -3,18 +3,21 @@
 # | |  | | __ _| |_| |__  
 # | |  | |/ _` | __| '_ \ 
 # | |__| | (_| | |_| | | |
-#  \____/ \__,_|\__|_| |_| of Application.
+#  \____/ \__,_|\__|_| |_| of Relaxed (Flutter Edition)
 # ------------------------------------------------------------------------------
 #
 # Flexible linting for applications:
 # - Removes the need to document all public APIs
+# - Removes some lints that cause a lot of churn with little benefit
 #
 # Format: https://dart.dev/tools/analysis#the-analysis-options-file
 
-# Start with an "Oath of Library".
-include: package:oath/library.yaml
+# Start with the same relaxed base lints.
+include: package:oath/relaxed.yaml
 
 linter:
   rules:
+    avoid_redundant_argument_values: false
     public_member_api_docs: false
     package_api_docs: false
+    unnecessary_raw_strings: false
