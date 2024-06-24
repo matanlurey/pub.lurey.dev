@@ -2,7 +2,7 @@
 
 name: mansion
 description: A stately library for crafting and deciphering ANSI escape codes.
-version: 0.0.0
+version: 0.1.0
 
 environment:
   sdk: ^3.4.0
