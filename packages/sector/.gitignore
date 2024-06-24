@@ -1,0 +1,6 @@
+.dart_tool/
+coverage/
+benchmark/*.exe
+doc/api/
+
+pubspec.lock
