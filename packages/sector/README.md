@@ -2,6 +2,11 @@
 
 A 🔥 _fast_ (benchmarked) and 👍🏼 _intuitive_ (idiomatic) 2D Grid API.
 
+[![CI](https://github.com/matanlurey/sector/actions/workflows/ci.yaml/badge.svg)](https://github.com/matanlurey/sector/actions/workflows/ci.yaml)
+[![Coverage Status](https://coveralls.io/repos/github/matanlurey/sector/badge.svg?branch=main)](https://coveralls.io/github/matanlurey/sector?branch=main)
+[![Pub Package](https://img.shields.io/pub/v/sector.svg)](https://pub.dev/packages/sector)
+[![Dartdoc reference](https://img.shields.io/badge/dartdoc-reference-blue.svg)](https://pub.dev/documentation/sector/latest/)
+
 ## Getting Started
 
 Add a dependency in your `pubspec.yaml` or run the following command:
