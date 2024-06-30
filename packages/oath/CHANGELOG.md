@@ -1,5 +1,12 @@
 # Change Log
 
+## 0.2.0-dev
+
+Added new experimental tools:
+
+- `package:oath/tools/coverage.dart`: A script to generate coverage reports.
+- `package:oath/tools/dartdoc.dart`: A script to generate Dart documentation.
+
 ## 0.2.0
 
 **BREAKING CHANGE**: `library.yaml` was renmed to `strict.yaml`, and ...
