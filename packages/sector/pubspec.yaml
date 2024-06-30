@@ -1,8 +1,8 @@
 # Format: https://dart.dev/tools/pub/pubspec
 
 name: sector
-description: A fast and intuitive 2D Grid API.
-version: 0.1.0
+description: Fast and intuitive 2D Grid and grid-based utilities for Dart.
+version: 0.1.1
 
 environment:
   sdk: ^3.4.0

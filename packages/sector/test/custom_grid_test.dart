@@ -1,9 +1,21 @@
 import 'package:sector/sector.dart';
 
 import '_grid_suite.dart';
+import '_sized_grid_suite.dart';
 
 void main() {
-  runSuite(
+  runGridTests(
+    'NaiveListGrid',
+    filled: NaiveListGrid.filled,
+    from: NaiveListGrid.from,
+    generate: NaiveListGrid.generate,
+    fromCells: NaiveListGrid.fromCells,
+    fromRows: NaiveListGrid.fromRows,
+    fromColumns: NaiveListGrid.fromColumns,
+    empty: NaiveListGrid.empty,
+  );
+
+  runResizableGridTests(
     'NaiveListGrid',
     filled: NaiveListGrid.filled,
     from: NaiveListGrid.from,

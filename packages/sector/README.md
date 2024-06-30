@@ -7,6 +7,8 @@ A 🔥 _fast_ (benchmarked) and 👍🏼 _intuitive_ (idiomatic) 2D Grid API.
 [![Pub Package](https://img.shields.io/pub/v/sector.svg)](https://pub.dev/packages/sector)
 [![Dartdoc reference](https://img.shields.io/badge/dartdoc-reference-blue.svg)](https://pub.dev/documentation/sector/latest/)
 
+![Demo](https://github.com/matanlurey/sector/assets/168174/259a0d08-8a7c-4830-beb9-491fc1ea47d9)
+
 ## Getting Started
 
 Add a dependency in your `pubspec.yaml` or run the following command:

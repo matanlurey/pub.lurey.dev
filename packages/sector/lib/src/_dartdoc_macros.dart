@@ -7,11 +7,8 @@
 /// >
 /// > For example, the [ListGrid] class supports growable grids, but the default
 /// > grid implementation returned by [Grid.asSubGrid] only supports resizing if
-/// > the view is "complete"; meaning that [Grid.clear] only works if the view
-/// > covers the entire grid, [Rows.insertAt], [Rows.removeAt] only work if the
-/// > view's width is the same as the original grid's width and
-/// > [Columns.insertAt], [Columns.removeAt] only work if the view's height is the
-/// > same as the original grid's height.
+/// > the view is "complete"; and [TypedDataGrid] does not support resizing at
+/// > all.
 /// {@endtemplate}
 library;
 

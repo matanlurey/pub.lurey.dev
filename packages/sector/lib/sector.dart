@@ -16,6 +16,8 @@
 /// // └───────┘
 /// ```
 ///
+/// For better memory and performance, use [Uint8Grid] instead of `Grid<int>`.
+///
 /// ## Custom Implementations
 ///
 /// The default implementation of [Grid] is [ListGrid], which is a dense grid
@@ -55,3 +57,4 @@ export 'src/grid_extension.dart' show GridExtension;
 export 'src/grid_impl.dart' show GridImpl;
 export 'src/list_grid.dart' show ListGrid;
 export 'src/rows.dart' show Rows, RowsBase;
+export 'src/typed_data_grid.dart' show TypedDataGrid, Uint8Grid;
