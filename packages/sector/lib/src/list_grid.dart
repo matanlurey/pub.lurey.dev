@@ -145,6 +145,27 @@ final class ListGrid<T> with Grid<T> {
     return ListGrid._([], 0);
   }
 
+  /// Creates a grid that is a _view_ of [cells] in row-major order.
+  ///
+  /// The [cells] must have a length equal to the product of the [width] and
+  /// [height], and the grid will have a width and height equal to the provided
+  /// dimensions.
+  ///
+  /// Unlike [ListGrid.fromCells], this constructor does not copy the cells, and
+  /// instead provides a view into the provided list. This means that changes to
+  /// the cells will be reflected in the grid, and vice versa.
+  factory ListGrid.view(List<T> cells, {required int width}) {
+    RangeError.checkNotNegative(width, 'width');
+    if (cells.length % width != 0) {
+      throw ArgumentError.value(
+        cells,
+        'list',
+        'Number of cells must be a multiple of the width.',
+      );
+    }
+    return ListGrid._(cells, width);
+  }
+
   ListGrid._(this._cells, this._width);
 
   final List<T> _cells;
@@ -163,15 +184,88 @@ final class ListGrid<T> with Grid<T> {
   Columns<T> get columns => _Columns(this);
 
   @pragma('vm:prefer-inline')
+  int _index(int x, int y) => x + y * _width;
+
+  @pragma('vm:prefer-inline')
+  (int, int) _offset(int index) {
+    final y = index ~/ _width;
+    final x = index % _width;
+    return (x, y);
+  }
+
+  @pragma('vm:prefer-inline')
   @override
   T getUnchecked(int x, int y) {
-    return _cells[x + y * _width];
+    return _cells[_index(x, y)];
   }
 
   @pragma('vm:prefer-inline')
   @override
   void setUnchecked(int x, int y, T value) {
-    _cells[x + y * _width] = value;
+    _cells[_index(x, y)] = value;
+  }
+
+  @override
+  bool contains(T element) => _cells.contains(element);
+
+  @override
+  (int, int)? offsetOf(
+    T element, [
+    (int, int) start = (0, 0),
+  ]) {
+    // Convert the offset into an index.
+    final offset = _index(start.$1, start.$2);
+    final index = _cells.indexOf(element, offset);
+    if (index == -1) {
+      return null;
+    }
+    return _offset(index);
+  }
+
+  @override
+  (int, int)? offsetWhere(
+    bool Function(T) test, [
+    (int, int) start = (0, 0),
+  ]) {
+    // Convert the offset into an index.
+    final offset = _index(start.$1, start.$2);
+    final index = _cells.indexWhere(test, offset);
+    if (index == -1) {
+      return null;
+    }
+    return _offset(index);
+  }
+
+  @override
+  (int, int)? lastOffsetOf(
+    T element, [
+    (int, int)? end,
+  ]) {
+    end ??= (width - 1, height - 1);
+
+    // Convert the offset into an index.
+    final offset = _index(end.$1, end.$2);
+    final index = _cells.lastIndexOf(element, offset);
+    if (index == -1) {
+      return null;
+    }
+    return _offset(index);
+  }
+
+  @override
+  (int, int)? lastOffsetWhere(
+    bool Function(T) test, [
+    (int, int)? end,
+  ]) {
+    end ??= (width - 1, height - 1);
+
+    // Convert the offset into an index.
+    final offset = _index(end.$1, end.$2);
+    final index = _cells.lastIndexWhere(test, offset);
+    if (index == -1) {
+      return null;
+    }
+    return _offset(index);
   }
 
   @override

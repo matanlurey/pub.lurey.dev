@@ -16,7 +16,18 @@
 /// // └───────┘
 /// ```
 ///
-/// For better memory and performance, use [Uint8Grid] instead of `Grid<int>`.
+/// For better `Grid<int>` memory and performance, use [ListGrid.view] with a
+/// backing store of a typed data list, such as [Uint8List] or [Float32List]:
+/// ```dart
+/// final buffer = Uint8List(9);
+/// final grid = ListGrid.view(buffer, width: 3);
+/// print(grid);
+/// // ┌───────┐
+/// // │ 0 0 0 │
+/// // │ 0 0 0 │
+/// // │ 0 0 0 │
+/// // └───────┘
+/// ```
 ///
 /// ## Custom Implementations
 ///
@@ -49,6 +60,8 @@
 /// built-in methods (either from a mixin or [GridImpl]) with your own.
 library;
 
+import 'dart:typed_data';
+
 import 'package:sector/sector.dart';
 
 export 'src/columns.dart' show Columns, ColumnsBase;
@@ -57,4 +70,3 @@ export 'src/grid_extension.dart' show GridExtension;
 export 'src/grid_impl.dart' show GridImpl;
 export 'src/list_grid.dart' show ListGrid;
 export 'src/rows.dart' show Rows, RowsBase;
-export 'src/typed_data_grid.dart' show TypedDataGrid, Uint8Grid;

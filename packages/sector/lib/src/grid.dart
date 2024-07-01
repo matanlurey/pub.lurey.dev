@@ -7,7 +7,7 @@ import 'package:sector/src/_dartdoc_macros.dart';
 ///
 /// Where as a [List] is a 1-dimensional data structure of elements, a [Grid] is
 /// a 2-dimensional data structure of elements, where each element is accessed
-/// by its `x` and `y` coordinates ([get], [set], [contains]).
+/// by its `x` and `y` coordinates ([get], [set], [containsXY]).
 ///
 /// The `x` and `y` coordinates are zero-based, where `x` is the horizontal
 /// axis and `y` is the vertical axis. The origin `(0, 0)` is at the top-left
@@ -196,6 +196,93 @@ abstract mixin class Grid<T> {
   /// ```
   bool get isEmpty => width == 0 || height == 0;
 
+  /// Returns `true` if the grid contains the provided [element].
+  ///
+  /// The equality of the elements is determined by the `==` operator.
+  bool contains(T element) => offsetOf(element) != null;
+
+  /// Returns the first `(x, y)` offset of the provided [element] in the grid.
+  ///
+  /// If [start] is provided, the search starts at the provided offset,
+  /// otherwise it starts at `(0, 0)`. If the element is not found, `null` is
+  /// returned.
+  ///
+  /// The equality of the elements is determined by the `==` operator.
+  ///
+  /// > [!NOTE]
+  /// > The order of the search is not guaranteed, and may vary depending on the
+  /// > implementation of the grid. If the order of the search is important, it
+  /// > is recommended to use [rows] or [columns] to iterate over the grid and
+  /// > search for the element.
+  (int, int)? offsetOf(T element, [(int, int) start = (0, 0)]) {
+    return offsetWhere((e) => e == element, start);
+  }
+
+  /// Returns the first `(x, y)` offset where [test] returns `true`.
+  ///
+  /// If [start] is provided, the search starts at the provided offset,
+  /// otherwise it starts at `(0, 0)`. If the element is not found, `null` is
+  /// returned.
+  ///
+  /// > [!NOTE]
+  /// > The order of the search is not guaranteed, and may vary depending on the
+  /// > implementation of the grid. If the order of the search is important, it
+  /// > is recommended to use [rows] or [columns] to iterate over the grid and
+  /// > search for the element.
+  (int, int)? offsetWhere(bool Function(T) test, [(int, int) start = (0, 0)]) {
+    for (var y = start.$1; y < height; y++) {
+      for (var x = start.$2; x < width; x++) {
+        if (test(getUnchecked(x, y))) {
+          return (x, y);
+        }
+      }
+    }
+    return null;
+  }
+
+  /// Returns the last `(x, y)` offset of the provided [element] in the grid.
+  ///
+  /// If [end] is provided, the search starts at the provided offset, otherwise
+  /// it starts at the bottom-right corner of the grid. If the element is not
+  /// found, `null` is returned.
+  ///
+  /// The equality of the elements is determined by the `==` operator.
+  ///
+  /// > [!NOTE]
+  /// > The order of the search is not guaranteed, and may vary depending on the
+  /// > implementation of the grid. If the order of the search is important, it
+  /// > is recommended to use [rows] or [columns] to iterate over the grid and
+  /// > search for the element.
+  (int, int)? lastOffsetOf(T element, [(int, int)? end]) {
+    return lastOffsetWhere((e) => e == element, end);
+  }
+
+  /// Returns the last `(x, y)` offset where [test] returns `true`.
+  ///
+  /// If [end] is provided, the search starts at the provided offset, otherwise
+  /// it starts at the bottom-right corner of the grid. If the element is not
+  /// found, `null` is returned.
+  ///
+  /// > [!NOTE]
+  /// > The order of the search is not guaranteed, and may vary depending on the
+  /// > implementation of the grid. If the order of the search is important, it
+  /// > is recommended to use [rows] or [columns] to iterate over the grid and
+  /// > search for the element.
+  (int, int)? lastOffsetWhere(
+    bool Function(T) test, [
+    (int, int)? end,
+  ]) {
+    end ??= (width - 1, height - 1);
+    for (var y = end.$1; y >= 0; y--) {
+      for (var x = end.$2; x >= 0; x--) {
+        if (test(getUnchecked(x, y))) {
+          return (x, y);
+        }
+      }
+    }
+    return null;
+  }
+
   /// Returns `true` if the grid contains an element at the given [x] and [y].
   ///
   /// The `x` and `y` coordinates are zero-based, where `x` is the horizontal
@@ -206,10 +293,10 @@ abstract mixin class Grid<T> {
   ///
   /// ```dart
   /// final grid = Grid.filled(3, 3, 0);
-  /// print(grid.contains(1, 1)); // true
-  /// print(grid.contains(3, 3)); // false
+  /// print(grid.containsXY(1, 1)); // true
+  /// print(grid.containsXY(3, 3)); // false
   /// ```
-  bool contains(int x, int y) => x >= 0 && x < width && y >= 0 && y < height;
+  bool containsXY(int x, int y) => x >= 0 && x < width && y >= 0 && y < height;
 
   /// Returns `true` if the grid contains the bounds provided.
   ///
@@ -225,7 +312,7 @@ abstract mixin class Grid<T> {
   /// print(grid.containsXYWH(2, 2, 2, 2)); // false
   /// ```
   bool containsXYWH(int x, int y, int width, int height) {
-    return contains(x, y) && contains(x + width - 1, y + height - 1);
+    return containsXY(x, y) && containsXY(x + width - 1, y + height - 1);
   }
 
   /// Returns the element at the given [x] and [y].

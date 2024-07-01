@@ -2,6 +2,7 @@ import 'dart:io' as io;
 import 'dart:isolate';
 
 import 'dart:math' show Random;
+import 'dart:typed_data';
 
 import 'package:sector/sector.dart';
 
@@ -31,10 +32,15 @@ void main(List<String> args) async {
     return;
   }
   if (args.contains('--parallel') || args.contains('-p')) {
-    final grids = List<Uint8Grid>.generate(
-      io.Platform.numberOfProcessors,
-      (_) => Uint8Grid.generate(20, 10, (x, y) => Random().nextInt(2)),
-    );
+    final grids = List<Grid<int>>.generate(io.Platform.numberOfProcessors, (_) {
+      final buffer = Uint8List(20 * 10);
+      final grid = ListGrid.view(buffer, width: 20);
+      final random = Random();
+      for (var i = 0; i < buffer.length; i++) {
+        buffer[i] = random.nextInt(2);
+      }
+      return grid;
+    });
 
     final stopwatch = Stopwatch()..start();
 

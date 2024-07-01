@@ -12,8 +12,8 @@ extension GridSubject<T> on Subject<Grid<T>> {
 
   Subject<bool> get isEmpty => has((it) => it.isEmpty, 'isEmpty');
 
-  Subject<bool> contains(int x, int y) {
-    return has((it) => it.contains(x, y), 'contains($x, $y)');
+  Subject<bool> containsXY(int x, int y) {
+    return has((it) => it.containsXY(x, y), 'contains($x, $y)');
   }
 
   Subject<bool> containsXYWH(int x, int y, int width, int height) {

@@ -7,8 +7,8 @@
 /// >
 /// > For example, the [ListGrid] class supports growable grids, but the default
 /// > grid implementation returned by [Grid.asSubGrid] only supports resizing if
-/// > the view is "complete"; and [TypedDataGrid] does not support resizing at
-/// > all.
+/// > the view is "complete"; and [ListGrid.view] only supports resizing if the
+/// > backing list is growable.
 /// {@endtemplate}
 library;
 

@@ -24,7 +24,7 @@ extension GridImpl on Never {
   ///
   /// If the coordinates are out of bounds, a [RangeError] is thrown.
   static void checkBoundsExclusive(Grid<void> grid, int x, int y) {
-    if (!grid.contains(x, y)) {
+    if (!grid.containsXY(x, y)) {
       throw RangeError('Coordinates out of bounds: ($x, $y)');
     }
   }

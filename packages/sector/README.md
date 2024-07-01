@@ -39,7 +39,7 @@ Check the bounds, `get`, and `set` elements:
 
 ```dart
 // Check if a point is within the bounds of the grid.
-if (grid.contains(0, 0)) {
+if (grid.containsXY(0, 0)) {
   // ...
 }
 

@@ -7,3 +7,10 @@ presets:
 
 platforms:
   - vm
+
+fold_stack_frames:
+  except:
+    - checks
+    - test
+    - test_api
+    - stream_channel
