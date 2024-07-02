@@ -221,6 +221,11 @@ void runGridTests(
       final grid = filled(3, 3, 0);
       check(grid).containsXYWH(1, 1, 1, 1).isTrue();
     });
+
+    test('should return if an element exists', () {
+      final grid = filled(3, 3, 0);
+      check(grid.contains(0)).isTrue();
+    });
   });
 
   group('<$testing>.get', () {
@@ -573,110 +578,6 @@ void runGridTests(
     test('should return false if the element is not in the grid', () {
       final grid = filled(3, 3, 1);
       check(grid).has((g) => g.contains(0), 'contains(0)').isFalse();
-    });
-  });
-
-  group('<$testing>.offsetOf', () {
-    test('should return an offset if found', () {
-      final grid = filled(3, 3, 0);
-      grid.set(1, 1, 1);
-
-      final offset = grid.offsetOf(1);
-      check(offset).equals((1, 1));
-    });
-
-    test('should return null if not found', () {
-      final grid = filled(3, 3, 0);
-      check(grid.offsetOf(1)).isNull();
-    });
-
-    test('should return an offset with a start offset', () {
-      final grid = filled(3, 3, 0);
-      grid.set(1, 1, 1);
-
-      final found = grid.offsetOf(1, (1, 1));
-      check(found).equals((1, 1));
-
-      final notFound = grid.offsetOf(1, (1, 2));
-      check(notFound).isNull();
-    });
-  });
-
-  group('<$testing>.offsetWhere', () {
-    test('should return an offset if found', () {
-      final grid = filled(3, 3, 0);
-      grid.set(1, 1, 1);
-
-      final offset = grid.offsetWhere((it) => it == 1);
-      check(offset).equals((1, 1));
-    });
-
-    test('should return null if not found', () {
-      final grid = filled(3, 3, 0);
-      check(grid.offsetWhere((it) => it == 1)).isNull();
-    });
-
-    test('should return an offset with a start offset', () {
-      final grid = filled(3, 3, 0);
-      grid.set(1, 1, 1);
-
-      final found = grid.offsetWhere((it) => it == 1, (1, 1));
-      check(found).equals((1, 1));
-
-      final notFound = grid.offsetWhere((it) => it == 1, (1, 2));
-      check(notFound).isNull();
-    });
-  });
-
-  group('<$testing>.lastOffsetOf', () {
-    test('should return an offset if found', () {
-      final grid = filled(3, 3, 0);
-      grid.set(1, 1, 1);
-
-      final offset = grid.lastOffsetOf(1);
-      check(offset).equals((1, 1));
-    });
-
-    test('should return null if not found', () {
-      final grid = filled(3, 3, 0);
-      check(grid.lastOffsetOf(1)).isNull();
-    });
-
-    test('should return an offset with a start offset', () {
-      final grid = filled(3, 3, 0);
-      grid.set(1, 1, 1);
-
-      final found = grid.lastOffsetOf(1, (1, 1));
-      check(found).equals((1, 1));
-
-      final notFound = grid.lastOffsetOf(1, (1, 0));
-      check(notFound).isNull();
-    });
-  });
-
-  group('<$testing>.lastOffsetWhere', () {
-    test('should return an offset if found', () {
-      final grid = filled(3, 3, 0);
-      grid.set(1, 1, 1);
-
-      final offset = grid.lastOffsetWhere((it) => it == 1);
-      check(offset).equals((1, 1));
-    });
-
-    test('should return null if not found', () {
-      final grid = filled(3, 3, 0);
-      check(grid.lastOffsetWhere((it) => it == 1)).isNull();
-    });
-
-    test('should return an offset with a start offset', () {
-      final grid = filled(3, 3, 0);
-      grid.set(1, 1, 1);
-
-      final found = grid.lastOffsetWhere((it) => it == 1, (1, 1));
-      check(found).equals((1, 1));
-
-      final notFound = grid.lastOffsetWhere((it) => it == 1, (1, 0));
-      check(notFound).isNull();
     });
   });
 

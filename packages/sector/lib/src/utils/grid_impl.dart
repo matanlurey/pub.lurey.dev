@@ -1,7 +1,7 @@
 import 'dart:math' as math;
 
 import 'package:sector/sector.dart';
-import 'package:sector/src/sub_grid_view.dart';
+import 'package:sector/src/views/sub_grid_view.dart';
 
 /// A collection of static methods for implementing the [Grid] interface.
 ///

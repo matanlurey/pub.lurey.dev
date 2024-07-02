@@ -18,16 +18,6 @@
   }
   ```
 
-- Added `<Grid>.{offsetOf|offsetWhere|lastOffsetOf|lastOffsetWhere}` to find the
-  index of an element within the grid, similar to `List.{indexOf|lastIndexOf}`:
-
-  ```dart
-  final offsetA = grid.offsetOf('#');
-  final offsetB = grid.offsetWhere((element) => element == '#');
-  final lastOffsetA = grid.lastOffsetOf('#');
-  final lastOffsetB = grid.lastOffsetWhere((element) => element == '#');
-  ```
-
 - Removed `Uint8Grid`, in favor of `ListGrid.view(List<T>, {int width})`:
 
   ```diff
@@ -38,6 +28,18 @@
   This reducs the API surface, and focuses on the key use-case of creating a
   grid without copying the data: using compact lists as backing storage without
   generics or codegen.
+
+- Added `GridIterator`, `GridIterable` and `Traversal`. These classes provide
+  ways to iterate over the elements of a grid, and to traverse the grid in
+  different directions.
+
+  For example, a _row-major_ traversal:
+
+  ```dart
+  for (final element in grid.traverse(rowMajor())) {
+    // ...
+  }
+  ```
 
 ## 0.1.1
 

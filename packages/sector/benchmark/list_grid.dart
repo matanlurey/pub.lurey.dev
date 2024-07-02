@@ -11,6 +11,7 @@ void main() {
   _IterateGetXYGrid().report();
   _IterateGetXYUncheckedGrid().report();
   _IterateRowsGrid().report();
+  _IteratorTraversalGrid().report();
   _AddRowsGrid().report();
 }
 
@@ -97,6 +98,30 @@ final class _IterateRowsGrid extends BenchmarkBase {
       for (final cell in row) {
         adder += cell;
       }
+    }
+    if (adder == random.nextInt(1000) + 1) {
+      throw StateError('This should never happen');
+    }
+  }
+}
+
+final class _IteratorTraversalGrid extends BenchmarkBase {
+  _IteratorTraversalGrid() : super('Iterate 80x24 grid using rowMajor');
+
+  late Grid<int> grid;
+  late math.Random random;
+
+  @override
+  void setup() {
+    grid = Grid<int>.filled(80, 24, 0);
+    random = math.Random();
+  }
+
+  @override
+  void run() {
+    var adder = 0;
+    for (final cell in grid.traverse()) {
+      adder += cell;
     }
     if (adder == random.nextInt(1000) + 1) {
       throw StateError('This should never happen');

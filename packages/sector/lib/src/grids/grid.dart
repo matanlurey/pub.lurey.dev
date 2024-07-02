@@ -199,88 +199,15 @@ abstract mixin class Grid<T> {
   /// Returns `true` if the grid contains the provided [element].
   ///
   /// The equality of the elements is determined by the `==` operator.
-  bool contains(T element) => offsetOf(element) != null;
-
-  /// Returns the first `(x, y)` offset of the provided [element] in the grid.
-  ///
-  /// If [start] is provided, the search starts at the provided offset,
-  /// otherwise it starts at `(0, 0)`. If the element is not found, `null` is
-  /// returned.
-  ///
-  /// The equality of the elements is determined by the `==` operator.
-  ///
-  /// > [!NOTE]
-  /// > The order of the search is not guaranteed, and may vary depending on the
-  /// > implementation of the grid. If the order of the search is important, it
-  /// > is recommended to use [rows] or [columns] to iterate over the grid and
-  /// > search for the element.
-  (int, int)? offsetOf(T element, [(int, int) start = (0, 0)]) {
-    return offsetWhere((e) => e == element, start);
-  }
-
-  /// Returns the first `(x, y)` offset where [test] returns `true`.
-  ///
-  /// If [start] is provided, the search starts at the provided offset,
-  /// otherwise it starts at `(0, 0)`. If the element is not found, `null` is
-  /// returned.
-  ///
-  /// > [!NOTE]
-  /// > The order of the search is not guaranteed, and may vary depending on the
-  /// > implementation of the grid. If the order of the search is important, it
-  /// > is recommended to use [rows] or [columns] to iterate over the grid and
-  /// > search for the element.
-  (int, int)? offsetWhere(bool Function(T) test, [(int, int) start = (0, 0)]) {
-    for (var y = start.$1; y < height; y++) {
-      for (var x = start.$2; x < width; x++) {
-        if (test(getUnchecked(x, y))) {
-          return (x, y);
+  bool contains(T element) {
+    for (var y = 0; y < height; y++) {
+      for (var x = 0; x < width; x++) {
+        if (getUnchecked(x, y) == element) {
+          return true;
         }
       }
     }
-    return null;
-  }
-
-  /// Returns the last `(x, y)` offset of the provided [element] in the grid.
-  ///
-  /// If [end] is provided, the search starts at the provided offset, otherwise
-  /// it starts at the bottom-right corner of the grid. If the element is not
-  /// found, `null` is returned.
-  ///
-  /// The equality of the elements is determined by the `==` operator.
-  ///
-  /// > [!NOTE]
-  /// > The order of the search is not guaranteed, and may vary depending on the
-  /// > implementation of the grid. If the order of the search is important, it
-  /// > is recommended to use [rows] or [columns] to iterate over the grid and
-  /// > search for the element.
-  (int, int)? lastOffsetOf(T element, [(int, int)? end]) {
-    return lastOffsetWhere((e) => e == element, end);
-  }
-
-  /// Returns the last `(x, y)` offset where [test] returns `true`.
-  ///
-  /// If [end] is provided, the search starts at the provided offset, otherwise
-  /// it starts at the bottom-right corner of the grid. If the element is not
-  /// found, `null` is returned.
-  ///
-  /// > [!NOTE]
-  /// > The order of the search is not guaranteed, and may vary depending on the
-  /// > implementation of the grid. If the order of the search is important, it
-  /// > is recommended to use [rows] or [columns] to iterate over the grid and
-  /// > search for the element.
-  (int, int)? lastOffsetWhere(
-    bool Function(T) test, [
-    (int, int)? end,
-  ]) {
-    end ??= (width - 1, height - 1);
-    for (var y = end.$1; y >= 0; y--) {
-      for (var x = end.$2; x >= 0; x--) {
-        if (test(getUnchecked(x, y))) {
-          return (x, y);
-        }
-      }
-    }
-    return null;
+    return false;
   }
 
   /// Returns `true` if the grid contains an element at the given [x] and [y].
@@ -439,6 +366,34 @@ abstract mixin class Grid<T> {
   /// // [0, 0, 0]
   /// ```
   Columns<T> get columns;
+
+  /// Returns an iterable that traverses the grid in a specific [order].
+  ///
+  /// The order of the traversal is determined by the provided [order], which
+  /// is a [Traversal] implementation. If not provided, the default order is
+  /// determined by the specific implementation of the grid, often row-major.
+  ///
+  /// ## Examples
+  ///
+  /// ```dart
+  /// final grid = Grid.generate(2, 2, (x, y) => (x, y));
+  /// for (final (x, y, element) in grid.traverse()) {
+  ///   print(element);
+  /// }
+  /// ```
+  ///
+  /// The output of the example is:
+  ///
+  /// ```txt
+  /// (0, 0)
+  /// (1, 0)
+  /// (0, 1)
+  /// (1, 1)
+  /// ```
+  GridIterable<T> traverse([Traversal<T>? order]) {
+    final traversal = order ?? rowMajor();
+    return traversal(this);
+  }
 
   /// Returns a _new_ grid with a shallow copy of the provided bounds.
   ///

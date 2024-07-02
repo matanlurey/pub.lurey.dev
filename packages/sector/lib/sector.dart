@@ -16,8 +16,15 @@
 /// // └───────┘
 /// ```
 ///
-/// For better `Grid<int>` memory and performance, use [ListGrid.view] with a
-/// backing store of a typed data list, such as [Uint8List] or [Float32List]:
+/// ## Performance
+///
+/// The default [Grid] implementation, [ListGrid], is optimized and benchmarked
+/// for similar performance to using a 1-dimensional [List] for a 2-dimensional
+/// grid, but with a more intuitive API.
+///
+/// For better `Grid<int>` or `Grid<double>` performance, use [ListGrid.view]
+/// with a backing store of a typed data list, such as [Uint8List] or
+/// [Float32List], which can be used to store elements more efficiently:
 /// ```dart
 /// final buffer = Uint8List(9);
 /// final grid = ListGrid.view(buffer, width: 3);
@@ -64,9 +71,14 @@ import 'dart:typed_data';
 
 import 'package:sector/sector.dart';
 
-export 'src/columns.dart' show Columns, ColumnsBase;
-export 'src/grid.dart' show Grid;
-export 'src/grid_extension.dart' show GridExtension;
-export 'src/grid_impl.dart' show GridImpl;
-export 'src/list_grid.dart' show ListGrid;
-export 'src/rows.dart' show Rows, RowsBase;
+export 'src/base/columns.dart' show Columns, ColumnsBase;
+export 'src/base/iterator.dart' show GridIterable, GridIterator;
+export 'src/base/rows.dart' show Rows, RowsBase;
+export 'src/base/traversal.dart' show Traversal;
+export 'src/grids/grid.dart' show Grid;
+export 'src/grids/list.dart' show ListGrid;
+export 'src/traverse/draw_line.dart' show drawLine;
+export 'src/traverse/row_major.dart' show rowMajor;
+export 'src/utils/grid_extension.dart' show GridExtension;
+export 'src/utils/grid_impl.dart' show GridImpl;
+export 'src/utils/octant.dart' show Octant;

@@ -23,15 +23,15 @@ dart pub add sector
 
 ```dart
 // Create a 2D grid with 80 columns and 24 rows filled with spaces.
-final grid = Grid.filled(80, 24, ' ');
+final grid = Grid.filled(80, 24, Tile.empty);
 ```
 
 ```dart
 // Create a 2D grid from an existing 2D matrix-like collection.
 final grid = Grid.fromRows([
-  [' ', '#', '#', ' '],
-  [' ', ' ', '#', ' '],
-  [' ', ' ', ' ', ' '],
+  [Tile.grass, Tile.water, Tile.water, Tile.grass],
+  [Tile.grass, Tile.water, Tile.water, Tile.grass],
+  [Tile.grass, Tile.grass, Tile.grass, Tile.grass],
 ]);
 ```
 
@@ -47,7 +47,7 @@ if (grid.containsXY(0, 0)) {
 final element = grid.get(0, 0);
 
 // Set the element at a point.
-grid.set(0, 0, '#');
+grid.set(0, 0, Tile.lava);
 ```
 
 Iterate over the grid with `rows` and `columns`:
@@ -59,9 +59,17 @@ for (final row in grid.rows) {
 }
 ```
 
+Use or build your own custom traversals:
+
+```dart
+for (final cell in grid.traverse(drawLine(0, 0, 10, 10))) {
+  // ...
+}
+```
+
 ```dart
 // Expand or shrink the grid on demand.
-grid.rows.insertFirst(['#', '#', '#', '#']);
+grid.rows.insertFirst([Tile.rocks, Tile.rocks, Tile.rocks, Tile.rocks]);
 ```
 
 ## Features

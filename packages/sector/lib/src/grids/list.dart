@@ -187,13 +187,6 @@ final class ListGrid<T> with Grid<T> {
   int _index(int x, int y) => x + y * _width;
 
   @pragma('vm:prefer-inline')
-  (int, int) _offset(int index) {
-    final y = index ~/ _width;
-    final x = index % _width;
-    return (x, y);
-  }
-
-  @pragma('vm:prefer-inline')
   @override
   T getUnchecked(int x, int y) {
     return _cells[_index(x, y)];
@@ -207,66 +200,6 @@ final class ListGrid<T> with Grid<T> {
 
   @override
   bool contains(T element) => _cells.contains(element);
-
-  @override
-  (int, int)? offsetOf(
-    T element, [
-    (int, int) start = (0, 0),
-  ]) {
-    // Convert the offset into an index.
-    final offset = _index(start.$1, start.$2);
-    final index = _cells.indexOf(element, offset);
-    if (index == -1) {
-      return null;
-    }
-    return _offset(index);
-  }
-
-  @override
-  (int, int)? offsetWhere(
-    bool Function(T) test, [
-    (int, int) start = (0, 0),
-  ]) {
-    // Convert the offset into an index.
-    final offset = _index(start.$1, start.$2);
-    final index = _cells.indexWhere(test, offset);
-    if (index == -1) {
-      return null;
-    }
-    return _offset(index);
-  }
-
-  @override
-  (int, int)? lastOffsetOf(
-    T element, [
-    (int, int)? end,
-  ]) {
-    end ??= (width - 1, height - 1);
-
-    // Convert the offset into an index.
-    final offset = _index(end.$1, end.$2);
-    final index = _cells.lastIndexOf(element, offset);
-    if (index == -1) {
-      return null;
-    }
-    return _offset(index);
-  }
-
-  @override
-  (int, int)? lastOffsetWhere(
-    bool Function(T) test, [
-    (int, int)? end,
-  ]) {
-    end ??= (width - 1, height - 1);
-
-    // Convert the offset into an index.
-    final offset = _index(end.$1, end.$2);
-    final index = _cells.lastIndexWhere(test, offset);
-    if (index == -1) {
-      return null;
-    }
-    return _offset(index);
-  }
 
   @override
   bool get isEmpty => _cells.isEmpty;
