@@ -437,6 +437,29 @@ abstract mixin class Grid<T> {
     );
   }
 
+  /// A hint to algorithms about the internal layout of the grid.
+  ///
+  /// A value of [LayoutHint.private] indicates that the grid is a private
+  /// implementation detail and should not be relied upon by external code.
+  ///
+  /// > [!IMPORTANT]
+  /// > You _must_ override [getByIndexUnchecked] if a known layout is provided.
+  LayoutHint get layoutHint => LayoutHint.private;
+
+  /// Given a grid of `width * height` cells, returns the nth-cell.
+  ///
+  /// This method is based on the internal layout of the grid, and is not
+  /// guaranteed to be efficient for all grid implementations. If the hint is
+  /// [LayoutHint.private], the behavior is undefined.
+  ///
+  /// > [!WARNING]
+  /// > Use this method with caution, as it may lead to undefined behavior if
+  /// > the index is out of bounds. It is recommended to use [get] instead
+  /// > unless writing performance-sensitive code with proper bounds checking.
+  T getByIndexUnchecked(int index) {
+    throw UnsupportedError('Cannot be used with a private layout');
+  }
+
   @override
   String toString() => GridImpl.debugString(this);
 }

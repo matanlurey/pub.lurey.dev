@@ -209,6 +209,13 @@ final class ListGrid<T> with Grid<T> {
     _cells.clear();
     _width = 0;
   }
+
+  @override
+  LayoutHint get layoutHint => LayoutHint.rowMajorContiguous;
+
+  @override
+  @pragma('vm:prefer-inline')
+  T getByIndexUnchecked(int index) => _cells[index];
 }
 
 final class _Rows<T> extends Iterable<Iterable<T>> with RowsBase<T> {

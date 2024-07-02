@@ -16,6 +16,15 @@
 /// // └───────┘
 /// ```
 ///
+/// ## Caveats
+///
+/// This package will always provide _2D_ data structures. If you need three
+/// or more dimensions, look elsewhere. A [Grid] is a _container_ for all kinds
+/// of data; if you need to perform matrix operations, you are better off with
+/// a dedicated linear algebra library, such as [`vector_math`][vector_math].
+///
+/// [vector_math]: https://pub.dev/packages/vector_math
+///
 /// ## Performance
 ///
 /// The default [Grid] implementation, [ListGrid], is optimized and benchmarked
@@ -73,6 +82,7 @@ import 'package:sector/sector.dart';
 
 export 'src/base/columns.dart' show Columns, ColumnsBase;
 export 'src/base/iterator.dart' show GridIterable, GridIterator;
+export 'src/base/layout_hint.dart' show LayoutHint;
 export 'src/base/rows.dart' show Rows, RowsBase;
 export 'src/base/traversal.dart' show Traversal;
 export 'src/grids/grid.dart' show Grid;

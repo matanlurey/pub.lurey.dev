@@ -9,13 +9,23 @@ import 'package:sector/sector.dart';
 Traversal<T> rowMajor<T>({(int, int)? start}) {
   return (grid) {
     final (startX, startY) = start ?? (0, 0);
-    return GridIterable.from(
-      () => _RowMajorIterator(
-        grid,
-        startX,
-        startY,
-      ),
-    );
+    if (grid.layoutHint == LayoutHint.rowMajorContiguous) {
+      return GridIterable.from(
+        () => _FastRowMajorIterator(
+          grid,
+          startX,
+          startY,
+        ),
+      );
+    } else {
+      return GridIterable.from(
+        () => _RowMajorIterator(
+          grid,
+          startX,
+          startY,
+        ),
+      );
+    }
   };
 }
 
@@ -46,8 +56,46 @@ final class _RowMajorIterator<T> with GridIterator<T> {
   }
 
   @override
+  @pragma('vm:prefer-inline')
   T get current => _grid.getUnchecked(_x, _y);
 
   @override
   (int, int) get position => (_x, _y);
+}
+
+final class _FastRowMajorIterator<T> with GridIterator<T> {
+  _FastRowMajorIterator(
+    this._grid,
+    int startX,
+    int startY,
+  )   : _length = _grid.width * _grid.height,
+        _index = startY * _grid.width + startX - 1,
+        assert(
+          _grid.layoutHint == LayoutHint.rowMajorContiguous,
+          'The grid must be row-major contiguous',
+        );
+
+  final Grid<T> _grid;
+  final int _length;
+  int _index;
+
+  @override
+  bool moveNext() {
+    if (_index + 1 < _length) {
+      _index++;
+      return true;
+    }
+    return false;
+  }
+
+  @override
+  @pragma('vm:prefer-inline')
+  T get current => _grid.getByIndexUnchecked(_index);
+
+  @override
+  (int, int) get position {
+    final x = _index % _grid.width;
+    final y = _index ~/ _grid.width;
+    return (x, y);
+  }
 }

@@ -2,7 +2,7 @@
 
 name: sector
 description: Fast and intuitive 2D Grid and grid-based utilities for Dart.
-version: 0.1.1
+version: 0.2.0
 
 environment:
   sdk: ^3.4.0

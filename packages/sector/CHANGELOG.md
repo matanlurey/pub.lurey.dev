@@ -1,6 +1,6 @@
 # Change Log
 
-## 0.2.0-dev
+## 0.2.0
 
 - Renamed `<Grid>.contains` to `<Grid>.containsXY`:
 
@@ -40,6 +40,18 @@
     // ...
   }
   ```
+
+  See also:
+
+  - `rowMajor`
+  - `drawLine`
+
+- Added `<Grid>.layoutHint` and `<Grid>.getByIndexUnchecked`; these methods
+  allow for more efficient traversal of the grid, by providing a hint about the
+  layout of the grid, and by accessing elements by index without extra bounds
+  checking.
+  
+  Most users never need to use these methods.
 
 ## 0.1.1
 

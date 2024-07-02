@@ -1,6 +1,7 @@
 import 'package:sector/sector.dart';
 
 import '_grid_suite.dart';
+import '_prelude.dart';
 import '_sized_grid_suite.dart';
 
 void main() {
@@ -25,6 +26,12 @@ void main() {
     fromColumns: NaiveListGrid.fromColumns,
     empty: NaiveListGrid.empty,
   );
+
+  test('getByIndexUnchecked throws by default', () {
+    check(
+      () => NaiveListGrid.filled(1, 1, 1).getByIndexUnchecked(0),
+    ).throws<UnsupportedError>();
+  });
 }
 
 /// A naive implementation of [Grid] that does not specialize any behavior.
