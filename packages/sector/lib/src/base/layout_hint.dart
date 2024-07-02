@@ -9,7 +9,7 @@ enum LayoutHint {
 
   /// Each cell is stored in a contiguous block of memory in row-major order.
   ///
-  /// When calling [Grid.getByIndexUnchecked], the position is calculated as:
+  /// [EfficientIndexGrid.getByIndexUnchecked] should compute the position as:
   /// ```dart
   /// final x = index % width;
   /// final y = index ~/ width;

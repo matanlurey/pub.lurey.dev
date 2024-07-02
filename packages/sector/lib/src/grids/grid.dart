@@ -313,7 +313,12 @@ abstract mixin class Grid<T> {
   /// Clears all elements in the grid, making it empty.
   ///
   /// {@macro warn-grid-might-not-be-growable}
-  void clear();
+  void clear() {
+    final rows = this.rows;
+    while (isNotEmpty) {
+      rows.removeLast();
+    }
+  }
 
   /// All rows in the grid, from top to bottom.
   ///
@@ -339,7 +344,7 @@ abstract mixin class Grid<T> {
   /// // [0, 0, 0]
   /// // [0, 0, 0]
   /// ```
-  Rows<T> get rows;
+  GridAxis<T> get rows;
 
   /// All columns in the grid, from left to right.
   ///
@@ -365,7 +370,7 @@ abstract mixin class Grid<T> {
   /// // [0, 0, 0]
   /// // [0, 0, 0]
   /// ```
-  Columns<T> get columns;
+  GridAxis<T> get columns;
 
   /// Returns an iterable that traverses the grid in a specific [order].
   ///
@@ -437,6 +442,20 @@ abstract mixin class Grid<T> {
     );
   }
 
+  @override
+  String toString() => GridImpl.debugString(this);
+}
+
+/// A mixin that augments [Grid] to indicate it supports efficient index access.
+///
+/// This mixin is used to provide hints to algorithms about the internal layout
+/// of the grid, which can be used to optimize performance for certain
+/// operations.
+///
+/// To implement this mixin, you must override [layoutHint] and provide a
+/// cooresponding implementation for [getByIndexUnchecked]. If the layout hint
+/// is [LayoutHint.private], the behavior is undefined.
+mixin EfficientIndexGrid<T> on Grid<T> {
   /// A hint to algorithms about the internal layout of the grid.
   ///
   /// A value of [LayoutHint.private] indicates that the grid is a private
@@ -444,7 +463,7 @@ abstract mixin class Grid<T> {
   ///
   /// > [!IMPORTANT]
   /// > You _must_ override [getByIndexUnchecked] if a known layout is provided.
-  LayoutHint get layoutHint => LayoutHint.private;
+  LayoutHint get layoutHint;
 
   /// Given a grid of `width * height` cells, returns the nth-cell.
   ///
@@ -456,10 +475,5 @@ abstract mixin class Grid<T> {
   /// > Use this method with caution, as it may lead to undefined behavior if
   /// > the index is out of bounds. It is recommended to use [get] instead
   /// > unless writing performance-sensitive code with proper bounds checking.
-  T getByIndexUnchecked(int index) {
-    throw UnsupportedError('Cannot be used with a private layout');
-  }
-
-  @override
-  String toString() => GridImpl.debugString(this);
+  T getByIndexUnchecked(int index);
 }

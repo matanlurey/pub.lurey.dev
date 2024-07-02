@@ -1,7 +1,5 @@
-import 'package:sector/sector.dart';
-
 import '../_prelude.dart';
-import '../custom_grid_test.dart';
+import '../src/naive_grid.dart';
 
 void main() {
   group('rowMajor (Slow)', () {

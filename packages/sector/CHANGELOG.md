@@ -1,5 +1,51 @@
 # Change Log
 
+## 0.3.0-dev
+
+- Fixed a bug in `Grid.fromColumns` (and `ListGrid.fromColumns`) where the
+  columns were not copied correctly, and the grid was not initialized with the
+  correct dimensions.
+
+- Fixed a bug in `<Grid>.columns.remove*` where, similar to above, the grid was
+  not updated correctly.
+
+- Moved `<Grid>.layoutHint` and `<Grid>.getByIndexUnchecked` to the optional
+  mixin `EfficientIndexGrid`, which only provides these methods. This allows
+  users to opt-in to these methods, and not have them clutter the API of the
+  main `Grid` class:
+
+  ```dart
+  class MyListGrid<T> with Grid<T>, EfficientIndexGrid<T> {
+    final List<T> _list;
+
+    /* ... */
+
+    @override
+    LayoutHint get layoutHint => LayoutHint.rowMajorContinguous;
+
+    @override
+    T getByIndexUnchecked(int index) => _list[index];
+  }
+  ```
+
+- Replaced `Rows` and `Columns` with `GridAxis`; both of these types only
+  existed to have a common interface for iterating over rows and columns, but
+  ironically the only common base was `Iterable<Iterable<T>>`.
+
+  `GridAxis` is a more general type that can be used to iterate over rows and
+  columns, and even allow users to define their own axis. The common way to
+  implement those will be `RowsMixin` and `ColumnsMixin`, which replaces the
+  types `RowsBase` and `ColumnsBase` accordingly.
+
+  ```diff
+  - class MyRows extends Iterable<Iterable<T>> with RowsBase<T> { /* ... */ }
+  + class MyRows extends GridAxis<T> with RowsMixin<T> { /* ... */ }
+  ```
+
+- Extending or mixing in `Grid<T>` provides a default implementation of `clear`.
+
+- Added `UnmodifiableGridView`, which wraps a `Grid` and makes it unmodifiable.
+
 ## 0.2.0
 
 - Renamed `<Grid>.contains` to `<Grid>.containsXY`:

@@ -9,7 +9,8 @@ import 'package:sector/sector.dart';
 Traversal<T> rowMajor<T>({(int, int)? start}) {
   return (grid) {
     final (startX, startY) = start ?? (0, 0);
-    if (grid.layoutHint == LayoutHint.rowMajorContiguous) {
+    if (grid is EfficientIndexGrid<T> &&
+        grid.layoutHint == LayoutHint.rowMajorContiguous) {
       return GridIterable.from(
         () => _FastRowMajorIterator(
           grid,
@@ -75,7 +76,7 @@ final class _FastRowMajorIterator<T> with GridIterator<T> {
           'The grid must be row-major contiguous',
         );
 
-  final Grid<T> _grid;
+  final EfficientIndexGrid<T> _grid;
   final int _length;
   int _index;
 

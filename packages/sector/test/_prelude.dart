@@ -2,6 +2,7 @@ import 'package:checks/checks.dart';
 import 'package:sector/sector.dart';
 
 export 'package:checks/checks.dart';
+export 'package:sector/sector.dart';
 export 'package:test/test.dart' show group, test;
 
 /// Convenience methods for testing [Grid] implementations.
@@ -27,7 +28,9 @@ extension GridSubject<T> on Subject<Grid<T>> {
     return has((it) => it.get(x, y), 'get($x, $y)');
   }
 
-  Subject<Rows<T>> get rows => has((it) => it.rows, 'rows');
+  Subject<GridAxis<T>> get rows => has((it) => it.rows, 'rows');
 
-  Subject<Columns<T>> get columns => has((it) => it.columns, 'columns');
+  Subject<GridAxis<T>> get columns => has((it) => it.columns, 'columns');
+
+  Subject<bool> get isEmptyRows => rows.has((it) => it.isEmpty, 'isEmpty');
 }

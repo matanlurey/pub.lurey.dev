@@ -6,7 +6,7 @@ import 'package:sector/sector.dart';
 /// the [Grid] interface. It is a row-major dense grid, where each row is stored
 /// contiguously in memory. This is the most common layout for a grid, and is
 /// the most efficient for most use-cases.
-final class ListGrid<T> with Grid<T> {
+final class ListGrid<T> with Grid<T>, EfficientIndexGrid<T> {
   /// Creates a new grid with the provided [width] and [height].
   ///
   /// The grid is initialized with all elements set to [fill].
@@ -126,12 +126,14 @@ final class ListGrid<T> with Grid<T> {
     }
 
     final width = columnsList.length;
+    final height = columnsList.first.length;
     final cells = List.of(GridImpl.checkedExpand(columnsList));
 
     // Map the columns to rows.
-    final rows = List.generate(width, (x) {
-      return List.generate(cells.length ~/ width, (y) {
-        return cells[x + y * width];
+    final rows = List.generate(height, (y) {
+      return List.generate(width, (x) {
+        // Remember cells is column-major, so we need to swap x and y.
+        return cells[y + x * height];
       });
     });
 
@@ -156,6 +158,9 @@ final class ListGrid<T> with Grid<T> {
   /// the cells will be reflected in the grid, and vice versa.
   factory ListGrid.view(List<T> cells, {required int width}) {
     RangeError.checkNotNegative(width, 'width');
+    if (width == 0 || cells.isEmpty) {
+      return ListGrid.empty();
+    }
     if (cells.length % width != 0) {
       throw ArgumentError.value(
         cells,
@@ -178,10 +183,10 @@ final class ListGrid<T> with Grid<T> {
   int get height => _width == 0 ? 0 : _cells.length ~/ _width;
 
   @override
-  Rows<T> get rows => _Rows(this);
+  GridAxis<T> get rows => _Rows(this);
 
   @override
-  Columns<T> get columns => _Columns(this);
+  GridAxis<T> get columns => _Columns(this);
 
   @pragma('vm:prefer-inline')
   int _index(int x, int y) => x + y * _width;
@@ -218,7 +223,7 @@ final class ListGrid<T> with Grid<T> {
   T getByIndexUnchecked(int index) => _cells[index];
 }
 
-final class _Rows<T> extends Iterable<Iterable<T>> with RowsBase<T> {
+final class _Rows<T> extends GridAxis<T> with RowsMixin<T> {
   _Rows(this.grid);
 
   @override
@@ -313,7 +318,7 @@ final class _RowIterator<T> implements Iterator<T> {
   }
 }
 
-final class _Columns<T> extends Iterable<Iterable<T>> with ColumnsBase<T> {
+final class _Columns<T> extends GridAxis<T> with ColumnsMixin<T> {
   _Columns(this.grid);
 
   @override
@@ -344,8 +349,9 @@ final class _Columns<T> extends Iterable<Iterable<T>> with ColumnsBase<T> {
   void removeAt(int index) {
     GridImpl.checkBoundsExclusive(grid, index, 0);
 
-    for (var i = index; i < grid._cells.length; i += grid.width) {
-      grid._cells.removeAt(i);
+    // Remove in reverse order to avoid shifting elements.
+    for (var i = grid.height - 1; i >= 0; i--) {
+      grid._cells.removeAt(index + i * grid.width);
     }
 
     grid._width -= 1;

@@ -46,10 +46,10 @@ final class SubGridView<T> with Grid<T> {
   }
 
   @override
-  Rows<T> get rows => _Rows(this);
+  GridAxis<T> get rows => _Rows(this);
 
   @override
-  Columns<T> get columns => _Columns(this);
+  GridAxis<T> get columns => _Columns(this);
 
   @override
   Grid<T> asSubGrid({
@@ -70,7 +70,7 @@ final class SubGridView<T> with Grid<T> {
   }
 }
 
-final class _Rows<T> extends Iterable<Iterable<T>> with RowsBase<T> {
+final class _Rows<T> extends GridAxis<T> with RowsMixin<T> {
   _Rows(this.grid);
 
   @override
@@ -99,7 +99,7 @@ final class _Rows<T> extends Iterable<Iterable<T>> with RowsBase<T> {
   }
 }
 
-final class _Columns<T> extends Iterable<Iterable<T>> with ColumnsBase<T> {
+final class _Columns<T> extends GridAxis<T> with ColumnsMixin<T> {
   _Columns(this.grid);
 
   @override

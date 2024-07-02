@@ -1,6 +1,4 @@
-import 'package:sector/sector.dart';
-
-import '_prelude.dart';
+import '../_prelude.dart';
 
 void main() {
   group('.isNotEmpty', () {
