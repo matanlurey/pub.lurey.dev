@@ -56,4 +56,69 @@ extension GridExtension<T> on Grid<T> {
     height = (height ?? this.height - top).clamp(0, this.height - top);
     return asSubGrid(left: left, top: top, width: width, height: height);
   }
+
+  /// Fills the grid traversed by the [order] with the given [value].
+  ///
+  /// ## Examples
+  ///
+  /// ```dart
+  /// final grid = Grid.fromRows([
+  ///   [1, 2, 3],
+  ///   [4, 5, 6],
+  ///   [7, 8, 9],
+  /// ]);
+  /// grid.fill(edges, 0);
+  /// print(grid);
+  /// ```
+  ///
+  /// The output of the example is:
+  ///
+  /// ```txt
+  /// ┌───────┐
+  /// | 0 0 0 |
+  /// | 0 5 0 |
+  /// | 0 0 0 |
+  /// └───────┘
+  /// ```
+  void fill<R extends GridIterable<void>>(Traversal<R, T> order, T value) {
+    for (final (x, y) in order(this).positions) {
+      setUnchecked(x, y, value);
+    }
+  }
+
+  /// Fills the grid traversed by the [order] by calling [value] for each cell.
+  ///
+  /// The [value] function is called with the current cell's position and the
+  /// previous value at that position. The return value of the function is used
+  /// as the new value for the cell.
+  ///
+  /// ## Examples
+  ///
+  /// ```dart
+  /// final grid = Grid.fromRows([
+  ///   [1, 2, 3],
+  ///   [4, 5, 6],
+  ///   [7, 8, 9],
+  /// ]);
+  /// grid.fillWith(edges, (x, y, previous) => previous - 1);
+  /// print(grid);
+  /// ```
+  ///
+  /// The output of the example is:
+  ///
+  /// ```txt
+  /// ┌───────┐
+  /// | 0 1 2 |
+  /// | 3 5 5 |
+  /// | 6 7 8 |
+  /// └───────┘
+  /// ```
+  void fillWith<R extends GridIterable<T>>(
+    Traversal<R, T> order,
+    T Function(int x, int y, T previous) value,
+  ) {
+    for (final (x, y, p) in order(this).positioned) {
+      setUnchecked(x, y, value(x, y, p));
+    }
+  }
 }
