@@ -11,6 +11,13 @@ import 'package:sector/sector.dart';
 ///
 /// - [rowMajor]
 /// - [drawLine]
+/// - [drawRect]
+/// - [neighbors]
+/// - [neighborsDiagonal]
+///
+/// Including ones that don't return an iterable:
+///
+/// - [prettyPrint]
 ///
 /// ## Examples
 ///
@@ -34,4 +41,4 @@ import 'package:sector/sector.dart';
 /// c
 /// d
 /// ```
-typedef Traversal<T> = GridIterable<T> Function(Grid<T> grid);
+typedef Traversal<R, T> = R Function(Grid<T> grid);

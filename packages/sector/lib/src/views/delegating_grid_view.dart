@@ -55,7 +55,7 @@ abstract base class DelegatingGridView<T> implements Grid<T> {
   GridAxis<T> get columns => view.columns;
 
   @override
-  GridIterable<T> traverse([Traversal<T>? order]) {
+  R traverse<R>(Traversal<R, T> order) {
     return view.traverse(order);
   }
 

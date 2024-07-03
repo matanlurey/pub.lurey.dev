@@ -6,7 +6,7 @@ import 'package:sector/sector.dart';
 /// top-left corner of the grid and moving to the right until the end of the
 /// row, then moving to the next row and repeating the process until the entire
 /// grid has been visited.
-Traversal<T> rowMajor<T>({(int, int)? start}) {
+Traversal<GridIterable<T>, T> rowMajor<T>({(int, int)? start}) {
   return (grid) {
     final (startX, startY) = start ?? (0, 0);
     if (grid is EfficientIndexGrid<T> &&

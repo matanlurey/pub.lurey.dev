@@ -30,7 +30,7 @@ import 'package:sector/sector.dart';
 /// 5
 /// 9
 /// ```
-Traversal<T> drawLine<T>(
+Traversal<GridIterable<T>, T> drawLine<T>(
   int x1,
   int y1,
   int x2,

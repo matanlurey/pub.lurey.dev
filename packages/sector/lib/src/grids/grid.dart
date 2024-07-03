@@ -382,7 +382,7 @@ abstract mixin class Grid<T> {
   ///
   /// ```dart
   /// final grid = Grid.generate(2, 2, (x, y) => (x, y));
-  /// for (final (x, y, element) in grid.traverse()) {
+  /// for (final (x, y, element) in grid.traverse(rowMajor())) {
   ///   print(element);
   /// }
   /// ```
@@ -395,10 +395,7 @@ abstract mixin class Grid<T> {
   /// (0, 1)
   /// (1, 1)
   /// ```
-  GridIterable<T> traverse([Traversal<T>? order]) {
-    final traversal = order ?? rowMajor();
-    return traversal(this);
-  }
+  R traverse<R>(Traversal<R, T> order) => order(this);
 
   /// Returns a _new_ grid with a shallow copy of the provided bounds.
   ///

@@ -8,7 +8,7 @@ void main() {
         [1, 2, 3],
         [4, 5, 6],
       ]);
-      check(grid.traverse()).deepEquals([1, 2, 3, 4, 5, 6]);
+      check(grid.traverse(rowMajor())).deepEquals([1, 2, 3, 4, 5, 6]);
     });
 
     test('should traverse with a custom starting point', () {
@@ -40,7 +40,7 @@ void main() {
         [1, 2, 3],
         [4, 5, 6],
       ]);
-      check(grid.traverse()).last.equals(6);
+      check(grid.traverse(rowMajor())).last.equals(6);
     });
 
     test('should support position', () {
@@ -60,7 +60,7 @@ void main() {
         [1, 2, 3],
         [4, 5, 6],
       ]);
-      check(grid.traverse()).deepEquals([1, 2, 3, 4, 5, 6]);
+      check(grid.traverse(rowMajor())).deepEquals([1, 2, 3, 4, 5, 6]);
     });
 
     test('should traverse with a custom starting point', () {
@@ -92,7 +92,7 @@ void main() {
         [1, 2, 3],
         [4, 5, 6],
       ]);
-      check(grid.traverse()).last.equals(6);
+      check(grid.traverse(rowMajor())).last.equals(6);
     });
 
     test('should support position', () {

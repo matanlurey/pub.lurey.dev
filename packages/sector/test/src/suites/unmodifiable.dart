@@ -11,15 +11,15 @@ void runUnmodifiableTestSuite<T>(
 
   test('.set should fail', () {
     final grid = getGrid();
-    final cells = grid.traverse().toList();
+    final cells = grid.traverse(rowMajor()).toList();
     check(() => grid.set(0, 0, fill)).throws<UnsupportedError>();
-    check(grid.traverse()).deepEquals(cells);
+    check(grid.traverse(rowMajor())).deepEquals(cells);
   });
 
   test('.setUnchecked should fail', () {
     final grid = getGrid();
-    final cells = grid.traverse().toList();
+    final cells = grid.traverse(rowMajor()).toList();
     check(() => grid.setUnchecked(0, 0, fill)).throws<UnsupportedError>();
-    check(grid.traverse()).deepEquals(cells);
+    check(grid.traverse(rowMajor())).deepEquals(cells);
   });
 }

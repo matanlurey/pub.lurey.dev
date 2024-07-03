@@ -49,6 +49,38 @@
   + class MyRows extends GridAxis<T> with RowsMixin<T> { /* ... */ }
   ```
 
+- Changed `<Grid>.traversal` and `Traversal` to allow arbitrary return types,
+  i.e. not strictly a `GridIterable<T>`. This allows users to use the traversal
+  API to create custom traversals that return different types of elements, e.g.
+  custom transformations, filters, or other types of elements:
+
+  ```diff
+  - Traversal<T> rowMajor<T>(...) { ... }
+  + Traversal<GridIterable<T>, T> rowMajor<T>(...) { ... }
+  ```
+
+  As a result, `.traversal` now _requires_ an argument, versus defaulting to
+  `rowMajor()` before:
+
+  ```diff
+  - for (final element in grid.traversal) { /* ... */ }
+  + for (final element in grid.traversal(rowMajor())) { /* ... */ }
+  ```
+
+  An example of benefitting from this change is the `prettyPrint` traversal:
+
+  ```dart
+  final string = Grid.fromRows([
+    [1, 2, 3],
+    [4, 5, 6],
+  ]).traversal(prettyPrint());
+  print(string);
+  // ┌───────┐
+  // │ 1 2 3 │
+  // │ 4 5 6 │
+  // └───────┘
+  ```
+  
 ### New Features
 
 - Extending or mixing in `Grid<T>` provides a default implementation of `clear`.

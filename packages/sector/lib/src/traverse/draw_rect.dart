@@ -27,7 +27,7 @@ import 'package:sector/sector.dart';
 /// 4
 /// 5
 /// ```
-Traversal<T> drawRect<T>(
+Traversal<GridIterable<T>, T> drawRect<T>(
   int left,
   int top,
   int width,

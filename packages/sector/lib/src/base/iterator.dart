@@ -39,7 +39,7 @@ abstract mixin class GridIterator<E> implements Iterator<E> {
   ///   ['a', 'b'],
   ///   ['c', 'd'],
   /// ]);
-  /// final it = grid.traverse().iterator;
+  /// final it = grid.traverse(rowMajor()).iterator;
   /// while (it.moveNext()) {
   ///   print(it.current);
   /// }
@@ -75,7 +75,7 @@ abstract mixin class GridIterator<E> implements Iterator<E> {
   ///   ['a', 'b'],
   ///   ['c', 'd'],
   /// ]);
-  /// final it = grid.traverse().iterator;
+  /// final it = grid.traverse(rowMajor()).iterator;
   /// while (it.moveNext()) {
   ///   print(it.position);
   /// }
@@ -116,7 +116,7 @@ abstract mixin class GridIterator<E> implements Iterator<E> {
   ///   ['a', 'b'],
   ///   ['c', 'd'],
   /// ]);
-  /// final it = grid.traverse().iterator;
+  /// final it = grid.traverse(rowMajor()).iterator;
   /// print(it.moveNext()); // true
   /// print(it.moveNext()); // true
   /// print(it.moveNext()); // true
@@ -144,7 +144,7 @@ abstract mixin class GridIterator<E> implements Iterator<E> {
   ///   ['a', 'b'],
   ///   ['c', 'd'],
   /// ]);
-  /// final it = grid.traverse().iterator;
+  /// final it = grid.traverse(rowMajor()).iterator;
   /// print(it.seek(2)); // true
   /// print(it.current); // c
   /// print(it.position); // (0, 1)

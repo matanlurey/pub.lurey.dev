@@ -114,11 +114,12 @@ extension GridImpl on Never {
   /// ```
   static String debugString<T>(
     Grid<T> grid, {
-    String Function(T) format = _format,
+    String Function(T)? format,
   }) {
     // Pre-format the cells in row-major order, and track the longest cell.
     final output = <String>[];
     var longest = 0;
+    format ??= _format;
     for (var y = 0; y < grid.height; y++) {
       for (var x = 0; x < grid.width; x++) {
         final cell = format(grid.get(x, y));
