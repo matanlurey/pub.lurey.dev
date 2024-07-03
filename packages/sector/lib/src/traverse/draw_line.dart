@@ -91,10 +91,7 @@ final class _BreshamIterator<T> with GridIterator<T> {
   late (int, int) position;
 
   @override
-  T get current {
-    final (x, y) = position;
-    return _grid.getUnchecked(x, y);
-  }
+  late T current;
 
   @override
   bool moveNext() {
@@ -105,6 +102,7 @@ final class _BreshamIterator<T> with GridIterator<T> {
 
     final y = _startY;
     position = _octant.fromOctant1(x, y);
+    current = _grid.getUnchecked(position.$1, position.$2);
     if (_diff >= 0) {
       _startY += 1;
       _diff -= _dx;

@@ -6,22 +6,38 @@ import 'package:sector/sector.dart';
 /// the [Grid] interface. It is a row-major dense grid, where each row is stored
 /// contiguously in memory. This is the most common layout for a grid, and is
 /// the most efficient for most use-cases.
+///
+/// ## Examples
+///
+/// The following grid:
+///
+/// ```dart
+/// final grid = ListGrid.fromRows([
+///   ['a', 'b', 'c'],
+///   ['d', 'e', 'f'],
+///   ['g', 'h', 'i'],
+/// ]);
+/// print(grid);
+/// ```
+///
+/// Produces the following output:
+///
+/// ```txt
+/// ┌───────┐
+/// │ a b c │
+/// │ d e f │
+/// │ g h i │
+/// └───────┘
+/// ```
 final class ListGrid<T> with Grid<T>, EfficientIndexGrid<T> {
   /// Creates a new grid with the provided [width] and [height].
   ///
   /// The grid is initialized with all elements set to [fill].
   ///
   /// The [width] and [height] must be non-negative.
-  ///
-  /// If either dimension is `0`, an [ListGrid.empty] is returned.
   factory ListGrid.filled(int width, int height, T fill) {
     RangeError.checkNotNegative(width, 'width');
     RangeError.checkNotNegative(height, 'height');
-
-    if (width == 0 || height == 0) {
-      return ListGrid.empty();
-    }
-
     final cells = List<T>.filled(width * height, fill, growable: true);
     return ListGrid._(cells, width);
   }
@@ -32,8 +48,6 @@ final class ListGrid<T> with Grid<T>, EfficientIndexGrid<T> {
   /// [generator], where the element at index `(x, y)` is `generator(x, y)`.
   ///
   /// The [width] and [height] must be non-negative.
-  ///
-  /// If either dimension is `0`, an [ListGrid.empty] is returned.
   factory ListGrid.generate(
     int width,
     int height,
@@ -41,11 +55,6 @@ final class ListGrid<T> with Grid<T>, EfficientIndexGrid<T> {
   ) {
     RangeError.checkNotNegative(width, 'width');
     RangeError.checkNotNegative(height, 'height');
-
-    if (width == 0 || height == 0) {
-      return ListGrid.empty();
-    }
-
     final cells = List<T>.generate(width * height, (index) {
       final x = index % width;
       final y = index ~/ width;
@@ -58,7 +67,7 @@ final class ListGrid<T> with Grid<T>, EfficientIndexGrid<T> {
   ///
   /// The new grid is a shallow copy of the original grid.
   factory ListGrid.from(Grid<T> grid) {
-    return ListGrid.generate(grid.width, grid.height, grid.get);
+    return ListGrid.generate(grid.width, grid.height, grid.getUnchecked);
   }
 
   /// Creates a new grid from the provided [cells].
@@ -68,20 +77,15 @@ final class ListGrid<T> with Grid<T>, EfficientIndexGrid<T> {
   /// integer.
   ///
   /// The grid is initialized with the elements in the cells, where the element
-  /// at index `(x, y)` is `cells[y * width + x]`.
-  ///
-  /// If [width] is `0`, an [Grid.empty] is returned.
+  /// at index `(x, y)` is `cells[y * width + x]`, known as row-major order.
   factory ListGrid.fromCells(Iterable<T> cells, {required int width}) {
     RangeError.checkNotNegative(width, 'width');
-    if (width == 0) {
-      return ListGrid.empty();
-    }
 
     // Make accessing length predictable.
     final cellsList = List.of(cells);
 
     // Ensure the number of cells is a multiple of the width.
-    if (cellsList.length % width != 0) {
+    if (width != 0 && cellsList.length % width != 0) {
       throw ArgumentError.value(
         cells,
         'cells',
@@ -117,32 +121,13 @@ final class ListGrid<T> with Grid<T>, EfficientIndexGrid<T> {
   /// The grid is initialized with the elements in the columns, where the
   /// element at index `(x, y)` is `columns[x][y]`.
   factory ListGrid.fromColumns(Iterable<Iterable<T>> columns) {
-    // Make accessing length predictable.
-    final columnsList = List.of(columns);
-
-    // If empty, the grid is empty.
-    if (columnsList.isEmpty) {
-      return ListGrid.empty();
-    }
-
-    final width = columnsList.length;
-    final height = columnsList.first.length;
-    final cells = List.of(GridImpl.checkedExpand(columnsList));
-
-    // Map the columns to rows.
-    final rows = List.generate(height, (y) {
-      return List.generate(width, (x) {
-        // Remember cells is column-major, so we need to swap x and y.
-        return cells[y + x * height];
-      });
-    });
-
-    return ListGrid.fromRows(rows);
+    return ListGrid.fromRows(GridImpl.transpose(columns));
   }
 
   /// Creates a new empty grid.
   ///
-  /// The grid has a width and height of `0` and will not contain any elements.
+  /// The grid has a [width] and [height] of `0` and will not contain any
+  /// elements.
   factory ListGrid.empty() {
     return ListGrid._([], 0);
   }
@@ -158,10 +143,7 @@ final class ListGrid<T> with Grid<T>, EfficientIndexGrid<T> {
   /// the cells will be reflected in the grid, and vice versa.
   factory ListGrid.view(List<T> cells, {required int width}) {
     RangeError.checkNotNegative(width, 'width');
-    if (width == 0 || cells.isEmpty) {
-      return ListGrid.empty();
-    }
-    if (cells.length % width != 0) {
+    if (width != 0 && cells.length % width != 0) {
       throw ArgumentError.value(
         cells,
         'list',

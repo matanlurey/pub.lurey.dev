@@ -98,4 +98,14 @@ void main() {
       ]),
     ).throws<ArgumentError>();
   });
+
+  test('ListGrid.empty returns an empty list that can be grown', () {
+    final grid = Grid<int>.empty();
+    check(grid).isEmpty.isTrue();
+
+    grid.rows.insertAt(0, [1, 2]);
+    check(grid).rows.deepEquals([
+      [1, 2],
+    ]);
+  });
 }

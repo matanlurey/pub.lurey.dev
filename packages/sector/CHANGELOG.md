@@ -2,12 +2,19 @@
 
 ## 0.3.0-dev
 
+### Bug Fixes
+
 - Fixed a bug in `Grid.fromColumns` (and `ListGrid.fromColumns`) where the
   columns were not copied correctly, and the grid was not initialized with the
   correct dimensions.
 
 - Fixed a bug in `<Grid>.columns.remove*` where, similar to above, the grid was
   not updated correctly.
+
+- Fixed a bug in `<ListGrid>.view` where an empty list of cells was not used as
+  the backing storage as documented.
+
+### Breaking Changes
 
 - Moved `<Grid>.layoutHint` and `<Grid>.getByIndexUnchecked` to the optional
   mixin `EfficientIndexGrid`, which only provides these methods. This allows
@@ -42,9 +49,36 @@
   + class MyRows extends GridAxis<T> with RowsMixin<T> { /* ... */ }
   ```
 
+### New Features
+
 - Extending or mixing in `Grid<T>` provides a default implementation of `clear`.
 
 - Added `UnmodifiableGridView`, which wraps a `Grid` and makes it unmodifiable.
+
+- Added `GridImpl.transpose` to create a `List<List<T>>` from an iterable of
+  iterables, where the rows are the columns of the original grid and vice versa;
+  used as an implementation detail in `ListGrid.fromColumns`.
+
+- Added `SplayTreeGrid`, which is a sparse grid that uses a `SplayTreeMap` to
+  store the elements. This grid is useful when the grid is sparse, and the
+  elements are typically accessed in a sorted order:
+
+  ```dart
+  final grid = SplayTreeGrid.fromRows([
+    ['a', ' ', ' '],
+    [' ', 'b', ' '],
+    [' ', ' ', 'c'],
+  ]);
+  print(grid.toSparseMap()); // {0: {0: 'a'}, 1: {1: 'b'}, 2: {2: 'c'}}
+  ```
+
+- Added `drawRect` as a traveresal that draws a rectangle on the grid:
+
+  ```dart
+  for (final cell in grid.traverse(drawRect(0, 0, 10, 10))) {
+    // ...
+  }
+  ```
 
 ## 0.2.0
 

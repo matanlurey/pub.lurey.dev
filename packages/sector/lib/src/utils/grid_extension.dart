@@ -1,6 +1,6 @@
 import 'package:sector/sector.dart';
 
-/// Additional convenience methods that are derived from the [Grid] interface.
+/// Additional convenience methods that are derived from [Grid].
 ///
 /// Methods are added here, instead of on the [Grid] interface when they are
 /// purely derived from the existing methods on the interface, and don't have

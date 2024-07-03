@@ -1,3 +1,4 @@
+import 'dart:collection';
 import 'dart:math' as math;
 
 import 'package:sector/sector.dart';
@@ -185,6 +186,62 @@ extension GridImpl on Never {
       width,
       height,
     );
+  }
+
+  /// Returns the most common element in the provided [elements].
+  ///
+  /// If the elements are empty, an error is thrown.
+  static T mostCommonElement<T>(
+    Iterable<T> elements, {
+    bool Function(T, T)? equal = identical,
+    int Function(T)? hashCode = identityHashCode,
+  }) {
+    T? mostCommon;
+    var mostCommonCount = 0;
+    final counts = HashMap<T, int>();
+    for (final element in elements) {
+      final count = counts.update(
+        element,
+        (value) => value + 1,
+        ifAbsent: () => 1,
+      );
+      if (count > mostCommonCount) {
+        mostCommon = element;
+        mostCommonCount = count;
+      }
+    }
+
+    if (mostCommon is! T) {
+      throw StateError('No elements to find most common.');
+    }
+
+    return mostCommon;
+  }
+
+  /// Returns a list of lists where the inner lists are transposed.
+  ///
+  /// That is:
+  /// ```txt
+  /// 0 1 2
+  /// 3 4 5
+  /// 6 7 8
+  /// ```
+  ///
+  /// Becomes:
+  /// ```txt
+  /// 0 3 6
+  /// 1 4 7
+  /// 2 5 8
+  /// ```
+  static List<List<T>> transpose<T>(Iterable<Iterable<T>> input) {
+    final elements = checkedExpand(input).toList();
+    final width = input.isEmpty ? 0 : input.first.length;
+    final height = width != 0 ? elements.length ~/ width : 0;
+    return List.generate(width, (x) {
+      return List.generate(height, (y) {
+        return elements[y * width + x];
+      });
+    });
   }
 
   /// Resizes the grid to the provided [width] and [height].
