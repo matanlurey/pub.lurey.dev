@@ -1,0 +1,222 @@
+import '_prelude.dart';
+
+void main() {
+  test('should create a Pos(x, y)', () {
+    final pos = Pos(10, 20);
+    check(pos.x).equals(10);
+    check(pos.y).equals(20);
+  });
+
+  test('zero is (0, 0)', () {
+    check(Pos.zero).equals(Pos(0, 0));
+  });
+
+  group('distanceTo', () {
+    test('defaults to euclideanSquared', () {
+      final a = Pos(10, 20);
+      final b = Pos(30, 40);
+      check(a.distanceTo(b)).equals(800);
+    });
+
+    test('can specify an alternate distance function', () {
+      final a = Pos(10, 20);
+      final b = Pos(30, 40);
+      check(a.distanceTo(b, using: manhattan)).equals(40);
+    });
+  });
+
+  group('lineTo', () {
+    test('defaults to bresenham', () {
+      final a = Pos(0, 0);
+      final b = Pos(2, 2);
+      check(a.lineTo(b)).deepEquals([
+        Pos(0, 0),
+        Pos(1, 1),
+        Pos(2, 2),
+      ]);
+    });
+
+    test('can specify an alternate line function', () {
+      final a = Pos(0, 0);
+      final b = Pos(2, 2);
+
+      Iterable<Pos> fakeLine(Pos a, Pos b, {bool exclusive = false}) sync* {
+        yield a;
+        yield b;
+      }
+
+      check(a.lineTo(b, using: fakeLine)).deepEquals([
+        a,
+        b,
+      ]);
+    });
+  });
+
+  group('midpoints', () {
+    test('returns the middle of two points', () {
+      final a = Pos(0, 0);
+      final b = Pos(2, 2);
+      check(a.midpoints(b)).deepEquals([Pos(1, 1)]);
+    });
+
+    test('returns the middle of two points with a remainder', () {
+      final a = Pos(0, 0);
+      final b = Pos(3, 3);
+      check(a.midpoints(b)).deepEquals([Pos(1, 1), Pos(2, 2)]);
+    });
+  });
+
+  group('rotate45', () {
+    test('1 (45)', () {
+      check(Pos(1, 0).rotate45()).equals(Pos(1, 1));
+    });
+
+    test('2 (90)', () {
+      check(Pos(1, 0).rotate45(2)).equals(Pos(0, 1));
+    });
+
+    test('3 (135)', () {
+      check(Pos(1, 0).rotate45(3)).equals(Pos(-1, -1));
+    });
+
+    test('4 (180)', () {
+      check(Pos(1, 0).rotate45(4)).equals(Pos(-1, 0));
+    });
+
+    test('5 (225)', () {
+      check(Pos(1, 0).rotate45(5)).equals(Pos(-1, -1));
+    });
+
+    test('6 (270)', () {
+      check(Pos(1, 0).rotate45(6)).equals(Pos(0, -1));
+    });
+
+    test('7 (315)', () {
+      check(Pos(1, 0).rotate45(7)).equals(Pos(1, -1));
+    });
+
+    test('8 (360)', () {
+      check(Pos(1, 0).rotate45(8)).equals(Pos(1, 0));
+    });
+
+    test('-1 (-45)', () {
+      check(Pos(1, 0).rotate45(-1)).equals(Pos(1, -1));
+    });
+  });
+
+  group('rotate90', () {
+    test('1 (90)', () {
+      check(Pos(1, 0).rotate90()).equals(Pos(0, 1));
+    });
+
+    test('2 (180)', () {
+      check(Pos(1, 0).rotate90(2)).equals(Pos(-1, 0));
+    });
+
+    test('3 (270)', () {
+      check(Pos(1, 0).rotate90(3)).equals(Pos(0, -1));
+    });
+
+    test('4 (360)', () {
+      check(Pos(1, 0).rotate90(4)).equals(Pos(1, 0));
+    });
+
+    test('-1 (-90)', () {
+      check(Pos(1, 0).rotate90(-1)).equals(Pos(0, -1));
+    });
+  });
+
+  test('rotate180', () {
+    check(Pos(1, 0).rotate180()).equals(Pos(-1, 0));
+  });
+
+  test('scale', () {
+    check(Pos(1, 2).scale(Pos(2, 4))).equals(Pos(2, 8));
+  });
+
+  test('abs', () {
+    check(Pos(-1, -2).abs()).equals(Pos(1, 2));
+  });
+
+  test('pow', () {
+    check(Pos(2, 3).pow(2)).equals(Pos(4, 9));
+  });
+
+  test('negation', () {
+    check(-Pos(1, 2)).equals(Pos(-1, -2));
+  });
+
+  test('+', () {
+    check(Pos(1, 2) + Pos(3, 4)).equals(Pos(4, 6));
+  });
+
+  test('-', () {
+    check(Pos(1, 2) - Pos(3, 4)).equals(Pos(-2, -2));
+  });
+
+  test('*', () {
+    check(Pos(1, 2) * 3).equals(Pos(3, 6));
+  });
+
+  test('|', () {
+    check(Pos(1, 2) | Pos(3, 4)).equals(Pos(3, 6));
+  });
+
+  test('&', () {
+    check(Pos(1, 2) & Pos(3, 4)).equals(Pos(1, 0));
+  });
+
+  test('^', () {
+    check(Pos(1, 2) ^ Pos(3, 4)).equals(Pos(2, 6));
+  });
+
+  test('hashCode', () {
+    check(Pos(1, 2).hashCode).equals(Pos(1, 2).hashCode);
+  });
+
+  test('toString', () {
+    check(Pos(1, 2).toString()).equals('Pos(1, 2)');
+  });
+
+  group('should sort byMagntiude', () {
+    test('1, 2, 3', () {
+      final list = [Pos(3, 3), Pos(1, 1), Pos(2, 2)];
+      list.sort(Pos.byMagnitude());
+      check(list).deepEquals([Pos(1, 1), Pos(2, 2), Pos(3, 3)]);
+    });
+
+    test('3, 2, 1', () {
+      final list = [Pos(2, 2), Pos(3, 3), Pos(1, 1)];
+      list.sort(Pos.byMagnitude());
+      check(list).deepEquals([Pos(1, 1), Pos(2, 2), Pos(3, 3)]);
+    });
+  });
+
+  group('should sort byRowMajor', () {
+    test('1, 2, 3', () {
+      final list = [Pos(1, 1), Pos(2, 2), Pos(3, 3)];
+      list.sort(Pos.byRowMajor);
+      check(list).deepEquals([Pos(1, 1), Pos(2, 2), Pos(3, 3)]);
+    });
+
+    test('3, 2, 1', () {
+      final list = [Pos(3, 3), Pos(2, 2), Pos(1, 1)];
+      list.sort(Pos.byRowMajor);
+      check(list).deepEquals([Pos(1, 1), Pos(2, 2), Pos(3, 3)]);
+    });
+  });
+
+  group('should sort byColumnMajor', () {
+    test('1, 2, 3', () {
+      final list = [Pos(1, 1), Pos(2, 2), Pos(3, 3)];
+      list.sort(Pos.byColumnMajor);
+      check(list).deepEquals([Pos(1, 1), Pos(2, 2), Pos(3, 3)]);
+    });
+
+    test('3, 2, 1', () {
+      final list = [Pos(3, 3), Pos(2, 2), Pos(1, 1)];
+      list.sort(Pos.byColumnMajor);
+      check(list).deepEquals([Pos(1, 1), Pos(2, 2), Pos(3, 3)]);
+    });
+  });
+}

@@ -1,0 +1,4 @@
+.dart_tool/
+benchmark/*.exe
+doc/api/
+pubspec.lock
