@@ -2,7 +2,7 @@
 
 name: lodim
 description: Fixed-point pixel accurate 2D geometry without approximations.
-version: 0.0.0
+version: 0.1.0
 
 environment:
   sdk: ^3.4.0
