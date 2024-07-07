@@ -1,4 +1,4 @@
-/// _Fast_ and _pixel accurate_ fixed-point 2D geometry without approximations.
+/// _Fast pixel accurate_ fixed-point 2D geometry with minimum approximations.
 ///
 /// ## Usage
 ///

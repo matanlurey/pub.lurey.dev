@@ -1,6 +1,6 @@
 # lodim
 
-_Fast_ and _pixel accurate_ fixed-point 2D geometry without approximations.
+_Fast_ and _pixel accurate_ fixed-point 2D geometry with minimal approximations.
 
 [![CI](https://github.com/matanlurey/lodim/actions/workflows/ci.yaml/badge.svg)](https://github.com/matanlurey/lodim/actions/workflows/ci.yaml)
 [![Coverage Status](https://coveralls.io/repos/github/matanlurey/lodim/badge.svg?branch=main)](https://coveralls.io/github/matanlurey/lodim?branch=main)

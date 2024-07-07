@@ -1,7 +1,8 @@
 # Format: https://dart.dev/tools/pub/pubspec
 
 name: lodim
-description: Fixed-point pixel accurate 2D geometry without approximations.
+description: |-
+  Fixed-point pixel accurate 2D geometry with minimal approximations.
 version: 0.1.1
 
 environment:
