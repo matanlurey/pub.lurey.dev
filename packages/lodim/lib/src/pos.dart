@@ -329,6 +329,26 @@ final class Pos {
   /// See also [operator-] for the same effect.
   Pos rotate180() => -this;
 
+  /// Returns `this` as a [Rect.center] of a rectangle expanded by [delta].
+  ///
+  /// This is equivalent to:
+  /// ```dart
+  /// final a = Pos(10, 20);
+  /// final b = Rect.fromLTWH(a.x - delta.x, a.y - delta.y, delta.x * 2, delta.y * 2);
+  /// ```
+  ///
+  /// ## Example
+  ///
+  /// ```dart
+  /// final a = Pos(5, 5);
+  /// final b = a.inflate(Pos(2, 3));
+  /// print(b); // => Rect.fromLTRB(3, 2, 7, 8)
+  /// print(b.center); // => [Pos(5, 5)]
+  /// ```
+  Rect inflate(Pos delta) {
+    return Rect.fromLTWH(x - delta.x, y - delta.y, delta.x * 2, delta.y * 2);
+  }
+
   /// Returns a new position with the offsets of `this` scaled by [other].
   ///
   /// This is equivalent to:
@@ -378,6 +398,76 @@ final class Pos {
   /// ```
   Pos pow(int exponent) {
     return Pos(math.pow(x, exponent) as int, math.pow(y, exponent) as int);
+  }
+
+  /// Returns a new position with offsets no greater than [other].
+  ///
+  /// The offsets are compared to the corresponding offsets of [other], and the
+  /// result is a new position with the smaller of the two offsets. Each offset
+  /// is compared independently.
+  ///
+  /// ## Example
+  ///
+  /// ```dart
+  /// final a = Pos(10, 20);
+  /// print(a.min(Pos(5, 15))); // => Pos(5, 15)
+  /// ```
+  Pos min(Pos other) => Pos(math.min(x, other.x), math.min(y, other.y));
+
+  /// Returns a new position with offsets no less than [other].
+  ///
+  /// The offsets are compared to the corresponding offsets of [other], and the
+  /// result is a new position with the larger of the two offsets. Each offset
+  /// is compared independently.
+  ///
+  /// ## Example
+  ///
+  /// ```dart
+  /// final a = Pos(10, 20);
+  /// print(a.max(Pos(5, 15))); // => Pos(10, 20)
+  /// ```
+  Pos max(Pos other) => Pos(math.max(x, other.x), math.max(y, other.y));
+
+  /// Returns a new position with the offsets of `this` position clamped.
+  ///
+  /// The offsets are clamped to be within the range of [min] and [max];
+  /// if the offsets are less than [min], they will be set to [min], and if
+  /// they are greater than [max], they will be set to [max].
+  ///
+  /// Each offset is clamped independently.
+  ///
+  /// ## Example
+  ///
+  /// ```dart
+  /// final a = Pos(10, 20);
+  /// print(a.clamp(Pos(5, 25), Pos(15, 15))); // => Pos(5, 15)
+  /// ```
+  Pos clamp(Pos min, Pos max) {
+    return Pos(x.clamp(min.x, max.x), y.clamp(min.y, max.y));
+  }
+
+  /// Returns an approximate normalized vector represented by `this`.
+  ///
+  /// Exact normalization with integer math is not possible, so this method
+  /// returns an approximate normalized vector that is close enough for most
+  /// use-cases, such as calculating directions or distances.
+  ///
+  /// The result is a vector with the same direction as `this`, but with a
+  /// magnitude as close to `1` as possible; the result is not guaranteed to
+  /// have a magnitude of `1`.
+  ///
+  /// ## Example
+  ///
+  /// ```dart
+  /// final a = Pos(10, 20);
+  /// print(a.normalizedApproximate); // => Pos(1, 2)
+  /// ```
+  Pos get normalizedApproximate {
+    if (x == 0 && y == 0) {
+      return Pos.zero;
+    }
+    final gcd = x.gcd(y);
+    return Pos(x ~/ gcd, y ~/ gcd);
   }
 
   @override
@@ -453,6 +543,82 @@ final class Pos {
   /// ```
   Pos operator *(int scalar) => Pos(x * scalar, y * scalar);
 
+  /// Returns the dot product of `this` and [other].
+  ///
+  /// The dot product is the sum of the products of the corresponding elements
+  /// of the two sequences of numbers. It is a scalar value that is used to
+  /// determine the angle between two vectors.
+  ///
+  /// This is equivalent to:
+  /// ```dart
+  /// final a = Pos(10, 20);
+  /// final b = Pos(30, 40);
+  /// final c = a.x * b.x + a.y * b.y;
+  /// ```
+  ///
+  /// ## Example
+  ///
+  /// ```dart
+  /// final a = Pos(10, 20);
+  /// final b = Pos(30, 40);
+  /// print(a.dot(b)); // => 1100
+  /// ```
+  int dot(Pos other) => x * other.x + y * other.y;
+
+  /// Returns the cross product of `this` and [other].
+  ///
+  /// The cross product is a vector that is perpendicular to the plane formed
+  /// by the two vectors. It is a vector that is orthogonal to both `this` and
+  /// [other] and is used to determine the direction of the resulting vector.
+  ///
+  /// This is equivalent to:
+  /// ```dart
+  /// final a = Pos(10, 20);
+  /// final b = Pos(30, 40);
+  /// final c = a.x * b.y - a.y * b.x;
+  /// ```
+  ///
+  /// ## Example
+  ///
+  /// ```dart
+  /// final a = Pos(10, 20);
+  /// final b = Pos(30, 40);
+  /// print(a.cross(b)); // => 200
+  /// ```
+  int cross(Pos other) => x * other.y - y * other.x;
+
+  /// Returns a new position with `this` position floor divided by [scalar].
+  ///
+  /// This is equivalent to:
+  /// ```dart
+  /// final a = Pos(10, 20);
+  /// final b = Pos(a.x ~/ scalar, a.y ~/ scalar);
+  /// ```
+  ///
+  /// ## Example
+  ///
+  /// ```dart
+  /// final a = Pos(10, 20);
+  /// print(a ~/ 2); // => Pos(5, 10)
+  /// ```
+  Pos operator ~/(int scalar) => Pos(x ~/ scalar, y ~/ scalar);
+
+  /// Returns a new position with `this` position remainder divided by [scalar].
+  ///
+  /// This is equivalent to:
+  /// ```dart
+  /// final a = Pos(10, 20);
+  /// final b = Pos(a.x % scalar, a.y % scalar);
+  /// ```
+  ///
+  /// ## Example
+  ///
+  /// ```dart
+  /// final a = Pos(10, 20);
+  /// print(a % 3); // => Pos(1, 2)
+  /// ```
+  Pos operator %(int scalar) => Pos(x % scalar, y % scalar);
+
   /// Returns a new position with `this` position logical-ORed with [other].
   ///
   /// This is equivalent to:
@@ -505,9 +671,85 @@ final class Pos {
   /// ```
   Pos operator ^(Pos other) => Pos(x ^ other.x, y ^ other.y);
 
+  /// Returns a new position with `this` position bit-wise negated.
+  ///
+  /// This is equivalent to:
+  /// ```dart
+  /// final a = Pos(10, 20);
+  /// final b = Pos(~a.x, ~a.y);
+  /// ```
+  ///
+  /// ## Example
+  ///
+  /// ```dart
+  /// final a = Pos(10, 20);
+  /// print(~a); // => Pos(-11, -21)
+  /// ```
+  Pos operator ~() => Pos(~x, ~y);
+
+  /// Returns a new position with `this` position bit-shifted left by [shifts].
+  ///
+  /// This is equivalent to:
+  /// ```dart
+  /// final a = Pos(10, 20);
+  /// final b = Pos(a.x << shifts, a.y << shifts);
+  /// ```
+  ///
+  /// ## Example
+  ///
+  /// ```dart
+  /// final a = Pos(10, 20);
+  /// print(a << 2); // => Pos(40, 80)
+  /// ```
+  Pos operator <<(int shifts) => Pos(x << shifts, y << shifts);
+
+  /// Returns a new position with `this` position bit-shifted right by [shifts].
+  ///
+  /// This is equivalent to:
+  /// ```dart
+  /// final a = Pos(10, 20);
+  /// final b = Pos(a.x >> shifts, a.y >> shifts);
+  /// ```
+  ///
+  /// ## Example
+  ///
+  /// ```dart
+  /// final a = Pos(10, 20);
+  /// print(a >> 2); // => Pos(2, 5)
+  /// ```
+  Pos operator >>(int shifts) => Pos(x >> shifts, y >> shifts);
+
   @override
   int get hashCode => Object.hash(x, y);
 
+  /// Returns `this` as a rectangle with a width and height of `1`.
+  ///
+  /// This is equivalent to:
+  /// ```dart
+  /// final a = Pos(10, 20);
+  /// a.inflate(Pos.zero);
+  /// ```
+  ///
+  /// ## Example
+  ///
+  /// ```dart
+  /// final a = Pos(10, 20);
+  /// print(a.toRect()); // => Rect.fromLTWH(10, 20, 1, 1)
+  Rect toRect() => Rect.fromLTWH(x, y, 1, 1);
+
   @override
   String toString() => 'Pos($x, $y)';
+}
+
+/// Extension methods on `(int, int)` tuples for convenience.
+extension IntPair on (int, int) {
+  /// Creates a new position from a tuple of two integers.
+  ///
+  /// This is equivalent to:
+  /// ```dart
+  /// final (x, y) = a;
+  /// final b = Pos(x, y);
+  /// ```
+  @pragma('vm:prefer-inline')
+  Pos toPos() => Pos($1, $2);
 }

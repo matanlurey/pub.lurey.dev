@@ -170,6 +170,26 @@ void main() {
     check(Pos(1, 2) ^ Pos(3, 4)).equals(Pos(2, 6));
   });
 
+  test('~/', () {
+    check(Pos(1, 2) ~/ 3).equals(Pos(0, 0));
+  });
+
+  test('%', () {
+    check(Pos(1, 2) % 3).equals(Pos(1, 2));
+  });
+
+  test('~', () {
+    check(~Pos(1, 2)).equals(Pos(-2, -3));
+  });
+
+  test('<<', () {
+    check(Pos(1, 2) << 1).equals(Pos(2, 4));
+  });
+
+  test('>>', () {
+    check(Pos(1, 2) >> 1).equals(Pos(0, 1));
+  });
+
   test('hashCode', () {
     check(Pos(1, 2).hashCode).equals(Pos(1, 2).hashCode);
   });
@@ -218,5 +238,47 @@ void main() {
       list.sort(Pos.byColumnMajor);
       check(list).deepEquals([Pos(1, 1), Pos(2, 2), Pos(3, 3)]);
     });
+  });
+
+  test('inflate', () {
+    check(Pos(2, 2).inflate(Pos(2, 2))).equals(Rect.fromLTWH(0, 0, 4, 4));
+  });
+
+  test('min', () {
+    check(Pos(1, 2).min(Pos(3, 4))).equals(Pos(1, 2));
+  });
+
+  test('max', () {
+    check(Pos(1, 2).max(Pos(3, 4))).equals(Pos(3, 4));
+  });
+
+  test('clamp', () {
+    check(Pos(1, 2).clamp(Pos(3, 4), Pos(5, 6))).equals(Pos(3, 4));
+  });
+
+  group('normalizedApproximate', () {
+    test('returns 0 if both offsets are 0', () {
+      check(Pos(0, 0).normalizedApproximate).equals(Pos(0, 0));
+    });
+
+    test('returns the GCD', () {
+      check(Pos(2, 4).normalizedApproximate).equals(Pos(1, 2));
+    });
+  });
+
+  test('dot', () {
+    check(Pos(1, 2).dot(Pos(3, 4))).equals(11);
+  });
+
+  test('cross', () {
+    check(Pos(1, 2).cross(Pos(3, 4))).equals(-2);
+  });
+
+  test('toRect', () {
+    check(Pos(1, 2).toRect()).equals(Rect.fromLTWH(1, 2, 1, 1));
+  });
+
+  test('toPos', () {
+    check((1, 2).toPos()).equals(Pos(1, 2));
   });
 }

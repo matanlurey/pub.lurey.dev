@@ -81,11 +81,16 @@ library;
 
 import 'dart:math' as math;
 
+import 'package:lodim/src/impl/bresenham.dart';
 import 'package:meta/meta.dart';
+
+export 'package:lodim/src/impl/bresenham.dart';
+export 'package:lodim/src/impl/vector_line.dart';
 
 part 'src/direction.dart';
 part 'src/distance.dart';
 part 'src/line.dart';
+part 'src/math.dart';
 part 'src/octant.dart';
 part 'src/pos.dart';
 part 'src/rect.dart';

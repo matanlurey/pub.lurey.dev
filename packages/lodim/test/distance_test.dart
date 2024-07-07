@@ -33,6 +33,38 @@ void main() {
     });
   });
 
+  group('euclideanApproximate', () {
+    test('calculates the approximate euclidean distance between 2 points', () {
+      final a = Pos(1, 2);
+      final b = Pos(4, 6);
+      check(euclideanApproximate(a, b)).equals(5);
+    });
+
+    test('is commutative', () {
+      final a = Pos(1, 2);
+      final b = Pos(4, 6);
+      check(euclideanApproximate(a, b)).equals(euclideanApproximate(b, a));
+    });
+
+    test('is reflexive', () {
+      final a = Pos(1, 2);
+      check(euclideanApproximate(a, a)).equals(0);
+    });
+
+    test('is positive', () {
+      final a = Pos(1, 2);
+      final b = Pos(4, 6);
+      check(euclideanApproximate(a, b)).isGreaterOrEqual(0);
+    });
+
+    test('is zero if and only if the points are the same', () {
+      final a = Pos(1, 2);
+      final b = Pos(4, 6);
+      check(euclideanApproximate(a, b)).not((a) => a.equals(0));
+      check(euclideanApproximate(a, a)).equals(0);
+    });
+  });
+
   group('manhattan', () {
     test('calculates the manhattan distance between two points', () {
       final a = Pos(1, 2);
@@ -62,6 +94,38 @@ void main() {
       final b = Pos(4, 6);
       check(manhattan(a, b)).not((a) => a.equals(0));
       check(manhattan(a, a)).equals(0);
+    });
+  });
+
+  group('diagonal', () {
+    test('calculates the diagonal distance between two points', () {
+      final a = Pos(1, 2);
+      final b = Pos(4, 6);
+      check(diagonal(a, b)).equals(4);
+    });
+
+    test('is commutative', () {
+      final a = Pos(1, 2);
+      final b = Pos(4, 6);
+      check(diagonal(a, b)).equals(diagonal(b, a));
+    });
+
+    test('is reflexive', () {
+      final a = Pos(1, 2);
+      check(diagonal(a, a)).equals(0);
+    });
+
+    test('is positive', () {
+      final a = Pos(1, 2);
+      final b = Pos(4, 6);
+      check(diagonal(a, b)).isGreaterOrEqual(0);
+    });
+
+    test('is zero if and only if the points are the same', () {
+      final a = Pos(1, 2);
+      final b = Pos(4, 6);
+      check(diagonal(a, b)).not((a) => a.equals(0));
+      check(diagonal(a, a)).equals(0);
     });
   });
 
