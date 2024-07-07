@@ -2,9 +2,9 @@
 
 ## 0.1.1
 
-### Features
+**Features**:
 
-#### `Pos`
+Most new additions were to the `Pos` class:
 
 - Added `vectorLine` as a faster `Line` function (alternative to `bresenham`):
 
@@ -59,7 +59,7 @@
 
 - Added missing core operators: `~/`, `%`, `~`, `<<`, `>>`.
 
-#### `Rect`
+New changes to the `Rect` class:
 
 - Added `<Rect>.inflate` and `<Rect>.deflate`, which, given a delta `Pos` offset
   inflates or deflates the rectangle by that amount:
@@ -70,7 +70,7 @@
   rect.deflate(Pos(2, 2)); // Rect.fromLTRB(2, 2, 8, 8)
   ```
 
-#### Misc
+Other new features:
 
 - Added a new extension on `(int, int)` to convert a tuple to a `Pos`:
 
