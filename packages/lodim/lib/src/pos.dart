@@ -21,6 +21,8 @@ part of '../lodim.dart';
 /// ```dart
 /// final Pos(:x, :y) = pos;
 /// ```
+///
+/// {@category Grids}
 @immutable
 final class Pos {
   /// Creates a new position with the given x and y offsets.

@@ -5,6 +5,9 @@ part of '../lodim.dart';
 /// This class represents a direction in a 2D space, with a fixed distance of 1
 /// unit. The direction can be one of the four [cardinal] directions, or one of
 /// four [ordinal] directions, or all eight [values].
+///
+/// {@category Grids}
+/// {@category Graphs}
 extension type const Direction._(Pos _) implements Pos {
   /// A comparator that sorts directions in clockwise order.
   ///

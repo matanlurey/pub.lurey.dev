@@ -26,6 +26,8 @@ part of '../lodim.dart';
 /// ```dart
 /// final Rect(:left, :top, :right, :bottom) = rect;
 /// ```
+///
+/// {@category Grids}
 @immutable
 final class Rect {
   /// Creates a rectangle from its left, top, right, and bottom edges.
