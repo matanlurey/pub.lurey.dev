@@ -4,7 +4,7 @@ part of '../lodim.dart';
 ///
 /// This class represents a direction in a 2D space, with a fixed distance of 1
 /// unit. The direction can be one of the four [cardinal] directions, or one of
-/// four [ordinal] directions, or all eight [values].
+/// four [ordinal] directions, or [all] eight values.
 ///
 /// {@category Grids}
 /// {@category Graphs}
@@ -48,7 +48,13 @@ extension type const Direction._(Pos _) implements Pos {
   /// All eight cardinal and ordinal directions, in clockwise order.
   ///
   /// This list is unmodifiable.
-  static const values = [
+  @Deprecated('Use Direction.all instead')
+  static const values = all;
+
+  /// All eight cardinal and ordinal directions, in clockwise order.
+  ///
+  /// This list is unmodifiable.
+  static const all = [
     north,
     northEast,
     east,

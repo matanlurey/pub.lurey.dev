@@ -2,7 +2,18 @@
 
 ## 0.1.1+1
 
-Added dartdoc categories for upstream use in `package:sector`.
+**Deprecations**:
+
+- Deprecated `Direction.values` in favor of the identical `Direction.all`:
+
+  ```diff
+  - for (final dir in Direction.values) {
+  + for (final dir in Direction.all) {
+  ```
+
+**Misc**:
+
+- Added dartdoc categories for upstream use in `package:sector`.
 
 ## 0.1.1
 

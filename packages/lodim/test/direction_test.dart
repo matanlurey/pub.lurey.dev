@@ -2,9 +2,9 @@ import '_prelude.dart';
 
 void main() {
   test('cardinal directions are north, east, south, west', () {
-    // Ensure 'values' contains only cardinal directions.
+    // Ensure 'all' contains only cardinal directions.
     check(
-      Direction.values.where((d) => d.isCardinal),
+      Direction.all.where((d) => d.isCardinal),
     ).deepEquals(Direction.cardinal);
 
     // Ensure 'cardinal' is exactly the four cardinal directions.
@@ -17,9 +17,9 @@ void main() {
   });
 
   test('ordinal directions are northEast, southEast, southWest, northWest', () {
-    // Ensure 'values' contains only ordinal directions.
+    // Ensure 'all' contains only ordinal directions.
     check(
-      Direction.values.where((d) => d.isOrdinal),
+      Direction.all.where((d) => d.isOrdinal),
     ).deepEquals(Direction.ordinal);
 
     // Ensure 'ordinal' is exactly the four ordinal directions.
@@ -50,7 +50,7 @@ void main() {
 
   test('sorts directions in clock-wise order', () {
     for (var i = 0; i < 10; i++) {
-      final directions = Direction.values.toList()..shuffle();
+      final directions = Direction.all.toList()..shuffle();
       directions.sort(Direction.byClockwise);
       check(directions).deepEquals([
         Direction.north,
@@ -67,7 +67,7 @@ void main() {
 
   test('sorts directions in counter-clock-wise order', () {
     for (var i = 0; i < 10; i++) {
-      final directions = Direction.values.toList()..shuffle();
+      final directions = Direction.all.toList()..shuffle();
       directions.sort(Direction.byCounterClockwise);
       check(directions).deepEquals([
         Direction.north,
@@ -117,25 +117,25 @@ void main() {
   });
 
   group('rotate90 guarantees a Direction', () {
-    for (final direction in Direction.values) {
+    for (final direction in Direction.all) {
       test('rotating $direction by 90 degrees', () {
-        check(Direction.values).contains(direction.rotate90());
+        check(Direction.all).contains(direction.rotate90());
       });
     }
   });
 
   group('rotate180 guarantees a Direction', () {
-    for (final direction in Direction.values) {
+    for (final direction in Direction.all) {
       test('rotating $direction by 180 degrees', () {
-        check(Direction.values).contains(direction.rotate180());
+        check(Direction.all).contains(direction.rotate180());
       });
     }
   });
 
   group('operator- guarantees a Direction', () {
-    for (final direction in Direction.values) {
+    for (final direction in Direction.all) {
       test('negating $direction', () {
-        check(Direction.values).contains(-direction);
+        check(Direction.all).contains(-direction);
       });
     }
   });

@@ -31,7 +31,7 @@
 ///
 /// [Direction] is a specialization of [Pos] with a fixed set of 8 directions;
 /// either [Direction.ordinal] (horizontal/vertical), [Direction.cardinal]
-/// (diagonal), or [Direction.values] (all 8 directions), with useful constants:
+/// (diagonal), or [Direction.all] (all 8 directions), with useful constants:
 ///
 /// ```dart
 /// // Getting the direction to the right.
