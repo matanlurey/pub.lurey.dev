@@ -4,43 +4,43 @@
 
 | Benchmark | Results | Delta |
 | --------- | ------- | ----- |
-| `LinkedHashMap` | 0.11ms | 16.59% |
-| `SplayTreeMap` | 0.13ms | 46.26% |
+| `LinkedHashMap` | 0.11ms | 18.07% |
+| `SplayTreeMap` | 0.13ms | 45.77% |
 | `HashMap` | **0.09ms** | +0.00% |
-| `IndexMap` | *0.15ms* | -71.16% |
+| `IndexMap` | *0.16ms* | -73.64% |
 
 ## CreateMapWith1kStringIntEntries(RunTime)
 
 | Benchmark | Results | Delta |
 | --------- | ------- | ----- |
-| `LinkedHashMap` | *416.88ms* | -104.09% |
-| `SplayTreeMap` | 394.78ms | 93.27% |
-| `HashMap` | **204.26ms** | +0.00% |
-| `IndexMap` | 387.82ms | 89.86% |
+| `LinkedHashMap` | *427.34ms* | -114.27% |
+| `SplayTreeMap` | 392.04ms | 96.56% |
+| `HashMap` | **199.44ms** | +0.00% |
+| `IndexMap` | 401.21ms | 101.16% |
 
 ## IterateMapWith1kStringIntEntries(RunTime)
 
 | Benchmark | Results | Delta |
 | --------- | ------- | ----- |
-| `LinkedHashMap` | 204.49ms | 99.69% |
-| `SplayTreeMap` | 196.44ms | 91.83% |
-| `HashMap` | *238.86ms* | -133.25% |
-| `IndexMap` | **102.40ms** | +0.00% |
+| `LinkedHashMap` | 207.82ms | 102.35% |
+| `SplayTreeMap` | 206.20ms | 100.78% |
+| `HashMap` | *245.73ms* | -139.27% |
+| `IndexMap` | **102.70ms** | +0.00% |
 
 ## Hash1kEntries(RunTime)
 
 | Benchmark | Results | Delta |
 | --------- | ------- | ----- |
-| `LinkedHashMap` | 241.88ms | 7.46% |
-| `SplayTreeMap` | *842.40ms* | -274.26% |
-| `HashMap` | **225.08ms** | +0.00% |
-| `IndexMap` | 228.53ms | 1.53% |
+| `LinkedHashMap` | 246.58ms | 7.71% |
+| `SplayTreeMap` | *852.19ms* | -272.26% |
+| `HashMap` | **228.92ms** | +0.00% |
+| `IndexMap` | 229.32ms | 0.17% |
 
 ## RemoveEveryOtherEntry1kEntries(RunTime)
 
 | Benchmark | Results | Delta |
 | --------- | ------- | ----- |
-| `LinkedHashMap` | 34.47ms | 46.39% |
-| `SplayTreeMap` | *312.01ms* | -1225.11% |
-| `HashMap` | **23.55ms** | +0.00% |
-| `IndexMap` | 24.50ms | 4.07% |
+| `LinkedHashMap` | 35.01ms | 45.52% |
+| `SplayTreeMap` | *312.40ms* | -1198.60% |
+| `HashMap` | **24.06ms** | +0.00% |
+| `IndexMap` | 38.76ms | 61.11% |

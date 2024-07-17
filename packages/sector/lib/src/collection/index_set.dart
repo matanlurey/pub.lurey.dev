@@ -161,10 +161,10 @@ final class _IndexSet<E> with SetBase<E> implements IndexSet<E> {
       return false;
     }
 
-    final result = _removeSwap(_entries, index);
+    _removeSwap(_entries, index);
 
     // Remove the last index from the map.
-    _indices.remove(result);
+    _indices.remove(key);
 
     // Remap the moved entry.
     if (index < _entries.length) {

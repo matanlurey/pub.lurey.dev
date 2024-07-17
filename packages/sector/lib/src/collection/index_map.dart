@@ -312,7 +312,7 @@ final class _IndexMap<K, V> with MapBase<K, V> implements IndexMap<K, V> {
     final result = _removeSwap(_entries, index).value;
 
     // Remove the last index from the map.
-    _indices.remove(result);
+    _indices.remove(key);
 
     // Remap the moved entry.
     if (index < _entries.length) {

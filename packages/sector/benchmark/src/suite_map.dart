@@ -151,5 +151,7 @@ final class _RemoveEveryOtherEntry1KEntriesBenchmark extends BenchmarkBase {
     for (var i = 0; i < _keys.length; i += 2) {
       _map.remove(_keys[i]);
     }
+
+    _blackBox(_map);
   }
 }
