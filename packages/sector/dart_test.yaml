@@ -11,6 +11,7 @@ platforms:
 fold_stack_frames:
   except:
     - checks
+    - matcher
     - test
     - test_api
     - stream_channel

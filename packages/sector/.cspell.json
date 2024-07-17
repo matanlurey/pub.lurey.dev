@@ -1,0 +1,29 @@
+{
+  "language": "en",
+  "words": [
+    "astar",
+    "chebyshev",
+    "Dartdoc",
+    "Dijsktra's",
+    "Eucledian",
+    "idastar",
+    "IDDFS",
+    "lcov",
+    "lodim",
+    "Microtask",
+    "pathfinding",
+    "preorders",
+    "sublist",
+    "Walkables",
+    "writeln"
+  ],
+  "ignoreRegExpList": [
+    "dart-doc-macros"
+  ],
+  "patterns": [
+    {
+      "name": "dart-doc-macros",
+      "pattern": "{@.*?}"
+    }
+  ]
+}

@@ -1,13 +1,11 @@
 # Sector
 
-A 🔥 _fast_ (benchmarked) and 👍🏼 _intuitive_ (idiomatic) 2D Grid API.
+Fast and intuitive 2D data structures: grids, graphs, pathfinding & more.
 
 [![CI](https://github.com/matanlurey/sector/actions/workflows/ci.yaml/badge.svg)](https://github.com/matanlurey/sector/actions/workflows/ci.yaml)
 [![Coverage Status](https://coveralls.io/repos/github/matanlurey/sector/badge.svg?branch=main)](https://coveralls.io/github/matanlurey/sector?branch=main)
 [![Pub Package](https://img.shields.io/pub/v/sector.svg)](https://pub.dev/packages/sector)
 [![Dartdoc reference](https://img.shields.io/badge/dartdoc-reference-blue.svg)](https://pub.dev/documentation/sector/latest/)
-
-![Demo](https://github.com/matanlurey/sector/assets/168174/259a0d08-8a7c-4830-beb9-491fc1ea47d9)
 
 ## Getting Started
 
@@ -15,61 +13,6 @@ Add a dependency in your `pubspec.yaml` or run the following command:
 
 ```bash
 dart pub add sector
-```
-
-### Usage
-
-`Grid` is the 2-dimensional equivalent of a `List` in Dart:
-
-```dart
-// Create a 2D grid with 80 columns and 24 rows filled with spaces.
-final grid = Grid.filled(80, 24, Tile.empty);
-```
-
-```dart
-// Create a 2D grid from an existing 2D matrix-like collection.
-final grid = Grid.fromRows([
-  [Tile.grass, Tile.water, Tile.water, Tile.grass],
-  [Tile.grass, Tile.water, Tile.water, Tile.grass],
-  [Tile.grass, Tile.grass, Tile.grass, Tile.grass],
-]);
-```
-
-Check the bounds, `get`, and `set` elements:
-
-```dart
-// Check if a point is within the bounds of the grid.
-if (grid.containsXY(0, 0)) {
-  // ...
-}
-
-// Get the element at a point.
-final element = grid.get(0, 0);
-
-// Set the element at a point.
-grid.set(0, 0, Tile.lava);
-```
-
-Iterate over the grid with `rows` and `columns`:
-
-```dart
-// Iterate over the rows of the grid.
-for (final row in grid.rows) {
-  // ...
-}
-```
-
-Use or build your own custom traversals:
-
-```dart
-for (final cell in grid.traverse(drawLine(0, 0, 10, 10))) {
-  // ...
-}
-```
-
-```dart
-// Expand or shrink the grid on demand.
-grid.rows.insertFirst([Tile.rocks, Tile.rocks, Tile.rocks, Tile.rocks]);
 ```
 
 ## Features
@@ -80,48 +23,56 @@ grid.rows.insertFirst([Tile.rocks, Tile.rocks, Tile.rocks, Tile.rocks]);
 - _Well-tested_, with 100% code coverage and property-based tests.
 - _Lightweight_, with zero dependencies, minimal overhead, and benchmarked.
 
-### Benchmarks
+## Usage
 
-For a data structure like a `Grid`, it will almost always be faster to
-hand-write an optimal repsentation for your specific use case. However,
-`sector` is designed to be a general-purpose 2D grid that is fast enough
-for most applications.
+Sector offers a powerful toolkit for graphs, grids, pathfinding, and more.
 
-[Compared to a baseline implementation](./benchmark/README.md), `Grid` is
-roughly the _same speed_ as a hand-optimized implementation, in JIT and AOT
-modes (within <1% difference).
+### Graphs
 
-> [!NOTE]
-> Results on my personal M2 Macbook Pro, your mileage may vary.
+Create a graph and add edges:
 
-#### Baseline
+```dart
+final graph = Graph<String>();
 
-```sh
-$ dart run ./benchmark/baseline.dart
-Allocate 80x24 grid(RunTime): 16.06649213472959 us.
-Iterate 80x24 grid(RunTime): 19.974587703298372 us.
-Removes the top row and adds at bottom(RunTime): 36.68761446674683 us.
+graph.addEdge(Edge('a', 'b'));
+graph.addEdge(Edge('b', 'c'));
 
-$ dart compile exe ./benchmark/baseline.dart
-$ ./benchmark/baseline.exe
-Allocate 80x24 grid(RunTime): 13.26583125 us.
-Iterate 80x24 grid(RunTime): 19.46614307164082 us.
-Removes the top row and adds at bottom(RunTime): 41.7737068469836 us.
+print(graph.roots); // ['a']
+print(graph.successors('b')); // ['c']
 ```
 
-#### Grid
+### Grids
 
-```sh
-$ dart run ./benchmark/list_grid.dart
-Allocate 80x24 grid(RunTime): 15.735960664285184 us.
-Iterate 80x24 grid using for-loops and rows(RunTime): 19.53493233680822 us.
-Removes the top row and adds at bottom(RunTime): 41.14004523902736 us.
+Create a grid and update cells:
 
-$ dart compile exe ./benchmark/list_grid.dart
-$ ./benchmark/list_grid.exe
-Allocate 80x24 grid(RunTime): 13.095811723035522 us.
-Iterate 80x24 grid using for-loops and rows(RunTime): 20.751487810640235 us.
-Removes the top row and adds at bottom(RunTime): 40.39716505669887 us.
+```dart
+enum Tile {
+  wall,
+  floor,
+}
+
+// Create a 5x8 grid filled with `Tile.wall`.
+//
+// When resizing a grid, the `empty` value is used to fill the new cells.
+final grid = Grid.filled(5, 8, empty: Tile.wall);
+
+// Itereate over the grid.
+for (final row in grid.rows) {
+  for (final cell in row) {
+    print(cell);
+  }
+}
+```
+
+### Pathfinding
+
+Use built-in pathfinding algorithms or write your own:
+
+```dart
+final graph = Walkable.linear(['a', 'b', 'c']);
+
+final path = breadthFirstSearch(graph, 'a', Goal.node('c'));
+print(path); // Path(['a', 'b', 'c'])
 ```
 
 ## Contributing
@@ -143,3 +94,7 @@ To preview `dartdoc` output locally, run:
 ```shell
 dart tool/dartdoc.dart
 ```
+
+<!--
+TODO: Add a note about use of `cspell` (i.e. technical terms needing to be precise).
+-->

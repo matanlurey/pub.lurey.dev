@@ -21,6 +21,11 @@ void main(List<String> args) async {
       help: 'What kind of report to generate.',
       allowed: ['lcov', 'html'],
       defaultsTo: isCI ? 'lcov' : 'html',
+    )
+    ..addFlag(
+      'browse',
+      abbr: 'b',
+      help: 'Open the generated documentation in the browser.',
     );
   final results = parser.parse(args);
 
@@ -30,8 +35,10 @@ void main(List<String> args) async {
   }
 
   await runCoverage(
+    command: ['dart', 'run', 'coverage:test_with_coverage'],
     mode: results.option('report') == 'lcov'
         ? CoverageMode.generate
         : CoverageMode.preview,
+    browse: results.flag('browse'),
   );
 }
