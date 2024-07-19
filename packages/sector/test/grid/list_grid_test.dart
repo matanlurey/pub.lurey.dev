@@ -205,7 +205,7 @@ void main() {
       [7, 8, 9],
     ]);
 
-    final graph = grid.asWeighted(weight: (a, b) => (a - b).abs());
+    final graph = grid.asWeighted(weight: (a, b, _) => (a - b).abs());
     check(graph.roots.toList()).unorderedEquals([
       Pos(0, 0),
       Pos(1, 0),
@@ -236,7 +236,10 @@ void main() {
       empty: 0,
     );
 
-    final graph = GridWalkable.diagonal(grid, weight: (a, b) => (a - b).abs());
+    final graph = GridWalkable.diagonal(
+      grid,
+      weight: (a, b, _) => (a - b).abs(),
+    );
     check(graph.roots.toList()).unorderedEquals([
       Pos(0, 0),
       Pos(1, 0),
@@ -269,7 +272,7 @@ void main() {
 
     final graph = GridWalkable.all8Directions(
       grid,
-      weight: (a, b) => (a - b).abs(),
+      weight: (a, b, _) => (a - b).abs(),
     );
     check(graph.roots.toList()).unorderedEquals([
       Pos(0, 0),
@@ -311,7 +314,7 @@ void main() {
         Pos(-1, 0),
         Pos(0, -1),
       ],
-      weight: (a, b) => (a - b).abs(),
+      weight: (a, b, _) => (a - b).abs(),
     );
 
     check(graph.roots).unorderedEquals([

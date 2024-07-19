@@ -78,6 +78,42 @@ final class TraceRecorder<E> with Tracer<E> {
   void pushScalar(TraceKey key, double value) {
     _events.add(TraceEvent.pushScalar(key, value));
   }
+
+  /// Replays the recorded events using the provided [tracer].
+  ///
+  /// Returns a lazy iterable that replays the recorded events using the
+  /// provided [tracer]. The [tracer] will receive the same events in the
+  /// same order they were recorded, one event at a time as the iterable is
+  /// iterated.
+  ///
+  /// ## Example
+  ///
+  /// ```dart
+  /// final recorder = TraceRecorder<Pos>();
+  ///
+  /// // Record some events.
+  /// recorder.onVisit(Pos(0, 0));
+  /// recorder.onVisit(Pos(1, 0));
+  ///
+  /// // Replay the events.
+  /// for (final _ in recorder.replay(Tracer<Pos>.noop())) {
+  ///   // Do nothing.
+  /// }
+  /// ```
+  @experimental
+  Iterable<void> replayStepped(Tracer<E> tracer) sync* {
+    for (final event in events) {
+      switch (event) {
+        case VisitEvent<E>(:final node):
+          tracer.onVisit(node);
+        case SkipEvent<E>(:final node):
+          tracer.onSkip(node);
+        case ScalarEvent<E>(:final key, :final value):
+          tracer.pushScalar(key, value);
+      }
+      yield null;
+    }
+  }
 }
 
 final class _ChainedTracer<E> with Tracer<E> {

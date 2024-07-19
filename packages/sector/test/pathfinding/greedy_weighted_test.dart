@@ -1,5 +1,5 @@
 import '../prelude.dart';
-import '../test_data.dart';
+import '../src/test_data.dart';
 
 void main() {
   final adapted = greedyBestFirstSearch.asBestPathfinder(

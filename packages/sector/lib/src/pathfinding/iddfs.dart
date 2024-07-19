@@ -6,6 +6,7 @@ part of '../pathfinding.dart';
 /// or [IterativeDepthFirstSearch].
 ///
 /// {@category Pathfinding}
+@internal // Not stable yet.
 const iterativeDepthFirstSearch = IterativeDepthFirstSearch<Object?>();
 
 /// Pathfinding algorithm that explores the graph in iterative deepening depth.
@@ -20,6 +21,8 @@ const iterativeDepthFirstSearch = IterativeDepthFirstSearch<Object?>();
 /// [IDDFS]: https://en.wikipedia.org/wiki/Iterative_deepening_depth-first_search
 ///
 /// {@category Pathfinding}
+///
+@internal // Not stable yet.
 final class IterativeDepthFirstSearch<E> with Pathfinder<E> {
   /// Creates a new iterative deepening depth-first search algorithm.
   const IterativeDepthFirstSearch();

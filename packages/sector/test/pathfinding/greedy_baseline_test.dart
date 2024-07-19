@@ -1,5 +1,5 @@
 import '../prelude.dart';
-import '../test_data.dart';
+import '../src/test_data.dart';
 
 /// Tests greedyBestFirstSearch with an effectively unweighted graph.
 void main() {

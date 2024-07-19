@@ -1,11 +1,22 @@
 # Change Log
 
-## 0.3.0-alpha
+## 0.3.0
 
 Major overhaul of the API, almost all classes and methods have been renamed or
 restructured; the API is now more consistent and easier to use, and has been
 layered partially on top of [`package:lodim`](https://pub.dev/packages/lodim);
-`sector` now includes data structures, graphs, grids, and pathfinding.
+`sector` now includes data structures, graphs, grids, and pathfinding, with
+a more consistent API and is better tested and tuned for performance.
+
+In summary:
+
+- Sector now depends on, and uses, `package:lodim` for 2D vector operations.
+- Sector now has types and functionality for general-purpose graphs and
+  pathfinding.
+- `Grid` operations based on column-major order have been removed.
+- `Grid` has an `empty` field used for resizing and sparse-grid optimizations.
+- `Grid` resizing is now doen via setting `widht` or `height` respectively
+- Traversals have moved into general graph algorithms in `package:sector`.
 
 ## 0.2.0
 

@@ -334,7 +334,7 @@ abstract mixin class Grid<E> {
     ).asUnweighted();
   }
 
-  static double _eachWeightIs1(void a, void b) => 1.0;
+  static double _eachWeightIs1(void a, void b, void c) => 1.0;
 
   /// Returns a view of this grid as a weighted walkable.
   ///
@@ -342,8 +342,10 @@ abstract mixin class Grid<E> {
   /// and edges are pairs of elements at each position. The [directions] are the
   /// relative positions of the neighbors to connect each node to, which by
   /// default are the four cardinal directions (north, east, south, west).
+  ///
+  /// {@macro sector.GridWalkable:weight}
   WeightedWalkable<Pos> asWeighted({
-    required double Function(E, E) weight,
+    required double Function(E, E, Pos) weight,
     Iterable<Pos> directions = Direction.cardinal,
   }) {
     return GridWalkable.from(

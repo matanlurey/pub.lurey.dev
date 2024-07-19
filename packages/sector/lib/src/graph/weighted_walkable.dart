@@ -227,7 +227,10 @@ final class _AsUnweightedWalkable<V> with Walkable<V> {
   final WeightedWalkable<V> _walkable;
   @override
   Iterable<V> successors(V node) {
-    return _walkable.successors(node).map((pair) => pair.$1);
+    return _walkable
+        .successors(node)
+        .where((pair) => pair.$2 != double.infinity)
+        .map((pair) => pair.$1);
   }
 
   @override

@@ -55,7 +55,10 @@ final class BreadthFirstSearch<E> with Pathfinder<E> {
           path.add(successor);
           return Path(path);
         }
-        parents.entryOf(successor).setOrUpdate(i);
+        final next = parents.entryOf(successor);
+        if (next.isAbsent) {
+          next.setOrUpdate(i);
+        }
       }
       i += 1;
     } while (i < parents.length);

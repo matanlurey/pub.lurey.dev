@@ -1,5 +1,5 @@
 import '../prelude.dart';
-import '../test_data.dart';
+import '../src/test_data.dart';
 
 /// Due to an effective heuristic, falls back to Dijkstra's algorithm.
 void main() {

@@ -1,5 +1,7 @@
+import 'package:sector/src/pathfinding.dart';
+
 import '../prelude.dart';
-import '../test_data.dart';
+import '../src/test_data.dart';
 
 void main() {
   test('should find a direct path', () {

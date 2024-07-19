@@ -1,5 +1,5 @@
-import '../naive_grid.dart';
 import '../prelude.dart';
+import '../src/naive_grid.dart';
 
 void main() {
   test('should return the length', () {

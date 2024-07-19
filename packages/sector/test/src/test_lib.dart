@@ -3,7 +3,7 @@ import 'dart:async';
 import 'package:checks/context.dart';
 import 'package:test/test.dart';
 
-import 'prelude.dart';
+import '../prelude.dart';
 
 extension TestWalkableBase<T> on WalkableBase<T> {
   /// Returns any walkable as a weighted walkable.
