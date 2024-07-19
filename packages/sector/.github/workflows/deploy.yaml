@@ -14,6 +14,8 @@ jobs:
         uses: subosito/flutter-action@v2
         with:
           channel: 'stable'
+      - name: Download Dependencies
+        run: dart pub get
       - name: Build PWA
         run: dart run tool/demo.dart --release
       - name: Build API Docs
