@@ -24,6 +24,7 @@ void main(List<String> args) async {
           '--release',
           '--output',
           p.absolute(results.option('out-dir')!),
+          ...results.rest,
         ],
         workingDirectory: p.join('example', 'demo'),
         mode: io.ProcessStartMode.inheritStdio,
