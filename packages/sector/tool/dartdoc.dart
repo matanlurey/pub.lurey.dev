@@ -42,7 +42,6 @@ void main(List<String> args) async {
       'out',
       abbr: 'o',
       help: 'Output directory for the generated documentation.',
-      defaultsTo: p.join('doc', 'api'),
     );
   final results = parser.parse(args);
 
