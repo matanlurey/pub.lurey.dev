@@ -18,7 +18,7 @@ jobs:
         run: dart pub get
       - name: Build PWA
         run: |
-          dart run tool/demo.dart --release -- --base-href sector.dart
+          dart run tool/demo.dart --release -- --base-href /sector.dart
       - name: Build API Docs
         run: |
           dart run tool/dartdoc.dart --out build/api
