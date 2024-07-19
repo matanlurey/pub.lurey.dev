@@ -9,7 +9,7 @@ import 'package:path/path.dart' as p;
 /// Generates dartdoc for the project.
 void main(List<String> args) async {
   final isCI = io.Platform.environment['CI'] == 'true';
-  final parser = ArgParser()
+  final parser = ArgParser(allowTrailingOptions: false)
     ..addFlag(
       'help',
       abbr: 'h',

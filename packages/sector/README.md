@@ -10,6 +10,8 @@ Fast and intuitive 2D data structures: grids, graphs, pathfinding & more.
 
 [![Preview of the Demo App](https://github.com/user-attachments/assets/8071eab4-a234-492b-8c2e-1fa4233febed)](./example/demo)
 
+[Live Demo](https://matanlurey.github.io/sector.dart/) | [Latest API Docs](https://matanlurey.github.io/sector.dart/api)
+
 ## Getting Started
 
 Add a dependency in your `pubspec.yaml` or run the following command:
