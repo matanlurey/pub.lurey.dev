@@ -15,23 +15,3 @@ This repository is a monorepo containing multiple packages:
 
 [`sector`]: ./packages/sector
 [`sector_demo`]: ./packages/sector_demo
-
-## Contributing
-
-To run the tests, run:
-
-```shell
-dart test
-```
-
-To check code coverage locally, run:
-
-```shell
-dart tool/coverage.dart
-```
-
-To preview `dartdoc` output locally, run:
-
-```shell
-dart tool/dartdoc.dart
-```
