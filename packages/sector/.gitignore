@@ -1,4 +1,5 @@
 .dart_tool/
+build/
 coverage/
 doc/api/
 pubspec.lock

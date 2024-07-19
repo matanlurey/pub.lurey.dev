@@ -23,6 +23,7 @@ part 'pathfinding/heuristic_pathfinder.dart';
 part 'pathfinding/iddfs.dart';
 part 'pathfinding/path_result.dart';
 part 'pathfinding/pathfinder.dart';
+part 'pathfinding/pathfinder_base.dart';
 
 /// Reverses a path from a start index to the root.
 ///

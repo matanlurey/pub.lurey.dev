@@ -37,6 +37,12 @@ void main(List<String> args) async {
       'port',
       abbr: 'P',
       help: 'Port to serve the documentation on. Defaults to a random port.',
+    )
+    ..addOption(
+      'out',
+      abbr: 'o',
+      help: 'Output directory for the generated documentation.',
+      defaultsTo: p.join('doc', 'api'),
     );
   final results = parser.parse(args);
 
@@ -50,6 +56,6 @@ void main(List<String> args) async {
     generate: results.flag('generate'),
     browse: results.flag('browse'),
     port: int.parse(results.option('port') ?? '0'),
-    outDir: p.join('doc', 'api'),
+    outDir: results.option('out'),
   );
 }

@@ -7,6 +7,8 @@ Fast and intuitive 2D data structures: grids, graphs, pathfinding & more.
 [![Pub Package](https://img.shields.io/pub/v/sector.svg)](https://pub.dev/packages/sector)
 [![Dartdoc reference](https://img.shields.io/badge/dartdoc-reference-blue.svg)](https://pub.dev/documentation/sector/latest/)
 
+[![Preview of the Demo App](https://github.com/user-attachments/assets/8071eab4-a234-492b-8c2e-1fa4233febed)](./example/demo)
+
 ## Getting Started
 
 Add a dependency in your `pubspec.yaml` or run the following command:

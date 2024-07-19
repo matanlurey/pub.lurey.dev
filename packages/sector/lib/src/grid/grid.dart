@@ -143,6 +143,16 @@ abstract mixin class Grid<E> {
   /// The height must be non-negative.
   set height(int value);
 
+  /// Clears the grid, setting all elements to [empty], or [fill] if provided.
+  void clear([E? fill]) {
+    final cell = fill ?? empty;
+    for (var y = 0; y < height; y++) {
+      for (var x = 0; x < width; x++) {
+        setUnchecked(Pos(x, y), cell);
+      }
+    }
+  }
+
   /// Total number of elements in the grid.
   int get length => width * height;
 

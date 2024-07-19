@@ -1,0 +1,26 @@
+name: sector_demo
+publish_to: 'none'
+
+environment:
+  sdk: '>=3.4.4 <4.0.0'
+
+dependencies:
+  flutter:
+    sdk: flutter
+  sector:
+    path: ../../
+
+dev_dependencies:
+  flutter_test:
+    sdk: flutter
+  oath:
+    git:
+      url: https://github.com/matanlurey/oath.dart
+      ref: tools
+
+dependency_overrides:
+  http_parser: any
+  meta: any
+
+flutter:
+  uses-material-design: true

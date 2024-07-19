@@ -23,7 +23,7 @@ part of '../pathfinding.dart';
 /// ```
 ///
 /// {@category Pathfinding}
-mixin BestPathfinder<E> {
+mixin BestPathfinder<E> implements PathfinderBase<E> {
   /// Returns an optimal path (and it's total cost) in [graph] from [start] to a
   /// node that satisfies [goal].
   ///

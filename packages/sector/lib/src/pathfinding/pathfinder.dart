@@ -9,7 +9,7 @@ part of '../pathfinding.dart';
 /// default implementations by implementing only [findPathExclusive].
 ///
 /// {@category Pathfinding}
-mixin Pathfinder<E> {
+mixin Pathfinder<E> implements PathfinderBase<E> {
   /// Returns a path in [graph] from [start] to a node that satisfies [goal].
   ///
   /// {@template sector.Pathfinder.findPath:return}
