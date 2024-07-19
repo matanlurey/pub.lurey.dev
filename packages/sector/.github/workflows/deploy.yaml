@@ -15,7 +15,7 @@ jobs:
         with:
           channel: 'stable'
       - name: Build PWA
-        run: flutter build web --release
+        run: dart run tool/demo.dart --release
       - name: Build API Docs
         run: dart run tool/dartdoc.dart --out build/api
       - name: Deploy to GitHub Pages

@@ -3,6 +3,7 @@
 Fast and intuitive 2D data structures: grids, graphs, pathfinding & more.
 
 [![CI](https://github.com/matanlurey/sector/actions/workflows/ci.yaml/badge.svg)](https://github.com/matanlurey/sector/actions/workflows/ci.yaml)
+[![Deploy](https://github.com/matanlurey/sector.dart/actions/workflows/deploy.yaml/badge.svg)](https://github.com/matanlurey/sector.dart/actions/workflows/deploy.yaml)
 [![Coverage Status](https://coveralls.io/repos/github/matanlurey/sector/badge.svg?branch=main)](https://coveralls.io/github/matanlurey/sector?branch=main)
 [![Pub Package](https://img.shields.io/pub/v/sector.svg)](https://pub.dev/packages/sector)
 [![Dartdoc reference](https://img.shields.io/badge/dartdoc-reference-blue.svg)](https://pub.dev/documentation/sector/latest/)
