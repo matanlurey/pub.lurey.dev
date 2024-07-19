@@ -4,7 +4,6 @@ import 'dart:io' as io;
 
 import 'package:args/args.dart';
 import 'package:oath/tools/dartdoc.dart';
-import 'package:path/path.dart' as p;
 
 /// Generates dartdoc for the project.
 void main(List<String> args) async {

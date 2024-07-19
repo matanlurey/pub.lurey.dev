@@ -11,6 +11,9 @@ on:
 
 jobs:
   build:
+    defaults:
+      run:
+        working-directory: packages/sector
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v4.1.1
@@ -23,4 +26,4 @@ jobs:
         uses: coverallsapp/github-action@v2.2.3
         with:
           github-token: ${{ secrets.GITHUB_TOKEN }}
-          path-to-lcov: coverage/lcov.info
+          path-to-lcov: packages/sector/coverage/lcov.info

@@ -1,4 +1,5 @@
-import 'package:sector/sector.dart' show FlatQueue;
+import 'package:sector/sector.dart';
+
 import '../src/suite_queue.dart';
 
 void main() {

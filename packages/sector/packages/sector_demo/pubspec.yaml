@@ -8,7 +8,7 @@ dependencies:
   flutter:
     sdk: flutter
   sector:
-    path: ../../
+    path: ../sector
 
 dev_dependencies:
   flutter_test:

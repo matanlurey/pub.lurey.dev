@@ -7,6 +7,7 @@ final class PathfinderGrid extends StatefulWidget {
   const PathfinderGrid({
     required this.grid,
     required this.onTap,
+    required this.onDrag,
     this.start,
     this.end,
     this.path,
@@ -16,6 +17,9 @@ final class PathfinderGrid extends StatefulWidget {
 
   /// Called when a cell is tapped.
   final void Function(Pos) onTap;
+
+  /// Called when a cell was dragged.
+  final void Function(Pos) onDrag;
 
   /// The grid to display.
   final Grid<bool> grid;
@@ -48,6 +52,8 @@ final class _PathfinderGridState extends State<PathfinderGrid>
   Grid<bool> get grid => widget.grid;
   Path<Pos>? get path => widget.path;
   TraceRecorder<Pos>? get trace => widget.trace;
+
+  var _wasPointedMoved = false;
 
   @override
   void didUpdateWidget(covariant PathfinderGrid oldWidget) {
@@ -85,22 +91,34 @@ final class _PathfinderGridState extends State<PathfinderGrid>
         path: path,
       );
     }
-    return GestureDetector(
-      onTapDown: (details) {
-        final squareSize = 30.0;
-        final viewSize = MediaQuery.sizeOf(context);
-        final offsetX = (viewSize.width - grid.width * squareSize) / 2;
-        final offsetY = (viewSize.height - grid.height * squareSize) / 2;
-        final x = (details.localPosition.dx - offsetX) ~/ squareSize;
-        final y = (details.localPosition.dy - offsetY) ~/ squareSize;
-        final pos = Pos(x, y);
-        widget.onTap(pos);
-      },
+    return Listener(
       child: CustomPaint(
         foregroundPainter: painter,
         child: const SizedBox.expand(),
       ),
+      onPointerDown: (event) {
+        _wasPointedMoved = false;
+      },
+      onPointerUp: (event) {
+        if (!_wasPointedMoved) {
+          widget.onTap(_toPos(event));
+        }
+      },
+      onPointerMove: (event) {
+        _wasPointedMoved = true;
+        widget.onDrag(_toPos(event));
+      },
     );
+  }
+
+  Pos _toPos(PointerEvent e) {
+    final squareSize = 30.0;
+    final viewSize = MediaQuery.sizeOf(context);
+    final offsetX = (viewSize.width - grid.width * squareSize) / 2;
+    final offsetY = (viewSize.height - grid.height * squareSize) / 2;
+    final x = (e.localPosition.dx - offsetX) ~/ squareSize;
+    final y = (e.localPosition.dy - offsetY) ~/ squareSize;
+    return Pos(x, y);
   }
 }
 

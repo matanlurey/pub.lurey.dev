@@ -1,4 +1,4 @@
-import 'package:sector/src/collection.dart';
+import 'package:sector/sector.dart';
 
 import '../src/suite_map.dart';
 

@@ -26,7 +26,7 @@ void main(List<String> args) async {
           p.absolute(results.option('out-dir')!),
           ...results.rest,
         ],
-        workingDirectory: p.join('example', 'demo'),
+        workingDirectory: p.join('../', 'sector_demo'),
         mode: io.ProcessStartMode.inheritStdio,
       );
 
@@ -45,7 +45,7 @@ void main(List<String> args) async {
           ],
           ...results.rest,
         ],
-        workingDirectory: p.join('example', 'demo'),
+        workingDirectory: p.join('../', 'sector_demo'),
         mode: io.ProcessStartMode.inheritStdio,
       );
 

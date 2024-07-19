@@ -48,6 +48,7 @@ final class _PathfindViewState extends State<_PathfindView> {
           end: end,
           trace: trace,
           onTap: _onTapCell,
+          onDrag: (pos) => _onTapCell(pos, true),
         ),
         bottomSheet: PathfinderBottomSheet<Pos>(
           onClear: _onClearGrid,
@@ -57,7 +58,7 @@ final class _PathfindViewState extends State<_PathfindView> {
     );
   }
 
-  void _onTapCell(Pos cell) {
+  void _onTapCell(Pos cell, [bool? value]) {
     // If it was the starting node, toggle it off.
     if (cell == start) {
       setState(() {
@@ -92,7 +93,7 @@ final class _PathfindViewState extends State<_PathfindView> {
 
     // Otherwise, just toggle the cell.
     setState(() {
-      grid[cell] = !grid[cell];
+      grid[cell] = value ?? !grid[cell];
     });
   }
 
