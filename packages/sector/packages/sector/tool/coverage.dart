@@ -3,7 +3,9 @@
 import 'dart:io' as io;
 
 import 'package:args/args.dart';
-import 'package:oath/tools/coverage.dart';
+import 'package:chore/chores/coverage.dart';
+import 'package:chore/chores/generic.dart';
+import 'package:path/path.dart' as p;
 
 /// Generates a coverage report for the project.
 void main(List<String> args) async {
@@ -29,16 +31,22 @@ void main(List<String> args) async {
     );
   final results = parser.parse(args);
 
-  if (results['help'] as bool) {
+  if (results.flag('help')) {
     io.stderr.writeln(parser.usage);
     return;
   }
 
-  await runCoverage(
-    command: ['dart', 'run', 'coverage:test_with_coverage'],
-    mode: results.option('report') == 'lcov'
-        ? CoverageMode.generate
-        : CoverageMode.preview,
-    browse: results.flag('browse'),
-  );
+  final lcovPath = 'coverage';
+  await generateLcov(outDir: lcovPath);
+
+  if (results.option('report') == 'html') {
+    final htmlPath = p.join(lcovPath, 'html');
+    await generateHtml(outDir: htmlPath);
+
+    if (results.flag('browse')) {
+      final (url, done) = await serve(path: htmlPath, open: true);
+      io.stdout.writeln('Serving coverage report at $url');
+      await done;
+    }
+  }
 }

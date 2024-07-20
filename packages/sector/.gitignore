@@ -1,4 +1,4 @@
-.dart_tool/
-build/
-coverage/
-doc/api/
+**/.dart_tool/
+**/build/
+**/coverage/
+**/doc/api/

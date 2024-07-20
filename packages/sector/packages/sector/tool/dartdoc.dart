@@ -3,7 +3,8 @@
 import 'dart:io' as io;
 
 import 'package:args/args.dart';
-import 'package:oath/tools/dartdoc.dart';
+import 'package:chore/chores/dartdoc.dart';
+import 'package:chore/chores/generic.dart';
 
 /// Generates dartdoc for the project.
 void main(List<String> args) async {
@@ -41,19 +42,27 @@ void main(List<String> args) async {
       'out',
       abbr: 'o',
       help: 'Output directory for the generated documentation.',
+      defaultsTo: 'doc/api',
     );
   final results = parser.parse(args);
 
-  if (results['help'] as bool) {
+  if (results.flag('help')) {
     io.stderr.writeln(parser.usage);
     return;
   }
 
-  await runDartdoc(
-    preview: results.flag('preview'),
-    generate: results.flag('generate'),
-    browse: results.flag('browse'),
-    port: int.parse(results.option('port') ?? '0'),
-    outDir: results.option('out'),
-  );
+  final docPath = results.option('out')!;
+  if (results.flag('generate')) {
+    await generateDartdoc(outDir: docPath);
+  }
+
+  if (results.flag('preview')) {
+    final (url, done) = await serve(
+      path: docPath,
+      open: results.flag('browse'),
+      port: int.tryParse(results['port'] as String? ?? '8080')!,
+    );
+    io.stdout.writeln('Serving documentation at $url');
+    await done;
+  }
 }
