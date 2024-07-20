@@ -38,7 +38,9 @@ void main(List<String> args) async {
         lcovPath: lcov,
         outDir: p.join('coverage', 'html'),
       );
-      await serve(path: path, open: true);
+      final (url, done) = await serve(path: path, open: true);
+      io.stdout.writeln('Previewing coverage report at $url');
+      await done;
     }
   });
 }

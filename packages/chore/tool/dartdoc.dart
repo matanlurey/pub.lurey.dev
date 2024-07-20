@@ -33,7 +33,9 @@ void main(List<String> args) async {
   await run((context) async {
     final path = await generateDartdoc(outDir: p.join('doc', 'api'));
     if (results.flag('preview')) {
-      await serve(path: path, open: true);
+      final (url, done) = await serve(path: path, open: true);
+      io.stdout.writeln('Previewing documentation at $url');
+      await done;
     }
   });
 }
