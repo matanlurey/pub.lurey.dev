@@ -5,7 +5,6 @@ import 'package:args/command_runner.dart';
 import 'package:async/async.dart';
 import 'package:chore/src/coverage.dart';
 import 'package:chore/src/dartdoc.dart';
-import 'package:meta/meta.dart';
 import 'package:path/path.dart' as p;
 
 export 'package:chore/src/coverage.dart';
@@ -35,7 +34,6 @@ final class Chore extends CommandRunner<void> {
   }
 
   /// Creates a new instance of [Chore] without any commands.
-  @visibleForTesting
   Chore.withCommands({
     bool isCI = false,
     StringSink? stdout,

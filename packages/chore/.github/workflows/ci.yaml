@@ -18,13 +18,13 @@ jobs:
       - run: dart pub get
       - run: dart format --output none --set-exit-if-changed .
       - run: dart analyze
-      - run: dart run tool/coverage.dart
+      - run: dart run bin/chore.dart coverage
       - name: Upload coverage
         uses: coverallsapp/github-action@v2.2.3
         with:
           github-token: ${{ secrets.GITHUB_TOKEN }}
           path-to-lcov: coverage/lcov.info
-      - run: dart run tool/dartdoc.dart
+      - run: dart run bin/chore.dart dartdoc
       - name: Deploy to GitHub Pages
         uses: peaceiris/actions-gh-pages@v4
         with:
