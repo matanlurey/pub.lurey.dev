@@ -3,7 +3,6 @@
 import 'dart:io' as io;
 
 import 'package:args/args.dart';
-import 'package:chore/chore.dart';
 import 'package:path/path.dart' as p;
 
 void main(List<String> args) async {
@@ -15,42 +14,35 @@ void main(List<String> args) async {
 
   final release = results.flag('release');
   if (release) {
-    await run((context) async {
-      final flutter = await context.use(
-        startProcess(
-          'flutter',
-          [
-            'build',
-            'web',
-            '--release',
-            '--output',
-            p.absolute(results.option('out-dir')!),
-            ...results.rest,
-          ],
-          workingDirectory: p.join('../', 'sector_demo'),
-        ),
-      );
-      await flutter.exitCode;
-    });
+    final flutter = await io.Process.start(
+      'flutter',
+      [
+        'build',
+        'web',
+        '--release',
+        '--output',
+        p.absolute(results.option('out-dir')!),
+        ...results.rest,
+      ],
+      workingDirectory: p.join('../', 'sector_demo'),
+      mode: io.ProcessStartMode.inheritStdio,
+    );
+    await flutter.exitCode;
   } else {
-    await run((context) async {
-      final flutter = await context.use(
-        startProcess(
-          'flutter',
-          [
-            'run',
-            if (results.option('device') case final String device) ...[
-              '-d',
-              device,
-            ],
-            ...results.rest,
-          ],
-          workingDirectory: p.join('../', 'sector_demo'),
-        ),
-      );
-
-      await flutter.exitCode;
-    });
+    final flutter = await io.Process.start(
+      'flutter',
+      [
+        'run',
+        if (results.option('device') case final String device) ...[
+          '-d',
+          device,
+        ],
+        ...results.rest,
+      ],
+      workingDirectory: p.join('../', 'sector_demo'),
+      mode: io.ProcessStartMode.inheritStdio,
+    );
+    await flutter.exitCode;
   }
 }
 

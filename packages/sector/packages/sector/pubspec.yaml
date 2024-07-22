@@ -22,6 +22,7 @@ dev_dependencies:
   chore:
     git:
       url: https://github.com/matanlurey/chore.dart.git
+      ref: 26163e
   collection: ^1.19.0
   coverage: ^1.8.0
   oath: ^0.2.0
