@@ -19,10 +19,6 @@ final class Chore extends CommandRunner<void> {
     bool? isCI,
     Stream<void>? onTerminate,
   }) {
-    onTerminate ??= StreamGroup.merge([
-      io.ProcessSignal.sigint.watch(),
-      io.ProcessSignal.sigterm.watch(),
-    ]);
     final chore = Chore.withCommands(
       stdout: stdout,
       stderr: stderr,
@@ -38,11 +34,16 @@ final class Chore extends CommandRunner<void> {
     bool isCI = false,
     StringSink? stdout,
     StringSink? stderr,
-    this.onTerminate = const Stream.empty(),
+    Stream<void>? onTerminate,
     List<Command<void> Function(Chore)> commands = const [],
   })  : _commands = commands,
         stdout = stdout ?? io.stdout,
         stderr = stderr ?? io.stderr,
+        onTerminate = onTerminate ??
+            StreamGroup.merge([
+              io.ProcessSignal.sigint.watch(),
+              io.ProcessSignal.sigterm.watch(),
+            ]),
         super('chore', 'A simple task runner') {
     argParser
       ..addOption(
