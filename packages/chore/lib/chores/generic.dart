@@ -1,3 +1,5 @@
+import 'dart:async';
+
 import 'package:chore/chore.dart';
 import 'package:shelf/shelf_io.dart' as shelf_io;
 import 'package:shelf_static/shelf_static.dart';
@@ -12,7 +14,11 @@ Future<(Uri, Future<void>)> serve({
   return run((context) async {
     final handler = createStaticHandler(path, defaultDocument: 'index.html');
     final server = await shelf_io.serve(handler, 'localhost', port);
-    context.addCleanup(server.close);
+    late final StreamSubscription<void> sub;
+    sub = context.onDone.listen((_) async {
+      await server.close(force: true);
+      await sub.cancel();
+    });
 
     final url = Uri.http('localhost:$port');
     if (open) {
