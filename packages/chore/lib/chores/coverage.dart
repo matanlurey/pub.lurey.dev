@@ -13,11 +13,18 @@ Future<String> generateLcov({
     (context) async {
       outDir ??= (await context.use(getTempDir())).path;
       final [name, ...args] = command;
+
+      var trailing = args.indexOf('--');
+      if (trailing == -1) {
+        trailing = args.length;
+      }
+
       final process = await startProcess(
         name,
         [
-          ...args,
+          ...args.sublist(0, trailing),
           '--out=$outDir',
+          ...args.sublist(trailing),
         ],
       )(context);
       final exitCode = await process.exitCode;
