@@ -8,7 +8,7 @@ import 'package:shelf_static/shelf_static.dart';
 
 /// A command to generate a coverage report.
 final class Coverage extends Command<void> {
-  final Runner _chore;
+  final Chore _chore;
   Coverage(this._chore) {
     argParser
       ..addOption(

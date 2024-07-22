@@ -8,7 +8,7 @@ import 'package:shelf_static/shelf_static.dart';
 
 /// A command to generate dart docs.
 final class Dartdoc extends Command<void> {
-  final Runner _chore;
+  final Chore _chore;
   Dartdoc(this._chore) {
     argParser
       ..addOption(
