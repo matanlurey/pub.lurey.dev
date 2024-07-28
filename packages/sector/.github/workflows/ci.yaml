@@ -20,6 +20,7 @@ jobs:
       - uses: dart-lang/setup-dart@v1.6.4
       - run: dart pub get
       - run: ./chore.sh
+        working-directory: ../..
       - run: dart format --output none --set-exit-if-changed .
       - run: dart analyze
       - run: dart pub global run chore coverage
