@@ -24,7 +24,7 @@ jobs:
           dart run tool/demo.dart --release -- --base-href /sector.dart/
       - name: Build API Docs
         run: |
-          dart run tool/dartdoc.dart --out build/api
+          dart run tool/dartdoc.dart --output build/api
       - name: Deploy to GitHub Pages
         uses: peaceiris/actions-gh-pages@v4
         with:
