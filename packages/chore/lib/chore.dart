@@ -57,7 +57,7 @@ final class Chore extends CommandRunner<void> {
       ..addFlag(
         'ci',
         help: 'Whether the command is running in a CI environment',
-        defaultsTo: isCI,
+        defaultsTo: _isCI = isCI,
       );
   }
 
@@ -73,7 +73,7 @@ final class Chore extends CommandRunner<void> {
 
   /// Whether the command runner is running in a CI environment.
   bool get isCI => _isCI;
-  late final bool _isCI;
+  late bool _isCI;
 
   /// A stream that emits when the command runner should be terminated.
   final Stream<void> onTerminate;
@@ -84,7 +84,7 @@ final class Chore extends CommandRunner<void> {
   @override
   ArgResults parse(Iterable<String> args) {
     // Do an initial parse to get required options.
-    final results = super.parse(args);
+    final results = super.parse(args.takeWhile((arg) => arg.startsWith('-')));
     final workingDir = results.option('working-directory');
     _workingDirectory = p.normalize(workingDir ?? _findWorkingDir());
     _isCI = results.flag('ci');
