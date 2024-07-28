@@ -20,7 +20,7 @@ jobs:
       - name: Download Dependencies
         run: dart pub get
       - run: ./chore.sh
-        working-directory: ../..
+        working-directory: ./
       - name: Build PWA
         run: |
           dart run tool/demo.dart --release -- --base-href /sector.dart/
