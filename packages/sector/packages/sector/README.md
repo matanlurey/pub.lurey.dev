@@ -91,13 +91,14 @@ dart test
 To check code coverage locally, run:
 
 ```shell
-dart tool/coverage.dart
+dart pub global activate -sgit https://github.com/matanlurey/chore.dart.git --git-ref=8b252e7
+chore coverage
 ```
 
 To preview `dartdoc` output locally, run:
 
 ```shell
-dart tool/dartdoc.dart
+chore dartdoc
 ```
 
 <!--
