@@ -1,5 +1,9 @@
 # Change Log
 
+## 0.3.0+1
+
+Cosmetic changes to the `pubspec.yaml` file only.
+
 ## 0.3.0
 
 Major overhaul of the API, almost all classes and methods have been renamed or

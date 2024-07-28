@@ -3,12 +3,12 @@
 name: sector
 description: |-
   Fast and intuitive 2D data structures: grids, graphs, pathfinding & more.
-version: 0.3.0
+version: 0.3.0+1
 
 environment:
   sdk: ^3.4.0
 
-repository: https://github.com/matanlurey/sector.dart/tree/packages/sector
+repository: https://github.com/matanlurey/sector.dart/tree/main/packages/sector
 issue_tracker: https://github.com/matanlurey/sector.dart/issues
 
 dependencies:
