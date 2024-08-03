@@ -1,0 +1,12 @@
+cmake_minimum_required(VERSION 3.7 FATAL_ERROR)
+project(xoshiro128plus_library VERSION 1.0.0 LANGUAGES C)
+add_library(xoshiro128plus_library SHARED xoshiro128plus.c xoshiro128plus.def)
+target_link_libraries(xoshiro128plus_library PUBLIC m)
+
+set_target_properties(xoshiro128plus_library PROPERTIES
+    PUBLIC_HEADER xoshiro128plus.h
+    VERSION ${PROJECT_VERSION}
+    SOVERSION 1
+    OUTPUT_NAME "xoshiro128plus"
+    XCODE_ATTRIBUTE_CODE_SIGN_IDENTITY "Hex_Identity_ID_Goes_Here"
+)
