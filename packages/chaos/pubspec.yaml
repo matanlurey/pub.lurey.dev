@@ -1,7 +1,10 @@
 # Format: https://dart.dev/tools/pub/pubspec
 
 name: chaos
+description: |-
+  Fast and high quality pseudo-random number generators (PRNGs) with cloneable state.
 version: 0.1.0
+repository: https://github.com/matanlurey/chaos.dart
 environment:
   sdk: ^3.4.0
 
