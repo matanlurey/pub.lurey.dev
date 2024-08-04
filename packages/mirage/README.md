@@ -2,7 +2,7 @@
 
 Generates noise and patterns algorithmically for use in software, textures, and graphics.
 
-![Mirage on pub.dev][pub_img]][pub_url]
+[![Mirage on pub.dev][pub_img]][pub_url]
 [![Code coverage][cov_img]][cov_url]
 [![Github action status][gha_img]][gha_url]
 [![Dartdocs][doc_img]][doc_url]
