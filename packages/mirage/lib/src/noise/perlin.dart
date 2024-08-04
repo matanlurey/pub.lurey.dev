@@ -15,7 +15,7 @@ import 'package:mirage/mirage.dart';
 /// underlying grid structure, and is considered slower than [Simplex] for
 /// similar quality output.
 ///
-/// ![Example](https://github.com/user-attachments/assets/3600cdf8-d5af-44a6-adb9-cbc642c7b136)
+/// ![Example](https://github.com/user-attachments/assets/23214d88-4143-44e5-97bb-40c40d02e529)
 final class Perlin with Pattern2d {
   /// Creates a new perlin noise generator.
   ///
@@ -29,11 +29,11 @@ final class Perlin with Pattern2d {
   final NoiseHasher _hasher;
 
   @override
-  double get2d(int x, int y) => _perlin2d(Vec2.fromInts(x, y));
+  double get2df(double x, double y) => _perlin2d(Vec2(x, y));
 
   double _perlin2d(Vec2 point) {
     final corner = point.floorToInt();
-    final distance = point - corner.reinterpret();
+    final distance = point - corner.toVec2();
 
     double gradient(Vec2 offset) {
       final point = distance - offset;

@@ -31,7 +31,7 @@ final class Constant with Pattern2d {
   static const positive = Constant(1.0);
 
   @override
-  double get2d(int x, int y) => _value;
+  double get2df(double x, double y) => _value;
 }
 
 /// A pattern that outputs a checkerboard pattern.
@@ -79,4 +79,7 @@ final class Checkerboard with Pattern2d {
 
   @override
   double get2d(int x, int y) => (x + y).isEven ? _even : _odd;
+
+  @override
+  double get2df(double x, double y) => get2d(x.floor(), y.floor());
 }

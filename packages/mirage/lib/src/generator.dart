@@ -15,7 +15,7 @@ import 'package:meta/meta.dart';
 /// ## Implementing
 ///
 /// To implement a new pattern generator, create a new class that implements or
-/// mixes in this interface, and implement [get2d].
+/// mixes in this interface, and implement [get2df].
 @Immutable('Recommended to be immutable for predictable behavior.')
 abstract mixin class Pattern2d {
   /// Creates a new pattern that delegates to a function to calculate the output
@@ -30,17 +30,26 @@ abstract mixin class Pattern2d {
   /// print(pattern.get(1, 2)); // 3.0
   /// ```
   const factory Pattern2d.from(
-    double Function(int x, int y) get,
+    double Function(double x, double y) get,
   ) = _DelegatePattern2d;
 
-  /// Returns the value of the pattern at the given coordinates.
+  /// Returns the value of the pattern at the given fixed-point coordinates.
   ///
   /// The value returned is typically within the range of `[-1.0, 1.0]`, where:
   ///
   /// - `-1.0` represents the lowest value of the pattern;
   /// - `0.0` represents the middle value of the pattern;
   /// - `1.0` represents the highest value of the pattern.
-  double get2d(int x, int y);
+  double get2d(int x, int y) => get2df(x.toDouble(), y.toDouble());
+
+  /// Returns the value of the pattern at the given floating-point coordinates.
+  ///
+  /// The value returned is typically within the range of `[-1.0, 1.0]`, where:
+  ///
+  /// - `-1.0` represents the lowest value of the pattern;
+  /// - `0.0` represents the middle value of the pattern;
+  /// - `1.0` represents the highest value of the pattern.
+  double get2df(double x, double y);
 
   /// Returns a new pattern that maps the output of this pattern using the given
   /// function.
@@ -215,10 +224,10 @@ abstract mixin class Pattern2d {
 
 final class _DelegatePattern2d with Pattern2d {
   const _DelegatePattern2d(this._get);
-  final double Function(int x, int y) _get;
+  final double Function(double x, double y) _get;
 
   @override
-  double get2d(int x, int y) => _get(x, y);
+  double get2df(double x, double y) => _get(x, y);
 }
 
 final class _MappedPattern2d with Pattern2d {
@@ -227,7 +236,7 @@ final class _MappedPattern2d with Pattern2d {
   final double Function(double) _mapper;
 
   @override
-  double get2d(int x, int y) => _mapper(_pattern.get2d(x, y));
+  double get2df(double x, double y) => _mapper(_pattern.get2df(x, y));
 }
 
 final class _ScaledPattern2d with Pattern2d {
@@ -236,7 +245,7 @@ final class _ScaledPattern2d with Pattern2d {
   final double _scale;
 
   @override
-  double get2d(int x, int y) => _pattern.get2d(x, y) * _scale;
+  double get2df(double x, double y) => _pattern.get2df(x, y) * _scale;
 }
 
 final class _NormalizedPattern with Pattern2d {
@@ -244,8 +253,8 @@ final class _NormalizedPattern with Pattern2d {
   final Pattern2d _pattern;
 
   @override
-  double get2d(int x, int y) {
-    final value = _pattern.get2d(x, y);
+  double get2df(double x, double y) {
+    final value = _pattern.get2df(x, y);
     return (value + 1.0) / 2.0;
   }
 }
@@ -255,7 +264,7 @@ final class _InvertedPattern with Pattern2d {
   final Pattern2d _pattern;
 
   @override
-  double get2d(int x, int y) => -_pattern.get2d(x, y);
+  double get2df(double x, double y) => -_pattern.get2df(x, y);
 }
 
 final class _TransposedPattern2d with Pattern2d {
@@ -263,7 +272,7 @@ final class _TransposedPattern2d with Pattern2d {
   final Pattern2d _pattern;
 
   @override
-  double get2d(int x, int y) => _pattern.get2d(y, x);
+  double get2df(double x, double y) => _pattern.get2df(y, x);
 }
 
 final class _AbsolutePattern2d with Pattern2d {
@@ -271,7 +280,7 @@ final class _AbsolutePattern2d with Pattern2d {
   final Pattern2d _pattern;
 
   @override
-  double get2d(int x, int y) => _pattern.get2d(x, y).abs();
+  double get2df(double x, double y) => _pattern.get2df(x, y).abs();
 }
 
 final class _AddPattern2d with Pattern2d {
@@ -280,7 +289,7 @@ final class _AddPattern2d with Pattern2d {
   final Pattern2d _b;
 
   @override
-  double get2d(int x, int y) => _a.get2d(x, y) + _b.get2d(x, y);
+  double get2df(double x, double y) => _a.get2df(x, y) + _b.get2df(x, y);
 }
 
 final class _SubtractPattern2d with Pattern2d {
@@ -289,7 +298,7 @@ final class _SubtractPattern2d with Pattern2d {
   final Pattern2d _b;
 
   @override
-  double get2d(int x, int y) => _a.get2d(x, y) - _b.get2d(x, y);
+  double get2df(double x, double y) => _a.get2df(x, y) - _b.get2df(x, y);
 }
 
 final class _MaxPattern2d with Pattern2d {
@@ -298,7 +307,9 @@ final class _MaxPattern2d with Pattern2d {
   final Pattern2d _b;
 
   @override
-  double get2d(int x, int y) => math.max(_a.get2d(x, y), _b.get2d(x, y));
+  double get2df(double x, double y) {
+    return math.max(_a.get2df(x, y), _b.get2df(x, y));
+  }
 }
 
 final class _MinPattern2d with Pattern2d {
@@ -307,5 +318,7 @@ final class _MinPattern2d with Pattern2d {
   final Pattern2d _b;
 
   @override
-  double get2d(int x, int y) => math.min(_a.get2d(x, y), _b.get2d(x, y));
+  double get2df(double x, double y) {
+    return math.min(_a.get2df(x, y), _b.get2df(x, y));
+  }
 }

@@ -18,9 +18,9 @@ import 'package:mirage/mirage.dart';
 final class Worley with Pattern2d {
   /// Euclidean distance function.
   static double euclidean(Vec2 x, Vec2 y) {
-    final dx = x.x - y.x;
-    final dy = x.y - y.y;
-    return sqrt(dx * dx + dy * dy);
+    final diff = x - y;
+    final result = sqrt((diff.x * diff.x + diff.y * diff.y).abs());
+    return result;
   }
 
   /// Creates a new worley noise generator that returns the value of the
@@ -34,7 +34,7 @@ final class Worley with Pattern2d {
   /// The [frequency] can be used to scale the distance between points. The
   /// default is 1.0.
   ///
-  /// ![Example](https://github.com/user-attachments/assets/67cd0601-fd3f-42b6-9f5d-660d43c9ab67)
+  /// ![Example](https://github.com/user-attachments/assets/61475af8-1b95-4123-978a-b287cf3213c3)
   factory Worley.value({
     NoiseHasher? hasher,
     double Function(Vec2 x, Vec2 y) distance = euclidean,
@@ -55,7 +55,7 @@ final class Worley with Pattern2d {
   /// The [frequency] can be used to scale the distance between points. The
   /// default is 1.0.
   ///
-  /// ![Example](https://github.com/user-attachments/assets/db03f26d-a763-4024-8adc-7bc6b2ea0f3a)
+  /// ![Example](https://github.com/user-attachments/assets/234d1f60-238c-438c-8c27-407140309b6d)
   factory Worley.distance({
     NoiseHasher? hasher,
     double Function(Vec2 x, Vec2 y) distance = euclidean,
@@ -77,8 +77,8 @@ final class Worley with Pattern2d {
   final _ReturnType _returnType;
 
   @override
-  double get2d(int x, int y) {
-    return _worley2d(Vec2.fromInts(x, y).scale(_frequency));
+  double get2df(double x, double y) {
+    return _worley2d(Vec2(x, y).scale(_frequency));
   }
 
   double _worley2d(Vec2 point) {
@@ -131,7 +131,7 @@ final class Worley with Pattern2d {
   }
 
   static Vec2 _getPoint(int index, IVec2 point) {
-    return _getVec2(index) + point.reinterpret();
+    return _getVec2(index) + point.toVec2();
   }
 
   static Vec2 _getVec2(int index) {

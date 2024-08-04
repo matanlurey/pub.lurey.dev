@@ -10,7 +10,7 @@ import 'package:mirage/mirage.dart';
 /// and organic patterns but with better performance and fewer directional
 /// artifacts; often considered the best general-purpose noise algorithm.
 ///
-/// ![Example](https://github.com/user-attachments/assets/ec9c44c1-fe6d-4ae4-99cc-09527229797e)
+/// ![Example](https://github.com/user-attachments/assets/5168bc86-9915-4664-ae8d-3752e2bd3651)
 final class Simplex with Pattern2d {
   /// Creates a new simplex noise generator.
   ///
@@ -24,9 +24,8 @@ final class Simplex with Pattern2d {
   final NoiseHasher _hasher;
 
   @override
-  double get2d(int x, int y) {
-    final point = Vec2.fromInts(x, y);
-    final (noise, _) = _simplex2d(point);
+  double get2df(double x, double y) {
+    final (noise, _) = _simplex2d(Vec2(x, y));
     return noise;
   }
 

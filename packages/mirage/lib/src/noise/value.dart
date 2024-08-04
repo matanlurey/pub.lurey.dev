@@ -13,7 +13,7 @@ import 'package:mirage/mirage.dart';
 /// but can exhibit visible grid artifacts due to linear interpolation, and is
 /// considered less smooth than [Perlin] or [Simplex] noise.
 ///
-/// ![Example](https://github.com/user-attachments/assets/6c93d6d0-67d1-4bb9-a8fc-6cc00b451a5c)
+/// ![Example](https://github.com/user-attachments/assets/fd03f266-785b-4fbd-b532-d8421864f9fb)
 final class Value with Pattern2d {
   /// Creates a new value noise generator.
   ///
@@ -27,7 +27,7 @@ final class Value with Pattern2d {
   final NoiseHasher _hasher;
 
   @override
-  double get2d(int x, int y) => _value2d(Vec2.fromInts(x, y));
+  double get2df(double x, double y) => _value2d(Vec2(x, y));
 
   double _value2d(Vec2 point) {
     final corner = point.floor();

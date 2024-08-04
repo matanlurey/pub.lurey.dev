@@ -99,7 +99,12 @@ extension type const Vec2._((double, double) _) {
   static const v11 = (1.0, 1.0) as Vec2;
 
   /// Creates a new 2D vector.
-  factory Vec2(double x, double y) => (x, y) as Vec2;
+  ///
+  /// The components must be finite.
+  factory Vec2(double x, double y) {
+    assert(x.isFinite && y.isFinite, 'Vector components must be finite');
+    return (x, y) as Vec2;
+  }
 
   /// Creates a new 2D vector from two integers.
   factory Vec2.fromInts(int x, int y) => Vec2(x.toDouble(), y.toDouble());
@@ -208,8 +213,6 @@ extension type const IVec2._((int, int) _) {
   /// Returns a list of the vector components.
   List<int> toList() => [x, y];
 
-  /// Reinprets the vector as a 2D floating-point vector.
-  Vec2 reinterpret() {
-    return Vec2(reinterpretAsDouble(x), reinterpretAsDouble(y));
-  }
+  /// Returns as a 2D floating-point vector.
+  Vec2 toVec2() => Vec2(x.toDouble(), y.toDouble());
 }

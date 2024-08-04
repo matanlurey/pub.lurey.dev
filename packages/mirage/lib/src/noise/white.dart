@@ -11,7 +11,7 @@ import 'package:mirage/mirage.dart';
 /// pattern if and only if the same seed is used and the same number of values
 /// are generated in the same order.
 ///
-/// ![Example](https://github.com/user-attachments/assets/5d4989b3-5ffd-46b5-9c90-116019464ff6)
+/// ![Example](https://github.com/user-attachments/assets/665131a8-0571-4200-8487-3f6f179f11b1)
 ///
 /// ## Example
 ///
@@ -26,5 +26,5 @@ final class White with Pattern2d {
   final Random _random;
 
   @override
-  double get2d(int x, int y) => _random.nextDouble() * 2.0 - 1.0;
+  double get2df(double x, double y) => _random.nextDouble() * 2.0 - 1.0;
 }

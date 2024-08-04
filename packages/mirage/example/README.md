@@ -6,28 +6,28 @@ pattern function:
 
 ## `Checkerboard`
 
-![Checkerboard](https://github.com/user-attachments/assets/5d3dace2-b78d-4bc7-81c3-3eb3f0847b48)
+![Checkerboard](https://github.com/user-attachments/assets/b2800c02-6c49-44d0-a159-a5721682d283)
 
 ## `White`
 
-![White](https://github.com/user-attachments/assets/5d4989b3-5ffd-46b5-9c90-116019464ff6)
+![White](https://github.com/user-attachments/assets/665131a8-0571-4200-8487-3f6f179f11b1)
 
 ## `Value`
 
-![Value](https://github.com/user-attachments/assets/6c93d6d0-67d1-4bb9-a8fc-6cc00b451a5c))
+![Value](https://github.com/user-attachments/assets/fd03f266-785b-4fbd-b532-d8421864f9fb)
 
 ## `Perlin`
 
-![Perlin](https://github.com/user-attachments/assets/3600cdf8-d5af-44a6-adb9-cbc642c7b136)
+![Perlin](https://github.com/user-attachments/assets/23214d88-4143-44e5-97bb-40c40d02e529)
 
 ## `Simplex`
 
-![Simplex](https://github.com/user-attachments/assets/ec9c44c1-fe6d-4ae4-99cc-09527229797e)
+![Simplex](https://github.com/user-attachments/assets/5168bc86-9915-4664-ae8d-3752e2bd3651)
 
 ## `Worley.distance`
 
-![Worley.distance](https://github.com/user-attachments/assets/db03f26d-a763-4024-8adc-7bc6b2ea0f3a)
+![Worley.distance](https://github.com/user-attachments/assets/234d1f60-238c-438c-8c27-407140309b6d)
 
 ## `Worley.value`
 
-![Worley.value](https://github.com/user-attachments/assets/67cd0601-fd3f-42b6-9f5d-660d43c9ab67)
+![Worley.value](https://github.com/user-attachments/assets/61475af8-1b95-4123-978a-b287cf3213c3)

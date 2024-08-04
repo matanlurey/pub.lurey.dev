@@ -11,3 +11,4 @@ export 'src/noise/value.dart';
 export 'src/noise/white.dart';
 export 'src/noise/worley.dart';
 export 'src/patterns.dart';
+export 'src/scalar.dart';
