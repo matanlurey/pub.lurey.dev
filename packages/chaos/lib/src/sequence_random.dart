@@ -76,7 +76,15 @@ final class SequenceRandom implements PersistentRandom {
   factory SequenceRandom(List<double> sequence, {bool terminal = false}) {
     final s = Float64List(sequence.length);
     for (var i = 0; i < sequence.length; i++) {
-      s[i] = sequence[i] % 1.0;
+      final r = sequence[i];
+      if (r < 0.0) {
+        s[i] = 1.0 - (-r % 1.0);
+      } else if (r >= 1.0) {
+        s[i] = r % 1.0;
+      } else {
+        s[i] = r;
+      }
+      s[i] = r;
     }
     return SequenceRandom._(s, terminal: terminal);
   }
@@ -172,10 +180,12 @@ final class SequenceRandom implements PersistentRandom {
     if (_sequence.isEmpty) {
       throw StateError('No random numbers available.');
     }
-    final i = _sequence[_index];
-    _index = (_index + 1) % _sequence.length;
-    if (_terminal && _index == 0) {
-      throw StateError('Sequence exhausted.');
+    final i = _sequence[_index++];
+    if (_index == _sequence.length) {
+      if (_terminal) {
+        throw StateError('Sequence exhausted.');
+      }
+      _index = 0;
     }
     return i;
   }
