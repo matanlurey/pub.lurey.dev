@@ -53,7 +53,7 @@ void main() {
 
   // Want very controlled artificial randomness for unit tests?
   // Use a pre-generated sequence of random numbers: SequenceRandom.
-  final sequence = SequenceRandom([1, 2, 3, 4, 5]);
+  final sequence = SequenceRandom([1, 2, 3, 4, 5], max: 6);
 
   // "Roll" 5 d6s, and print the results!
   // (TIP: This is going to be 1, 2, 3, 4, 5)

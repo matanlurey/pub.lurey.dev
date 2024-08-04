@@ -95,11 +95,40 @@ final class SequenceRandom implements PersistentRandom {
   /// `double` values in the range [0, 1) so that the test sequence can be
   /// easily defined as integers, e.g. `SequenceRandom.ints([1, 2, 3])` instead
   /// of `SequenceRandom([0.1, 0.2, 0.3])`.
-  factory SequenceRandom.ints(List<int> sequence, {bool terminal = false}) {
+  ///
+  /// [min] and [max] can be used to specify the range of the integers. If not
+  /// provided, the smallest and largest values in the sequence will be used.
+  factory SequenceRandom.ints(
+    List<int> sequence, {
+    bool terminal = false,
+    int? min,
+    int? max,
+  }) {
+    // If the sequence is empty, return an empty sequence.
+    if (sequence.isEmpty) {
+      return SequenceRandom.never();
+    }
+
+    // Find the smallest and largest values in the sequence.
+    var iMin = min ?? sequence.first;
+    var iMax = max ?? sequence.first;
+    if (min == null || max == null) {
+      for (var i = 1; i < sequence.length; i++) {
+        final value = sequence[i];
+        if (value < iMin) {
+          iMin = value;
+        } else if (value > iMax) {
+          iMax = value;
+        }
+      }
+    }
+
+    // Create a normalized sequence.
     final s = Float64List(sequence.length);
     for (var i = 0; i < sequence.length; i++) {
-      s[i] = (sequence[i] % 1000) / 1000;
+      s[i] = (sequence[i] - iMin) / (iMax - iMin);
     }
+
     return SequenceRandom._(s, terminal: terminal);
   }
 

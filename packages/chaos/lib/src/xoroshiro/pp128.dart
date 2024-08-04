@@ -17,9 +17,7 @@ final class Xoshiro128PP extends Xoshiro128 {
   ///
   /// If no seed is provided, a random seed is generated.
   factory Xoshiro128PP([int? seed]) {
-    if (seed == null) {
-      return xoshiro128PP.fromRandom();
-    }
+    seed ??= Xoshiro128.randomSeed();
     return xoshiro128PP.fromSeed32(seed);
   }
 
