@@ -23,7 +23,7 @@ Generates noise and patterns algorithmically for use in software, textures, and 
 
 An example of generating a Simplex noise pattern:
 
-![Simlex](./example/out/simplex_noise.png)
+![Simplex](https://github.com/user-attachments/assets/ec9c44c1-fe6d-4ae4-99cc-09527229797e)
 
 ```dart
 import 'package:mirage/mirage.dart';
@@ -32,7 +32,7 @@ void main() {
   final noise = Simplex();
   for (var y = 0; y < 256; y++) {
     for (var x = 0; x < 256; x++) {
-      final value = noise.get2d(x / 256, y / 256);
+      final value = noise.get2d(x, y);
       // Do something with the value...
     }
   }

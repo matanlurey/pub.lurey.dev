@@ -4,7 +4,7 @@ name: mirage
 description: |-
   Generate noise and patterns algorithmically for use in software, textures, and
   graphics.
-version: 0.1.0
+version: 0.1.0+1
 repository: https://github.com/matanlurey/mirage.dart
 
 environment:
