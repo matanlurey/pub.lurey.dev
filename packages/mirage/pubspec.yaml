@@ -5,6 +5,7 @@ description: |-
   Generate noise and patterns algorithmically for use in software, textures, and
   graphics.
 version: 0.1.0
+repository: https://github.com/matanlurey/mirage.dart
 
 environment:
   sdk: ^3.4.0
