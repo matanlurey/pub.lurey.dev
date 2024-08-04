@@ -6,15 +6,15 @@ pattern function:
 
 ## `Checkerboard`
 
-![Checkerboard]([./out/checkerboard.png](https://github.com/user-attachments/assets/5d3dace2-b78d-4bc7-81c3-3eb3f0847b48))
+![Checkerboard](https://github.com/user-attachments/assets/5d3dace2-b78d-4bc7-81c3-3eb3f0847b48)
 
 ## `White`
 
-![White]([./out/white_noise.png](https://github.com/user-attachments/assets/5d4989b3-5ffd-46b5-9c90-116019464ff6))
+![White](https://github.com/user-attachments/assets/5d4989b3-5ffd-46b5-9c90-116019464ff6)
 
 ## `Value`
 
-![Value]([./out/value_noise.png](https://github.com/user-attachments/assets/6c93d6d0-67d1-4bb9-a8fc-6cc00b451a5c))
+![Value](https://github.com/user-attachments/assets/6c93d6d0-67d1-4bb9-a8fc-6cc00b451a5c))
 
 ## `Perlin`
 
