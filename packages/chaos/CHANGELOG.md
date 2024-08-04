@@ -1,5 +1,11 @@
 # Changelog
 
+## 0.1.2
+
+**New features:**
+
+- Exported `PersistentRandom` to the public API.
+
 ## 0.1.1
 
 **New features:**
