@@ -3,7 +3,7 @@
 name: sector
 description: |-
   Fast and intuitive 2D data structures: grids, graphs, pathfinding & more.
-version: 0.3.0+1
+version: 0.4.0-alpha
 
 environment:
   sdk: ^3.4.0
@@ -19,10 +19,6 @@ dev_dependencies:
   args: ^2.5.0
   benchmark_harness: ^2.2.2
   checks: ^0.3.0
-  chore:
-    git:
-      url: https://github.com/matanlurey/chore.dart.git
-      ref: 26163e
   collection: ^1.19.0
   coverage: ^1.8.0
   oath: ^0.2.0

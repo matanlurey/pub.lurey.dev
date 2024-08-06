@@ -8,10 +8,7 @@ part of '../grid.dart';
 /// type, [E].
 ///
 /// {@category Grids}
-abstract mixin class Grid<E> {
-  // ignore: public_member_api_docs
-  const Grid();
-
+abstract base mixin class Grid<E> {
   /// Creates a new [ListGrid] with the given [width] and [height].
   ///
   /// Each element in the grid is initialized to [empty], which is also used as
@@ -143,12 +140,31 @@ abstract mixin class Grid<E> {
   /// The height must be non-negative.
   set height(int value);
 
-  /// Clears the grid, setting all elements to [empty], or [fill] if provided.
-  void clear([E? fill]) {
-    final cell = fill ?? empty;
-    for (var y = 0; y < height; y++) {
-      for (var x = 0; x < width; x++) {
-        setUnchecked(Pos(x, y), cell);
+  /// Resizes the grid to the given [width] and [height].
+  void resize(int width, int height) {
+    this.width = width;
+    this.height = height;
+  }
+
+  /// Bounds of the grid, anchored at the [topLeft] position.
+  ///
+  /// The bounds are a rectangle with a width and height equal to the width and
+  /// height of the grid.
+  Rect get bounds => Rect.fromLTWH(0, 0, width, height);
+
+  /// Clears the grid, setting all elements to [empty].
+  ///
+  /// If [bounds] is provided, only the elements within the bounds are cleared.
+  void clear([Rect? bounds]) => fill(empty, bounds);
+
+  /// Fills the grid with the given element.
+  ///
+  /// If [bounds] is provided, only the elements within the bounds are filled.
+  void fill(E fill, [Rect? bounds]) {
+    bounds ??= this.bounds;
+    for (var y = bounds.top; y < bounds.bottom; y++) {
+      for (var x = bounds.left; x < bounds.right; x++) {
+        setUnchecked(Pos(x, y), fill);
       }
     }
   }
@@ -318,7 +334,7 @@ abstract mixin class Grid<E> {
   Iterable<(Pos, E)> get cells => _Cells(this);
 
   /// The top-left position of the grid.
-  Pos get topLeft => Pos(0, 0);
+  Pos get topLeft => Pos.zero;
 
   /// The top-right position of the grid.
   Pos get topRight => Pos(width - 1, 0);

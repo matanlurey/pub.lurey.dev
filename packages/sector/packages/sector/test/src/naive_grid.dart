@@ -1,6 +1,6 @@
 import 'package:sector/src/grid.dart';
 
-final class NaiveGrid<E> extends Grid<E> {
+final class NaiveGrid<E> with Grid<E> {
   NaiveGrid(this._rows, {required this.empty});
   final List<List<E>> _rows;
 

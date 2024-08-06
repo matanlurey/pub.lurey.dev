@@ -11,7 +11,7 @@ part of '../graph.dart';
 /// operations are applicable to both types of graphs.
 ///
 /// {@category Graphs}
-abstract mixin class Graph<E> implements GraphBase<E>, Walkable<E> {
+abstract base mixin class Graph<E> implements GraphBase<E>, Walkable<E> {
   /// Creates an empty [AdjacencyListGraph].
   ///
   /// If [directed] is `true`, which is the default, the graph is directed, i.e.

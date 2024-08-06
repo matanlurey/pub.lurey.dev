@@ -1,6 +1,6 @@
 part of '../graph.dart';
 
-/// A mixin and marker interface that that adapts a [Graph] to be undirected.
+/// A mixin that that adapts a [Graph] to be undirected.
 ///
 /// This mixin ensures that for every edge added to the graph, the inverse edge
 /// is also added, and that for every edge removed from the graph, the inverse
@@ -16,7 +16,7 @@ part of '../graph.dart';
 /// ```
 ///
 /// {@category Graphs}
-mixin UndirectedGraph<E> on Graph<E> implements GraphBase<E> {
+base mixin UndirectedGraph<E> on Graph<E> implements GraphBase<E> {
   @override
   bool addEdge(Edge<E> edge) {
     final a = super.addEdge(edge);

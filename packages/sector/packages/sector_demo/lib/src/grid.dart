@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:sector/sector.dart';
+import 'package:sector/sector.dart' hide Rect;
 
 /// A grid of cells.
 final class PathfinderGrid extends StatefulWidget {

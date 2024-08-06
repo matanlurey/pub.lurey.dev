@@ -24,7 +24,7 @@ part of '../grid.dart';
 /// [^1]: Where `m` is the number of non-empty entries in the grid.
 ///
 /// {@category Grids}
-abstract final class SplayTreeGrid<E> extends Grid<E> {
+abstract final class SplayTreeGrid<E> with Grid<E> {
   const SplayTreeGrid._();
 
   /// Creates a new splay tree grid with the given [width] and [height].

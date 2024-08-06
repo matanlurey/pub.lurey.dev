@@ -20,7 +20,7 @@ part of '../grid.dart';
 /// `rows` or `columns` | `O(n)`
 ///
 /// {@category Grids}
-abstract final class ListGrid<E> extends Grid<E> {
+abstract final class ListGrid<E> with Grid<E> {
   const ListGrid._();
 
   /// Creates a new list grid with the given [width] and [height].

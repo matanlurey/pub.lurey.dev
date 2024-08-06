@@ -1,5 +1,25 @@
 # Change Log
 
+## 0.4.0-alpha
+
+**Breaking changes**:
+
+- `Grid` and `Graph` are now `abstract base mixin class`; in other words, they
+  must either be extended or mixed into a class to be used. It is unlikely that
+  this will affect any users, but it is a breaking change nevertheless; there
+  should be no need to mock either class, as concrete implementations are
+  already provided, and they are difficult to mock in isolation.
+
+- `UndirectedGraph` is now a `base mixin` for a similar reason.
+
+- Renamed `clear` to `fill`, and changed the type signature:
+
+  ```diff
+  - void clear([E? fill])
+  + void clear([Rect? bounds])
+  + void fill(E fill, [Rect? bounds])
+  ```
+
 ## 0.3.0+1
 
 Cosmetic changes to the `pubspec.yaml` file only.

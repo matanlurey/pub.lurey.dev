@@ -5,7 +5,7 @@ import 'package:lodim/lodim.dart';
 import 'package:sector/src/collection.dart';
 import 'package:sector/src/graph.dart';
 
-export 'package:lodim/lodim.dart' show Pos;
+export 'package:lodim/lodim.dart' show Pos, Rect;
 
 part 'grid/grid.dart';
 part 'grid/grid_walkable.dart';
