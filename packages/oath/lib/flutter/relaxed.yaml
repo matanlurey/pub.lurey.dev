@@ -12,12 +12,13 @@
 #
 # Format: https://dart.dev/tools/analysis#the-analysis-options-file
 
-# Start with the same relaxed base lints.
-include: package:oath/relaxed.yaml
+# Start with the flutter strict set.
+include: package:oath/flutter/strict.yaml
 
 linter:
   rules:
     avoid_redundant_argument_values: false
+    document_ignores: false
     public_member_api_docs: false
     package_api_docs: false
     unnecessary_raw_strings: false

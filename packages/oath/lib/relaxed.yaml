@@ -18,6 +18,7 @@ include: package:oath/strict.yaml
 linter:
   rules:
     avoid_redundant_argument_values: false
+    document_ignores: false
     public_member_api_docs: false
     package_api_docs: false
     unnecessary_raw_strings: false

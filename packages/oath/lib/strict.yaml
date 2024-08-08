@@ -52,8 +52,10 @@ linter:
     - deprecated_consistency
     - directives_ordering
     - discarded_futures
+    - document_ignores
     - do_not_use_environment
     - implicit_reopen
+    - invalid_runtime_check_with_js_interop_types
     - leading_newlines_in_multiline_strings
     - matching_super_parameters
     - missing_code_block_language_in_doc_comment
@@ -74,6 +76,7 @@ linter:
     - sort_pub_dependencies
     - throw_in_finally
     - unawaited_futures
+    - unintended_html_in_doc_comment
     - unnecessary_await_in_return
     - unnecessary_breaks
     - unnecessary_lambdas

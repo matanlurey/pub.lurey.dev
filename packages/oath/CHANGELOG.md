@@ -1,11 +1,18 @@
 # Change Log
 
-## 0.2.0-dev
+## 0.2.1
 
-Added new experimental tools:
+Fixed a bug where `flutter/relaxed.yaml` did not inherit from
+`flutter/strict.yaml`.
 
-- `package:oath/tools/coverage.dart`: A script to generate coverage reports.
-- `package:oath/tools/dartdoc.dart`: A script to generate Dart documentation.
+Added the following lint rules _just_ to strict rule sets:
+
+- [`document_ignores`](https://dart.dev/lints/document_ignores).
+
+Added the following lint rules to every rule set:
+
+- [`invalid_runtime_check_with_js_interop_types`](https://dart.dev/lints/invalid_runtime_check_with_js_interop_types).
+- [`unintended_html_in_doc_comment`](https://dart.dev/lints/unintended_html_in_doc_comment).
 
 ## 0.2.0
 
