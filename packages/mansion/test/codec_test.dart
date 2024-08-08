@@ -31,6 +31,7 @@ void main() {
   });
 
   group('$AnsiDecoder(allowInvalid: false)', () {
+    // Make this explicit for tests.
     // ignore: avoid_redundant_argument_values
     const decoder = AnsiDecoder(allowInvalid: false);
 
@@ -50,6 +51,7 @@ void main() {
   });
 
   group('$AnsiDecoder.startChunkedConversion', () {
+    // Make this explicit for tests.
     // ignore: avoid_redundant_argument_values
     const decoder = AnsiDecoder(allowInvalid: false);
 

@@ -78,12 +78,9 @@ extension AnsiStringSink<W extends StringSink> on W {
   T syncAnsiUpdate<T>(T Function(W) update) {
     writeAnsi(SynchronousUpdates.start);
     try {
-      final result = update(this);
+      return update(this);
+    } finally {
       writeAnsi(SynchronousUpdates.end);
-      return result;
-    } on Object catch (_) {
-      writeAnsi(SynchronousUpdates.end);
-      rethrow;
     }
   }
 }
