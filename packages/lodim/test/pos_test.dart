@@ -11,6 +11,22 @@ void main() {
     check(Pos.zero).equals(Pos(0, 0));
   });
 
+  test('should create a Pos from two doubles, truncating', () {
+    // Positive values.
+    check(Pos.truncate(1.5, 2.5)).equals(Pos(1, 2));
+
+    // Negative values.
+    check(Pos.truncate(-1.5, -2.5)).equals(Pos(-1, -2));
+  });
+
+  test('should create a Pos from two doubles, flooring', () {
+    // Positive values.
+    check(Pos.floor(1.5, 2.5)).equals(Pos(1, 2));
+
+    // Negative values.
+    check(Pos.floor(-1.5, -2.5)).equals(Pos(-2, -3));
+  });
+
   group('distanceTo', () {
     test('defaults to euclideanSquared', () {
       final a = Pos(10, 20);
@@ -198,6 +214,14 @@ void main() {
     check(Pos(1, 2).toString()).equals('Pos(1, 2)');
   });
 
+  test('toList', () {
+    check(Pos(1, 2).toList()).deepEquals([1, 2]);
+  });
+
+  test('xy', () {
+    check(Pos(1, 2).xy).equals((1, 2));
+  });
+
   group('should sort byMagntiude', () {
     test('1, 2, 3', () {
       final list = [Pos(3, 3), Pos(1, 1), Pos(2, 2)];
@@ -236,6 +260,20 @@ void main() {
     test('3, 2, 1', () {
       final list = [Pos(3, 3), Pos(2, 2), Pos(1, 1)];
       list.sort(Pos.byColumnMajor);
+      check(list).deepEquals([Pos(1, 1), Pos(2, 2), Pos(3, 3)]);
+    });
+  });
+
+  group('should sort byDistanceTo', () {
+    test('1, 2, 3', () {
+      final list = [Pos(3, 3), Pos(1, 1), Pos(2, 2)];
+      list.sort(Pos.byDistanceTo(Pos(0, 0)));
+      check(list).deepEquals([Pos(1, 1), Pos(2, 2), Pos(3, 3)]);
+    });
+
+    test('3, 2, 1', () {
+      final list = [Pos(2, 2), Pos(3, 3), Pos(1, 1)];
+      list.sort(Pos.byDistanceTo(Pos(0, 0)));
       check(list).deepEquals([Pos(1, 1), Pos(2, 2), Pos(3, 3)]);
     });
   });

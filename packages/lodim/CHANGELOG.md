@@ -1,5 +1,47 @@
 # Changelog
 
+## 0.1.2
+
+**Features**:
+
+- Added `Pos.truncate` to convert doubles to an integer position:
+
+  ```dart
+  Pos.truncate(5.5, 5.5); // Pos(5, 5)
+  ```
+
+- Added `Pos.floor` to convert doubles to an integer position, rounding down:
+
+  ```dart
+  Pos.floor(5.5, 5.5); // Pos(5, 5)
+  ```
+
+- Added `Pos.byDistanceTo` to create a comparator that sorts positions based
+  on distance to a given position:
+
+  ```dart
+  final comparator = Pos.byDistanceTo(Pos(5, 5));
+  [Pos(0, 0), Pos(1, 1), Pos(2, 2)].sort(comparator); // [Pos(2, 2), Pos(1, 1), Pos(0, 0)]
+  ```
+
+- Added `<Pos>.map` to apply a function to each component of a position:
+
+  ```dart
+  Pos(5, 5).map((x) => x * 2); // Pos(10, 10)
+  ```
+
+- Added `<Pos>.toList` to convert a position to a list of integers:
+
+  ```dart
+  Pos(5, 5).toList(); // [5, 5]
+  ```
+
+- Added `<Pos>.xy` to get the x and y components of a position as a tuple:
+
+  ```dart
+  Pos(5, 5).xy; // (5, 5)
+  ```
+
 ## 0.1.1+1
 
 **Deprecations**:

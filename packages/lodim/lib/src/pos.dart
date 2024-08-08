@@ -29,6 +29,40 @@ final class Pos {
   @pragma('vm:prefer-inline')
   const Pos(this.x, this.y);
 
+  /// Creates a new position by truncating the given `dx` and `dy` values.
+  ///
+  /// This is equivalent to:
+  /// ```dart
+  /// final a = Pos(dx.toInt(), dy.toInt());
+  /// ```
+  ///
+  /// ## Example
+  ///
+  /// ```dart
+  /// final a = Pos.truncate(10.5, 20.5);
+  /// print(a); // => Pos(10, 20)
+  /// ```
+  factory Pos.truncate(double dx, double dy) {
+    return Pos(dx.toInt(), dy.toInt());
+  }
+
+  /// Creates a new position by flooring the given `dx` and `dy` values.
+  ///
+  /// This is equivalent to:
+  /// ```dart
+  /// final a = Pos(dx.floor(), dy.floor());
+  /// ```
+  ///
+  /// ## Example
+  ///
+  /// ```dart
+  /// final a = Pos.floor(10.5, 20.5);
+  /// print(a); // => Pos(10, 20)
+  /// ```
+  factory Pos.floor(double dx, double dy) {
+    return Pos(dx.floor(), dy.floor());
+  }
+
   /// Returns a comparator that sorts positions by distance from the origin.
   ///
   /// The default formula is [euclideanSquared], which produces a value useful
@@ -86,6 +120,27 @@ final class Pos {
   static const Comparator<Pos> byColumnMajor = _byColumnMajor;
   static int _byColumnMajor(Pos a, Pos b) {
     return a.x == b.x ? a.y.compareTo(b.y) : a.x.compareTo(b.x);
+  }
+
+  /// Returns a comparator that sorts positions by distance to [target].
+  ///
+  /// The default formula is [euclideanSquared], which produces a value useful
+  /// for distances that will be _compared_, but not used as an actual distance;
+  /// see also [manhattan] and [chebyshev], or implement your own [Distance].
+  ///
+  /// ## Example
+  ///
+  /// ```dart
+  /// final target = Pos(10, 10);
+  /// final positions = [Pos(10, 15), Pos(4, 8), Pos(12, 9)];
+  /// positions.sort(Pos.byDistanceTo(target));
+  /// print(positions); // => [Pos(12, 9), Pos(10, 15), Pos(4, 8)]
+  /// ```
+  static Comparator<Pos> byDistanceTo(
+    Pos target, {
+    Distance using = euclideanSquared,
+  }) {
+    return (a, b) => using(a, target).compareTo(using(b, target));
   }
 
   /// A position with x and y offsets set to zero, often used as the  _origin_.
@@ -448,6 +503,22 @@ final class Pos {
     return Pos(x.clamp(min.x, max.x), y.clamp(min.y, max.y));
   }
 
+  /// Returns a new position with the `map` function applied to each offset.
+  ///
+  /// This is equivalent to:
+  /// ```dart
+  /// final a = Pos(10, 20);
+  /// final b = Pos(map(a.x), map(a.y));
+  /// ```
+  ///
+  /// ## Example
+  ///
+  /// ```dart
+  /// final a = Pos(10, 20);
+  /// print(a.map((offset) => offset * 2)); // => Pos(20, 40)
+  /// ```
+  Pos map(int Function(int offset) map) => Pos(map(x), map(y));
+
   /// Returns an approximate normalized vector represented by `this`.
   ///
   /// Exact normalization with integer math is not possible, so this method
@@ -737,7 +808,44 @@ final class Pos {
   /// ```dart
   /// final a = Pos(10, 20);
   /// print(a.toRect()); // => Rect.fromLTWH(10, 20, 1, 1)
+  /// ```
   Rect toRect() => Rect.fromLTWH(x, y, 1, 1);
+
+  /// Returns `this` as a list of two integers.
+  ///
+  /// The first element is the x offset, and the second element is the y offset.
+  ///
+  /// This is equivalent to:
+  /// ```dart
+  /// final a = Pos(10, 20);
+  /// final b = [a.x, a.y];
+  /// ```
+  ///
+  /// ## Example
+  ///
+  /// ```dart
+  /// final a = Pos(10, 20);
+  /// print(a.toList()); // => [10, 20]
+  /// ```
+  List<int> toList() => [x, y];
+
+  /// `this` as a tuple of two integers.
+  ///
+  /// The first element is the x offset, and the second element is the y offset.
+  ///
+  /// This is equivalent to:
+  /// ```dart
+  /// final a = Pos(10, 20);
+  /// final b = (a.x, a.y);
+  /// ```
+  ///
+  /// ## Example
+  ///
+  /// ```dart
+  /// final a = Pos(10, 20);
+  /// final (x, y) = a.xy;
+  /// ```
+  (int x, int y) get xy => (x, y);
 
   @override
   String toString() => 'Pos($x, $y)';
