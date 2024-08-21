@@ -803,13 +803,42 @@ final class Pos {
   /// a.inflate(Pos.zero);
   /// ```
   ///
+  /// May optionally provide a [size] parameter to specify the size of the
+  /// rectangle:
+  ///
+  /// ```dart
+  /// final a = Pos(10, 20);
+  /// print(a.toRect(Pos(2, 3))); // => Rect.fromLTWH(10, 20, 2, 3)
+  /// ```
+  ///
   /// ## Example
   ///
   /// ```dart
   /// final a = Pos(10, 20);
   /// print(a.toRect()); // => Rect.fromLTWH(10, 20, 1, 1)
   /// ```
-  Rect toRect() => Rect.fromLTWH(x, y, 1, 1);
+  Rect toRect([Pos size = const Pos(1, 1)]) {
+    return Rect.fromLTWH(x, y, size.x, size.y);
+  }
+
+  /// Returns `this` as a sized rectangle with the origin at [origin].
+  ///
+  /// This is equivalent to:
+  /// ```dart
+  /// final a = Pos(10, 20);
+  /// final b = Rect.fromLTWH(0, 0, a.x, a.y);
+  /// ```
+  ///
+  /// May optionally provide an [origin] parameter to specify the origin of the
+  /// rectangle:
+  ///
+  /// ```dart
+  /// final a = Pos(10, 20);
+  /// print(a.toSize(Pos(5, 5))); // => Rect.fromLTWH(5, 5, 10, 20)
+  /// ```
+  Rect toSize([Pos origin = Pos.zero]) {
+    return Rect.fromLTWH(origin.x, origin.y, x, y);
+  }
 
   /// Returns `this` as a list of two integers.
   ///

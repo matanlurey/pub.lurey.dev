@@ -1,4 +1,5 @@
 .dart_tool/
 benchmark/*.exe
+coverage/
 doc/api/
 pubspec.lock

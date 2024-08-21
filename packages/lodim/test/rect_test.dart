@@ -25,6 +25,22 @@ void main() {
     check(rect.bottom).equals(40);
   });
 
+  test('should create from WH with default offset', () {
+    final rect = Rect.fromWH(20, 20);
+    check(rect.left).equals(0);
+    check(rect.top).equals(0);
+    check(rect.right).equals(20);
+    check(rect.bottom).equals(20);
+  });
+
+  test('should create from WH with offset', () {
+    final rect = Rect.fromWH(20, 20, offset: Pos(10, 20));
+    check(rect.left).equals(10);
+    check(rect.top).equals(20);
+    check(rect.right).equals(30);
+    check(rect.bottom).equals(40);
+  });
+
   test('should enclose over two positions', () {
     final a = Pos(10, 20);
     final b = Pos(30, 40);
@@ -327,6 +343,23 @@ void main() {
   test('deflate', () {
     final rect = Rect.fromLTWH(10, 20, 30, 40);
     check(rect.deflate(5)).equals(Rect.fromLTWH(15, 25, 20, 30));
+  });
+
+  group('normalize', () {
+    test('no effect on a normal rect', () {
+      final rect = Rect.fromLTWH(10, 20, 30, 40);
+      check(rect.normalize()).equals(Rect.fromLTWH(10, 20, 30, 40));
+    });
+
+    test('right < left swaps left and right', () {
+      final rect = Rect.fromLTRB(30, 20, 10, 40);
+      check(rect.normalize()).equals(Rect.fromLTRB(10, 20, 30, 40));
+    });
+
+    test('bottom < top swaps top and bottom', () {
+      final rect = Rect.fromLTRB(10, 40, 30, 20);
+      check(rect.normalize()).equals(Rect.fromLTRB(10, 20, 30, 40));
+    });
   });
 
   test('hashCode', () {

@@ -46,6 +46,13 @@ final class Rect {
     int height,
   ) : this.fromLTRB(left, top, left + width, top + height);
 
+  /// Creates an origin-based rectangle from its [width] and [height].
+  Rect.fromWH(
+    int width,
+    int height, {
+    Pos offset = Pos.zero,
+  }) : this.fromLTWH(offset.x, offset.y, width, height);
+
   /// Creates a rectangle from its top-left and bottom-right corners.
   ///
   /// This is equivalent to:
@@ -279,11 +286,8 @@ final class Rect {
   /// print(rect.positions); // [Pos(0, 0), Pos(1, 0), Pos(0, 1), Pos(1, 1)]
   /// ```
   Iterable<Pos> get positions {
-    return Iterable.generate(area, (i) {
-      final x = left + i % width;
-      final y = top + i ~/ width;
-      return Pos(x, y);
-    });
+    final topLeft = this.topLeft;
+    return Iterable.generate(area, (i) => topLeft + Pos(i % width, i ~/ width));
   }
 
   /// Returns whether the provided [position] is within the rectangle.
@@ -413,6 +417,23 @@ final class Rect {
   /// print(deflated); // Rect.fromLTWH(1, 1, 2, 2)
   /// ```
   Rect deflate(int delta) => inflate(-delta);
+
+  /// Returns a normalized rectangle where `left <= right` and `top <= bottom`.
+  ///
+  /// ## Example
+  ///
+  /// ```dart
+  /// final rect = Rect.fromLTWH(2, 2, -2, -2);
+  /// final normalized = rect.normalize();
+  /// print(normalized); // Rect.fromLTWH(0, 0, 0, 0)
+  /// ```
+  Rect normalize() {
+    final l = math.min(left, right);
+    final t = math.min(top, bottom);
+    final r = math.max(left, right);
+    final b = math.max(top, bottom);
+    return Rect.fromLTRB(l, t, r, b);
+  }
 
   @override
   bool operator ==(Object other) {

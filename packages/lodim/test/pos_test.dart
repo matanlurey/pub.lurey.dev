@@ -312,8 +312,24 @@ void main() {
     check(Pos(1, 2).cross(Pos(3, 4))).equals(-2);
   });
 
-  test('toRect', () {
+  test('toRect with default size', () {
     check(Pos(1, 2).toRect()).equals(Rect.fromLTWH(1, 2, 1, 1));
+  });
+
+  test('toRect with provided size', () {
+    check(Pos(1, 2).toRect(Pos(3, 4))).equals(Rect.fromLTWH(1, 2, 3, 4));
+  });
+
+  test('toSize with default offset', () {
+    check(Pos(1, 2).toSize()).equals(Rect.fromLTWH(0, 0, 1, 2));
+  });
+
+  test('toSize with provided offset', () {
+    check(Pos(1, 2).toSize(Pos(3, 4))).equals(Rect.fromLTWH(3, 4, 1, 2));
+  });
+
+  test('map', () {
+    check(Pos(1, 2).map((i) => i * 2)).equals(Pos(2, 4));
   });
 
   test('toPos', () {

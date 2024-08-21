@@ -1,1 +1,0 @@
-genhtml /Users/matan/Developer/lodim/coverage/lcov.info -o /Users/matan/Developer/lodim/coverage/html

@@ -4,6 +4,38 @@
 
 **Features**:
 
+- Added optional parameter `size` to `<Pos>.toRect` when converting a position:
+
+  ```dart
+  Pos(5, 5).toRect(size: Pos(2, 2)); // Rect.fromLTWH(5, 5, 2, 2)
+  ```
+
+- Added `<Pos>.toSize` to convert a position, optionally with an offset:
+
+  ```dart
+  Pos(5, 5).toSize(); // Rect.fromLTWH(0, 0, 5, 5)
+  Pos(5, 5).toSize(Pos(2, 2)); // Rect.fromLTWH(2, 2, 5, 5)
+  ```
+
+- Added `Rect.fromWH` to create a width, height, and optional offset:
+
+  ```dart
+  Rect.fromWH(5, 5); // Rect.fromLTWH(0, 0, 5, 5)
+  Rect.fromWH(5, 5, Pos(2, 2)); // Rect.fromLTWH(2, 2, 5, 5)
+  ```
+
+- Added `<Rect>.normalize()` to convert a rectangle to one with positive width
+  and height:
+
+  ```dart
+  Rect.fromLTRB(5, 5, 3, 3).normalize(); // Rect.fromLTRB(3, 3, 5, 5)
+  Rect.fromLTRB(3, 3, -2, -2).normalize(); // Rect.fromLTRB(-2, -2, 3, 3)
+  ```
+
+## 0.1.2
+
+**Features**:
+
 - Added `Pos.truncate` to convert doubles to an integer position:
 
   ```dart
