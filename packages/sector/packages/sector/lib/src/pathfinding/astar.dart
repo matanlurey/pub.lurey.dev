@@ -29,8 +29,7 @@ final class Astar<E> with HeuristicPathfinder<E> {
   @override
   (Path<T> path, double cost) findBestPathExclusive<T extends E>(
     WeightedWalkable<T> graph,
-    // ignore: avoid_final_parameters
-    final T start,
+    T start,
     Goal<T> goal,
     Heuristic<T> heuristic, {
     Tracer<T>? tracer,

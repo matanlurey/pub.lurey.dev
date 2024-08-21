@@ -8,7 +8,7 @@ part of '../grid.dart';
 /// type, [E].
 ///
 /// {@category Grids}
-abstract base mixin class Grid<E> {
+abstract base mixin class Grid<E> implements GridLike<E> {
   /// Creates a new [ListGrid] with the given [width] and [height].
   ///
   /// Each element in the grid is initialized to [empty], which is also used as
@@ -115,6 +115,7 @@ abstract base mixin class Grid<E> {
   /// Number of columns in the grid, and the upper bound for the x-coordinate.
   ///
   /// Always non-negative.
+  @override
   int get width;
 
   /// Sets the number of columns in the grid.
@@ -129,6 +130,7 @@ abstract base mixin class Grid<E> {
   /// Number of rows in the grid, and the upper bound for the y-coordinate.
   ///
   /// Always non-negative.
+  @override
   int get height;
 
   /// Sets the number of rows in the grid.
@@ -161,12 +163,7 @@ abstract base mixin class Grid<E> {
   ///
   /// If [bounds] is provided, only the elements within the bounds are filled.
   void fill(E fill, [Rect? bounds]) {
-    bounds ??= this.bounds;
-    for (var y = bounds.top; y < bounds.bottom; y++) {
-      for (var x = bounds.left; x < bounds.right; x++) {
-        setUnchecked(Pos(x, y), fill);
-      }
-    }
+    GridLike.fillRect(this, fill, bounds: bounds);
   }
 
   /// Total number of elements in the grid.
@@ -207,11 +204,12 @@ abstract base mixin class Grid<E> {
   /// final pos = Pos(1, 1);
   /// print(grid.get(pos)); // Tile.floor
   /// ```
+  @override
   E get(Pos pos) {
     if (!containsPos(pos)) {
       throw RangeError('Position $pos is out of bounds');
     }
-    return getUnchecked(pos);
+    return getUnsafe(pos);
   }
 
   /// Returns the element at a position in the grid.
@@ -239,7 +237,17 @@ abstract base mixin class Grid<E> {
   ///   }
   /// }
   /// ```
-  E getUnchecked(Pos pos);
+  @override
+  E getUnsafe(Pos pos);
+
+  /// Returns the element at a position in the grid.
+  ///
+  /// If the position is not within the bounds of the grid, the behavior is
+  /// undefined. This method is intended to be used in cases where the position
+  /// can be trusted, such as an iterator or other trusted synchronous
+  /// operations.
+  @Deprecated('Use getUnsafe instead')
+  E getUnchecked(Pos pos) => getUnsafe(pos);
 
   /// Sets the element at a position in the grid.
   ///
@@ -260,11 +268,12 @@ abstract base mixin class Grid<E> {
   /// grid.set(pos, 1);
   /// print(grid.get(pos)); // 1
   /// ```
+  @override
   void set(Pos pos, E value) {
     if (!containsPos(pos)) {
       throw RangeError('Position $pos is out of bounds');
     }
-    setUnchecked(pos, value);
+    setUnsafe(pos, value);
   }
 
   /// Sets the element at a position in the grid.
@@ -284,7 +293,17 @@ abstract base mixin class Grid<E> {
   ///   }
   /// }
   /// ```
-  void setUnchecked(Pos pos, E value);
+  @override
+  void setUnsafe(Pos pos, E value);
+
+  /// Sets the element at a position in the grid.
+  ///
+  /// If the position is not within the bounds of the grid, the behavior is
+  /// undefined. This method is intended to be used in cases where the position
+  /// can be trusted, such as an iterator or other trusted synchronous
+  /// operations.
+  @Deprecated('Use setUnsafe instead')
+  void setUnchecked(Pos pos, E value) => setUnsafe(pos, value);
 
   /// Rows of the grid.
   ///
@@ -436,7 +455,7 @@ final class _Rows<E> extends FixedLengthIterable<Iterable<E>> {
   @override
   Iterable<E> elementAt(int index) {
     return Iterable.generate(_grid.width, (x) {
-      return _grid.getUnchecked(Pos(x, index));
+      return _grid.getUnsafe(Pos(x, index));
     });
   }
 }
@@ -451,7 +470,7 @@ final class _Columns<E> extends FixedLengthIterable<Iterable<E>> {
   @override
   Iterable<E> elementAt(int index) {
     return Iterable.generate(_grid.height, (y) {
-      return _grid.getUnchecked(Pos(index, y));
+      return _grid.getUnsafe(Pos(index, y));
     });
   }
 }
@@ -467,6 +486,6 @@ final class _Cells<E> extends FixedLengthIterable<(Pos, E)> {
   (Pos, E) elementAt(int index) {
     final y = index ~/ _grid.width;
     final x = index % _grid.width;
-    return (Pos(x, y), _grid.getUnchecked(Pos(x, y)));
+    return (Pos(x, y), _grid.getUnsafe(Pos(x, y)));
   }
 }

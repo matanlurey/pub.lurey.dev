@@ -77,7 +77,7 @@ abstract final class SplayTreeGrid<E> with Grid<E> {
     final grid = SplayTreeGrid<E>.filled(width, height, empty: empty);
     for (var y = 0; y < height; y++) {
       for (var x = 0; x < width; x++) {
-        grid.setUnchecked(Pos(x, y), generator(Pos(x, y)));
+        grid.setUnsafe(Pos(x, y), generator(Pos(x, y)));
       }
     }
     return grid;
@@ -110,7 +110,7 @@ abstract final class SplayTreeGrid<E> with Grid<E> {
       for (var y = 0; y < other.height; y++) {
         for (var x = 0; x < other.width; x++) {
           final pos = Pos(x, y);
-          clone.setUnchecked(pos, other.getUnchecked(pos));
+          clone.setUnsafe(pos, other.getUnsafe(pos));
         }
       }
     }
@@ -197,12 +197,12 @@ final class _SplayTreeGrid<E> extends SplayTreeGrid<E> {
   bool get isEmpty => _nodes.isEmpty;
 
   @override
-  E getUnchecked(Pos pos) {
+  E getUnsafe(Pos pos) {
     return _nodes[pos] ?? empty;
   }
 
   @override
-  void setUnchecked(Pos pos, E value) {
+  void setUnsafe(Pos pos, E value) {
     if (value == empty) {
       _nodes.remove(pos);
     } else {
@@ -272,7 +272,7 @@ final class _SplayTreeGridRowIterable<E> extends FixedLengthIterable<E> {
   @override
   E elementAt(int index) {
     final pos = Pos(index, _y);
-    return _grid.getUnchecked(pos);
+    return _grid.getUnsafe(pos);
   }
 
   @override

@@ -1,5 +1,10 @@
 # Change Log
 
+## 0.4.0-alpha+1
+
+- Deprecated `getUnchecked` and `setUnchecked` in favor of `getUnsafe` and
+  `setUnsafe`.
+
 ## 0.4.0-alpha
 
 **Breaking changes**:

@@ -151,8 +151,8 @@ final class _GridSuccessorsIterator<E> implements Iterator<(Pos, double)> {
         continue;
       }
       final weight = _adaptor._weight(
-        _adaptor._grid.getUnchecked(_node),
-        _adaptor._grid.getUnchecked(next),
+        _adaptor._grid.getUnsafe(_node),
+        _adaptor._grid.getUnsafe(next),
         next - _node,
       );
       if (weight != double.infinity) {

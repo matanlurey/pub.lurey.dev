@@ -183,10 +183,9 @@ final class _AsBestPathfinder<E, G extends Goal<E>> with BestPathfinder<E> {
     Goal<T> goal, {
     Tracer<T>? tracer,
   }) {
-    // ignore: omit_local_variable_types
-    final Heuristic<T> heuristic = switch (goal) {
-      _NodeGoal<T>(:final node) => _toNode(node),
-      _ => _orElse(start, goal as G),
+    final heuristic = switch (goal) {
+      _NodeGoal<T>(:final node) => _toNode<T>(node),
+      _ => _orElse<T>(start, goal as G),
     };
     return _pathfinder.findBestPathExclusive(
       graph,

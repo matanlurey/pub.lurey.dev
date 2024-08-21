@@ -38,13 +38,13 @@ final class NaiveGrid<E> with Grid<E> {
   final E empty;
 
   @override
-  E getUnchecked(Pos pos) => _rows[pos.y][pos.x];
+  E getUnsafe(Pos pos) => _rows[pos.y][pos.x];
 
   @override
   bool get isEmpty => _rows.every((row) => row.every((cell) => cell == empty));
 
   @override
-  void setUnchecked(Pos pos, E value) {
+  void setUnsafe(Pos pos, E value) {
     _rows[pos.y][pos.x] = value;
   }
 }

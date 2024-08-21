@@ -206,7 +206,7 @@ abstract final class ListGrid<E> with Grid<E> {
   }
 }
 
-final class _ListGrid<E> extends ListGrid<E> {
+final class _ListGrid<E> extends ListGrid<E> with LinearGridLike<E> {
   _ListGrid(
     this._width,
     this._height,
@@ -220,6 +220,10 @@ final class _ListGrid<E> extends ListGrid<E> {
             ),
         super._();
   final List<E> _elements;
+
+  @override
+  @protected
+  List<E> get data => _elements;
 
   @override
   final E empty;
