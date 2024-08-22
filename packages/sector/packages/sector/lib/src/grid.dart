@@ -2,10 +2,6 @@ import 'dart:collection';
 import 'dart:typed_data';
 
 import 'package:lodim/lodim.dart';
-// This is a private import of a "friend" package.
-// ignore: implementation_imports
-import 'package:lodim/src/grid.dart';
-import 'package:meta/meta.dart';
 import 'package:sector/src/collection.dart';
 import 'package:sector/src/graph.dart';
 

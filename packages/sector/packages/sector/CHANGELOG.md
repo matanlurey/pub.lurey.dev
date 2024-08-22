@@ -1,5 +1,9 @@
 # Change Log
 
+## 0.4.0-alpha+2
+
+- Optimized (and tested) `<Grid>.fill` and `<ListGrid>.fill`.
+
 ## 0.4.0-alpha+1
 
 - Deprecated `getUnchecked` and `setUnchecked` in favor of `getUnsafe` and

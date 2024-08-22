@@ -336,4 +336,55 @@ void main() {
       (Pos(1, 0), 3.0),
     ]);
   });
+
+  test('should fill the full grid', () {
+    final grid = ListGrid<int>.fromRows(
+      [
+        [0, 1, 2, 3, 4],
+        [1, 2, 3, 4, 5],
+        [2, 3, 4, 5, 6],
+      ],
+      empty: 0,
+    );
+    grid.fill(7);
+    check(grid.rows).deepEquals([
+      [7, 7, 7, 7, 7],
+      [7, 7, 7, 7, 7],
+      [7, 7, 7, 7, 7],
+    ]);
+  });
+
+  test('should fill a part of the grid', () {
+    final grid = ListGrid<int>.fromRows(
+      [
+        [0, 1, 2, 3, 4],
+        [1, 2, 3, 4, 5],
+        [2, 3, 4, 5, 6],
+      ],
+      empty: 0,
+    );
+    grid.fill(7, Rect.fromLTWH(1, 1, 3, 2));
+    check(grid.rows).deepEquals([
+      [0, 1, 2, 3, 4],
+      [1, 7, 7, 7, 5],
+      [2, 7, 7, 7, 6],
+    ]);
+  });
+
+  test('should clamp when filling part of the grid', () {
+    final grid = ListGrid<int>.fromRows(
+      [
+        [0, 1, 2, 3, 4],
+        [1, 2, 3, 4, 5],
+        [2, 3, 4, 5, 6],
+      ],
+      empty: 0,
+    );
+    grid.fill(7, Rect.fromLTWH(1, 1, 5, 5));
+    check(grid.rows).deepEquals([
+      [0, 1, 2, 3, 4],
+      [1, 7, 7, 7, 7],
+      [2, 7, 7, 7, 7],
+    ]);
+  });
 }

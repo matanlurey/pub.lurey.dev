@@ -3,7 +3,7 @@
 name: sector
 description: |-
   Fast and intuitive 2D data structures: grids, graphs, pathfinding & more.
-version: 0.4.0-alpha+1
+version: 0.4.0-alpha+2
 
 environment:
   sdk: ^3.5.0
@@ -12,8 +12,7 @@ repository: https://github.com/matanlurey/sector.dart/tree/main/packages/sector
 issue_tracker: https://github.com/matanlurey/sector.dart/issues
 
 dependencies:
-  # Using lodim/src/grid.dart (experimental).
-  lodim: 0.1.3
+  lodim: ^0.1.3
   meta: ^1.15.0
 
 dev_dependencies:

@@ -206,7 +206,7 @@ abstract final class ListGrid<E> with Grid<E> {
   }
 }
 
-final class _ListGrid<E> extends ListGrid<E> with LinearGridLike<E> {
+final class _ListGrid<E> extends ListGrid<E> {
   _ListGrid(
     this._width,
     this._height,
@@ -220,10 +220,6 @@ final class _ListGrid<E> extends ListGrid<E> with LinearGridLike<E> {
             ),
         super._();
   final List<E> _elements;
-
-  @override
-  @protected
-  List<E> get data => _elements;
 
   @override
   final E empty;
@@ -310,14 +306,48 @@ final class _ListGrid<E> extends ListGrid<E> with LinearGridLike<E> {
   bool get isNotEmpty => !isEmpty;
 
   @override
-  E getUnchecked(Pos pos) {
+  void fill(E fill, [Rect? bounds]) {
+    if (bounds == null) {
+      _elements.fillRange(0, _elements.length, fill);
+      return;
+    }
+    bounds = bounds.intersect(this.bounds);
+    if (bounds.width == width) {
+      _elements.fillRange(
+        bounds.top * width,
+        bounds.bottom * width,
+        fill,
+      );
+      return;
+    }
+    for (var y = bounds.top; y < bounds.bottom; y++) {
+      _elements.fillRange(
+        y * width + bounds.left,
+        y * width + bounds.right,
+        fill,
+      );
+    }
+  }
+
+  @override
+  @pragma('vm:unsafe:no-bounds-checks')
+  @pragma('dart2js:index-bounds:trust')
+  E getUnsafe(Pos pos) {
     return _elements[pos.y * _width + pos.x];
   }
 
   @override
-  void setUnchecked(Pos pos, E value) {
+  E getUnchecked(Pos pos) => getUnsafe(pos);
+
+  @override
+  @pragma('vm:unsafe:no-bounds-checks')
+  @pragma('dart2js:index-bounds:trust')
+  void setUnsafe(Pos pos, E value) {
     _elements[pos.y * _width + pos.x] = value;
   }
+
+  @override
+  void setUnchecked(Pos pos, E value) => setUnsafe(pos, value);
 
   @override
   Iterable<Iterable<E>> get rows => _ListGridRowsIterable(this);

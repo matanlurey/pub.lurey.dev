@@ -8,7 +8,7 @@ part of '../grid.dart';
 /// type, [E].
 ///
 /// {@category Grids}
-abstract base mixin class Grid<E> implements GridLike<E> {
+abstract base mixin class Grid<E> {
   /// Creates a new [ListGrid] with the given [width] and [height].
   ///
   /// Each element in the grid is initialized to [empty], which is also used as
@@ -115,7 +115,6 @@ abstract base mixin class Grid<E> implements GridLike<E> {
   /// Number of columns in the grid, and the upper bound for the x-coordinate.
   ///
   /// Always non-negative.
-  @override
   int get width;
 
   /// Sets the number of columns in the grid.
@@ -130,7 +129,6 @@ abstract base mixin class Grid<E> implements GridLike<E> {
   /// Number of rows in the grid, and the upper bound for the y-coordinate.
   ///
   /// Always non-negative.
-  @override
   int get height;
 
   /// Sets the number of rows in the grid.
@@ -163,7 +161,16 @@ abstract base mixin class Grid<E> implements GridLike<E> {
   ///
   /// If [bounds] is provided, only the elements within the bounds are filled.
   void fill(E fill, [Rect? bounds]) {
-    GridLike.fillRect(this, fill, bounds: bounds);
+    if (bounds == null) {
+      bounds = this.bounds;
+    } else {
+      bounds = bounds.intersect(this.bounds);
+    }
+    for (var y = bounds.top; y < bounds.bottom; y++) {
+      for (var x = bounds.left; x < bounds.right; x++) {
+        setUnsafe(Pos(x, y), fill);
+      }
+    }
   }
 
   /// Total number of elements in the grid.
@@ -204,7 +211,6 @@ abstract base mixin class Grid<E> implements GridLike<E> {
   /// final pos = Pos(1, 1);
   /// print(grid.get(pos)); // Tile.floor
   /// ```
-  @override
   E get(Pos pos) {
     if (!containsPos(pos)) {
       throw RangeError('Position $pos is out of bounds');
@@ -233,11 +239,10 @@ abstract base mixin class Grid<E> implements GridLike<E> {
   /// for (var y = 0; y < grid.height; y++) {
   ///   for (var x = 0; x < grid.width; x++) {
   ///     final pos = Pos(x, y);
-  ///     print(grid.getUnchecked(pos));
+  ///     print(grid.getUnsafe(pos));
   ///   }
   /// }
   /// ```
-  @override
   E getUnsafe(Pos pos);
 
   /// Returns the element at a position in the grid.
@@ -268,7 +273,6 @@ abstract base mixin class Grid<E> implements GridLike<E> {
   /// grid.set(pos, 1);
   /// print(grid.get(pos)); // 1
   /// ```
-  @override
   void set(Pos pos, E value) {
     if (!containsPos(pos)) {
       throw RangeError('Position $pos is out of bounds');
@@ -289,11 +293,10 @@ abstract base mixin class Grid<E> implements GridLike<E> {
   /// for (var y = 0; y < grid.height; y++) {
   ///   for (var x = 0; x < grid.width; x++) {
   ///     final pos = Pos(x, y);
-  ///     grid.setUnchecked(pos, 1);
+  ///     grid.setUnsafe(pos, 1);
   ///   }
   /// }
   /// ```
-  @override
   void setUnsafe(Pos pos, E value);
 
   /// Sets the element at a position in the grid.
