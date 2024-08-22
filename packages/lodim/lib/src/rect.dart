@@ -435,6 +435,9 @@ final class Rect {
     return Rect.fromLTRB(l, t, r, b);
   }
 
+  /// A position where [Pos.x] si [width] and [Pos.y] is [height].
+  Pos get size => Pos(width, height);
+
   @override
   bool operator ==(Object other) {
     return other is Rect &&

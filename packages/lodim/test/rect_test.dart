@@ -362,6 +362,11 @@ void main() {
     });
   });
 
+  test('size', () {
+    final rect = Rect.fromLTWH(10, 20, 30, 40);
+    check(rect.size).equals(Pos(30, 40));
+  });
+
   test('hashCode', () {
     final rect = Rect.fromLTWH(10, 20, 30, 40);
     check(rect.hashCode).equals(rect.hashCode);

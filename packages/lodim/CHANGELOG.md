@@ -1,5 +1,15 @@
 # Changelog
 
+## 0.1.4
+
+**Features**:
+
+- Added `Rect.size` to get the width and height of a rectangle as a `Pos`:
+
+  ```dart
+  Rect.fromLTWH(5, 5, 2, 2).size; // Pos(2, 2)
+  ```
+
 ## 0.1.3+2
 
 No public API changes.
