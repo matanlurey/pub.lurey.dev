@@ -139,7 +139,7 @@ void main() {
       grid.set(Pos(1, 1), 5);
       grid.set(Pos(2, 1), 6);
 
-      check(GridLike.getRect(grid)).deepEquals([
+      check(GridView.getRect(grid)).deepEquals([
         1, 2, 3, //
         4, 5, 6, //
       ]);
@@ -155,7 +155,7 @@ void main() {
         height: 2,
       );
 
-      check(GridLike.getRect(grid)).deepEquals([
+      check(GridView.getRect(grid)).deepEquals([
         1, 2, 3, //
         4, 5, 6, //
       ]);
@@ -170,7 +170,7 @@ void main() {
       grid.set(Pos(1, 1), 5);
       grid.set(Pos(2, 1), 6);
 
-      check(GridLike.getRect(grid, bounds: Rect.fromWH(3, 2))).deepEquals([
+      check(GridView.getRect(grid, bounds: Rect.fromWH(3, 2))).deepEquals([
         1, 2, 3, //
         4, 5, 6, //
       ]);
@@ -186,7 +186,7 @@ void main() {
         height: 2,
       );
 
-      check(GridLike.getRect(grid, bounds: Rect.fromWH(3, 2))).deepEquals([
+      check(GridView.getRect(grid, bounds: Rect.fromWH(3, 2))).deepEquals([
         1, 2, 3, //
         4, 5, 6, //
       ]);
@@ -202,7 +202,7 @@ void main() {
         height: 2,
       );
 
-      check(GridLike.getRect(grid, bounds: Rect.fromWH(3, 4))).deepEquals([
+      check(GridView.getRect(grid, bounds: Rect.fromWH(3, 4))).deepEquals([
         1, 2, 3, //
         4, 5, 6, //
       ]);
@@ -217,7 +217,7 @@ void main() {
       grid.set(Pos(1, 1), 5);
       grid.set(Pos(2, 1), 6);
 
-      check(GridLike.getRect(grid, bounds: Rect.fromWH(3, 1))).deepEquals([
+      check(GridView.getRect(grid, bounds: Rect.fromWH(3, 1))).deepEquals([
         1, 2, 3, //
       ]);
     });
@@ -232,7 +232,7 @@ void main() {
         height: 2,
       );
 
-      check(GridLike.getRect(grid, bounds: Rect.fromWH(3, 1))).deepEquals([
+      check(GridView.getRect(grid, bounds: Rect.fromWH(3, 1))).deepEquals([
         1, 2, 3, //
       ]);
     });
@@ -247,7 +247,7 @@ void main() {
       grid.set(Pos(2, 1), 6);
 
       check(
-        GridLike.getRect(grid, bounds: Rect.fromLTWH(1, 0, 2, 1)),
+        GridView.getRect(grid, bounds: Rect.fromLTWH(1, 0, 2, 1)),
       ).deepEquals([2, 3]);
     });
 
@@ -263,7 +263,7 @@ void main() {
       );
 
       check(
-        GridLike.getRect(grid, bounds: Rect.fromLTWH(1, 0, 2, 1)),
+        GridView.getRect(grid, bounds: Rect.fromLTWH(1, 0, 2, 1)),
       ).deepEquals([2, 3]);
     });
 
@@ -279,7 +279,7 @@ void main() {
       );
 
       check(
-        GridLike.getRect(grid, bounds: Rect.fromLTWH(1, 0, 1, 2)).toList(),
+        GridView.getRect(grid, bounds: Rect.fromLTWH(1, 0, 1, 2)).toList(),
       ).deepEquals([2, 5]);
     });
   });
@@ -289,7 +289,7 @@ void main() {
       final grid = _NaiveGrid(3, 2, 0);
       GridLike.fillRect(grid, 1);
 
-      check(GridLike.getRect(grid)).deepEquals([
+      check(GridView.getRect(grid)).deepEquals([
         1, 1, 1, //
         1, 1, 1, //
       ]);
@@ -306,7 +306,7 @@ void main() {
       );
       GridLike.fillRect(grid, 1);
 
-      check(GridLike.getRect(grid)).deepEquals([
+      check(GridView.getRect(grid)).deepEquals([
         1, 1, 1, //
         1, 1, 1, //
       ]);
@@ -320,7 +320,7 @@ void main() {
         bounds: Rect.fromWH(3, 1),
       );
 
-      check(GridLike.getRect(grid)).deepEquals([
+      check(GridView.getRect(grid)).deepEquals([
         1, 1, 1, //
         0, 0, 0, //
       ]);
@@ -341,7 +341,7 @@ void main() {
         bounds: Rect.fromWH(3, 1),
       );
 
-      check(GridLike.getRect(grid)).deepEquals([
+      check(GridView.getRect(grid)).deepEquals([
         1, 1, 1, //
         0, 0, 0, //
       ]);
@@ -362,7 +362,7 @@ void main() {
         bounds: Rect.fromLTWH(1, 0, 2, 1),
       );
 
-      check(GridLike.getRect(grid)).deepEquals([
+      check(GridView.getRect(grid)).deepEquals([
         0, 1, 1, //
         0, 0, 0, //
       ]);
@@ -374,7 +374,7 @@ void main() {
       final grid = _NaiveGrid(3, 2, 0);
       GridLike.fillRectFrom(grid, [1, 2, 3, 4, 5, 6]);
 
-      check(GridLike.getRect(grid)).deepEquals([
+      check(GridView.getRect(grid)).deepEquals([
         1, 2, 3, //
         4, 5, 6, //
       ]);
@@ -391,7 +391,7 @@ void main() {
       );
       GridLike.fillRectFrom(grid, [1, 2, 3, 4, 5, 6]);
 
-      check(GridLike.getRect(grid)).deepEquals([
+      check(GridView.getRect(grid)).deepEquals([
         1, 2, 3, //
         4, 5, 6, //
       ]);
@@ -405,7 +405,7 @@ void main() {
         bounds: Rect.fromWH(3, 1),
       );
 
-      check(GridLike.getRect(grid)).deepEquals([
+      check(GridView.getRect(grid)).deepEquals([
         1, 2, 3, //
         0, 0, 0, //
       ]);
@@ -426,7 +426,7 @@ void main() {
         bounds: Rect.fromWH(3, 1),
       );
 
-      check(GridLike.getRect(grid)).deepEquals([
+      check(GridView.getRect(grid)).deepEquals([
         1, 2, 3, //
         0, 0, 0, //
       ]);
@@ -479,7 +479,7 @@ void main() {
       );
       GridLike.fillRectFrom(grid, [1, 2, 3, 4, 5, 6]);
 
-      check(GridLike.getRect(grid)).deepEquals([
+      check(GridView.getRect(grid)).deepEquals([
         1, 2, 3, //
         4, 5, 6, //
       ]);
@@ -500,7 +500,7 @@ void main() {
         bounds: Rect.fromLTWH(1, 0, 2, 1),
       );
 
-      check(GridLike.getRect(grid)).deepEquals([
+      check(GridView.getRect(grid)).deepEquals([
         0, 1, 2, //
         0, 0, 0, //
       ]);
@@ -513,7 +513,7 @@ void main() {
       final copy = _NaiveGrid(3, 2, 0);
       GridLike.copyRect(grid, copy);
 
-      check(GridLike.getRect(copy)).deepEquals([
+      check(GridView.getRect(copy)).deepEquals([
         1, 1, 1, //
         1, 1, 1, //
       ]);
@@ -538,7 +538,7 @@ void main() {
       );
       GridLike.copyRect(grid, copy);
 
-      check(GridLike.getRect(copy)).deepEquals([
+      check(GridView.getRect(copy)).deepEquals([
         1, 1, 1, //
         1, 1, 1, //
       ]);
@@ -551,7 +551,7 @@ void main() {
       final copy = _NaiveGrid(3, 2, 0);
       GridLike.copyRectUnsafe(grid, copy);
 
-      check(GridLike.getRect(copy)).deepEquals([
+      check(GridView.getRect(copy)).deepEquals([
         1, 1, 1, //
         1, 1, 1, //
       ]);
@@ -576,7 +576,7 @@ void main() {
       );
       GridLike.copyRectUnsafe(grid, copy);
 
-      check(GridLike.getRect(copy)).deepEquals([
+      check(GridView.getRect(copy)).deepEquals([
         1, 1, 1, //
         1, 1, 1, //
       ]);
@@ -605,7 +605,7 @@ void main() {
         source: Rect.fromWH(3, 1),
       );
 
-      check(GridLike.getRect(copy)).deepEquals([
+      check(GridView.getRect(copy)).deepEquals([
         1, 2, 3, //
         0, 0, 0, //
       ]);
