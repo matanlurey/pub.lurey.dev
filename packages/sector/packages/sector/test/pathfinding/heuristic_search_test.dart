@@ -96,7 +96,7 @@ void main() {
         }
 
         // Return guidance towards the waypoint.
-        return manhattan(next, waypoint).toDouble();
+        return distanceManhattan(next, waypoint).toDouble();
       }),
       tracer: tracer,
     );

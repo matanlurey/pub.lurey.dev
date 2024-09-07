@@ -33,7 +33,7 @@ abstract final class SplayTreeGrid<E> with Grid<E> {
   /// the default, or [Grid.empty], element. An empty element does not consume
   /// memory and is ideally the most common element in the grid.
   ///
-  /// The [width] and [height] must be non-negative.
+  /// The [width] and [height] must be positive.
   ///
   /// ## Example
   ///
@@ -46,8 +46,8 @@ abstract final class SplayTreeGrid<E> with Grid<E> {
   /// print(grid.get(Pos(0, 0))); // 0
   /// ```
   factory SplayTreeGrid.filled(int width, int height, {required E empty}) {
-    RangeError.checkNotNegative(width, 'width');
-    RangeError.checkNotNegative(height, 'height');
+    checkPositive(width, 'width');
+    checkPositive(height, 'height');
     return _SplayTreeGrid(width, height, empty);
   }
 
@@ -56,7 +56,7 @@ abstract final class SplayTreeGrid<E> with Grid<E> {
   /// Each element in the grid is initialized by calling [generator] with the
   /// position of the element. The [empty] element is used as the default value.
   ///
-  /// The [width] and [height] must be non-negative.
+  /// The [width] and [height] must be positive.
   ///
   /// ## Example
   ///
@@ -72,8 +72,8 @@ abstract final class SplayTreeGrid<E> with Grid<E> {
     E Function(Pos) generator, {
     required E empty,
   }) {
-    RangeError.checkNotNegative(width, 'width');
-    RangeError.checkNotNegative(height, 'height');
+    checkPositive(width, 'width');
+    checkPositive(height, 'height');
     final grid = SplayTreeGrid<E>.filled(width, height, empty: empty);
     for (var y = 0; y < height; y++) {
       for (var x = 0; x < width; x++) {

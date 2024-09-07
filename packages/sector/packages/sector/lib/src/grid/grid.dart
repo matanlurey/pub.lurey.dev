@@ -7,6 +7,8 @@ part of '../grid.dart';
 /// the grid is resized, and can be replaced by a different element of the same
 /// type, [E].
 ///
+/// A grid is never empty, and always has a width and height of at least 1.
+///
 /// {@category Grids}
 abstract base mixin class Grid<E> {
   /// Creates a new [ListGrid] with the given [width] and [height].
@@ -166,11 +168,28 @@ abstract base mixin class Grid<E> {
     } else {
       bounds = bounds.intersect(this.bounds);
     }
-    for (var y = bounds.top; y < bounds.bottom; y++) {
-      for (var x = bounds.left; x < bounds.right; x++) {
-        setUnsafe(Pos(x, y), fill);
-      }
+    fillRect(bounds, setUnsafe, fill);
+  }
+
+  /// Copies the elements from another grid into this grid.
+  ///
+  /// If [source] is provided, only the elements within the bounds are copied.
+  ///
+  /// A [target] offset can be provided to copy the elements to a different
+  /// position in `this` grid.
+  void copyFrom(Grid<E> src, {Rect? source, Pos target = Pos.zero}) {
+    final dst = this;
+    if (source == null) {
+      source = src.bounds;
+    } else {
+      source = bounds.intersect(src.bounds);
     }
+    copyRect(
+      source,
+      src.get,
+      dst.set,
+      target: target,
+    );
   }
 
   /// Total number of elements in the grid.

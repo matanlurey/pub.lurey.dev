@@ -1,4 +1,5 @@
 import 'dart:collection';
+import 'dart:math' as math;
 import 'dart:typed_data';
 
 import 'package:lodim/lodim.dart';
@@ -11,35 +12,6 @@ part 'grid/grid.dart';
 part 'grid/grid_walkable.dart';
 part 'grid/list_grid.dart';
 part 'grid/splay_tree_grid.dart';
-
-/// Expands each sub-iterable into a single continuous iterable.
-///
-/// The resulting iterable runs through the elements returned by [elements]
-/// in the same iteration order, similar to `elements.expand((i) => i)`.
-///
-/// Throws [StateError] if each sub-iterable does not have the same `length`.
-///
-/// ## Example
-///
-/// ```dart
-/// final elements = [
-///   [1, 2, 3],
-///   [4, 5, 6],
-/// ];
-/// final expanded = ListGrid.expandEqualLength(elements);
-/// print(List.of(expanded)); // [1, 2, 3, 4, 5, 6]
-/// ```
-Iterable<T> _expandEqualLength<T>(Iterable<Iterable<T>> elements) {
-  int? length;
-  return elements.expand((subIterable) {
-    if (length == null) {
-      length = subIterable.length;
-    } else if (subIterable.length != length) {
-      throw ArgumentError('All sub-iterables must have the same length.');
-    }
-    return subIterable;
-  });
-}
 
 /// Returns the most common element in the provided [elements].
 ///

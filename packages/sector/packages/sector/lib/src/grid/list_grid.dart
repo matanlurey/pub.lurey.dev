@@ -29,7 +29,7 @@ abstract final class ListGrid<E> with Grid<E> {
   /// the default, or [Grid.empty], element. An empty element still consumes
   /// memory, but is used to allow resizing the grid.
   ///
-  /// The [width] and [height] must be non-negative.
+  /// The [width] and [height] must be positive.
   ///
   /// ## Example
   ///
@@ -47,8 +47,8 @@ abstract final class ListGrid<E> with Grid<E> {
     required E empty,
     E? fill,
   }) {
-    RangeError.checkNotNegative(width, 'width');
-    RangeError.checkNotNegative(height, 'height');
+    checkPositive(width, 'width');
+    checkPositive(height, 'height');
     final list = List.filled(
       width * height,
       fill ?? empty,
@@ -62,7 +62,7 @@ abstract final class ListGrid<E> with Grid<E> {
   /// Each element in the grid is initialized by calling [generator] with the
   /// position of the element. The [empty] element is used as the default value.
   ///
-  /// The [width] and [height] must be non-negative.
+  /// The [width] and [height] must be positive.
   ///
   /// ## Example
   ///
@@ -78,9 +78,10 @@ abstract final class ListGrid<E> with Grid<E> {
     E Function(Pos pos) generator, {
     required E empty,
   }) {
+    checkPositive(width, 'width');
+    checkPositive(height, 'height');
     final list = List<E>.generate(width * height, (index) {
-      final pos = Pos(index % width, index ~/ width);
-      return generator(pos);
+      return generator(Pos.fromRowMajor(index, width: width));
     });
     return _ListGrid(width, height, empty, list);
   }
@@ -109,8 +110,13 @@ abstract final class ListGrid<E> with Grid<E> {
         List<E>.from(other._elements),
       );
     }
-    final list = List.of(other.rows.expand((row) => row));
-    return _ListGrid(other.width, other.height, empty ?? other.empty, list);
+    final list = List.of(other.cells.map((c) => c.$2));
+    return _ListGrid(
+      other.width,
+      other.height,
+      empty ?? other.empty,
+      list,
+    );
   }
 
   /// Creates a new list grid from a 2D list of rows of columns.
@@ -123,15 +129,15 @@ abstract final class ListGrid<E> with Grid<E> {
   /// at index `(x, y)` is `rows.elementAt(y).elementAt(x)`. If the [empty]
   /// element is omitted, the most common element in the rows is used, in which
   /// case the rows must be non-empty.
+  ///
+  /// The [rows] and columns must be non-empty.
   factory ListGrid.fromRows(Iterable<Iterable<E>> rows, {E? empty}) {
-    final height = rows.length;
-    final list = List.of(_expandEqualLength(rows));
-    final width = height == 0 ? 0 : list.length ~/ height;
+    final (cells, size) = checkRectangular2D(rows);
     return _ListGrid(
-      width,
-      height,
-      empty ?? _mostCommonElement(list),
-      list,
+      size.x,
+      size.y,
+      empty ?? _mostCommonElement(cells),
+      List.of(cells),
     );
   }
 
@@ -143,26 +149,21 @@ abstract final class ListGrid<E> with Grid<E> {
   ///
   /// The grid is initialized with the elements in the rows, where the element
   /// at index `(x, y)` is `rows.elementAt(y).elementAt(x)`. If the [empty]
-  /// element is omitted, the most common element in the rows is used, in which
-  /// case the rows must be non-empty.
+  /// element is omitted, the most common element in the rows is used.
+  ///
+  /// The [elements] must be non-empty.
   factory ListGrid.fromCells(
     Iterable<E> elements, {
     required int width,
     E? empty,
   }) {
-    if (width == 0) {
-      return _ListGrid(0, 0, ArgumentError.checkNotNull(empty, 'empty'));
-    }
-    final list = List.of(elements);
-    final height = list.length ~/ width;
-    if (list.length % width != 0) {
-      throw ArgumentError.value(
-        elements,
-        'elements',
-        'Must have a length that is a multiple of $width.',
-      );
-    }
-    return _ListGrid(width, height, empty ?? _mostCommonElement(list), list);
+    final (cells, size) = checkRectangular1D(elements, width: width);
+    return _ListGrid(
+      size.x,
+      size.y,
+      empty ?? _mostCommonElement(cells),
+      List.of(cells),
+    );
   }
 
   /// Creates a new grid backed by the provided [elements] in row-major order.
@@ -174,6 +175,8 @@ abstract final class ListGrid<E> with Grid<E> {
   /// Changes to the provided list will be reflected in the grid, and changes
   /// to the grid will be reflected in the list accordingly, with `elements[i]`
   /// being the element at position `Pos(i % width, i ~/ width)`.
+  ///
+  /// The grid must be non-empty.
   ///
   /// > [!WARNING]
   /// > The provided list must not be modified in a way that violates the
@@ -194,14 +197,9 @@ abstract final class ListGrid<E> with Grid<E> {
     required int width,
     required E empty,
   }) {
-    final height = elements.length ~/ width;
-    if (elements.length % width != 0) {
-      throw ArgumentError.value(
-        elements,
-        'elements',
-        'Must have a length that is a multiple of $width.',
-      );
-    }
+    checkPositive(width, 'width');
+    final (_, size) = checkRectangular1D(elements, width: width);
+    final height = size.y;
     return _ListGrid(width, height, empty, elements);
   }
 }
@@ -307,26 +305,37 @@ final class _ListGrid<E> extends ListGrid<E> {
 
   @override
   void fill(E fill, [Rect? bounds]) {
-    if (bounds == null) {
-      _elements.fillRange(0, _elements.length, fill);
-      return;
+    bounds = bounds?.intersect(this.bounds);
+    fillRectLinear(_elements, fill, width: width, bounds: bounds);
+  }
+
+  @override
+  @pragma('vm:always-consider-inlining')
+  @pragma('dart2js:prefer-inline')
+  void copyFrom(Grid<E> src, {Rect? source, Pos target = Pos.zero}) {
+    if (source == null) {
+      source = src.bounds;
+    } else {
+      source = source.intersect(src.bounds);
     }
-    bounds = bounds.intersect(this.bounds);
-    if (bounds.width == width) {
-      _elements.fillRange(
-        bounds.top * width,
-        bounds.bottom * width,
-        fill,
+
+    // Clamp the source to the maximum size of the target grid.
+    final width = math.min(source.width, this.width - target.x);
+    final height = math.min(source.height, this.height - target.y);
+    source = Rect.fromLTWH(source.left, source.top, width, height);
+
+    final dst = this;
+    if (src is _ListGrid<E>) {
+      return copyRectLinear(
+        src._elements,
+        dst._elements,
+        srcWidth: src.width,
+        dstWidth: dst.width,
+        source: source,
+        target: target,
       );
-      return;
     }
-    for (var y = bounds.top; y < bounds.bottom; y++) {
-      _elements.fillRange(
-        y * width + bounds.left,
-        y * width + bounds.right,
-        fill,
-      );
-    }
+    return super.copyFrom(src, source: source, target: target);
   }
 
   @override

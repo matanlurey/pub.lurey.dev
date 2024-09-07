@@ -1,5 +1,15 @@
 # Change Log
 
+## 0.4.0-alpha+3
+
+- Upgraded to `lodim: ^0.1.6`.
+
+- `Grid` and its subtypes must be non-empty (a width and height of at least 1);
+  in practice this was already the case, but it is now enforced by the various
+  constructors and factory methods.
+
+- Added `<Grid>.copyFrom` to copy the contents of one grid to another.
+
 ## 0.4.0-alpha+2
 
 - Optimized (and tested) `<Grid>.fill` and `<ListGrid>.fill`.

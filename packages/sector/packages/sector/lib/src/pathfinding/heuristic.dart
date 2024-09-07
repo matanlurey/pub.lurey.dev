@@ -110,7 +110,7 @@ final class _AlwaysHeuristic<T> with Heuristic<T> {
 ///
 /// {@category Pathfinding}
 abstract final class GridHeuristic with Heuristic<Pos> {
-  /// Uses `euclidean` (`√` of [euclideanSquared]) distance to estimate the
+  /// Uses `euclidean` (`√` of [distanceSquared]) distance to estimate the
   /// total cost.
   ///
   /// {@macro sector.GridHeuristic:ratio}
@@ -119,7 +119,7 @@ abstract final class GridHeuristic with Heuristic<Pos> {
     double ratio,
   }) = _EucledianHeuristic;
 
-  /// Uses [manhattan] distance to estimate the total cost.
+  /// Uses [distanceManhattan] to estimate the total cost.
   ///
   /// {@template sector.GridHeuristic:ratio}
   /// The [ratio] parameter can be used to scale the heuristic, making it more
@@ -133,7 +133,7 @@ abstract final class GridHeuristic with Heuristic<Pos> {
     double ratio,
   }) = _ManhattanHeuristic;
 
-  /// Uses [diagonal] distance to estimate the total cost.
+  /// Uses [distanceDiagonal] distance to estimate the total cost.
   ///
   /// {@macro sector.GridHeuristic:ratio}
   const factory GridHeuristic.diagonal(
@@ -141,7 +141,7 @@ abstract final class GridHeuristic with Heuristic<Pos> {
     double ratio,
   }) = _DiagonalHeuristic;
 
-  /// Uses [chebyshev] distance to estimate the total cost.
+  /// Uses [distanceChebyshev] distance to estimate the total cost.
   ///
   /// {@macro sector.GridHeuristic:ratio}
   const factory GridHeuristic.chebyshev(
@@ -166,7 +166,7 @@ final class _EucledianHeuristic extends GridHeuristic {
 
   @override
   double estimateTotalCost(Pos node) {
-    return math.sqrt(euclideanSquared(node, _goal)) * ratio;
+    return math.sqrt(distanceSquared(node, _goal)) * ratio;
   }
 }
 
@@ -174,21 +174,21 @@ final class _ManhattanHeuristic extends GridHeuristic {
   const _ManhattanHeuristic(super._goal, {super.ratio});
 
   @override
-  double estimateTotalCost(Pos node) => manhattan(node, _goal) * ratio;
+  double estimateTotalCost(Pos node) => distanceManhattan(node, _goal) * ratio;
 }
 
 final class _DiagonalHeuristic extends GridHeuristic {
   const _DiagonalHeuristic(super._goal, {super.ratio});
 
   @override
-  double estimateTotalCost(Pos node) => diagonal(node, _goal) * ratio;
+  double estimateTotalCost(Pos node) => distanceDiagonal(node, _goal) * ratio;
 }
 
 final class _ChebyshevHeuristic extends GridHeuristic {
   const _ChebyshevHeuristic(super._goal, {super.ratio});
 
   @override
-  double estimateTotalCost(Pos node) => chebyshev(node, _goal) * ratio;
+  double estimateTotalCost(Pos node) => distanceChebyshev(node, _goal) * ratio;
 }
 
 final class _AnyHeuristic<T> with Heuristic<T> {

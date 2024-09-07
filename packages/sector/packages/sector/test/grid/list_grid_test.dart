@@ -72,7 +72,7 @@ void main() {
   test('should fail if fromRows empty and no empty', () {
     check(
       () => ListGrid<int>.fromRows([[]]),
-    ).throws<StateError>();
+    ).throws<Error>();
   });
 
   test('should create a grid fromCells', () {
@@ -92,10 +92,10 @@ void main() {
     ]);
   });
 
-  test('should return an empty grid fromCells', () {
-    final grid = ListGrid.fromCells([], width: 0, empty: 0);
-
-    check(grid).isEmpty();
+  test('should not return an empty grid fromCells', () {
+    check(
+      () => ListGrid.fromCells([], width: 0, empty: 0),
+    ).throws<ArgumentError>();
   });
 
   test('should fail fromCells if not a multiple of width', () {
@@ -119,10 +119,8 @@ void main() {
     ).throws<ArgumentError>();
   });
 
-  test('should create a grid fromRows with 0 cells', () {
-    final grid = ListGrid.fromRows([], empty: 0);
-
-    check(grid).isEmpty();
+  test('should not create a grid fromRows with 0 cells', () {
+    check(() => ListGrid.fromRows([], empty: 0)).throws<ArgumentError>();
   });
 
   test('should resize the grid by expanding width', () {
