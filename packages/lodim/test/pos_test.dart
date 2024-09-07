@@ -37,15 +37,15 @@ void main() {
     test('can specify an alternate distance function', () {
       final a = Pos(10, 20);
       final b = Pos(30, 40);
-      check(a.distanceTo(b, using: manhattan)).equals(40);
+      check(a.distanceTo(b, using: distanceManhattan)).equals(40);
     });
   });
 
-  group('lineTo', () {
+  group('pathTo', () {
     test('defaults to bresenham', () {
       final a = Pos(0, 0);
       final b = Pos(2, 2);
-      check(a.lineTo(b)).deepEquals([
+      check(a.pathTo(b)).deepEquals([
         Pos(0, 0),
         Pos(1, 1),
         Pos(2, 2),
@@ -61,7 +61,7 @@ void main() {
         yield b;
       }
 
-      check(a.lineTo(b, using: fakeLine)).deepEquals([
+      check(a.pathTo(b, using: fakeLine)).deepEquals([
         a,
         b,
       ]);
@@ -214,12 +214,88 @@ void main() {
     check(Pos(1, 2).toString()).equals('Pos(1, 2)');
   });
 
+  test('fromXY', () {
+    check(Pos.fromXY((1, 2))).equals(Pos(1, 2));
+  });
+
+  test('fromList', () {
+    check(Pos.fromList([1, 2])).equals(Pos(1, 2));
+  });
+
+  test('fromList with offset', () {
+    check(Pos.fromList([0, 1, 2], 1)).equals(Pos(1, 2));
+  });
+
+  test('fromList must have at least two elements', () {
+    check(() => Pos.fromList([1])).throws<RangeError>();
+  });
+
+  test('fromList must have at least two elements after the offset', () {
+    check(() => Pos.fromList([1, 2], 1)).throws<RangeError>();
+  });
+
+  test('fromListUnsafe', () {
+    check(Pos.fromListUnsafe([1, 2])).equals(Pos(1, 2));
+  });
+
+  test('fromListUnsafe with offset', () {
+    check(Pos.fromListUnsafe([0, 1, 2], 1)).equals(Pos(1, 2));
+  });
+
+  test('fromListUnsafe must have at least two elements', () {
+    check(() => Pos.fromListUnsafe([1])).throws<RangeError>();
+  });
+
   test('toList', () {
     check(Pos(1, 2).toList()).deepEquals([1, 2]);
   });
 
+  test('toListUnsafe', () {
+    check(Pos(1, 2).toListUnsafe()).deepEquals([1, 2]);
+  });
+
+  test('toList index must be 0 if output is null', () {
+    check(() => Pos(1, 2).toList(null, 1)).throws<ArgumentError>();
+  });
+
+  test('toListUnsafe index must be 0 if output is null', () {
+    check(() => Pos(1, 2).toListUnsafe(null, 1)).throws<ArgumentError>();
+  });
+
+  test('toList writes to an existing list', () {
+    final list = [0, 0];
+    check(Pos(1, 2).toList(list)).equals(list);
+    check(list).deepEquals([1, 2]);
+  });
+
+  test('toListUnsafe writes to an existing list', () {
+    final list = [0, 0];
+    check(Pos(1, 2).toListUnsafe(list)).equals(list);
+    check(list).deepEquals([1, 2]);
+  });
+
+  test('toList writes to an existing list with an offset', () {
+    final list = [0, 0, 0];
+    check(Pos(1, 2).toList(list, 1)).equals(list);
+    check(list).deepEquals([0, 1, 2]);
+  });
+
+  test('toListUnsafe writes to an existing list with an offset', () {
+    final list = [0, 0, 0];
+    check(Pos(1, 2).toListUnsafe(list, 1)).equals(list);
+    check(list).deepEquals([0, 1, 2]);
+  });
+
   test('xy', () {
     check(Pos(1, 2).xy).equals((1, 2));
+  });
+
+  test('fromRowMajor', () {
+    check(Pos.fromRowMajor(12, width: 4)).equals(Pos(0, 3));
+  });
+
+  test('toRowMajor', () {
+    check(Pos(0, 3).toRowMajor(width: 4)).equals(12);
   });
 
   group('should sort byMagntiude', () {
@@ -333,6 +409,8 @@ void main() {
   });
 
   test('toPos', () {
+    // Test the deprecated method.
+    // ignore: deprecated_member_use_from_same_package
     check((1, 2).toPos()).equals(Pos(1, 2));
   });
 }

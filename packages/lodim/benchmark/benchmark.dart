@@ -198,7 +198,7 @@ final class _PosClass100x100Lines extends BenchmarkBase {
     for (var y = 0; y < 100; y++) {
       for (var x = 0; x < 100; x++) {
         for (var k = 0; k < 8; k++) {
-          results[y * 100 + x] = Pos(x, y).lineTo(Pos(100, 100)).toList();
+          results[y * 100 + x] = Pos(x, y).pathTo(Pos(100, 100)).toList();
         }
       }
     }

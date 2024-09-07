@@ -1,5 +1,102 @@
 # Changelog
 
+## 0.1.5
+
+**Features**:
+
+- Added top-level functions to perform bulk-`Pos` based operations.
+
+  While this library will not ship a grid implementation, it is no doubt useful
+  in the context of `Pos` and `Rect` to be able to make bulk operations on
+  grid-like objects using these functions. There are two implementations of
+  each function - one that uses callback functions, and one that operates on
+  linear memory in row-major order:
+
+  Callback-based | Linear memory
+  ---------------|--------------
+  `getRect`      | `getRectLinear`
+  `fillRect`     | `fillRectLinear`
+  `fillRectFrom` | `fillRectFromLinear`
+  `copyRect`     | `copyRectLinear`
+
+- Added `checkPositive`, `assertPositive`, and `assertNonNegative` as top-level
+  methods to assert that a value is positive (`>= 0`), or non-negative (`> 0`);
+  these methods return the value if it passes the check or throws an exception
+  otherwise:
+
+  ```dart
+  checkPositive(5); // 5
+  assertPositive(5); // 5
+  assertNonNegative(5); // 5
+  ```
+
+- Added `Pos.fromXY` as an inverse of `<Pos>.xy` to create a position from a
+  tuple:
+
+  ```dart
+  Pos.fromXY(5, 5); // Pos(5, 5)
+  ```
+
+- Added `Pos.fromRowMajor` and `Pos.toRowMajor` to convert a position to and
+  from a row-major index:
+
+  ```dart
+  Pos.fromRowMajor(5, 3, 10); // Pos(5, 3)
+  Pos(5, 3).toRowMajor(10); // 35
+  ```
+
+- Added `Pos.fromList` as an inverse of `<Pos>.toList` to create a position from
+  a list of integers, optionally with a start index:
+
+  ```dart
+  Pos.fromList([5, 5]); // Pos(5, 5)
+  Pos.fromList([1, 2, 3], 1); // Pos(2, 3)
+  ```
+
+  In addition, added `unsafe` variants of these methods that do not check the
+  bounds of the list:
+
+  ```dart
+  Pos.fromListUnsafe([5, 5]); // Pos(5, 5)
+  Pos.fromListUnsafe([1, 2, 3], 1); // Pos(2, 3)
+  ```
+
+- Tweaked `<Pos>.toList` to support writing to an existing list instead of
+  allocating a new one:
+
+  ```dart
+  Pos(5, 5).toList([0, 0], 1); // [0, 5, 5]
+  ```
+
+  In addition, added `unsafe` variants of these methods that do not check the
+  bounds of the list:
+
+  ```dart
+  Pos(5, 5).toListUnsafe([0, 0], 1); // [0, 5, 5]
+  ```
+
+**Deprecations**:
+
+- The extension `IntPair` has been deprecated in favor of `Pos.fromXY`:
+
+  ```diff
+  - (5, 5).toPos();
+  + Pos.fromXY(5, 5);
+  ```
+
+- The following functions have been renamed (the originals are deprecated):
+
+  Replacement           | Original
+  ----------------------|--------------------
+  `distanceSquared`     | `euclideanSquared`
+  `distanceApproximate` | `euclideanApproximate`
+  `distanceManhattan`   | `manhattan`
+  `distanceChebyshev`   | `chebyshev`
+  `distanceDiagonal`    | `diagonal`
+  `lineBresenham`       | `bresenham`
+  `lineVector`          | `vectorLine`
+  `<Pos>.lineTo`        | `<Pos>.pathTo`
+
 ## 0.1.4
 
 **Features**:

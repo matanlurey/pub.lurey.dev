@@ -286,7 +286,6 @@ final class Rect {
   /// print(rect.positions); // [Pos(0, 0), Pos(1, 0), Pos(0, 1), Pos(1, 1)]
   /// ```
   Iterable<Pos> get positions {
-    final topLeft = this.topLeft;
     return Iterable.generate(area, (i) => topLeft + Pos(i % width, i ~/ width));
   }
 
@@ -456,8 +455,16 @@ final class Rect {
 
 final class _EdgesIterable extends Iterable<Pos> {
   const _EdgesIterable(this._rect);
-
   final Rect _rect;
+
+  @override
+  int get length => isEmpty ? 0 : _rect.width * 2 + _rect.height * 2;
+
+  @override
+  bool get isEmpty => _rect.isEmpty;
+
+  @override
+  bool get isNotEmpty => _rect.isNotEmpty;
 
   @override
   Iterator<Pos> get iterator => _EdgesIterator(_rect);
@@ -490,7 +497,6 @@ final class _EdgesIterator implements Iterator<Pos> {
       }
       _direction = Direction.down;
     }
-
     if (_direction == Direction.down) {
       if (_current.y < _rect.bottom - 1) {
         _current = Pos(_current.x, _current.y + 1);
@@ -498,7 +504,6 @@ final class _EdgesIterator implements Iterator<Pos> {
       }
       _direction = Direction.left;
     }
-
     if (_direction == Direction.left) {
       if (_current.x > _rect.left) {
         _current = Pos(_current.x - 1, _current.y);
@@ -506,14 +511,12 @@ final class _EdgesIterator implements Iterator<Pos> {
       }
       _direction = Direction.up;
     }
-
     if (_direction == Direction.up) {
       if (_current.y > _rect.top + 1) {
         _current = Pos(_current.x, _current.y - 1);
         return true;
       }
     }
-
     return false;
   }
 }

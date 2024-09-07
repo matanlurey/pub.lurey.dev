@@ -26,7 +26,7 @@ part of '../lodim.dart';
 @immutable
 final class Pos {
   /// Creates a new position with the given x and y offsets.
-  @pragma('vm:prefer-inline')
+  @_pragmaInline
   const Pos(this.x, this.y);
 
   /// Creates a new position by truncating the given `dx` and `dy` values.
@@ -63,11 +63,108 @@ final class Pos {
     return Pos(dx.floor(), dy.floor());
   }
 
+  /// Creates a new position by destructuring a two-element tuple.
+  ///
+  /// This is equivalent to:
+  ///
+  /// ```dart
+  /// final a = Pos(tuple.$1, tuple.$2);
+  /// ```
+  ///
+  /// The inverse of this operation is [xy].
+  ///
+  /// ## Example
+  ///
+  /// ```dart
+  /// final a = Pos.fromXY((10, 20));
+  /// print(a); // => Pos(10, 20)
+  /// ```
+  factory Pos.fromXY((int x, int y) xy) => Pos(xy.$1, xy.$2);
+
+  /// Creates a new position from two elements of a list of integers.
+  ///
+  /// May optionally provide a [start] index to skip elements at the beginning.
+  ///
+  /// The list, starting at [start], must have at least two elements.
+  ///
+  /// This is equivalent to:
+  /// ```dart
+  /// final a = Pos(list[start], list[start + 1]);
+  /// ```
+  ///
+  /// ## Example
+  ///
+  /// ```dart
+  /// final a = Pos.fromList([10, 20, 30, 40], start: 2);
+  /// print(a); // => Pos(30, 40)
+  /// ```
+  factory Pos.fromList(List<int> list, [int start = 0]) {
+    if (list.length - start < 2) {
+      throw RangeError('List must have at least two elements');
+    }
+    return Pos._fromListUnsafe(list, start);
+  }
+
+  /// Creates a new position from two elements of a list of integers.
+  ///
+  /// May optionally provide a [start] index to skip elements at the beginning.
+  ///
+  /// If the list does not have at least two elements, the result is undefined.
+  ///
+  /// This is equivalent to:
+  /// ```dart
+  /// final a = Pos(list[start], list[start + 1]);
+  /// ```
+  ///
+  /// ## Example
+  ///
+  /// ```dart
+  /// final a = Pos.fromListUnsafe([10, 20, 30, 40], start: 2);
+  /// print(a); // => Pos(30, 40)
+  /// ```
+  factory Pos.fromListUnsafe(List<int> list, [int start = 0]) {
+    if (_assertionsEnabled && list.length - start < 2) {
+      throw RangeError('List must have at least two elements');
+    }
+    return Pos._fromListUnsafe(list, start);
+  }
+
+  @_pragmaInline
+  @_pragmaOmitBoundsChecks
+  factory Pos._fromListUnsafe(List<int> list, [int start = 0]) {
+    return Pos(list[start], list[start + 1]);
+  }
+
+  /// Creates a position representing [index] in a grid of [width] columns.
+  ///
+  /// The position is calculated as if the grid was row-major, i.e. the x-axis
+  /// is the primary sort key, and the y-axis is the secondary, or the algorithm
+  /// `index = y * width + x`.
+  ///
+  /// Note that, like other methods in [Pos], there are no assertions that
+  /// `this` coordinate is valid, or that [width] is positive, and the result
+  /// is undefined if the conditions are not met.
+  ///
+  /// The inverse of this operation is [toRowMajor].
+  ///
+  /// ## Example
+  ///
+  /// ```dart
+  /// final a = Pos.fromRowMajor(5, width: 3);
+  /// print(a); // => Pos(2, 1)
+  /// ```
+  factory Pos.fromRowMajor(int index, {required int width}) {
+    final x = index % width;
+    final y = index ~/ width;
+    return Pos(x, y);
+  }
+
   /// Returns a comparator that sorts positions by distance from the origin.
   ///
-  /// The default formula is [euclideanSquared], which produces a value useful
+  /// The default formula is [distanceSquared], which produces a value useful
   /// for distances that will be _compared_, but not used as an actual distance;
-  /// see also [manhattan] and [chebyshev], or implement your own [Distance].
+  /// see also [distanceManhattan] and [distanceChebyshev], or implement your
+  /// own [Distance].
   ///
   /// ## Example
   ///
@@ -86,7 +183,7 @@ final class Pos {
   /// positions.sort(Pos.byMagnitude(manhattan));
   /// print(positions); // => [Pos(4, 8), Pos(12, 9), Pos(10, 15)]
   /// ```
-  static Comparator<Pos> byMagnitude([Distance formula = euclideanSquared]) {
+  static Comparator<Pos> byMagnitude([Distance formula = distanceSquared]) {
     return (a, b) => formula(a, Pos.zero).compareTo(formula(b, Pos.zero));
   }
 
@@ -124,9 +221,10 @@ final class Pos {
 
   /// Returns a comparator that sorts positions by distance to [target].
   ///
-  /// The default formula is [euclideanSquared], which produces a value useful
+  /// The default formula is [distanceSquared], which produces a value useful
   /// for distances that will be _compared_, but not used as an actual distance;
-  /// see also [manhattan] and [chebyshev], or implement your own [Distance].
+  /// see also [distanceManhattan] and [distanceChebyshev], or implement your
+  /// own [Distance].
   ///
   /// ## Example
   ///
@@ -138,7 +236,7 @@ final class Pos {
   /// ```
   static Comparator<Pos> byDistanceTo(
     Pos target, {
-    Distance using = euclideanSquared,
+    Distance using = distanceSquared,
   }) {
     return (a, b) => using(a, target).compareTo(using(b, target));
   }
@@ -154,9 +252,10 @@ final class Pos {
 
   /// Returns the distance between `this` and [other].
   ///
-  /// The default formula is [euclideanSquared], which produces a value useful
+  /// The default formula is [distanceSquared], which produces a value useful
   /// for distances that will be _compared_, but not used as an actual distance.
-  /// See also [manhattan] and [chebyshev], or implement your own [Distance].
+  /// See also [distanceManhattan] and [distanceChebyshev], or implement your
+  /// own [Distance].
   ///
   /// To sort positions by using distance from the origin, see [byMagnitude].
   ///
@@ -167,31 +266,45 @@ final class Pos {
   /// final b = Pos(30, 40);
   /// print(a.distanceTo(b, using: euclideanSquared)); // => 500
   /// ```
-  @pragma('vm:prefer-inline')
-  int distanceTo(Pos other, {Distance using = euclideanSquared}) {
+  @_pragmaInline
+  int distanceTo(Pos other, {Distance using = distanceSquared}) {
     return using(this, other);
   }
 
-  /// Returns an iterable of positions that draws a line from `this` to [other].
+  /// Returns an iterable of positions that draws a path from `this` to [other].
   ///
-  /// The default line algorithm is [bresenham], which is a fast and efficient
-  /// algorithm for drawing lines between two points in a 2D space. You can also
-  /// provide your own [Line].
+  /// The default line algorithm is [lineBresenham], which is a fast and
+  /// efficient algorithm for drawing lines between two points in a 2D space.
+  /// You can also provide your own [Path].
   ///
   /// ## Example
   ///
   /// ```dart
   /// final a = Pos(0, 0);
   /// final b = Pos(2, 2);
-  /// print(a.lineTo(b)); // => [Pos(0, 0), Pos(1, 1), Pos(2, 2)]
+  /// print(a.pathTo(b)); // => [Pos(0, 0), Pos(1, 1), Pos(2, 2)]
   /// ```
-  Iterable<Pos> lineTo(
+  Iterable<Pos> pathTo(
     Pos other, {
-    Line using = bresenham,
+    Path using = lineBresenham,
     bool exclusive = false,
   }) {
     return using(this, other, exclusive: exclusive);
   }
+
+  /// Returns an iterable of positions that draws a line from `this` to [other].
+  ///
+  /// **Deprecated**: Use [pathTo] instead.
+  // coverage:ignore-start
+  @Deprecated('Use `pathTo` instead.')
+  Iterable<Pos> lineTo(
+    Pos other, {
+    Path using = lineBresenham,
+    bool exclusive = false,
+  }) {
+    return pathTo(other, using: using, exclusive: exclusive);
+  }
+  // coverage:ignore-end
 
   /// Returns the middle positions between `this` and [other].
   ///
@@ -543,6 +656,26 @@ final class Pos {
     return Pos(x ~/ gcd, y ~/ gcd);
   }
 
+  /// Returns a row-major index of this position in a grid of [width] columns.
+  ///
+  /// The position is calculated as if the grid was row-major, i.e. the x-axis
+  /// is the primary sort key, and the y-axis is the secondary, or the algorithm
+  /// `index = y * width + x`.
+  ///
+  /// Note that, like other methods in [Pos], there are no assertions that
+  /// `this` coordinate is valid, or that [width] is positive, and the result
+  /// is undefined if the conditions are not met.
+  ///
+  /// The inverse of this operation is [Pos.fromRowMajor].
+  ///
+  /// ## Example
+  ///
+  /// ```dart
+  /// final a = Pos(2, 1);
+  /// print(a.toRowMajor(width: 3)); // => 5
+  /// ```
+  int toRowMajor({required int width}) => y * width + x;
+
   @override
   bool operator ==(Object other) {
     return other is Pos && x == other.x && y == other.y;
@@ -856,7 +989,57 @@ final class Pos {
   /// final a = Pos(10, 20);
   /// print(a.toList()); // => [10, 20]
   /// ```
-  List<int> toList() => [x, y];
+  List<int> toList([List<int>? output, int index = 0]) {
+    if (output == null) {
+      if (index != 0) {
+        throw ArgumentError.value(
+          index,
+          'index',
+          'must be 0 if output is null',
+        );
+      }
+      return [x, y];
+    }
+    return _toListUnsafe(output, index);
+  }
+
+  /// Returns `this` as a list of two integers.
+  ///
+  /// The first element is the x offset, and the second element is the y offset.
+  ///
+  /// This is equivalent to:
+  /// ```dart
+  /// final a = Pos(10, 20);
+  /// final b = [a.x, a.y];
+  /// ```
+  ///
+  /// ## Example
+  ///
+  /// ```dart
+  /// final a = Pos(10, 20);
+  /// print(a.toListUnsafe()); // => [10, 20]
+  /// ```
+  List<int> toListUnsafe([List<int>? output, int index = 0]) {
+    if (output == null) {
+      if (_assertionsEnabled && index != 0) {
+        throw ArgumentError.value(
+          index,
+          'index',
+          'must be 0 if output is null',
+        );
+      }
+      return [x, y];
+    }
+    return _toListUnsafe(output, index);
+  }
+
+  @_pragmaInline
+  @_pragmaOmitBoundsChecks
+  List<int> _toListUnsafe(List<int> output, int index) {
+    output[index] = x;
+    output[index + 1] = y;
+    return output;
+  }
 
   /// `this` as a tuple of two integers.
   ///
@@ -867,6 +1050,8 @@ final class Pos {
   /// final a = Pos(10, 20);
   /// final b = (a.x, a.y);
   /// ```
+  ///
+  /// The inverse of this operation is [Pos.fromXY].
   ///
   /// ## Example
   ///
@@ -881,6 +1066,9 @@ final class Pos {
 }
 
 /// Extension methods on `(int, int)` tuples for convenience.
+///
+/// **DEPRECATED**: Use `Pos.fromXY` instead.
+@Deprecated('Use Pos.fromXY instead')
 extension IntPair on (int, int) {
   /// Creates a new position from a tuple of two integers.
   ///
@@ -889,6 +1077,9 @@ extension IntPair on (int, int) {
   /// final (x, y) = a;
   /// final b = Pos(x, y);
   /// ```
-  @pragma('vm:prefer-inline')
+  ///
+  /// **DEPRECATED**: Use `Pos.fromXY` instead.
+  @Deprecated('Use Pos.fromXY instead')
+  @_pragmaInline
   Pos toPos() => Pos($1, $2);
 }

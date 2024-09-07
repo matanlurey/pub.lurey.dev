@@ -30,6 +30,17 @@ Use `lodim` to quickly work with 2D geometry in a fixed-point space:
 
 [bresenham]: https://en.wikipedia.org/wiki/Bresenham%27s_line_algorithm
 
+### Design Principles
+
+`lodim` is designed to be a low-level, fixed-point geometry library that is not
+opionated about how you use it. It is not a game engine, nor does it provide
+high-level abstractions for rendering or collections.
+
+For example, top-level functions such as `getRect` or `fillRect` operate on
+either `Rect` or `Pos` types and either callback methods or a generic linear
+buffer. For a higher-level APIs, consider using `lodim` in conjunction with
+another library, such as [`package:sector`](https://pub.dev/packages/sector).
+
 ## Usage
 
 Just add a dependency in your `pubspec.yaml` or run the following command:

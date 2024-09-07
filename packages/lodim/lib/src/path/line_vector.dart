@@ -2,7 +2,8 @@ import 'package:lodim/lodim.dart';
 
 /// Calculates positions along a line using a fast 2D vector algorithm.
 ///
-/// Considered less "pixel-perfect" than [bresenham], but faster and simpler.
+/// Considered less "pixel-perfect" than [lineBresenham], but faster and
+/// simpler.
 ///
 /// ## Example
 ///
@@ -19,7 +20,14 @@ import 'package:lodim/lodim.dart';
 /// final line = vectorLine(Pos(0, 0), Pos(2, 2), exclusive: true);
 /// print(line); // (0, 0), (1, 1)
 /// ```
-Iterable<Pos> vectorLine(Pos start, Pos end, {bool exclusive = false}) {
+const Path lineVector = _lineVector;
+
+/// Calculates positions along a line using a fast 2D vector algorithm.
+///
+/// **Deprecated**: Use [lineVector] instead.
+const Path vectorLine = _lineVector;
+
+Iterable<Pos> _lineVector(Pos start, Pos end, {bool exclusive = false}) {
   final slope = (end - start).normalizedApproximate;
   if (exclusive) {
     end -= slope;

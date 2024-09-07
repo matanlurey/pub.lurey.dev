@@ -21,14 +21,14 @@ void main() {
 
   final a = Pos(10, 20);
   final b = Pos(30, 40);
-  print(a.distanceTo(b, using: euclideanSquared)); // => 500
-  print(a.distanceTo(b, using: manhattan)); // => 40
+  print(a.distanceTo(b, using: distanceSquared)); // => 500
+  print(a.distanceTo(b, using: distanceManhattan)); // => 40
 
   final rotated = pos.rotate90();
   print(rotated); // => Pos(-2, 4)
   print(Direction.right); // => Pos(1, 0)
 
-  for (final p in a.lineTo(b)) {
+  for (final p in a.pathTo(b)) {
     print(p);
   }
 }

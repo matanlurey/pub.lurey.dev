@@ -81,16 +81,43 @@ library;
 
 import 'dart:math' as math;
 
-import 'package:lodim/src/impl/bresenham.dart';
+import 'package:lodim/src/path/line_bresenham.dart';
 import 'package:meta/meta.dart';
 
-export 'package:lodim/src/impl/bresenham.dart';
-export 'package:lodim/src/impl/vector_line.dart';
+export 'package:lodim/src/path/line_bresenham.dart';
+export 'package:lodim/src/path/line_vector.dart';
 
+part 'src/check.dart';
 part 'src/direction.dart';
 part 'src/distance.dart';
-part 'src/line.dart';
+part 'src/grid.dart';
+part 'src/path.dart';
 part 'src/math.dart';
 part 'src/octant.dart';
 part 'src/pos.dart';
 part 'src/rect.dart';
+
+/// Whether assertions are enabled.
+bool get _assertionsEnabled {
+  var enabled = false;
+  assert(enabled = true, 'Always true when assertions are enabled');
+  return enabled;
+}
+
+/// Whether the runtime is JS (Dart2JS or DDC).
+const _isJs = identical(1, 1.0);
+
+/// A pragma hint requesting the compiler to inline the annotated function.
+const _pragmaInline = _isJs //
+    ? pragma('dart2js:prefer-inline')
+    : pragma('vm:prefer-inline');
+
+/// A pragma hint requesting the compiler to specialize the annotated function.
+const _pragmaSpecialize = _isJs //
+    ? pragma('dart2js:prefer-inline')
+    : pragma('vm:always-consider-inlining');
+
+/// A pragma hint requesting the compiler to omit array bounds checks.
+const _pragmaOmitBoundsChecks = _isJs //
+    ? pragma('dart2js:index-bounds:trust')
+    : pragma('vm:unsafe:no-bounds-checks');

@@ -198,6 +198,31 @@ void main() {
       final rect = Rect.fromLTWH(0, 0, 0, 0);
       check(rect.edges).deepEquals([]);
     });
+
+    test('returns length of 0 for empty rects', () {
+      final rect = Rect.fromLTWH(0, 0, 0, 0);
+      check(rect.edges.length).equals(0);
+    });
+
+    test('returns length of 4 for 1x1 rects', () {
+      final rect = Rect.fromLTWH(0, 0, 1, 1);
+      check(rect.edges.length).equals(4);
+    });
+
+    test('returns length of 8 for 2x2 rects', () {
+      final rect = Rect.fromLTWH(0, 0, 2, 2);
+      check(rect.edges.length).equals(8);
+    });
+
+    test('returns isEmpty for empty rects', () {
+      final rect = Rect.fromLTWH(0, 0, 0, 0);
+      check(rect.edges.isEmpty).isTrue();
+    });
+
+    test('returns isNotEmpty for non-empty rects', () {
+      final rect = Rect.fromLTWH(0, 0, 1, 1);
+      check(rect.edges.isNotEmpty).isTrue();
+    });
   });
 
   group('rows', () {
@@ -245,6 +270,11 @@ void main() {
         Pos(1, 2),
         Pos(2, 2),
       ]);
+    });
+
+    test('returns a 1x1 rect', () {
+      final rect = Rect.fromLTWH(0, 0, 1, 1);
+      check(rect.positions).deepEquals([Pos(0, 0)]);
     });
 
     test('returns no positions for an empty rect', () {

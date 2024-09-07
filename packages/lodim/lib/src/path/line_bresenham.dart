@@ -21,7 +21,15 @@ import 'package:lodim/lodim.dart';
 /// final line = bresenham(Pos(0, 0), Pos(2, 2), exclusive: true);
 /// print(line); // (0, 0), (1, 1)
 /// ```
-Iterable<Pos> bresenham(Pos start, Pos end, {bool exclusive = false}) {
+const Path lineBresenham = _lineBresenham;
+
+/// Calculates positions along a line optimized for fixed-point math.
+///
+/// **Deprecated**: Use [lineBresenham] instead.
+@Deprecated('Use `lineBresenham` instead.')
+const Line bresenham = _lineBresenham;
+
+Iterable<Pos> _lineBresenham(Pos start, Pos end, {bool exclusive = false}) {
   final octant = Octant.from(start, end);
   start = octant.toOctant1(start);
   end = octant.toOctant1(end);

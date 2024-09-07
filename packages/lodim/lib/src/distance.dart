@@ -26,15 +26,24 @@ typedef Distance = int Function(Pos a, Pos b);
 /// final b = Pos(30, 40);
 /// print(a.distanceTo(b, euclideanSquared)); // => 500
 /// ```
-@pragma('vm:prefer-inline')
-int euclideanSquared(Pos a, Pos b) {
+const Distance distanceSquared = _euclideanSquared;
+
+/// Calculates the _squared_ [Euclidean][] distance between two positions.
+///
+/// **Deprecated**: Use [distanceSquared] instead.
+@Deprecated('Use `distanceSquared` instead.')
+const Distance euclideanSquared = _euclideanSquared;
+
+@_pragmaInline
+int _euclideanSquared(Pos a, Pos b) {
   final delta = a - b;
   return delta.x * delta.x + delta.y * delta.y;
 }
 
 /// Calculates an _approximate_ [Euclidean][] distance between two positions.
 ///
-/// Uses [sqrtApproximate] to calculate the square root of [euclideanSquared].
+/// Uses [sqrtApproximate] to calculate the square root of
+/// [distanceApproximate].
 ///
 /// [Euclidean]: https://en.wikipedia.org/wiki/Euclidean_distance
 ///
@@ -45,9 +54,17 @@ int euclideanSquared(Pos a, Pos b) {
 /// final b = Pos(30, 40);
 /// print(a.distanceTo(b, using: euclideanApproximate)); // => 22
 /// ```
-@pragma('vm:prefer-inline')
-int euclideanApproximate(Pos a, Pos b) {
-  return sqrtApproximate(euclideanSquared(a, b));
+const Distance distanceApproximate = _euclideanApproximate;
+
+/// Calculates an _approximate_ [Euclidean][] distance between two positions.
+///
+/// **Deprecated**: Use [distanceApproximate] instead.
+@Deprecated('Use `distanceApproximate` instead.')
+const Distance euclideanApproximate = _euclideanApproximate;
+
+@_pragmaInline
+int _euclideanApproximate(Pos a, Pos b) {
+  return sqrtApproximate(distanceSquared(a, b));
 }
 
 /// Calculates the [Manhattan][] distance between two positions.
@@ -66,8 +83,16 @@ int euclideanApproximate(Pos a, Pos b) {
 /// final b = Pos(30, 40);
 /// print(a.distanceTo(b, manhattan)); // => 40
 /// ```
-@pragma('vm:prefer-inline')
-int manhattan(Pos a, Pos b) {
+const Distance distanceManhattan = _manhattan;
+
+/// Calculates the [Manhattan][] distance between two positions.
+///
+/// **Deprecated**: Use [manhattan] instead.
+@Deprecated('Use `manhattan` instead.')
+const Distance manhattan = _manhattan;
+
+@_pragmaInline
+int _manhattan(Pos a, Pos b) {
   final delta = (a - b).abs();
   return delta.x + delta.y;
 }
@@ -88,16 +113,24 @@ int manhattan(Pos a, Pos b) {
 /// final b = Pos(30, 40);
 /// print(a.distanceTo(b, chebyshev)); // => 20
 /// ```
-@pragma('vm:prefer-inline')
-int chebyshev(Pos a, Pos b) {
+const Distance distanceChebyshev = _chebyshev;
+
+/// Calculates the [Chebyshev][] distance between two positions.
+///
+/// **Deprecated**: Use [chebyshev] instead.
+@Deprecated('Use `chebyshev` instead.')
+const Distance chebyshev = _chebyshev;
+
+@_pragmaInline
+int _chebyshev(Pos a, Pos b) {
   final delta = (a - b).abs();
   return math.max(delta.x, delta.y);
 }
 
 /// Calculates the diagonal (ordinal) distance between two positions.
 ///
-/// Similar to [manhattan], but _only_ allows diagonal movement, i.e. the
-/// distance between two points is the sum of the horizontal and vertical
+/// Similar to [distanceManhattan], but _only_ allows diagonal movement, i.e.
+/// the distance between two points is the sum of the horizontal and vertical
 /// offsets, _minus_ the minimum of the two offsets, or
 /// `|x₂ - x₁| + |y₂ - y₁| - min(|x₂ - x₁|, |y₂ - y₁|)`.
 ///
@@ -108,8 +141,16 @@ int chebyshev(Pos a, Pos b) {
 /// final b = Pos(30, 40);
 /// print(a.distanceTo(b, diagonal)); // => 20
 /// ```
-@pragma('vm:prefer-inline')
-int diagonal(Pos a, Pos b) {
+const Distance distanceDiagonal = _diagonal;
+
+/// Calculates the diagonal (ordinal) distance between two positions.
+///
+/// **Deprecated**: Use [diagonal] instead.
+@Deprecated('Use `diagonal` instead.')
+const Distance diagonal = _diagonal;
+
+@_pragmaInline
+int _diagonal(Pos a, Pos b) {
   final delta = (a - b).abs();
   return delta.x + delta.y - math.min(delta.x, delta.y);
 }
