@@ -1,5 +1,14 @@
 # Changelog
 
+## 0.1.6
+
+**Features**:
+
+- Added additional functions for checking 1D and 2D collections:
+
+  - `checkRectangular1D` & `assertRectangular1D`
+  - `checkRectangular2D` & `assertRectangular2D`
+
 ## 0.1.5
 
 **Features**:
