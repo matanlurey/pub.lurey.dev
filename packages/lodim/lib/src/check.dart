@@ -76,12 +76,12 @@ int assertNonNegative(int value, [String? name, String? message]) {
 /// Throws if the iterable is not rectangular or if it is empty (has no cells).
 ///
 /// Returns the iterable and dimensions of the rectangle if it is rectangular.
-(Iterable<E>, Pos) checkRectangular1d<E>(
+(Iterable<E>, Pos) checkRectangular1D<E>(
   Iterable<E> cells, {
   required int width,
   int? height,
 }) {
-  return _checkRectangular1d(
+  return _checkRectangular1D(
     cells,
     check: true,
     width: width,
@@ -104,7 +104,7 @@ int assertNonNegative(int value, [String? name, String? message]) {
   required int width,
   int? height,
 }) {
-  return _checkRectangular1d(
+  return _checkRectangular1D(
     cells,
     check: _assertionsEnabled,
     width: width,
@@ -113,7 +113,7 @@ int assertNonNegative(int value, [String? name, String? message]) {
 }
 
 @_pragmaInline
-(Iterable<E>, Pos) _checkRectangular1d<E>(
+(Iterable<E>, Pos) _checkRectangular1D<E>(
   Iterable<E> cells, {
   required bool check,
   required int width,
@@ -152,7 +152,7 @@ int assertNonNegative(int value, [String? name, String? message]) {
 ///
 /// Returns the iterable and dimensions of the rectangle if it is rectangular.
 (Iterable<E>, Pos) checkRectangular2D<E>(Iterable<Iterable<E>> rows) {
-  return _checkRectangular2d(rows, check: true);
+  return _checkRectangular2D(rows, check: true);
 }
 
 /// Checks that the provided iterable of [rows] is rectangular and non-empty.
@@ -161,12 +161,12 @@ int assertNonNegative(int value, [String? name, String? message]) {
 /// if it is empty (has no rows).
 ///
 /// Returns the iterable and dimensions of the rectangle if it is rectangular.
-(Iterable<E>, Pos) assertRectangular2d<E>(Iterable<Iterable<E>> rows) {
-  return _checkRectangular2d(rows, check: _assertionsEnabled);
+(Iterable<E>, Pos) assertRectangular2D<E>(Iterable<Iterable<E>> rows) {
+  return _checkRectangular2D(rows, check: _assertionsEnabled);
 }
 
 @_pragmaInline
-(Iterable<E>, Pos) _checkRectangular2d<E>(
+(Iterable<E>, Pos) _checkRectangular2D<E>(
   Iterable<Iterable<E>> rows, {
   required bool check,
 }) {

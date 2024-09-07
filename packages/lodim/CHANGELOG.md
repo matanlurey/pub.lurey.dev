@@ -1,5 +1,11 @@
 # Changelog
 
+## 0.1.6+1
+
+Fixes a mistake where methods were not renamed correctly.
+
+The last release was published for only minutes, so hopefully this is fine!
+
 ## 0.1.6
 
 **Features**:
