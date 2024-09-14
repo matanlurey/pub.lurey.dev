@@ -1,5 +1,9 @@
 # Change Log
 
+## 0.4.0
+
+- Published `0.4.0-alpha+3` as `0.4.0` with no changes.
+
 ## 0.4.0-alpha+3
 
 - Upgraded to `lodim: ^0.1.6`.

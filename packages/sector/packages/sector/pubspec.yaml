@@ -3,7 +3,7 @@
 name: sector
 description: |-
   Fast and intuitive 2D data structures: grids, graphs, pathfinding & more.
-version: 0.4.0-alpha+3
+version: 0.4.0
 
 environment:
   sdk: ^3.5.0
