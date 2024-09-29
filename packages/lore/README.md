@@ -2,12 +2,10 @@
 
 Fast, structured, and idiomatic logging with an extensible API.
 
+[![CI](https://github.com/matanlurey/lore.dart/actions/workflows/check.yaml/badge.svg)](https://github.com/matanlurey/lore.dart/actions/workflows/check.yaml)
+[![Coverage Status](https://coveralls.io/repos/github/matanlurey/lore.dart/badge.svg?branch=main)](https://coveralls.io/github/matanlurey/lore.dart?branch=main)
+
 <!--
-[![CI](https://github.com/matanlurey/lore/actions/workflows/check.yaml/badge.svg)](https://github.com/matanlurey/lore/actions/workflows/check.yaml)
-
-REPLACE lore, UNCOMMENT BELOW, UNCOMMENT IN .github/workflows/check.yaml.
-
-[![Coverage Status](https://coveralls.io/repos/github/matanlurey/lore/badge.svg?branch=main)](https://coveralls.io/github/matanlurey/lore?branch=main)
 [![Pub Package](https://img.shields.io/pub/v/lore.svg)](https://pub.dev/packages/lore)
 [![Dartdoc reference](https://img.shields.io/badge/dartdoc-reference-blue.svg)](https://pub.dev/documentation/lore/latest/)
 -->
@@ -25,8 +23,6 @@ import 'package:lore/lore.dart';
 ```
 
 -->
-
-<!--
 
 ## Contributing
 
@@ -47,5 +43,3 @@ To preview `dartdoc` output locally, run:
 ```shell
 ./chore dartodc
 ```
-
--->

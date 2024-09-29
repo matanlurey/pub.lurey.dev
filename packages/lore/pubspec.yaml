@@ -4,8 +4,8 @@ name: lore
 
 description: |-
   Fast, structured, and idiomatic logging with an extensible API.
-version: 0.0.0
-# repository: https://github,com/matanlurey/lore
+version: 0.1.0-dev
+repository: https://github,com/matanlurey/lore.dart
 
 environment:
   sdk: ^3.5.0
