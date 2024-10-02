@@ -1,0 +1,11 @@
+# Files and directories created by pub.
+.dart_tool/
+
+# Output of "dart doc".
+doc/api/
+
+# Output of "dart run coverage:*" commands.
+coverage/
+
+# If you're building an application, you may want to check-in your pubspec.lock.
+pubspec.lock
