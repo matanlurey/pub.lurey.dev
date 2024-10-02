@@ -4,6 +4,7 @@ import 'dart:io' as io;
 import 'package:meta/meta.dart';
 import 'package:proc/src/exit_code.dart';
 import 'package:proc/src/process.dart' as base;
+import 'package:proc/src/process_exception.dart' as base;
 import 'package:proc/src/process_host.dart' as base;
 import 'package:proc/src/process_run_mode.dart';
 import 'package:proc/src/process_signal.dart';
@@ -73,16 +74,28 @@ final class ProcessHost extends base.ProcessHost {
     stdoutEncoding ??= this.stdoutEncoding;
     stderrEncoding ??= this.stderrEncoding;
 
-    final process = await io.Process.start(
-      executable,
-      arguments,
-      workingDirectory: workingDirectory,
-      environment: environment,
-      includeParentEnvironment: includeParentEnvironment,
-      runInShell: runInShell,
-    );
-
-    return _Process(process, stdoutEncoding, stderrEncoding);
+    try {
+      return _Process(
+        await io.Process.start(
+          executable,
+          arguments,
+          workingDirectory: workingDirectory,
+          environment: environment,
+          includeParentEnvironment: includeParentEnvironment,
+          runInShell: runInShell,
+        ),
+        stdoutEncoding,
+        stderrEncoding,
+      );
+    } on io.ProcessException catch (e) {
+      throw base.ProcessException(
+        executable: executable,
+        arguments: arguments,
+        workingDirectory: workingDirectory,
+        message: e.message,
+        errorCode: e.errorCode,
+      );
+    }
   }
 
   @override

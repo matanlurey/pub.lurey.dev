@@ -6,7 +6,6 @@ presets:
     reporter: github
 
 platforms:
-  - node
   - vm
 
 fold_stack_frames:
