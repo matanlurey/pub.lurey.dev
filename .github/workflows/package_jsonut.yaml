@@ -30,5 +30,4 @@ jobs:
       - name: Upload coverage
         uses: coverallsapp/github-action@v2.2.3
         with:
-          base-path: .
           github-token: ${{ secrets.GITHUB_TOKEN }}
