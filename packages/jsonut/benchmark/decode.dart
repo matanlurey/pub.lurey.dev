@@ -1,3 +1,4 @@
+// Intentionally benchmarking dynamic calls.
 // ignore_for_file: avoid_dynamic_calls, argument_type_not_assignable
 
 import 'dart:convert' show jsonDecode;

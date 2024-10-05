@@ -1,5 +1,7 @@
 # Format: https://dart.dev/tools/pub/pubspec.
 
+# Intentionally have an illegal name, we aren't publishing this package.
+# ignore: package_names
 name: pub.lurey.dev
 
 # This is a workspace package and not intended to be published.
@@ -7,3 +9,9 @@ name: pub.lurey.dev
 publish_to: none
 environment:
   sdk: ^3.5.0
+
+workspace:
+  - dev
+  - packages/jsonut
+  - packages/oath
+  - packages/sdk

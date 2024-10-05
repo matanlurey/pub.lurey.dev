@@ -1,6 +1,12 @@
 <!-- https://dart.dev/tools/pub/package-layout#changelog -->
 
-# 0.4.1
+# Changelog
+
+## 0.4.1+2
+
+- Move the package into a monorepo.
+
+## 0.4.1
 
 - **Performance**: Each `<JsonValue>` type now has a `parseUtf8` method to
   efficiently parse UTF-8 encoded JSON strings. This is useful for cases where
@@ -64,7 +70,7 @@
 
   Added `<JsonObject>.['...'] = value` as well with similar behavior.
 
-# 0.4.0
+## 0.4.0
 
 - **Breaking change**: `<JsonAny>.as` is now relaxed and will return `null` if
   the value is `null`, and also supports non-JSON primitive types for
@@ -139,7 +145,7 @@
   }
   ```
 
-# 0.3.0
+## 0.3.0
 
 - **Breaking change**: Removed `JsonAny.tryFrom`, which was at best, confusing
   as it accepted a nullable value and returned a nullable value. Either use
@@ -158,11 +164,11 @@
 
 - Improved some error messages.
 
-# 0.2.1
+## 0.2.1
 
 - Fixed a bug where `JsonArray`'s elements were `JsonValue` not `JsonAny`.
 
-# 0.2.0
+## 0.2.0
 
 - Added `.as` and `.asOrNull` methods to `JsonAny` for inference casting:
 
@@ -200,6 +206,6 @@
 
   Saving roughly ~2 characters per call wasn't worth the additional complexity.
 
-# 0.1.0
+## 0.1.0
 
 - Initial development release.

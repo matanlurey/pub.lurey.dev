@@ -1,5 +1,5 @@
 /// A minimal utility kit for working with JSON in a type-safe manner.
-library jsonut;
+library;
 
 // No imports beyond the dart SDK are allowed here, to ensure that it can be
 // used in any environment, and without resolving any dependencies. Remember,
@@ -311,6 +311,7 @@ extension type JsonAny._(Object? _value) implements JsonValue {
 
   /// Returns the value as an array, or an empty array if it is not an array.
   @pragma('vm:prefer-inline')
+  // The result must be mutable.
   // ignore: prefer_const_constructors
   JsonArray arrayOrEmpty() => arrayOrNull() ?? JsonArray._([]);
 
@@ -330,6 +331,7 @@ extension type JsonAny._(Object? _value) implements JsonValue {
 
   /// Returns the value as an object, or an empty object if it is not an object.
   @pragma('vm:prefer-inline')
+  // The result must be mutable.
   // ignore: prefer_const_constructors
   JsonObject objectOrEmpty() => objectOrNull() ?? JsonObject._({});
 
@@ -416,6 +418,8 @@ extension type const JsonArray._(List<JsonAny> _value)
   factory JsonArray.parseUtf8(List<int> bytes) => JsonValue.parseUtf8(bytes);
 
   /// Casts the elements of this array to the given type [T].
+  // Avoid a dependency on package:meta for now.
+  // ignore: annotate_redeclares
   List<T> cast<T extends JsonValue>() => _value.cast<T>();
 }
 
@@ -466,10 +470,14 @@ extension type const JsonObject._(Map<String, JsonAny> fields)
   /// fields in the JSON object without needing to cast the result or check its
   /// type or nullability.
   @pragma('vm:prefer-inline')
+  // Avoid a dependency on package:meta for now.
+  // ignore: annotate_redeclares
   JsonAny operator [](String name) => JsonAny._(fields[name]);
 
   /// Sets the field with the given [name] to the given [value].
   @pragma('vm:prefer-inline')
+  // Avoid a dependency on package:meta for now.
+  // ignore: annotate_redeclares
   void operator []=(String name, JsonValue value) {
     fields[name] = value.asAny();
   }
@@ -518,6 +526,8 @@ extension type const JsonObject._(Map<String, JsonAny> fields)
   /// ```dart
   /// final object = JsonObject({'key': JsonString('value')}).cast<JsonString>();
   /// ```
+  // Avoid a dependency on package:meta for now.
+  // ignore: annotate_redeclares
   Map<JsonString, V> cast<V extends JsonValue>() {
     return fields.cast<JsonString, V>();
   }
@@ -529,6 +539,7 @@ extension type const JsonObject._(Map<String, JsonAny> fields)
       if (value.isObject) {
         value = value.object()[key];
       } else {
+        // JsonAny can be null.
         // ignore: cast_from_null_always_fails
         return null as JsonAny;
       }

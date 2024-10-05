@@ -1,0 +1,22 @@
+# Format: https://dart.dev/tools/pub/pubspec
+
+name: dev
+publish_to: none
+
+resolution: workspace
+
+environment:
+  sdk: ^3.5.0
+
+dependencies:
+  args: ^2.5.0
+  lore:
+    git:
+      url: https://github.com/matanlurey/lore.dart
+  meta: ^1.16.0
+  path: ^1.9.0
+  proc: ^0.2.0
+
+dev_dependencies:
+  checks: ^0.3.0
+  test: ^1.25.8

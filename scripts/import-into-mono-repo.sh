@@ -48,12 +48,12 @@ if ! git filter-repo --version; then
   exit 1
 fi
 
-# Ensure the remote "temp-monorepo" does not already exist.
+# Ensure the remote "monorepo" does not already exist.
 #
 # This command will intentionally fail if the remote does not exist, so make
 # sure to ignore the error so -e does not exit the script.
-if git remote get-url temp-monorepo 2>/dev/null; then
-  echo "Please remove the remote 'temp-monorepo' before continuing."
+if git remote get-url monorepo 2>/dev/null; then
+  echo "Please remove the remote 'monorepo' before continuing."
   exit 1
 fi
 
@@ -75,13 +75,22 @@ git clone $URL $TEMP_DIR
 # Move into the temporary directory.
 pushd $TEMP_DIR
 
+# Ensure there are files in the cloned repository.
+# Print the root files and directories and ask the user to confirm.
+echo "Root files and directories:"
+ls -a $TEMP_DIR
+read -p "Continue? (y/n) " -n 1 -r
+if [[ ! $REPLY =~ ^[Yy]$ ]]; then
+  exit 1
+fi
+
 # Run git-filter-repo to move the external repository into the monorepo.
-git filter-repo --subdirectory-filter $SUBDIR
+git filter-repo --to-subdirectory-filter="$SUBDIR"
 
 # Rewrite the commit history to include the original repository URL.
 git filter-repo --commit-callback '
 msg = commit.message.decode("utf-8")
-newmsg = re.sub(r"\(#(?=\d+\))", f"({ORG}/{REPO}#", msg)
+newmsg = re.sub(r"\(#(?=\d+\))", f"('$ORG'/'$REPO'#", msg)
 commit.message = newmsg.encode("utf-8")
 '
 
@@ -89,10 +98,11 @@ commit.message = newmsg.encode("utf-8")
 popd
 
 # Add the temporary repository as a remote.
-git remote add temp-monorepo $TEMP_DIR
+git remote add monorepo $TEMP_DIR
 
 # Add a trap to cleanup the temporary remote.
-trap 'git remote remove temp-monorepo' EXIT
+trap 'git remote remove monorepo' EXIT
 
-git fetch temp-monorepo
-git merge temp-monorepo/main --allow-unrelated-histories
+git remote -v
+git fetch monorepo
+git merge monorepo/main --allow-unrelated-histories

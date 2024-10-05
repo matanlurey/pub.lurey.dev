@@ -1,5 +1,9 @@
 # Change Log
 
+## 0.2.1+1
+
+- Move the package into a monorepo.
+
 ## 0.2.1
 
 Fixed a bug where `flutter/relaxed.yaml` did not inherit from

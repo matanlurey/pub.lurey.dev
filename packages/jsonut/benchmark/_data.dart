@@ -1,4 +1,4 @@
-const json = r'''
+const json = '''
 {
   "metadata": {
     "timestamp": "2024-06-18T21:27:00Z",
