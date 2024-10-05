@@ -30,6 +30,5 @@ jobs:
       - name: Upload coverage
         uses: coverallsapp/github-action@v2.2.3
         with:
-          base-path: packages/sdk
+          base-path: .
           github-token: ${{ secrets.GITHUB_TOKEN }}
-          path-to-lcov: packages/sdk/coverage/lcov.info

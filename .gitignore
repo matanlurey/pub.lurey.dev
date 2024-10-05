@@ -1,2 +1,4 @@
 **/.dart_tool
 packages/*/pubspec.lock
+packages/*/coverage
+packages/*/doc/api
