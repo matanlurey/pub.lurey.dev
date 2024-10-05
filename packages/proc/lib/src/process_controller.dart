@@ -12,8 +12,38 @@ import 'package:proc/src/process_sink.dart';
 /// This class can be used to create an instrumented [Process] instance, either
 /// for implementing a custom [ProcessHost] (i.e. that does not delegate to
 /// `dart:io`), or for testing.
+///
+/// The controller can be used to simulate a process by adding data to its
+/// `stdout` and `stderr` streams by methods such as [addStdoutLine] and
+/// [addStderrLine], and then completing the process with [complete].
+///
+/// The controller can also be used to simulate input to the process's `stdin`
+/// stream by providing a callback to [onInput].
+///
+/// ## Example
+///
+/// ```dart
+/// final controller = ProcessController(processId: 123);
+/// controller.addStdoutLine('Hello, World!');
+/// controller.complete(ExitCode.success);
+/// ```
 final class ProcessController {
   /// Creates a controller that manages a running process.
+  ///
+  /// - [processId] is the ID of the process being controlled.
+  /// - [stdoutEncoding] is the encoding used for [Process.stdoutText].
+  /// - [stderrEncoding] is the encoding used for [Process.stderrText].
+  /// - [stdinEncoding] is the encoding used for [Process.stdin].
+  /// - [lineTerminator] is used for [addStdoutLine] and [addStderrLine].
+  ///
+  /// If [onKill] is not provided, the default behavior is to complete the
+  /// process with [ExitCode.failure], or ignore the signal and return `false`
+  /// if the process is already closed; a custom behavior can be provided by
+  /// passing a callback.
+  ///
+  /// If [onInput] is not provided, the default behavior is to ignore the input;
+  /// a custom behavior can be provided by passing a callback that receives the
+  /// input data.
   ProcessController({
     required this.processId,
     this.stdoutEncoding = utf8,
@@ -38,6 +68,9 @@ final class ProcessController {
   }
 
   /// Whether the controller is closed.
+  ///
+  /// Once the controller is closed, it cannot be used to interact with the
+  /// process.
   bool get isClosed => _closed;
   var _closed = false;
   void _throwIfClosed() {
@@ -47,7 +80,7 @@ final class ProcessController {
   }
 
   /// Called when [Process.kill] is called.
-  late void Function(ProcessSignal) onKill;
+  late bool Function(ProcessSignal) onKill;
 
   /// Called when [Process.stdin] receives data.
   late void Function(List<int>) onInput;
@@ -128,11 +161,7 @@ final class _Process implements Process {
 
   @override
   bool kill([ProcessSignal signal = ProcessSignal.sigterm]) {
-    if (_controller.isClosed) {
-      return false;
-    }
-    _controller.onKill(signal);
-    return true;
+    return _controller.onKill(signal);
   }
 
   @override

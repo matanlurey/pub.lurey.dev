@@ -4,7 +4,7 @@ name: proc
 
 description: |-
   Run and manage processes, including a record/replay mode for testing.
-version: 0.1.0-alpha
+version: 0.1.0
 repository: https://github.com/matanlurey/proc.dart
 
 environment:

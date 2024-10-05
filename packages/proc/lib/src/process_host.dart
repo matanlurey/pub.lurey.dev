@@ -7,7 +7,22 @@ import 'package:proc/src/process.dart';
 import 'package:proc/src/process_run_mode.dart';
 import 'package:proc/src/process_signal.dart';
 
-/// Runs processes.
+/// Runs processes and listens for signals on the host platform.
+///
+/// This class is an abstract base class that delegates to the host platform,
+/// or to a custom implementation.
+///
+/// To create a default process runner, use [ProcessHost.new].
+///
+/// To create a custom process runner, extend this class and override the
+/// methods as needed.
+///
+/// ## Example
+///
+/// ```dart
+/// final host = ProcessHost();
+/// final process = await host.start('echo', ['Hello, World!']);
+/// ```
 abstract base class ProcessHost {
   /// Whether process execution is supported on the host platform.
   ///

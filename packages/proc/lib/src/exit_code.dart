@@ -1,6 +1,13 @@
 import 'package:meta/meta.dart';
 
 /// Represents an exit code.
+///
+/// Exit codes are used to indicate the success or failure of a process.
+///
+/// The default exit code for success is [ExitCode.success] and for failure is
+/// [ExitCode.failure]. However, other exit codes can be used to represent
+/// differnent failure modes by providing a custom integer value to
+/// [ExitCode.from].
 @immutable
 final class ExitCode {
   /// Represents a successful exit code.

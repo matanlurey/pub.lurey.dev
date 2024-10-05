@@ -27,11 +27,17 @@ void main() {
     late final ProcessController controller;
     controller = ProcessController(
       processId: 1234,
-      onKill: expectAsync1((signal) {
-        check(signal).equals(ProcessSignal.sigkill);
-        controller.complete(ExitCode.failure);
-        return true;
-      }),
+      onKill: expectAsync1(
+        (signal) {
+          if (controller.isClosed) {
+            return false;
+          }
+          check(signal).equals(ProcessSignal.sigkill);
+          controller.complete(ExitCode.failure);
+          return true;
+        },
+        count: 2,
+      ),
     );
     final process = controller.process;
 
@@ -39,7 +45,7 @@ void main() {
     check(controller.isClosed).isTrue();
     await check(process.exitCode).completes((s) => s.equals(ExitCode.failure));
 
-    check(process.kill()).isFalse();
+    check(process.kill(ProcessSignal.sigkill)).isFalse();
   });
 
   test('default onInput', () {
