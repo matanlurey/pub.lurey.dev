@@ -1,0 +1,24 @@
+#    ____        _   _     
+#  / __ \      | | | |    
+# | |  | | __ _| |_| |__  
+# | |  | |/ _` | __| '_ \ 
+# | |__| | (_| | |_| | | |
+#  \____/ \__,_|\__|_| |_| of Relaxed (Applications, Examples, Tests).
+# ------------------------------------------------------------------------------
+#
+# Flexible linting for applications:
+# - Removes the need to document all public APIs
+# - Removes some lints that cause a lot of churn with little benefit
+#
+# Format: https://dart.dev/tools/analysis#the-analysis-options-file
+
+# Start with the strict base lints.
+include: package:oath/strict.yaml
+
+linter:
+  rules:
+    avoid_redundant_argument_values: false
+    document_ignores: false
+    public_member_api_docs: false
+    package_api_docs: false
+    unnecessary_raw_strings: false
