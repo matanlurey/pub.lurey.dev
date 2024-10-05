@@ -1,7 +1,6 @@
 import 'dart:convert';
 
 import 'package:proc/proc.dart';
-import 'package:test/test.dart';
 
 import '_prelude.dart';
 
@@ -13,7 +12,7 @@ void main() {
   });
 
   test('default onKill', () async {
-    final controller = ProcessController(processId: 1234);
+    final controller = ProcessController();
     final process = controller.process;
 
     check(process.kill()).isTrue();
@@ -26,7 +25,6 @@ void main() {
   test('custom onKill', () async {
     late final ProcessController controller;
     controller = ProcessController(
-      processId: 1234,
       onKill: expectAsync1(
         (signal) {
           if (controller.isClosed) {
@@ -49,7 +47,7 @@ void main() {
   });
 
   test('default onInput', () {
-    final controller = ProcessController(processId: 1234);
+    final controller = ProcessController();
     final process = controller.process;
 
     check(() => process.stdin.add([1])).returnsNormally();
@@ -58,7 +56,6 @@ void main() {
   test('custom onInput', () {
     late final ProcessController controller;
     controller = ProcessController(
-      processId: 1234,
       onInput: expectAsync1((event) {
         check(event).deepEquals([1]);
         controller.complete();
@@ -70,7 +67,7 @@ void main() {
   });
 
   test('throws if already closed', () {
-    final controller = ProcessController(processId: 1234);
+    final controller = ProcessController();
 
     check(controller.complete).returnsNormally();
     check(controller.isClosed).isTrue();
@@ -80,7 +77,6 @@ void main() {
 
   test('stdin default lineTerminator', () {
     final controller = ProcessController(
-      processId: 1234,
       onInput: expectAsync1((event) {
         check(utf8.decode(event)).equals('test\n');
       }),
@@ -92,7 +88,6 @@ void main() {
 
   test('stdin custom lineTerminator', () {
     final controller = ProcessController(
-      processId: 1234,
       onInput: expectAsync1((event) {
         check(utf8.decode(event)).equals('test\r\n');
       }),
@@ -105,7 +100,6 @@ void main() {
 
   test('stdin writeCharCode', () {
     final controller = ProcessController(
-      processId: 1234,
       onInput: expectAsync1((event) {
         check(utf8.decode(event)).equals('a');
       }),
@@ -118,7 +112,6 @@ void main() {
   test('stdin writeAll with separator', () async {
     final input = StringBuffer();
     final controller = ProcessController(
-      processId: 1234,
       onInput: (event) {
         input.write(utf8.decode(event));
       },
@@ -134,7 +127,6 @@ void main() {
   test('stdin addStream', () async {
     final input = StringBuffer();
     final controller = ProcessController(
-      processId: 1234,
       onInput: (event) {
         input.write(utf8.decode(event));
       },
@@ -158,7 +150,7 @@ void main() {
   });
 
   test('addStdout', () async {
-    final controller = ProcessController(processId: 1234);
+    final controller = ProcessController();
     final process = controller.process;
 
     controller.addStdout('Hello');
@@ -166,7 +158,7 @@ void main() {
   });
 
   test('addStdoutLine', () async {
-    final controller = ProcessController(processId: 1234);
+    final controller = ProcessController();
     final process = controller.process;
 
     controller.addStdoutLine('Hello');
@@ -175,7 +167,6 @@ void main() {
 
   test('addStdoutLine with custom lineTerminator', () async {
     final controller = ProcessController(
-      processId: 1234,
       lineTerminator: '\r\n',
     );
     final process = controller.process;
@@ -187,7 +178,7 @@ void main() {
   });
 
   test('addStdoutBytes', () async {
-    final controller = ProcessController(processId: 1234);
+    final controller = ProcessController();
     final process = controller.process;
 
     controller.addStdoutBytes([1, 2, 3]);
@@ -195,7 +186,7 @@ void main() {
   });
 
   test('addStderr', () async {
-    final controller = ProcessController(processId: 1234);
+    final controller = ProcessController();
     final process = controller.process;
 
     controller.addStderr('Hello');
@@ -203,7 +194,7 @@ void main() {
   });
 
   test('addStderrBytes', () async {
-    final controller = ProcessController(processId: 1234);
+    final controller = ProcessController();
     final process = controller.process;
 
     controller.addStderrBytes([1, 2, 3]);
@@ -211,7 +202,7 @@ void main() {
   });
 
   test('addStderrLine', () async {
-    final controller = ProcessController(processId: 1234);
+    final controller = ProcessController();
     final process = controller.process;
 
     controller.addStderrLine('Hello');
@@ -220,7 +211,6 @@ void main() {
 
   test('addStderrLine with custom lineTerminator', () async {
     final controller = ProcessController(
-      processId: 1234,
       lineTerminator: '\r\n',
     );
     final process = controller.process;
@@ -232,7 +222,7 @@ void main() {
   });
 
   test('cannot close stdin twice', () async {
-    final controller = ProcessController(processId: 1234);
+    final controller = ProcessController();
     final process = controller.process;
 
     check(() => process.stdin.close()).returnsNormally();

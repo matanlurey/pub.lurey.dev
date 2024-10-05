@@ -8,7 +8,6 @@ import 'dart:io' as io;
 import 'package:path/path.dart' as p;
 import 'package:proc/proc.dart';
 import 'package:proc/src/impl/_io.dart' as impl;
-import 'package:test/test.dart';
 
 import '../_prelude.dart';
 

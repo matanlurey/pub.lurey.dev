@@ -41,7 +41,6 @@ void main() {
     container.setExecutable('echo', (start) {
       late final ProcessController controller;
       controller = ProcessController(
-        processId: 1234,
         onInput: (data) {
           controller.addStdoutBytes(data);
         },
@@ -72,7 +71,6 @@ void main() {
     container.setExecutable(p.join('tool', 'echo'), (start) {
       late final ProcessController controller;
       controller = ProcessController(
-        processId: 1234,
         onInput: (data) {
           controller.addStdoutBytes(data);
         },

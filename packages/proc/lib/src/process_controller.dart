@@ -1,5 +1,6 @@
 import 'dart:async';
 import 'dart:convert';
+import 'dart:math' as math;
 
 import 'package:proc/src/exit_code.dart';
 import 'package:proc/src/process.dart';
@@ -23,7 +24,7 @@ import 'package:proc/src/process_sink.dart';
 /// ## Example
 ///
 /// ```dart
-/// final controller = ProcessController(processId: 123);
+/// final controller = ProcessController();
 /// controller.addStdoutLine('Hello, World!');
 /// controller.complete(ExitCode.success);
 /// ```
@@ -36,6 +37,10 @@ final class ProcessController {
   /// - [stdinEncoding] is the encoding used for [Process.stdin].
   /// - [lineTerminator] is used for [addStdoutLine] and [addStderrLine].
   ///
+  /// If [processId] is not provided, a random process ID is generated in the
+  /// range `0..32767`. The process ID is not guaranteed to be unique; if a
+  /// unique process ID is required, it should be provided explicitly.
+  ///
   /// If [onKill] is not provided, the default behavior is to complete the
   /// process with [ExitCode.failure], or ignore the signal and return `false`
   /// if the process is already closed; a custom behavior can be provided by
@@ -45,14 +50,14 @@ final class ProcessController {
   /// a custom behavior can be provided by passing a callback that receives the
   /// input data.
   ProcessController({
-    required this.processId,
+    int? processId,
     this.stdoutEncoding = utf8,
     this.stderrEncoding = utf8,
     this.stdinEncoding = utf8,
     this.lineTerminator = '\n',
     bool Function(ProcessSignal)? onKill,
     void Function(List<int>)? onInput,
-  }) {
+  }) : processId = processId ?? _nextProcessId() {
     onKill ??= (_) {
       if (isClosed) {
         return false;
@@ -66,6 +71,9 @@ final class ProcessController {
     this.onKill = onKill;
     this.onInput = onInput ?? (_) {};
   }
+
+  static int _nextProcessId() => _rngProcessId.nextInt(1 << 15);
+  static final _rngProcessId = math.Random();
 
   /// Whether the controller is closed.
   ///
@@ -152,7 +160,7 @@ final class ProcessController {
   }
 }
 
-final class _Process implements Process {
+final class _Process with Process {
   _Process(this._controller);
   final ProcessController _controller;
 

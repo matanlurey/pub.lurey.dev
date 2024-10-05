@@ -37,7 +37,7 @@
 /// import 'package:proc/proc.dart';
 ///
 /// void main() {
-///   final controller = ProcessController(processId: 123);
+///   final controller = ProcessController();
 ///   controller.addStdoutLine('Hello, World!');
 ///   controller.complete(ExitCode.success);
 ///
@@ -59,7 +59,6 @@
 ///   container.setExecutable('echo', (start) async {
 ///     late final ProcessController controller;
 ///     controller = ProcessController(
-///       processId: 1234,
 ///       onInput: (data) {
 ///         controller.addStdoutBytes(data);
 ///       },

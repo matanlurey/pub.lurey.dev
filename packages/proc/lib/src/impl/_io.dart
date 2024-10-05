@@ -128,7 +128,7 @@ void overrideProcessHostWatch(
 
 Stream<void> Function(io.ProcessSignal signal)? _override;
 
-final class _Process implements base.Process {
+final class _Process with base.Process {
   _Process(this._process, this._stdoutEncoding, this._stderrEncoding);
   final io.Process _process;
   final Encoding _stdoutEncoding;
