@@ -49,7 +49,10 @@ if ! git filter-repo --version; then
 fi
 
 # Ensure the remote "temp-monorepo" does not already exist.
-if ! git remote show temp-monorepo; then
+#
+# This command will intentionally fail if the remote does not exist, so make
+# sure to ignore the error so -e does not exit the script.
+if git remote get-url temp-monorepo 2>/dev/null; then
   echo "Please remove the remote 'temp-monorepo' before continuing."
   exit 1
 fi
@@ -78,7 +81,7 @@ git filter-repo --subdirectory-filter $SUBDIR
 # Rewrite the commit history to include the original repository URL.
 git filter-repo --commit-callback '
 msg = commit.message.decode("utf-8")
-newmsg = re.sub("\(#(?=\d+\))", "('$ORG'/'$REPO'#", msg)
+newmsg = re.sub(r"\(#(?=\d+\))", f"({ORG}/{REPO}#", msg)
 commit.message = newmsg.encode("utf-8")
 '
 
