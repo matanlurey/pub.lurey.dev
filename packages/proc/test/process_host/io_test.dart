@@ -230,4 +230,13 @@ void main() {
 
     await check(proc.exitCode).completes((e) => e.equals(ExitCode.failure));
   });
+
+  test('process exception is forwarded', () async {
+    final host = ProcessHost();
+    await check(host.start('missing', ['1', '2'])).throws<ProcessException>(
+      (e) => e
+          .has((x) => x.toString(), 'toString()')
+          .contains('No such file or directory'),
+    );
+  });
 }

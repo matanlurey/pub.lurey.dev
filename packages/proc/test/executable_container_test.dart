@@ -1,6 +1,7 @@
 import 'dart:async';
 import 'dart:convert';
 
+import 'package:path/path.dart' as p;
 import 'package:proc/proc.dart';
 import 'package:test/test.dart';
 
@@ -50,6 +51,37 @@ void main() {
 
     final host = container.createProcessHost();
     final process = await host.start('echo', ['hello']);
+
+    process.stdin.add(utf8.encode('Hello'));
+    await pumpEventQueue();
+    process.kill();
+
+    await check(process.stdoutText).withQueue.emits((e) => e.equals('Hello'));
+  });
+
+  test('copyWith copies the host', () async {
+    final container = ExecutableContainer();
+    final host = container.createProcessHost();
+
+    final copy = host.copyWith();
+    expect(copy, isNot(same(host)));
+  });
+
+  test('relative paths are resolved to CWD', () async {
+    final container = ExecutableContainer();
+    container.setExecutable(p.join('tool', 'echo'), (start) {
+      late final ProcessController controller;
+      controller = ProcessController(
+        processId: 1234,
+        onInput: (data) {
+          controller.addStdoutBytes(data);
+        },
+      );
+      return controller.process;
+    });
+
+    final host = container.createProcessHost();
+    final process = await host.start(p.join('tool', 'echo'), ['hello']);
 
     process.stdin.add(utf8.encode('Hello'));
     await pumpEventQueue();

@@ -176,7 +176,7 @@ final class _ExecutableContainerHost extends ProcessHost {
     } else if (!executable.contains(_container.context.separator)) {
       path = executable;
     } else {
-      path = _container.context.join(workingDirectory, executable);
+      path = _container.context.relative(executable, from: workingDirectory);
     }
 
     final run = _container._executables[path];
