@@ -1,0 +1,9 @@
+# Format: https://dart.dev/tools/pub/pubspec.
+
+name: pub.lurey.dev
+
+# This is a workspace package and not intended to be published.
+# See https://flutter.dev/go/pub-workspace for details.
+publish_to: none
+environment:
+  sdk: ^3.5.0
