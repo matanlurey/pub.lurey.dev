@@ -2,7 +2,7 @@
 
 - Install `git-filter-repo` (<https://github.com/newren/git-filter-repo>)
 - Go into a temporary directory and clone the repo to merge into the monorepo
-- In the monorepo, run `git filter-repo --to-subdirectory-filter <subdir>`
+- In the directory, run `git filter-repo --to-subdirectory-filter <subdir>`
 - Alter the commits so issues point to the right (historic) repo:
 
   ```sh
@@ -16,9 +16,9 @@
 - Now go back to the monorepo and merge:
 
   ```sh
-  git checkout -b integrate-cool-demo-repo
-  git remote add temp /path/to/temporary/cool-demo-repo
-  git fethc temp
+  git checkout -b integrate-oath.dart
+  git remote add temp /tmp/monorepo/oath.dart
+  git fetch temp
   git merge temp/main --allow-unrelated-histories
   ```
 
