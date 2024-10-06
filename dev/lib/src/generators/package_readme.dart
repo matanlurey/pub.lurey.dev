@@ -33,6 +33,7 @@ String generatePackageReadmeRegion(Package package) {
   // Maintenance status.
   buffer.write(' | ');
   buffer.write(_githubIssues(package.name));
+  buffer.write(' |');
 
   return buffer.toString();
 }

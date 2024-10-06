@@ -1,14 +1,25 @@
 # Format: https://dart.dev/tools/pub/pubspec
 
 name: chore
+
+# However, a shorter description is often better for a quick summary, so we
+# store an unofficial shorter description as `short_description` which tools
+# can optionally use.
+#
+# However, a shorter description is often better for a quick summary, so we
+# store an unofficial shorter description as `short_description` which tools
+# can optionally use.
 description: |-
-  A minimalistic task runner for managing Dart and Flutter projects.
+  Opinionated open source project management tools for Dart packages.
+short_description: Opinionated project management.
+
 version: 0.0.0
 
 environment:
-  sdk: ^3.4.0
+  sdk: ^3.5.0
 
 repository: https://github.com/matanlurey/chore.dart
+resolution: workspace
 
 dependencies:
   args: ^2.5.0

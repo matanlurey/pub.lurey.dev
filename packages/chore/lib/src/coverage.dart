@@ -9,6 +9,8 @@ import 'package:shelf_static/shelf_static.dart';
 /// A command to generate a coverage report.
 final class Coverage extends Command<void> {
   final Chore _chore;
+
+  /// Creates a new coverage command.
   Coverage(this._chore) {
     argParser
       ..addOption(

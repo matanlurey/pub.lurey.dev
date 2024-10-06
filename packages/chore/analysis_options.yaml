@@ -1,7 +1,0 @@
-# Format: https://dart.dev/tools/analysis#the-analysis-options-file.
-
-include: package:oath/relaxed.yaml
-
-linter:
-  rules:
-    noop_primitive_operations: false

@@ -10,6 +10,7 @@ A wide but independent collection of Dart packages and projects.
 
 | Project | Release | Description |
 |:--------|:--------|:------------|
+| [`chore`](./packages/chore) | [![Pub version for package/chore](https://img.shields.io/pub/v/chore?label=%20)](https://pub.dev/packages/chore) | Opinionated project management. |
 | [`iota`](./packages/iota) | [![Pub version for package/iota](https://img.shields.io/pub/v/iota?label=%20)](https://pub.dev/packages/iota) | Minimalist file system API. |
 | [`jsonut`](./packages/jsonut) | [![Pub version for package/jsonut](https://img.shields.io/pub/v/jsonut?label=%20)](https://pub.dev/packages/jsonut) | Minimal JSON utilities. |
 | [`lore`](./packages/lore) | [![Pub version for package/lore](https://img.shields.io/pub/v/lore?label=%20)](https://pub.dev/packages/lore) | Fast, structured, and idiomatic logging. |

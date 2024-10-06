@@ -5,7 +5,7 @@ A stately library for crafting and deciphering ANSI escape codes.
 
 | ✅ Health | 🚀 Release | 📝 Docs | ♻️ Maintenance |
 |:----------|:-----------|:--------|:--------------|
-| [![Build status for package/mansion](https://github.com/matanlurey/pub.lurey.dev/actions/workflows/package_mansion.yaml/badge.svg)](https://github.com/matanlurey/pub.lurey.dev/actions/workflows/package_mansion.yaml) | [![Pub version for package/mansion](https://img.shields.io/pub/v/mansion)](https://pub.dev/packages/mansion) | [![Dart documentation for package/mansion](https://img.shields.io/badge/dartdoc-reference-blue.svg)](https://pub.dev/documentation/mansion) | [![GitHub Issues for package/mansion](https://img.shields.io/github/issues/matanlurey/pub.lurey.dev/pkg-mansion?label=issues)](https://github.com/matanlurey/pub.lurey.dev/issues?q=is%3Aopen+is%3Aissue+label%3Apkg-mansion)
+| [![Build status for package/mansion](https://github.com/matanlurey/pub.lurey.dev/actions/workflows/package_mansion.yaml/badge.svg)](https://github.com/matanlurey/pub.lurey.dev/actions/workflows/package_mansion.yaml) | [![Pub version for package/mansion](https://img.shields.io/pub/v/mansion)](https://pub.dev/packages/mansion) | [![Dart documentation for package/mansion](https://img.shields.io/badge/dartdoc-reference-blue.svg)](https://pub.dev/documentation/mansion) | [![GitHub Issues for package/mansion](https://img.shields.io/github/issues/matanlurey/pub.lurey.dev/pkg-mansion?label=issues)](https://github.com/matanlurey/pub.lurey.dev/issues?q=is%3Aopen+is%3Aissue+label%3Apkg-mansion) |
 <!-- #endregion -->
 
 ![Demo](https://github.com/asciinema/agg/assets/168174/6832d773-22f9-47b9-a83c-0e6f260da849)
