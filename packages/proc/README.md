@@ -6,7 +6,7 @@ Run and manage OS processes with an extensible and testable API.
 [![Build status for package/proc](https://github.com/matanlurey/pub.lurey.dev/actions/workflows/package_proc.yaml/badge.svg)](https://github.com/matanlurey/pub.lurey.dev/actions/workflows/package_proc.yaml)
 [![Pub version for package/proc](https://img.shields.io/pub/v/proc)](https://pub.dev/packages/proc)
 [![Dart documentation for package/proc](https://img.shields.io/badge/dartdoc-reference-blue.svg)](https://pub.dev/documentation/proc)
-![GitHub Issues for package/proc](https://img.shields.io/github/issues/matanlurey/pub.lurey.dev/pkg-proc?label=issues)
+[![GitHub Issues for package/proc](https://img.shields.io/github/issues/matanlurey/pub.lurey.dev/pkg-proc?label=issues)](https://github.com/matanlurey/pub.lurey.dev/issues?q=is%3Aopen+is%3Aissue+label%3Apkg-proc)
 
 <!-- #endregion -->
 

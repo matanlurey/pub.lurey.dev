@@ -70,6 +70,8 @@ interface class FileSink {
       );
     }
 
+    lines.add('');
+
     // Write the modified lines back to the file.
     await file.writeAsString(lines.join('\n'));
   }

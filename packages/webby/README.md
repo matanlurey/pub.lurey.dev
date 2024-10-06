@@ -6,7 +6,7 @@ An artisnal hand-crafted interopability library for the web platform.
 [![Build status for package/webby](https://github.com/matanlurey/pub.lurey.dev/actions/workflows/package_webby.yaml/badge.svg)](https://github.com/matanlurey/pub.lurey.dev/actions/workflows/package_webby.yaml)
 [![Pub version for package/webby](https://img.shields.io/pub/v/webby)](https://pub.dev/packages/webby)
 [![Dart documentation for package/webby](https://img.shields.io/badge/dartdoc-reference-blue.svg)](https://pub.dev/documentation/webby)
-![GitHub Issues for package/webby](https://img.shields.io/github/issues/matanlurey/pub.lurey.dev/pkg-webby?label=issues)
+[![GitHub Issues for package/webby](https://img.shields.io/github/issues/matanlurey/pub.lurey.dev/pkg-webby?label=issues)](https://github.com/matanlurey/pub.lurey.dev/issues?q=is%3Aopen+is%3Aissue+label%3Apkg-webby)
 
 <!-- #endregion -->
 

@@ -25,21 +25,20 @@ String generateRootReadmeRegion(Iterable<Package> packages) {
   final buffer = StringBuffer();
   buffer.writeln();
 
-  buffer.writeln('Project | Version | Changelog | Description');
-  buffer.writeln('------- | ------- | --------- | -----------');
+  buffer.writeln('Project | Latest  | Description');
+  buffer.writeln('------- | ------- | -----------');
 
   for (final package in packages) {
+    buffer.write(_generateChangelog(package.name));
+    buffer.write(' ');
     buffer.write(_generateRelativePath(package.name));
     buffer.write(' | ');
     buffer.write(_generatePubStatus(package.name));
-    buffer.write(' | ');
-    buffer.write(_generateChangelog(package.name));
     buffer.write(' | ');
     buffer.write(package.description);
     buffer.writeln();
   }
 
-  buffer.writeln();
   return buffer.toString();
 }
 
@@ -50,10 +49,10 @@ String _generateRelativePath(String package) {
 String _generatePubStatus(String package) {
   return ''
       '[![Pub version for package/$package]'
-      '(https://img.shields.io/pub/v/$package)]'
+      '(https://img.shields.io/pub/v/$package?label=%20&color=007ec6)]'
       '(https://pub.dev/packages/$package)';
 }
 
 String _generateChangelog(String package) {
-  return '[CHANGELOG](./packages/$package/CHANGELOG.md)';
+  return '[🔖](./packages/$package/CHANGELOG.md)';
 }

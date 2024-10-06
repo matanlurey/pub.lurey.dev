@@ -2,6 +2,7 @@ import 'dart:async';
 import 'dart:io' as io;
 
 import 'package:args/command_runner.dart';
+import 'package:dev/src/generators/changelog_header.dart';
 import 'package:dev/src/generators/github_package_workflow.dart';
 import 'package:dev/src/generators/package_readme.dart';
 import 'package:dev/src/generators/root_readme.dart';
@@ -115,6 +116,11 @@ final class GenerateCommand extends Command<void> {
     final sink = FileSink.fromBaseDir(packageDir.path);
     await sink.writeRegions('README.md', {
       'BADGES': generatePackageReadmeRegion(pkg),
+    });
+
+    // Generate the CHANGELOG.md file.
+    await sink.writeRegions('CHANGELOG.md', {
+      'HEADER': generateChangelogHeader(),
     });
   }
 

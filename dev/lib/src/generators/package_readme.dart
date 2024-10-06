@@ -37,5 +37,6 @@ String _generateDartDocs(String package) {
 
 String _githubIssues(String package) {
   return ''
-      '![GitHub Issues for package/$package](https://img.shields.io/github/issues/matanlurey/pub.lurey.dev/pkg-$package?label=issues)';
+      '[![GitHub Issues for package/$package](https://img.shields.io/github/issues/matanlurey/pub.lurey.dev/pkg-$package?label=issues)]'
+      '(https://github.com/matanlurey/pub.lurey.dev/issues?q=is%3Aopen+is%3Aissue+label%3Apkg-$package)';
 }
