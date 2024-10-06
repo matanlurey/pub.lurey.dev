@@ -12,7 +12,9 @@ environment:
 
 workspace:
   - dev
+  - packages/iota
   - packages/jsonut
   - packages/oath
   - packages/proc
   - packages/sdk
+  - packages/webby
