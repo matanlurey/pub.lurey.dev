@@ -37,6 +37,7 @@ jobs:
         working-directory: packages/sdk
       - run: ./chore coverage -- -P coverage
         working-directory: packages/sdk
+      - run: tail ./packages/sdk/coverage/lcov.info
       - name: Upload coverage
         uses: coverallsapp/github-action@v2.2.3
         with:
