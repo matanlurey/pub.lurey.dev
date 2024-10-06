@@ -1,13 +1,11 @@
-# JSON Utility Kit
+<!-- #region(PACKAGE_README_HEADER) -->
+# `jsonut`
 
-A minimal utility kit for working with JSON in a type-safe manner.
+A minimal utility kit for working with JSON in a typesafe manner.
 
-<!-- #region(BADGES) -->
-[![Build status for package/jsonut](https://github.com/matanlurey/pub.lurey.dev/actions/workflows/package_jsonut.yaml/badge.svg)](https://github.com/matanlurey/pub.lurey.dev/actions/workflows/package_jsonut.yaml)
-[![Pub version for package/jsonut](https://img.shields.io/pub/v/jsonut)](https://pub.dev/packages/jsonut)
-[![Dart documentation for package/jsonut](https://img.shields.io/badge/dartdoc-reference-blue.svg)](https://pub.dev/documentation/jsonut)
-[![GitHub Issues for package/jsonut](https://img.shields.io/github/issues/matanlurey/pub.lurey.dev/pkg-jsonut?label=issues)](https://github.com/matanlurey/pub.lurey.dev/issues?q=is%3Aopen+is%3Aissue+label%3Apkg-jsonut)
-
+| ✅ Health | 🚀 Release | 📝 Docs | ♻️ Maintenance |
+|:----------|:-----------|:--------|:--------------|
+| [![Build status for package/jsonut](https://github.com/matanlurey/pub.lurey.dev/actions/workflows/package_jsonut.yaml/badge.svg)](https://github.com/matanlurey/pub.lurey.dev/actions/workflows/package_jsonut.yaml) | [![Pub version for package/jsonut](https://img.shields.io/pub/v/jsonut)](https://pub.dev/packages/jsonut) | [![Dart documentation for package/jsonut](https://img.shields.io/badge/dartdoc-reference-blue.svg)](https://pub.dev/documentation/jsonut) | [![GitHub Issues for package/jsonut](https://img.shields.io/github/issues/matanlurey/pub.lurey.dev/pkg-jsonut?label=issues)](https://github.com/matanlurey/pub.lurey.dev/issues?q=is%3Aopen+is%3Aissue+label%3Apkg-jsonut)
 <!-- #endregion -->
 
 <!-- See https://dart.dev/guides/libraries/writing-package-pages -->

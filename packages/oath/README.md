@@ -1,13 +1,11 @@
-# Oath Linter for Dart
+<!-- #region(PACKAGE_README_HEADER) -->
+# `oath`
 
-Swear a Paladin's _Oath_ to code righteousness.
+Swear a Paladin's Oath to code righteousness by enforcing lints.
 
-<!-- #region(BADGES) -->
-[![Build status for package/oath](https://github.com/matanlurey/pub.lurey.dev/actions/workflows/package_oath.yaml/badge.svg)](https://github.com/matanlurey/pub.lurey.dev/actions/workflows/package_oath.yaml)
-[![Pub version for package/oath](https://img.shields.io/pub/v/oath)](https://pub.dev/packages/oath)
-[![Dart documentation for package/oath](https://img.shields.io/badge/dartdoc-reference-blue.svg)](https://pub.dev/documentation/oath)
-[![GitHub Issues for package/oath](https://img.shields.io/github/issues/matanlurey/pub.lurey.dev/pkg-oath?label=issues)](https://github.com/matanlurey/pub.lurey.dev/issues?q=is%3Aopen+is%3Aissue+label%3Apkg-oath)
-
+| ✅ Health | 🚀 Release | 📝 Docs | ♻️ Maintenance |
+|:----------|:-----------|:--------|:--------------|
+| [![Build status for package/oath](https://github.com/matanlurey/pub.lurey.dev/actions/workflows/package_oath.yaml/badge.svg)](https://github.com/matanlurey/pub.lurey.dev/actions/workflows/package_oath.yaml) | [![Pub version for package/oath](https://img.shields.io/pub/v/oath)](https://pub.dev/packages/oath) | [![Dart documentation for package/oath](https://img.shields.io/badge/dartdoc-reference-blue.svg)](https://pub.dev/documentation/oath) | [![GitHub Issues for package/oath](https://img.shields.io/github/issues/matanlurey/pub.lurey.dev/pkg-oath?label=issues)](https://github.com/matanlurey/pub.lurey.dev/issues?q=is%3Aopen+is%3Aissue+label%3Apkg-oath)
 <!-- #endregion -->
 
 Lints serve as your guide, ensuring your code adheres to the highest standards

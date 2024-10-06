@@ -3,13 +3,36 @@ import 'package:dev/src/generators/root_readme.dart';
 /// Generates a region of a package's README file.
 String generatePackageReadmeRegion(Package package) {
   final buffer = StringBuffer();
+  buffer.writeln('# `${package.name}`\n');
+  buffer.writeln('${package.description}\n');
 
-  buffer.writeln(_generateBuildStatus(package.name));
+  // Table header.
+  buffer.writeln('| ✅ Health | 🚀 Release | 📝 Docs | ♻️ Maintenance |');
+  buffer.writeln('|:----------|:-----------|:--------|:--------------|');
+
+  // Build status.
+  buffer.write('| ');
+  buffer.write(_generateBuildStatus(package.name));
+
+  // Release status.
+  buffer.write(' | ');
   if (package.isPublishable) {
-    buffer.writeln(_generatePubStatus(package.name));
-    buffer.writeln(_generateDartDocs(package.name));
+    buffer.write(_generatePubStatus(package.name));
+  } else {
+    buffer.write('Unreleased');
   }
-  buffer.writeln(_githubIssues(package.name));
+
+  // Documentation status.
+  buffer.write(' | ');
+  if (package.isPublishable) {
+    buffer.write(_generateDartDocs(package.name));
+  } else {
+    buffer.write('Unreleased');
+  }
+
+  // Maintenance status.
+  buffer.write(' | ');
+  buffer.write(_githubIssues(package.name));
 
   return buffer.toString();
 }
