@@ -239,14 +239,6 @@ packages:
       url: "https://pub.dev"
     source: hosted
     version: "1.5.1"
-  proc:
-    dependency: transitive
-    description:
-      name: proc
-      sha256: "43247477035500356987e756dcc188add352c451be29a3d37209df7462314911"
-      url: "https://pub.dev"
-    source: hosted
-    version: "0.2.0"
   pub_semver:
     dependency: transitive
     description:
