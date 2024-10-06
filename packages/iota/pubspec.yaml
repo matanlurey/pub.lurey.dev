@@ -1,0 +1,23 @@
+# Format: https://dart.dev/tools/pub/pubspec
+
+name: iota
+
+description: |-
+  Minimalist file system API which is compatible with sandboxes.
+version: 0.0.0
+
+homepage: https://github.com/pub.lurey.dev/tree/main/packages/iota
+issue_tracker: https://github.com/matanlurey/pub.lurey.dev/labels/pkg-iota
+
+resolution: workspace
+
+environment:
+  sdk: ^3.5.0
+
+dependencies:
+  meta: ^1.15.0
+  path: ^1.9.0
+
+dev_dependencies:
+  checks: ^0.3.0
+  test: ^1.25.7
