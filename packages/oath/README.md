@@ -2,8 +2,9 @@
 
 Swear a Paladin's _Oath_ to code righteousness.
 
-[![Github Actions](https://github.com/matanlurey/oath.dart/actions/workflows/check.yml/badge.svg)](https://github.com/matanlurey/oath.dart/actions/workflows/check.yml)
-[![Pub](https://img.shields.io/pub/v/oath)](https://pub.dev/oath)
+[![package/oath](https://github.com/matanlurey/pub.lurey.dev/actions/workflows/package_oath.yaml/badge.svg)](https://github.com/matanlurey/pub.lurey.dev/actions/workflows/package_oath.yaml)
+[![Version for package:oath](https://img.shields.io/pub/v/oath)](https://pub.dev/packages/oath)
+[![Dartdoc reference](https://img.shields.io/badge/dartdoc-reference-blue.svg)](https://pub.dev/documentation/oath/latest/)
 
 Lints serve as your guide, ensuring your code adheres to the highest standards
 of valor:
