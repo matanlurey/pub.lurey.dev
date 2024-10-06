@@ -4,8 +4,6 @@ A wide but independent collection of Dart packages and projects.
 
 ## Packages
 
-[![Coverage Status](https://coveralls.io/repos/github/matanlurey/pub.lurey.dev/badge.svg?branch=main)](https://coveralls.io/github/matanlurey/pub.lurey.dev?branch=main)
-
 Project | Build | Version | Changelog | Description
 ------- | ----- | ------- | --------- | -----------
 [`jsonut`](./packages/jsonut/)  | [![package/jsonut](https://github.com/matanlurey/pub.lurey.dev/actions/workflows/package_jsonut.yaml/badge.svg)](https://github.com/matanlurey/pub.lurey.dev/actions/workflows/package_jsonut.yaml) | [![Version for package:jsonut](https://img.shields.io/pub/v/jsonut)](https://pub.dev/packages/jsonut) | [Changelog](./packages/jsonut/CHANGELOG.md) | A minimal utility kit for working with JSON in a typesafe manner.
