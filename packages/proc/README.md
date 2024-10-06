@@ -2,10 +2,13 @@
 
 Run and manage OS processes with an extensible and testable API.
 
-[![CI](https://github.com/matanlurey/proc.dart/actions/workflows/check.yaml/badge.svg)](https://github.com/matanlurey/proc.dart/actions/workflows/check.yaml)
-[![Coverage Status](https://coveralls.io/repos/github/matanlurey/proc.dart/badge.svg?branch=main)](https://coveralls.io/github/matanlurey/proc.dart?branch=main)
-[![Pub Package](https://img.shields.io/pub/v/proc.svg)](https://pub.dev/packages/proc)
-[![Dartdoc reference](https://img.shields.io/badge/dartdoc-reference-blue.svg)](https://pub.dev/documentation/proc/latest/)
+<!-- #region(BADGES) -->
+[![Build status for package/proc](https://github.com/matanlurey/pub.lurey.dev/actions/workflows/package_proc.yaml/badge.svg)](https://github.com/matanlurey/pub.lurey.dev/actions/workflows/package_proc.yaml)
+[![Pub version for package/proc](https://img.shields.io/pub/v/proc)](https://pub.dev/packages/proc)
+[![Dart documentation for package/proc](https://img.shields.io/badge/dartdoc-reference-blue.svg)](https://pub.dev/documentation/proc)
+![GitHub Issues for package/proc](https://img.shields.io/github/issues/matanlurey/pub.lurey.dev/pkg-proc?label=issues)
+
+<!-- #endregion -->
 
 ## Features
 

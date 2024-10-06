@@ -2,10 +2,13 @@
 
 A stately library for crafting and deciphering ANSI escape codes.
 
-[![CI](https://github.com/matanlurey/mansion/actions/workflows/ci.yaml/badge.svg)](https://github.com/matanlurey/mansion/actions/workflows/ci.yaml)
-[![Coverage Status](https://coveralls.io/repos/github/matanlurey/mansion/badge.svg?branch=main)](https://coveralls.io/github/matanlurey/mansion?branch=main)
-[![Pub Package](https://img.shields.io/pub/v/mansion.svg)](https://pub.dev/packages/mansion)
-[![Dartdoc reference](https://img.shields.io/badge/dartdoc-reference-blue.svg)](https://pub.dev/documentation/mansion/latest/)
+<!-- #region(BADGES) -->
+[![Build status for package/mansion](https://github.com/matanlurey/pub.lurey.dev/actions/workflows/package_mansion.yaml/badge.svg)](https://github.com/matanlurey/pub.lurey.dev/actions/workflows/package_mansion.yaml)
+[![Pub version for package/mansion](https://img.shields.io/pub/v/mansion)](https://pub.dev/packages/mansion)
+[![Dart documentation for package/mansion](https://img.shields.io/badge/dartdoc-reference-blue.svg)](https://pub.dev/documentation/mansion)
+![GitHub Issues for package/mansion](https://img.shields.io/github/issues/matanlurey/pub.lurey.dev/pkg-mansion?label=issues)
+
+<!-- #endregion -->
 
 ![Demo](https://github.com/asciinema/agg/assets/168174/6832d773-22f9-47b9-a83c-0e6f260da849)
 

@@ -2,12 +2,16 @@
 
 Fast, structured, and idiomatic logging with an extensible API.
 
-[![CI](https://github.com/matanlurey/lore.dart/actions/workflows/check.yaml/badge.svg)](https://github.com/matanlurey/lore.dart/actions/workflows/check.yaml)
-[![Coverage Status](https://coveralls.io/repos/github/matanlurey/lore.dart/badge.svg?branch=main)](https://coveralls.io/github/matanlurey/lore.dart?branch=main)
-
 <!--
-[![Pub Package](https://img.shields.io/pub/v/lore.svg)](https://pub.dev/packages/lore)
-[![Dartdoc reference](https://img.shields.io/badge/dartdoc-reference-blue.svg)](https://pub.dev/documentation/lore/latest/)
+
+#region(BADGES)
+[![Build status for package/lore](https://github.com/matanlurey/pub.lurey.dev/actions/workflows/package_lore.yaml/badge.svg)](https://github.com/matanlurey/pub.lurey.dev/actions/workflows/package_lore.yaml)
+[![Pub version for package/lore](https://img.shields.io/pub/v/lore)](https://pub.dev/packages/lore)
+[![Dart documentation for package/lore](https://img.shields.io/badge/dartdoc-reference-blue.svg)](https://pub.dev/documentation/lore)
+![GitHub Issues for package/lore](https://img.shields.io/github/issues/matanlurey/pub.lurey.dev/pkg-lore?label=issues)
+
+#endregion
+
 -->
 
 <!--

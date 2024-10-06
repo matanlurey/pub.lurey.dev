@@ -7,7 +7,11 @@ version: 0.1.0
 environment:
   sdk: ^3.5.0
 
-repository: https://github.com/matanlurey/mansion
+resolution: workspace
+
+homepage: https://github.com/matanlurey/pub.lurey.dev/tree/main/packages/mansion
+issue_tracker: https://github.com/matanlurey/pub.lurey.dev/labels/pkg-mansion
+
 
 dependencies:
   meta: ^1.15.0
