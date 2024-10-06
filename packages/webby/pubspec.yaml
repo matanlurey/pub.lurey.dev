@@ -2,8 +2,16 @@
 
 name: webby
 
+# Pub requires at 60 chartacters or we are dinged for "too short".
+# https://dart.dev/tools/pub/pubspec#description
+#
+# However, a shorter description is often better for a quick summary, so we
+# store an unofficial shorter description as `short_description` which tools
+# can optionally use.
 description: |-
-  An artisnal hand-crafted interopability library for the web platform.
+  Artisnal hand-crafted interopability library for the web platform.
+short_description: Hand-crafted interop for web apps.
+
 version: 0.1.0-alpha
 
 homepage: https://github.com/matanlurey/pub.lurey.dev/tree/main/packages/webby

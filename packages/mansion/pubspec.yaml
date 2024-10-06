@@ -1,7 +1,17 @@
 # Format: https://dart.dev/tools/pub/pubspec
 
 name: mansion
+
+# However, a shorter description is often better for a quick summary, so we
+# store an unofficial shorter description as `short_description` which tools
+# can optionally use.
+#
+# However, a shorter description is often better for a quick summary, so we
+# store an unofficial shorter description as `short_description` which tools
+# can optionally use.
 description: A stately library for crafting and deciphering ANSI escape codes.
+short_description: Create and parse ANSI escape codes.
+
 version: 0.1.0+1
 
 environment:

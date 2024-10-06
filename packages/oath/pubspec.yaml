@@ -1,5 +1,15 @@
 name: oath
+
+# However, a shorter description is often better for a quick summary, so we
+# store an unofficial shorter description as `short_description` which tools
+# can optionally use.
+#
+# However, a shorter description is often better for a quick summary, so we
+# store an unofficial shorter description as `short_description` which tools
+# can optionally use.
 description: Swear a Paladin's Oath to code righteousness by enforcing lints.
+short_description: Strict linting for Dart packages.
+
 version: 0.2.1+1
 
 homepage: https://github.com/matanlurey/pub.lurey.dev/tree/main/packages/oath

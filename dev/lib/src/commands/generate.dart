@@ -110,6 +110,7 @@ final class GenerateCommand extends Command<void> {
       name: package,
       isPublishable: pubspec.isPublishable,
       description: pubspec.description,
+      shortDescription: pubspec.shortDescription,
     );
 
     // Generate the README file.
@@ -143,6 +144,7 @@ final class GenerateCommand extends Command<void> {
           name: package,
           isPublishable: yaml.isPublishable,
           description: yaml.description,
+          shortDescription: yaml.shortDescription,
         ),
       );
     }

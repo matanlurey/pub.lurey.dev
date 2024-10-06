@@ -1,7 +1,7 @@
 <!-- #region(PACKAGE_README_HEADER) -->
 # `webby`
 
-An artisnal hand-crafted interopability library for the web platform.
+Artisnal hand-crafted interopability library for the web platform.
 
 | ✅ Health | 🚀 Release | 📝 Docs | ♻️ Maintenance |
 |:----------|:-----------|:--------|:--------------|

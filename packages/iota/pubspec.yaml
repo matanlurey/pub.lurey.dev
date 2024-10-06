@@ -2,8 +2,17 @@
 
 name: iota
 
+# However, a shorter description is often better for a quick summary, so we
+# store an unofficial shorter description as `short_description` which tools
+# can optionally use.
+#
+# However, a shorter description is often better for a quick summary, so we
+# store an unofficial shorter description as `short_description` which tools
+# can optionally use.
 description: |-
   Minimalist file system API which is compatible with sandboxes.
+short_description: Minimalist file system API.
+
 version: 0.0.0
 
 homepage: https://github.com/matanlurey/pub.lurey.dev/tree/main/packages/iota

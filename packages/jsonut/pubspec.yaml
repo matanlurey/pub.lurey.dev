@@ -1,7 +1,17 @@
 # Format: https://dart.dev/tools/pub/pubspec
 
 name: jsonut
+
+# However, a shorter description is often better for a quick summary, so we
+# store an unofficial shorter description as `short_description` which tools
+# can optionally use.
+#
+# However, a shorter description is often better for a quick summary, so we
+# store an unofficial shorter description as `short_description` which tools
+# can optionally use.
 description: A minimal utility kit for working with JSON in a typesafe manner.
+short_description: Minimal JSON utilities.
+
 version: 0.4.1+2
 
 homepage: https://github.com/matanlurey/pub.lurey.dev/tree/main/packages/jsonut

@@ -1,3 +1,5 @@
+import 'dart:collection';
+
 import 'package:yaml/yaml.dart';
 
 /// Parses a pubspec file.
@@ -32,5 +34,43 @@ final class PubspecYaml {
       );
     }
     return description;
+  }
+
+  /// Short description of the package.
+  ///
+  /// If omitted, the full [description] is returned.
+  String get shortDescription {
+    final description = (_doc.contents as YamlMap)['short_description'];
+    if (description == null) {
+      return this.description;
+    }
+    if (description is! String) {
+      throw FormatException(
+        'Expected a string, got ${description.runtimeType}',
+        _doc.span.text,
+      );
+    }
+    return description;
+  }
+
+  /// Which packages are listed as part of the workspace.
+  List<String> get workspace {
+    final packages = (_doc.contents as YamlMap)['workspace'];
+    if (packages == null) {
+      return const [];
+    }
+    if (packages is! List) {
+      throw FormatException(
+        'Expected a list, got ${packages.runtimeType}',
+        _doc.span.text,
+      );
+    }
+    if (packages.any((e) => e is! String)) {
+      throw FormatException(
+        'Expected a list of strings, got ${packages.runtimeType}',
+        _doc.span.text,
+      );
+    }
+    return UnmodifiableListView(packages.cast());
   }
 }

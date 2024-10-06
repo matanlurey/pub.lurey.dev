@@ -8,6 +8,7 @@ final class Package {
     required this.name,
     required this.isPublishable,
     required this.description,
+    required this.shortDescription,
   });
 
   /// Name of the package.
@@ -18,6 +19,9 @@ final class Package {
 
   /// Description of the package.
   final String description;
+
+  /// Short description of the package.
+  final String shortDescription;
 }
 
 /// Generates a region of the root README file.
@@ -35,10 +39,10 @@ String generateRootReadmeRegion(Iterable<Package> packages) {
     if (package.isPublishable) {
       buffer.write(_generatePubStatus(package.name));
     } else {
-      buffer.write('Unreleased');
+      buffer.write('_Unreleased_');
     }
     buffer.write(' | ');
-    buffer.write(package.description);
+    buffer.write(package.shortDescription);
     buffer.writeln(' |');
   }
 
