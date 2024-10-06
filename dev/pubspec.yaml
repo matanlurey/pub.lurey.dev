@@ -11,11 +11,12 @@ environment:
 dependencies:
   args: ^2.5.0
   lore:
-    git:
-      url: https://github.com/matanlurey/lore.dart
+    path:
+      ../packages/lore
   meta: ^1.16.0
   path: ^1.9.0
   proc: ^0.2.0
+  yaml: ^3.1.2
 
 dev_dependencies:
   checks: ^0.3.0

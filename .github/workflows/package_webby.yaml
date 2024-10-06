@@ -19,9 +19,9 @@ jobs:
       run:
         working-directory: packages/webby
     steps:
-      - uses: actions/checkout@v4.1.1
-      - uses: dart-lang/setup-dart@v1.6.4
-      - uses: browser-actions/setup-chrome@v1
+      - uses: actions/checkout@v4.2.0
+      - uses: dart-lang/setup-dart@v1.6.5
+      - uses: browser-actions/setup-chrome@v1.7.2
       - run: dart pub get
       - run: dart format --output none --set-exit-if-changed .
       - run: dart analyze

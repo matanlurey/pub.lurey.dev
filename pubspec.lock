@@ -169,11 +169,9 @@ packages:
   lore:
     dependency: transitive
     description:
-      path: "."
-      ref: HEAD
-      resolved-ref: "162043be28ad6323ae4c5da56c994ef2337b9dd4"
-      url: "https://github.com/matanlurey/lore.dart"
-    source: git
+      path: "packages/lore"
+      relative: true
+    source: path
     version: "0.1.0-dev"
   macros:
     dependency: transitive

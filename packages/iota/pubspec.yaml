@@ -6,7 +6,7 @@ description: |-
   Minimalist file system API which is compatible with sandboxes.
 version: 0.0.0
 
-homepage: https://github.com/pub.lurey.dev/tree/main/packages/iota
+homepage: https://github.com/matanlurey/pub.lurey.dev/tree/main/packages/iota
 issue_tracker: https://github.com/matanlurey/pub.lurey.dev/labels/pkg-iota
 
 resolution: workspace

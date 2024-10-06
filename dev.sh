@@ -49,4 +49,4 @@ ROOT_DIR="$(dirname "$DEV_SH_PATH")"
 DEV_DART="$ROOT_DIR/dev/bin/dev.dart"
 
 # Run the development script in --resident mode.
-exec dart "$DEV_DART" --resident "$@"
+exec dart run --resident "$DEV_DART" "$@"

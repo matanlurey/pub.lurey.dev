@@ -6,7 +6,7 @@ description: |-
   Run and manage OS processes with an extensible and testable API.
 version: 0.2.0+1
 
-homepage: https://github.com/pub.lurey.dev/tree/main/packages/proc
+homepage: https://github.com/matanlurey/pub.lurey.dev/tree/main/packages/proc
 issue_tracker: https://github.com/matanlurey/pub.lurey.dev/labels/pkg-proc
 
 resolution: workspace

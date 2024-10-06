@@ -4,7 +4,7 @@ name: jsonut
 description: A minimal utility kit for working with JSON in a typesafe manner.
 version: 0.4.1+2
 
-homepage: https://github.com/pub.lurey.dev/tree/main/packages/jsonut
+homepage: https://github.com/matanlurey/pub.lurey.dev/tree/main/packages/jsonut
 issue_tracker: https://github.com/matanlurey/pub.lurey.dev/labels/pkg-jsonut
 
 resolution: workspace

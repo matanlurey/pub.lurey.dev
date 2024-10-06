@@ -1,3 +1,7 @@
 #!/usr/bin/env dart
 
-void main(List<String> args) {}
+import 'package:dev/src/runner.dart';
+
+void main(List<String> args) async {
+  await Runner().run(args);
+}

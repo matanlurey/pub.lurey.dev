@@ -1,4 +1,4 @@
-name: package/proc
+name: package/iota
 
 on:
   # Post-submit.
@@ -9,18 +9,19 @@ on:
   pull_request:
     branches: [ main ]
     paths:
-      - .github/workflows/package_proc.yaml
-      - packages/proc/**
+      - .github/workflows/package_iota.yaml
+      - packages/iota/**
 
 jobs:
   build:
     runs-on: ubuntu-latest
     defaults:
       run:
-        working-directory: packages/proc
+        working-directory: packages/iota
     steps:
       - uses: actions/checkout@v4.2.0
       - uses: dart-lang/setup-dart@v1.6.5
+      - uses: browser-actions/setup-chrome@v1.7.2
       - run: dart pub get
       - run: dart format --output none --set-exit-if-changed .
       - run: dart analyze

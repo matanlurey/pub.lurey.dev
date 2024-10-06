@@ -59,4 +59,9 @@ final class YamlSink {
   void writeListValue(String value) {
     _writeLine('- $value');
   }
+
+  /// Write newline (empty line) to the sink.
+  void writeNewline() {
+    _sink.writeln();
+  }
 }

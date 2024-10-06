@@ -6,7 +6,7 @@ description: |-
   Fast, structured, and idiomatic logging with an extensible API.
 version: 0.1.0-dev
 
-homepage: https://github.com/pub.lurey.dev/tree/main/packages/lore
+homepage: https://github.com/matanlurey/pub.lurey.dev/tree/main/packages/lore
 issue_tracker: https://github.com/matanlurey/pub.lurey.dev/labels/pkg-lore
 
 environment:
