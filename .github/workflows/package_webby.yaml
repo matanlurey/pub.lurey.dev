@@ -1,4 +1,4 @@
-name: package/jsonut
+name: package/webby
 
 on:
   # Post-submit.
@@ -9,15 +9,15 @@ on:
   pull_request:
     branches: [ main ]
     paths:
-      - .github/workflows/package_jsonut.yaml
-      - packages/jsonut/**
+      - .github/workflows/package_webby.yaml
+      - packages/webby/**
 
 jobs:
   build:
     runs-on: ubuntu-latest
     defaults:
       run:
-        working-directory: packages/jsonut
+        working-directory: packages/webby
     steps:
       - uses: actions/checkout@v4.1.1
       - uses: dart-lang/setup-dart@v1.6.4
