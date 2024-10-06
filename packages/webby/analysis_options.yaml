@@ -1,0 +1,6 @@
+include: ../../analysis_options.yaml
+
+analyzer:
+  errors:
+    # JS interop is strict about lambdas.
+    unnecessary_lambdas: ignore

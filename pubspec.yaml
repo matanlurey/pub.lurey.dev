@@ -17,3 +17,4 @@ workspace:
   - packages/oath
   - packages/proc
   - packages/sdk
+  - packages/webby
