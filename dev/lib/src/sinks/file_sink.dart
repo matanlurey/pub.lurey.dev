@@ -51,7 +51,7 @@ interface class FileSink {
 
       // Find the end of the region.
       var end = i + 1;
-      final search = '#endregion($regionName)';
+      final search = '#endregion';
       while (end < lines.length && !lines[end].contains(search)) {
         end++;
       }
@@ -65,7 +65,9 @@ interface class FileSink {
 
     // If any regions were not written, throw.
     if (pending.isNotEmpty) {
-      throw StateError('Regions not found: $pending');
+      throw StateError(
+        'Regions not found: $pending in $_baseDir/$relativePath',
+      );
     }
 
     // Write the modified lines back to the file.

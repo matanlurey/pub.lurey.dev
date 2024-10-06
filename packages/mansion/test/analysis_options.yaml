@@ -1,0 +1,6 @@
+include: ../../../analysis_options.yaml
+
+analyzer:
+  errors:
+    # For tests, this is unnecessarily verbose.
+    non_const_call_to_literal_constructor: false
