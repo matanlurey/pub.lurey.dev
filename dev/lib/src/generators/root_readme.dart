@@ -25,13 +25,11 @@ String generateRootReadmeRegion(Iterable<Package> packages) {
   final buffer = StringBuffer();
   buffer.writeln();
 
-  buffer.writeln('Project | Build | Version | Changelog | Description');
-  buffer.writeln('------- | ----- | ------- | --------- | -----------');
+  buffer.writeln('Project | Version | Changelog | Description');
+  buffer.writeln('------- | ------- | --------- | -----------');
 
   for (final package in packages) {
     buffer.write(_generateRelativePath(package.name));
-    buffer.write(' | ');
-    buffer.write(_generateBuildStatus(package.name));
     buffer.write(' | ');
     buffer.write(_generatePubStatus(package.name));
     buffer.write(' | ');
@@ -47,13 +45,6 @@ String generateRootReadmeRegion(Iterable<Package> packages) {
 
 String _generateRelativePath(String package) {
   return '[`$package`](./packages/$package)';
-}
-
-String _generateBuildStatus(String package) {
-  return ''
-      '[![Build status for package/$package]'
-      '(https://github.com/matanlurey/pub.lurey.dev/actions/workflows/package_$package.yaml/badge.svg)]'
-      '(https://github.com/matanlurey/pub.lurey.dev/actions/workflows/package_$package.yaml)';
 }
 
 String _generatePubStatus(String package) {
