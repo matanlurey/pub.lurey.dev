@@ -1,3 +1,0 @@
-# Format: https://dart.dev/tools/analysis#the-analysis-options-file.
-
-include: package:oath/strict.yaml

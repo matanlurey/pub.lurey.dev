@@ -3,9 +3,13 @@
 name: proc
 
 description: |-
-  Run and manage processes, including a record/replay mode for testing.
-version: 0.2.0
-repository: https://github.com/matanlurey/proc.dart
+  Run and manage OS processes with an extensible and testable API.
+version: 0.2.0+1
+
+homepage: https://github.com/pub.lurey.dev/tree/main/packages/proc
+issue_tracker: https://github.com/matanlurey/pub.lurey.dev/labels/pkg-proc
+
+resolution: workspace
 
 environment:
   sdk: ^3.5.0

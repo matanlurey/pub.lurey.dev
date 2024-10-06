@@ -1,5 +1,9 @@
 # Changelog
 
+## 0.2.0+1
+
+- Move into a monorepo.
+
 ## 0.2.0
 
 - `Proccess.complete(...)` is a convenience method for simple cases where a
