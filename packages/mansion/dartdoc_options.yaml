@@ -1,0 +1,24 @@
+dartdoc:
+  categories:
+    "Introduction":
+      markdown: doc/intro.md
+    "Cursors and Positioning":
+      markdown: doc/cursor.md
+    "Event Handling":
+      markdown: doc/events.md
+    "Screen Manipulation":
+      markdown: doc/screen.md
+    "Styles and Colors":
+      markdown: doc/styles.md
+    "Parsing ANSI Text":
+      markdown: doc/parsing.md
+    "Best Practices":
+      markdown: doc/best_practices.md
+  categoryOrder:
+    - "Introduction"
+    - "Styles and Colors"
+    - "Cursors and Positioning"
+    - "Screen Manipulation"
+    - "Event Handling"
+    - "Parsing ANSI Text"
+    - "Best Practices"

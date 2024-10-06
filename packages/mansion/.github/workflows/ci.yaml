@@ -1,0 +1,32 @@
+name: CI
+
+on:
+  # Post-submit.
+  push:
+    branches: [ main ]
+
+  # Pre-submit.
+  pull_request:
+    branches: [ main ]
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4.1.1
+      - uses: dart-lang/setup-dart@v1.6.4
+      - run: dart pub get
+      - run: dart format --output none --set-exit-if-changed .
+      - run: dart analyze
+      - run: ./chore coverage
+      - name: Upload coverage
+        uses: coverallsapp/github-action@v2.2.3
+        with:
+          github-token: ${{ secrets.GITHUB_TOKEN }}
+          path-to-lcov: coverage/lcov.info
+      - run: ./chore dartdoc
+      - name: Deploy to GitHub Pages
+        uses: peaceiris/actions-gh-pages@v4
+        with:
+          github_token: ${{ secrets.GITHUB_TOKEN }}
+          publish_dir: ./doc/api
