@@ -46,7 +46,7 @@ sealed class SemanticVersion {
   /// Whether this version is the [latest] available.
   bool get isLatest;
 
-  /// Name of the version.
+  /// Human readable name of the version.
   String get name;
 }
 

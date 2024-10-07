@@ -16,6 +16,9 @@ environment:
   sdk: ^3.5.0
 
 dependencies:
+  async: ^2.11.0
+  intl: ^0.19.0
+  jsonut: ^0.4.1+2
   meta: ^1.16.0
   path: ^1.9.0
   proc: ^0.2.0
