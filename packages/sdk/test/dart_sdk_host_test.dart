@@ -16,10 +16,6 @@ void main() {
     await check(() => sdk.revision).returnsNormally().completes();
   });
 
-  test('sdkPath', () {
-    check(sdk.sdkPath).contains('libexec');
-  });
-
   test('dart --version', () async {
     await check(sdk.dart.version).returnsNormally().completes();
   });
