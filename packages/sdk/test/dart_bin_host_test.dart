@@ -1,3 +1,6 @@
+@TestOn('vm')
+library;
+
 import 'dart:io' as io;
 import 'package:path/path.dart' as p;
 import 'package:sdk/sdk.dart';
@@ -5,8 +8,8 @@ import 'package:sdk/sdk.dart';
 import '_prelude.dart';
 
 void main() {
-  final dart = Dart.current;
-  if (dart == null) {
+  final dart = Dart.fromPath(io.Platform.resolvedExecutable);
+  if (!io.File(dart.binPath).existsSync()) {
     fail('Could not determine the Dart SDK.');
   }
 

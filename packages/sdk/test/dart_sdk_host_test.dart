@@ -1,12 +1,17 @@
+@TestOn('vm')
+library;
+
+import 'dart:io' as io;
 import 'package:sdk/sdk.dart';
 
 import '_prelude.dart';
 
 void main() {
-  final sdk = DartSdk.current;
-  if (sdk == null) {
+  final dart = Dart.fromPath(io.Platform.resolvedExecutable);
+  if (!io.File(dart.binPath).existsSync()) {
     fail('Could not determine the Dart SDK.');
   }
+  final sdk = dart.sdk;
 
   test('version', () async {
     await check(() => sdk.version).returnsNormally().completes();

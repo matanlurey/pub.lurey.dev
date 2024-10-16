@@ -1,4 +1,3 @@
-import 'dart:io' as io;
 import 'package:async/async.dart';
 import 'package:intl/intl.dart' show DateFormat;
 import 'package:jsonut/jsonut.dart';
@@ -13,22 +12,6 @@ import 'package:sdk/sdk.dart';
 /// scripts, compiling Dart code, and running Dart tests; as well as to access
 /// information about the Dart SDK.
 interface class Dart {
-  /// Current Dart binary that is running the process.
-  ///
-  /// If the current process is AOT (ahead-of-time) compiled, is `null`.
-  static final current = () {
-    final executable = io.Platform.resolvedExecutable;
-    if (p.basenameWithoutExtension(io.Platform.resolvedExecutable) == 'dart') {
-      return Dart.fromPath(executable);
-    } else {
-      return null;
-    }
-  }();
-
-  /// A reference to the `dart` binary that is currently running the process.
-  ///
-  /// If un
-
   /// Creates a reference to the `dart` binary at the given path.
   factory Dart.fromPath(String binPath) = Dart._;
   Dart._(this.binPath);
