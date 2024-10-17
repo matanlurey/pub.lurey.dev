@@ -28,4 +28,3 @@ jobs:
         with:
           github-token: ${{ secrets.GITHUB_TOKEN }}
           base-path: packages/iota
-          path-to-lcov: packages/iota/coverage/lcov.info
