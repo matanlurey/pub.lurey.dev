@@ -44,20 +44,6 @@ final class Pubspec {
     return value;
   }
 
-  bool? _loadBool(String key) {
-    final value = _root[key];
-    if (value == null) {
-      return null;
-    }
-    if (value is! bool) {
-      throw FormatException(
-        'Expected a boolean, got ${value.runtimeType}',
-        _root.span.text,
-      );
-    }
-    return value;
-  }
-
   List<String>? _loadStringList(String key) {
     final value = _root[key];
     if (value == null) {
