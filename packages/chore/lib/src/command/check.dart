@@ -32,8 +32,9 @@ final class Check extends BaseCommand {
     {
       final process = await environment.processHost.start(
         dartBin.binPath,
-        ['format', '--set-exit-if-changed', package.path],
+        ['format', '--set-exit-if-changed'],
         runMode: ProcessRunMode.inheritStdio,
+        workingDirectory: package.path,
       );
       if ((await process.exitCode).isFailure) {
         io.exitCode = 1;
@@ -49,8 +50,9 @@ final class Check extends BaseCommand {
     {
       final process = await environment.processHost.start(
         dartBin.binPath,
-        ['analyze', package.path],
+        ['analyze', '.'],
         runMode: ProcessRunMode.inheritStdio,
+        workingDirectory: package.path,
       );
       if ((await process.exitCode).isFailure) {
         io.exitCode = 1;

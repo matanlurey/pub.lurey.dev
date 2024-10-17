@@ -32,8 +32,9 @@ final class Test extends BaseCommand {
     {
       final process = await environment.processHost.start(
         dartBin.binPath,
-        ['test', package.path],
+        ['test'],
         runMode: ProcessRunMode.inheritStdio,
+        workingDirectory: package.path,
       );
       if ((await process.exitCode).isFailure) {
         io.exitCode = 1;
