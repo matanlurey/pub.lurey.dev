@@ -27,5 +27,4 @@ jobs:
       - uses: coverallsapp/github-action@v2.2.3
         with:
           github-token: ${{ secrets.GITHUB_TOKEN }}
-          base-path: packages/iota
-          path-to-lcov: ./packages/iota/coverage/lcov.info
+          file: packages/iota/coverage/lcov.info
