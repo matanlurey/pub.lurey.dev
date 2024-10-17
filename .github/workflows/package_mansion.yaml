@@ -22,3 +22,9 @@ jobs:
         working-directory: packages/mansion
       - run: ./dev.sh check --packages packages/mansion
       - run: ./dev.sh test --packages packages/mansion
+      - run: ./dev.sh coverage --packages packages/mansion
+      - uses: coverallsapp/github-action@v2.2.3
+        with:
+          github-token: ${{ secrets.GITHUB_TOKEN }}
+          base-path: packages/mansion
+          path-to-lcov: coverage/lcov.info

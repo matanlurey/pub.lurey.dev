@@ -93,7 +93,7 @@ Please [file an issue][] before contributing larger changes.
 
 This package uses repository specific tooling to enforce formatting, static analysis, and testing. Please run the following commands locally before submitting a pull request:
 
-- `./dev.sh check --packages jsonut`
-- `./dev.sh test --packages jsonut`
+- `./dev.sh check --packages packages/jsonut`
+- `./dev.sh test --packages packages/jsonut`
 
 <!-- #endregion -->

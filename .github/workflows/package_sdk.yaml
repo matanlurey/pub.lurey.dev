@@ -22,3 +22,9 @@ jobs:
         working-directory: packages/sdk
       - run: ./dev.sh check --packages packages/sdk
       - run: ./dev.sh test --packages packages/sdk
+      - run: ./dev.sh coverage --packages packages/sdk
+      - uses: coverallsapp/github-action@v2.2.3
+        with:
+          github-token: ${{ secrets.GITHUB_TOKEN }}
+          base-path: packages/sdk
+          path-to-lcov: coverage/lcov.info

@@ -22,3 +22,9 @@ jobs:
         working-directory: packages/proc
       - run: ./dev.sh check --packages packages/proc
       - run: ./dev.sh test --packages packages/proc
+      - run: ./dev.sh coverage --packages packages/proc
+      - uses: coverallsapp/github-action@v2.2.3
+        with:
+          github-token: ${{ secrets.GITHUB_TOKEN }}
+          base-path: packages/proc
+          path-to-lcov: coverage/lcov.info

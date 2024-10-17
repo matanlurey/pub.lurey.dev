@@ -22,3 +22,9 @@ jobs:
         working-directory: packages/quirk
       - run: ./dev.sh check --packages packages/quirk
       - run: ./dev.sh test --packages packages/quirk
+      - run: ./dev.sh coverage --packages packages/quirk
+      - uses: coverallsapp/github-action@v2.2.3
+        with:
+          github-token: ${{ secrets.GITHUB_TOKEN }}
+          base-path: packages/quirk
+          path-to-lcov: coverage/lcov.info

@@ -23,3 +23,9 @@ jobs:
         working-directory: packages/iota
       - run: ./dev.sh check --packages packages/iota
       - run: ./dev.sh test --packages packages/iota
+      - run: ./dev.sh coverage --packages packages/iota
+      - uses: coverallsapp/github-action@v2.2.3
+        with:
+          github-token: ${{ secrets.GITHUB_TOKEN }}
+          base-path: packages/iota
+          path-to-lcov: coverage/lcov.info

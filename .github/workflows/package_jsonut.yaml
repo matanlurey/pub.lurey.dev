@@ -22,3 +22,9 @@ jobs:
         working-directory: packages/jsonut
       - run: ./dev.sh check --packages packages/jsonut
       - run: ./dev.sh test --packages packages/jsonut
+      - run: ./dev.sh coverage --packages packages/jsonut
+      - uses: coverallsapp/github-action@v2.2.3
+        with:
+          github-token: ${{ secrets.GITHUB_TOKEN }}
+          base-path: packages/jsonut
+          path-to-lcov: coverage/lcov.info

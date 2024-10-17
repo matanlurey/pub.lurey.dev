@@ -52,7 +52,7 @@ Please [file an issue][] before contributing larger changes.
 
 This package uses repository specific tooling to enforce formatting, static analysis, and testing. Please run the following commands locally before submitting a pull request:
 
-- `./dev.sh check --packages oath`
-- `./dev.sh test --packages oath`
+- `./dev.sh check --packages packages/oath`
+- `./dev.sh test --packages packages/oath`
 
 <!-- #endregion -->

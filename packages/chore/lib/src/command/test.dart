@@ -32,7 +32,7 @@ final class Test extends BaseCommand {
     {
       final process = await environment.processHost.start(
         dartBin.binPath,
-        ['test'],
+        ['test', '--coverage=coverage'],
         runMode: ProcessRunMode.inheritStdio,
         workingDirectory: package.path,
       );

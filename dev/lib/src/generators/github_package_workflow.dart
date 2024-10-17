@@ -52,6 +52,17 @@ String generateGithubPackageWorkflow({
 
   writer.writeListValue('run: ./dev.sh check --packages packages/$package');
   writer.writeListValue('run: ./dev.sh test --packages packages/$package');
+  writer.writeListValue('run: ./dev.sh coverage --packages packages/$package');
+
+  writer.writeListValue('uses: coverallsapp/github-action@v2.2.3');
+  writer.indent();
+  writer.writeKey('with');
+  writer.indent();
+  writer.writeKeyValue('github-token', r'${{ secrets.GITHUB_TOKEN }}');
+  writer.writeKeyValue('base-path', 'packages/$package');
+  writer.writeKeyValue('path-to-lcov', 'coverage/lcov.info');
+  writer.unindent();
+  writer.unindent();
 
   return buffer.toString();
 }
