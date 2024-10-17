@@ -6,12 +6,18 @@ import 'package:meta/meta.dart';
 /// Entry point for the command-line interface.
 final class Runner extends CommandRunner<void> {
   /// Creates a command runner with the default commands.
-  factory Runner(Context context) {
+  factory Runner(
+    Context context,
+    Environment environment, {
+    required Iterable<String> availablePackages,
+  }) {
     return Runner._(
       [
+        Check(context, environment),
+        Test(context, environment),
         GenerateCommand(context),
       ],
-      packages: context.packages,
+      availablePackages: availablePackages,
     );
   }
 
@@ -21,21 +27,14 @@ final class Runner extends CommandRunner<void> {
   @visibleForTesting
   factory Runner.withCommands(
     Iterable<Command<void>> commands, {
-    required Iterable<String> packages,
+    required Iterable<String> availablePackages,
   }) = Runner._;
 
   Runner._(
     Iterable<Command<void>> commands, {
-    required Iterable<String> packages,
+    required Iterable<String> availablePackages,
   }) : super('dev', 'A tool working in the pub.lurey.dev monorepo.') {
     commands.forEach(addCommand);
-    argParser.addMultiOption(
-      'packages',
-      abbr: 'p',
-      help: ''
-          'Configuration to use for the command.\n\n'
-          'If omitted, each configuration is used.\n\nOptions:',
-      allowed: packages,
-    );
+    Context.registerArgs(argParser, packages: availablePackages);
   }
 }

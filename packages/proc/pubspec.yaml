@@ -13,7 +13,7 @@ description: |-
   Run and manage OS processes with an extensible and testable API.
 short_description: Extensible process management.
 
-version: 0.2.0+1
+version: 0.2.0+2
 
 homepage: https://github.com/matanlurey/pub.lurey.dev/tree/main/packages/proc
 issue_tracker: https://github.com/matanlurey/pub.lurey.dev/labels/pkg-proc

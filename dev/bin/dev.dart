@@ -2,6 +2,7 @@
 
 import 'dart:io' as io;
 
+import 'package:args/args.dart';
 import 'package:chore/chore.dart';
 import 'package:dev/src/runner.dart';
 
@@ -14,14 +15,14 @@ void main(List<String> args) async {
     return;
   }
 
-  // Find the workspace.
   final workspace = await Workspace.resolve(root);
+  final earlyArgs = ArgParser();
+  Context.registerArgs(earlyArgs, packages: workspace.packages);
+  final argResults = earlyArgs.parse(args);
+
   await Runner(
-    Context(
-      rootDir: root,
-      packages: workspace.packages.where((p) {
-        return !const {'dev'}.contains(p);
-      }).toSet(),
-    ),
+    await Context.resolve(argResults, root),
+    systemEnvironment,
+    availablePackages: workspace.packages,
   ).run(args);
 }

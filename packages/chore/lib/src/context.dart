@@ -1,5 +1,6 @@
 import 'dart:io' as io;
 
+import 'package:args/args.dart';
 import 'package:chore/src/internal/pubspec.dart';
 import 'package:chore/src/package.dart';
 import 'package:lore/lore.dart';
@@ -40,6 +41,25 @@ Future<String?> findRootDir({String? start, String? package}) async {
 /// Top-level context for executing a tool.
 @immutable
 final class Context {
+  /// Registers arguments for the context.
+  static void registerArgs(
+    ArgParser parser, {
+    required Iterable<String> packages,
+  }) {
+    parser.addMultiOption(
+      'packages',
+      abbr: 'p',
+      help: 'Configuration to use for the command.',
+      allowed: packages,
+    );
+  }
+
+  /// Resolves a context based on the given [results] and [rootDir].
+  static Future<Context> resolve(ArgResults results, String rootDir) async {
+    final packages = results.multiOption('packages').toSet();
+    return Context(rootDir: rootDir, packages: packages);
+  }
+
   /// Creates a new context.
   Context({
     required this.rootDir,
@@ -53,7 +73,7 @@ final class Context {
   /// What log level to use.
   final Level logLevel;
 
-  /// Packages, relative to [rootDir], to consider when running commands.
+  /// Packages, relative to [rootDir], to run commands for.
   final Set<String> packages;
 
   /// [packages] resolved to [Package] instances based on [rootDir].

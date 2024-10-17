@@ -83,6 +83,16 @@ final class ProcessHost extends base.ProcessHost {
           environment: environment,
           includeParentEnvironment: includeParentEnvironment,
           runInShell: runInShell,
+          mode: switch (runMode) {
+            ProcessRunMode.normal => io.ProcessStartMode.normal,
+            ProcessRunMode.inheritStdio => io.ProcessStartMode.inheritStdio,
+            ProcessRunMode.detached => io.ProcessStartMode.detached,
+            ProcessRunMode.detachedWithOutput =>
+              io.ProcessStartMode.detachedWithStdio,
+            // coverage:ignore-start
+            _ => throw UnsupportedError('Unsupported run mode: $runMode'),
+            // coverage:ignore-end
+          },
         ),
         stdoutEncoding,
         stderrEncoding,

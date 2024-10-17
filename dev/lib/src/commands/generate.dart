@@ -17,6 +17,7 @@ final class GenerateCommand extends Command<void> {
     argParser.addFlag(
       'root',
       help: 'Whether to also generate repository-level files.',
+      defaultsTo: _context.packages.isEmpty,
     );
   }
 
@@ -31,12 +32,7 @@ final class GenerateCommand extends Command<void> {
   @override
   Future<void> run() async {
     // Check for arguments, each positional argument is a package name.
-    final bool genRoot;
-    if (!argResults!.wasParsed('root')) {
-      genRoot = argResults!.rest.isEmpty;
-    } else {
-      genRoot = argResults!.flag('root');
-    }
+    final genRoot = argResults!.flag('root');
 
     for (final package in await _context.resolvedPackages) {
       await _runForPackage(_context.rootDir, package);

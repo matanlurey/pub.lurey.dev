@@ -1,6 +1,6 @@
 import 'dart:io' as io;
 
-import 'package:chore/src/internal/dart_test.dart';
+import 'package:chore/src/internal/dart_test_config.dart';
 import 'package:chore/src/internal/pubspec.dart';
 import 'package:chore/src/test_deps.dart';
 import 'package:meta/meta.dart';

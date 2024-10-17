@@ -23,11 +23,36 @@ interface class Dart {
   late final sdk = DartSdk.fromPath(p.dirname(p.dirname(binPath)));
 
   /// Analyze Dart code using `dart analyze`.
-  (Stream<Diagnostic>, Future<bool>) analyze(
+  Stream<Diagnostic> analyze(
     String directory, {
     ProcessHost? host,
   }) {
-    throw UnimplementedError();
+    host ??= ProcessHost();
+
+    // Using StreamCompleter.
+    // ignore: discarded_futures
+    return StreamCompleter.fromFuture(_analyze(directory, host: host));
+  }
+
+  Future<Stream<Diagnostic>> _analyze(
+    String directory, {
+    required ProcessHost host,
+  }) async {
+    final process = await host.start(
+      binPath,
+      [
+        'analyze',
+        '--format=machine',
+        directory,
+      ],
+    );
+    return process.stdoutText.map((t) {
+      final diagnostic = Diagnostic.tryParsePipe(t);
+      if (diagnostic == null) {
+        throw FormatException('Invalid diagnostic', t);
+      }
+      return diagnostic;
+    });
   }
 
   /// Format files using `dart format`.
@@ -43,7 +68,6 @@ interface class Dart {
       [
         'format',
         '--set-exit-if-changed',
-        '--',
         ...paths,
       ],
     );
@@ -83,7 +107,6 @@ interface class Dart {
         '--output=json',
         '--show=changed',
         '--set-exit-if-changed',
-        '--',
         ...paths,
       ],
     );
@@ -156,7 +179,7 @@ final class Diagnostic {
       return null;
     }
     return Diagnostic(
-      severity: Severity.from(parts[0]),
+      severity: Severity.from(parts[0].toLowerCase()),
       type: parts[1],
       code: parts[2],
       path: parts[3],
