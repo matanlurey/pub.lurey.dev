@@ -37,13 +37,6 @@ String generateGithubPackageWorkflow({
   writer.writeKey('build');
   writer.indent();
   writer.writeKeyValue('runs-on', 'ubuntu-latest');
-  writer.writeKey('defaults');
-  writer.indent();
-  writer.writeKey('run');
-  writer.indent();
-  writer.writeKeyValue('working-directory', 'packages/$package');
-  writer.unindent();
-  writer.unindent();
 
   writer.writeKey('steps');
   writer.indent();
