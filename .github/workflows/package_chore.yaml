@@ -23,5 +23,5 @@ jobs:
       - uses: dart-lang/setup-dart@v1.6.5
       - run: dart pub get
         working-directory: packages/chore
-      - run: ./dev.sh check --packages chore
-      - run: ./dev.sh test --packages chore
+      - run: ./dev.sh check --packages packages/chore
+      - run: ./dev.sh test --packages packages/chore

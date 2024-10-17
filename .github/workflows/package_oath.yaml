@@ -23,5 +23,5 @@ jobs:
       - uses: dart-lang/setup-dart@v1.6.5
       - run: dart pub get
         working-directory: packages/oath
-      - run: ./dev.sh check --packages oath
-      - run: ./dev.sh test --packages oath
+      - run: ./dev.sh check --packages packages/oath
+      - run: ./dev.sh test --packages packages/oath

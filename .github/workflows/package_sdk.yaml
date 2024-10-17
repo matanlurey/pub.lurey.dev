@@ -23,5 +23,5 @@ jobs:
       - uses: dart-lang/setup-dart@v1.6.5
       - run: dart pub get
         working-directory: packages/sdk
-      - run: ./dev.sh check --packages sdk
-      - run: ./dev.sh test --packages sdk
+      - run: ./dev.sh check --packages packages/sdk
+      - run: ./dev.sh test --packages packages/sdk

@@ -24,5 +24,5 @@ jobs:
       - uses: browser-actions/setup-chrome@v1.7.2
       - run: dart pub get
         working-directory: packages/webby
-      - run: ./dev.sh check --packages webby
-      - run: ./dev.sh test --packages webby
+      - run: ./dev.sh check --packages packages/webby
+      - run: ./dev.sh test --packages packages/webby
