@@ -1,7 +1,5 @@
 import 'package:args/command_runner.dart';
 import 'package:chore/chore.dart';
-import 'package:dev/src/commands/check.dart';
-import 'package:dev/src/commands/coverage.dart';
 import 'package:dev/src/commands/generate.dart';
 import 'package:meta/meta.dart';
 
@@ -11,8 +9,6 @@ final class Runner extends CommandRunner<void> {
   factory Runner(Context context) {
     return Runner._(
       [
-        CheckCommand(),
-        CoverageCommand(),
         GenerateCommand(context),
       ],
       packages: context.packages,
