@@ -1,6 +1,7 @@
 import 'dart:io' as io;
 
 import 'package:chore/chore.dart';
+import 'package:path/path.dart' as p;
 import 'package:sdk/sdk.dart';
 
 /// A command that collects and reports code coverage.
@@ -65,6 +66,16 @@ final class Coverage extends BaseCommand {
       } else {
         io.stderr.writeln('✅ Formatted coverage.');
       }
+    }
+
+    // ensure coverage/lcov.info exists
+    final lcov = io.File(p.join(package.path, 'coverage', 'lcov.info'));
+    if (!lcov.existsSync()) {
+      io.exitCode = 1;
+      io.stderr.writeln('❌ No coverage data found at ${lcov.path}.');
+      return;
+    } else {
+      io.stderr.writeln('✅ Found coverage data at ${lcov.path}.');
     }
   }
 }
