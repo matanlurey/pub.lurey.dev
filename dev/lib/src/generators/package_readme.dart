@@ -1,4 +1,4 @@
-import 'package:dev/src/generators/root_readme.dart';
+import 'package:chore/chore.dart';
 
 /// Generates a region of a package's README file.
 String generatePackageReadmeRegion(Package package) {

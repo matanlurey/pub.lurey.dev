@@ -17,7 +17,7 @@ A wide but independent collection of Dart packages and projects.
 | [`mansion`](./packages/mansion) | [![Pub version for package/mansion](https://img.shields.io/pub/v/mansion?label=%20)](https://pub.dev/packages/mansion) | Create and parse ANSI escape codes. |
 | [`oath`](./packages/oath) | [![Pub version for package/oath](https://img.shields.io/pub/v/oath?label=%20)](https://pub.dev/packages/oath) | Strict linting for Dart packages. |
 | [`proc`](./packages/proc) | [![Pub version for package/proc](https://img.shields.io/pub/v/proc?label=%20)](https://pub.dev/packages/proc) | Extensible process management. |
-| [`sdk`](./packages/sdk) | _Unreleased_ | Utilities for finding and using the Dart SDK programmatically. |
+| [`sdk`](./packages/sdk) | [![Pub version for package/sdk](https://img.shields.io/pub/v/sdk?label=%20)](https://pub.dev/packages/sdk) | null |
 | [`webby`](./packages/webby) | [![Pub version for package/webby](https://img.shields.io/pub/v/webby?label=%20)](https://pub.dev/packages/webby) | Hand-crafted interop for web apps. |
 
 <!-- #endregion -->

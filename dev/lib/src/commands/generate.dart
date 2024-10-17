@@ -2,12 +2,12 @@ import 'dart:async';
 import 'dart:io' as io;
 
 import 'package:args/command_runner.dart';
+import 'package:chore/chore.dart';
 import 'package:dev/src/generators/changelog_header.dart';
 import 'package:dev/src/generators/github_package_workflow.dart';
 import 'package:dev/src/generators/package_readme.dart';
 import 'package:dev/src/generators/root_readme.dart';
 import 'package:dev/src/parsers/dart_test_yaml.dart';
-import 'package:dev/src/parsers/pubspec_yaml.dart';
 import 'package:dev/src/sinks/file_sink.dart';
 import 'package:dev/src/utils/find_root_dir.dart';
 import 'package:path/path.dart' as p;
@@ -98,20 +98,8 @@ final class GenerateCommand extends Command<void> {
       ),
     );
 
-    // Load the pubspec.yaml file.
-    final pubspecFile = io.File(p.join(packageDir.path, 'pubspec.yaml'));
-    if (!pubspecFile.existsSync()) {
-      throw ArgumentError('Missing pubspec.yaml file in package: $package');
-    }
-    final pubspec = PubspecYaml.from(
-      loadYamlDocument(await pubspecFile.readAsString()),
-    );
-    final pkg = Package(
-      name: package,
-      isPublishable: pubspec.isPublishable,
-      description: pubspec.description,
-      shortDescription: pubspec.shortDescription,
-    );
+    // Load the package.
+    final pkg = await Package.resolve(packageDir.path);
 
     // Generate the README file.
     final sink = FileSink.fromBaseDir(packageDir.path);
@@ -134,19 +122,7 @@ final class GenerateCommand extends Command<void> {
       if (packageDir is! io.Directory) {
         continue;
       }
-      final package = p.basename(packageDir.path);
-      final pubspec = io.File(p.join(packageDir.path, 'pubspec.yaml'));
-      final doc = loadYamlDocument(await pubspec.readAsString());
-      final yaml = PubspecYaml.from(doc);
-
-      packages.add(
-        Package(
-          name: package,
-          isPublishable: yaml.isPublishable,
-          description: yaml.description,
-          shortDescription: yaml.shortDescription,
-        ),
-      );
+      packages.add(await Package.resolve(packageDir.path));
     }
 
     packages.sort((a, b) => a.name.compareTo(b.name));
