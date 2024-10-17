@@ -6,7 +6,12 @@ import 'package:proc/proc.dart';
 /// A command that checks the repository for issues.
 final class Check extends BaseCommand {
   /// Creates a new check command.
-  Check(super.context, super.environment);
+  Check(super.context, super.environment) {
+    argParser.addFlag(
+      'fix',
+      help: 'Automaticallyfix issues when possible.',
+    );
+  }
 
   @override
   String get name => 'check';
@@ -27,12 +32,25 @@ final class Check extends BaseCommand {
       throw StateError('Unable to find dart executable.');
     }
 
+    final fix = argResults!.flag('fix');
+
     // Run dartfmt.
     io.stderr.writeln('Checking formatting of ${package.name}...');
     {
       final process = await environment.processHost.start(
         dartBin.binPath,
-        ['format', '--set-exit-if-changed', '.'],
+        [
+          'format',
+          '--fix',
+          if (fix) ...[
+            '--output=write',
+          ] else ...[
+            '--output=show',
+            '--show=changed',
+            '--set-exit-if-changed',
+          ],
+          '.',
+        ],
         runMode: ProcessRunMode.inheritStdio,
         workingDirectory: package.path,
       );

@@ -11,5 +11,10 @@ Utilities for finding and using the Dart SDK programmatically.
 <!-- #region(CONTRIBUTING) -->
 ## Contributing
 
+This is an experimental package that is **not intended for general use**.
+
+Please [file an issue][] if changes to this package are desired.
+
+[file an issue]: https://github.com/matanlurey/pub.lurey.dev/issues/new
 
 <!-- #endregion -->

@@ -11,5 +11,15 @@ Fast, structured, and idiomatic logging with an extensible API.
 <!-- #region(CONTRIBUTING) -->
 ## Contributing
 
+We welcome contributions to this package!
+
+Please [file an issue][] before contributing larger changes.
+
+[file an issue]: https://github.com/matanlurey/pub.lurey.dev/issues/new?labels=pkg-lore
+
+This package uses repository specific tooling to enforce formatting, static analysis, and testing. Please run the following commands locally before submitting a pull request:
+
+- `./dev.sh check --packages lore`
+- `./dev.sh test --packages lore`
 
 <!-- #endregion -->

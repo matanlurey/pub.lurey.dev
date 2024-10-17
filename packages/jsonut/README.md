@@ -85,4 +85,15 @@ In short, the overhead is minimal compared to the benefits.
 <!-- #region(CONTRIBUTING) -->
 ## Contributing
 
+We welcome contributions to this package!
+
+Please [file an issue][] before contributing larger changes.
+
+[file an issue]: https://github.com/matanlurey/pub.lurey.dev/issues/new?labels=pkg-jsonut
+
+This package uses repository specific tooling to enforce formatting, static analysis, and testing. Please run the following commands locally before submitting a pull request:
+
+- `./dev.sh check --packages jsonut`
+- `./dev.sh test --packages jsonut`
+
 <!-- #endregion -->
