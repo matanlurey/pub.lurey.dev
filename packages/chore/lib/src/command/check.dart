@@ -32,7 +32,7 @@ final class Check extends BaseCommand {
     {
       final process = await environment.processHost.start(
         dartBin.binPath,
-        ['format', '--set-exit-if-changed'],
+        ['format', '--set-exit-if-changed', '.'],
         runMode: ProcessRunMode.inheritStdio,
         workingDirectory: package.path,
       );
