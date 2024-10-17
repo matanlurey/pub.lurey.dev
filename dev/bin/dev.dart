@@ -13,5 +13,15 @@ void main(List<String> args) async {
     io.exitCode = 1;
     return;
   }
-  await Runner(Context(rootDir: root)).run(args);
+
+  // Find the workspace.
+  final workspace = await Workspace.resolve(root);
+  await Runner(
+    Context(
+      rootDir: root,
+      packages: workspace.packages.where((p) {
+        return !const {'dev'}.contains(p);
+      }).toSet(),
+    ),
+  ).run(args);
 }

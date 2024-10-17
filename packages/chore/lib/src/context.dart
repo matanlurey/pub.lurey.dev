@@ -1,6 +1,7 @@
 import 'dart:io' as io;
 
 import 'package:chore/src/internal/pubspec.dart';
+import 'package:chore/src/package.dart';
 import 'package:lore/lore.dart';
 import 'package:meta/meta.dart';
 import 'package:path/path.dart' as p;
@@ -52,8 +53,11 @@ final class Context {
   /// What log level to use.
   final Level logLevel;
 
-  /// Packages to consider when running commands.
+  /// Packages, relative to [rootDir], to consider when running commands.
   final Set<String> packages;
+
+  /// [packages] resolved to [Package] instances based on [rootDir].
+  late final resolvedPackages = Future.wait(packages.map(Package.resolve));
 
   @override
   bool operator ==(Object other) {

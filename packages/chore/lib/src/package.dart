@@ -1,6 +1,8 @@
 import 'dart:io' as io;
 
+import 'package:chore/src/internal/dart_test.dart';
 import 'package:chore/src/internal/pubspec.dart';
+import 'package:chore/src/test_deps.dart';
 import 'package:meta/meta.dart';
 import 'package:path/path.dart' as p;
 import 'package:quirk/quirk.dart';
@@ -31,12 +33,29 @@ sealed class Package {
       );
     }
 
+    // Check if dart_test.yaml exists.
+    final dartTestPath = p.join(path, 'dart_test.yaml');
+    final testDeps = <TestDependency>{};
+    try {
+      final dartTest = DartTest.parseFrom(
+        await io.File(dartTestPath).readAsString(),
+        sourceUrl: Uri.parse(dartTestPath),
+      );
+      // Check if chrome is required.
+      if (dartTest.platforms?.contains('chrome') ?? false) {
+        testDeps.add(TestDependency.chrome);
+      }
+    } on io.FileSystemException {
+      // Ignore.
+    }
+
     return Package(
       path: path,
       name: pubspec.name,
       isPublishable: pubspec.isPublishable,
       description: pubspec.description,
       shortDescription: pubspec.shortDescription,
+      testDependencies: testDeps,
     );
   }
 
@@ -47,15 +66,17 @@ sealed class Package {
     required bool isPublishable,
     String? description,
     String? shortDescription,
+    Set<TestDependency> testDependencies,
   }) = _Package;
 
-  const Package._({
+  Package._({
     required this.path,
     required this.name,
     required this.isPublishable,
     this.description,
     this.shortDescription,
-  });
+    Set<TestDependency> testDependencies = const {},
+  }) : testDependencies = Set.unmodifiable(testDependencies);
 
   /// Path of the package.
   final String path;
@@ -75,6 +96,9 @@ sealed class Package {
 
   /// Whether the package is publishable.
   final bool isPublishable;
+
+  /// Dependencies required for testing.
+  final Set<TestDependency> testDependencies;
 
   @override
   bool operator ==(Object other) {
@@ -101,12 +125,13 @@ sealed class Package {
 }
 
 final class _Package extends Package {
-  const _Package({
+  _Package({
     required super.path,
     required super.name,
     required super.isPublishable,
     super.description,
     super.shortDescription,
+    super.testDependencies,
   }) : super._();
 
   @override
@@ -117,6 +142,15 @@ final class _Package extends Package {
 
 /// Represents a package that is a workspace.
 final class Workspace extends _Package {
+  /// Resolves a workspace from the given [path].
+  static Future<Workspace> resolve(String path) async {
+    final package = await Package.resolve(path);
+    if (package is! Workspace) {
+      throw ArgumentError('Expected a workspace, got $package');
+    }
+    return package;
+  }
+
   /// Describes a workspace package.
   Workspace({
     required super.path,
