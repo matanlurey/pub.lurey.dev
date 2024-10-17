@@ -27,3 +27,4 @@ jobs:
         with:
           github-token: ${{ secrets.GITHUB_TOKEN }}
           base-path: packages/lore
+          path-to-lcov: ./packages/lore/coverage/lcov.info

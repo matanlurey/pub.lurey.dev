@@ -27,3 +27,4 @@ jobs:
         with:
           github-token: ${{ secrets.GITHUB_TOKEN }}
           base-path: packages/mansion
+          path-to-lcov: ./packages/mansion/coverage/lcov.info
