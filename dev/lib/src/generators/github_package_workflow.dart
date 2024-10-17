@@ -57,8 +57,8 @@ String generateGithubPackageWorkflow({
   writer.writeKeyValue('working-directory', 'packages/$package');
   writer.unindent();
 
-  writer.writeListValue('run: ./dev.sh check --packages $package');
-  writer.writeListValue('run: ./dev.sh test --packages $package');
+  writer.writeListValue('run: ./dev.sh check --packages packages/$package');
+  writer.writeListValue('run: ./dev.sh test --packages packages/$package');
 
   return buffer.toString();
 }
