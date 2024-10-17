@@ -10,9 +10,10 @@ environment:
 
 dependencies:
   args: ^2.5.0
+  chore:
+    path: ../packages/chore
   lore:
-    path:
-      ../packages/lore
+    path: ../packages/lore
   meta: ^1.16.0
   path: ^1.9.0
   proc: ^0.2.0

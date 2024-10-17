@@ -19,5 +19,6 @@ workspace:
   - packages/mansion
   - packages/oath
   - packages/proc
+  - packages/quirk
   - packages/sdk
   - packages/webby

@@ -1,28 +1,4 @@
-import 'package:meta/meta.dart';
-
-/// Describes the package.
-@immutable
-final class Package {
-  /// Creates a new package description.
-  const Package({
-    required this.name,
-    required this.isPublishable,
-    required this.description,
-    required this.shortDescription,
-  });
-
-  /// Name of the package.
-  final String name;
-
-  /// Whether the package is publishable.
-  final bool isPublishable;
-
-  /// Description of the package.
-  final String description;
-
-  /// Short description of the package.
-  final String shortDescription;
-}
+import 'package:chore/chore.dart';
 
 /// Generates a region of the root README file.
 String generateRootReadmeRegion(Iterable<Package> packages) {

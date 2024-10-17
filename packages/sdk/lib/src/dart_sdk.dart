@@ -14,15 +14,6 @@ interface class DartSdk {
   /// the path is valid.
   factory DartSdk.fromPath(String sdkPath) = DartSdk._;
 
-  /// A reference to the Dart SDK
-
-  /// A reference to the Dart SDK that is running the current process.
-  ///
-  /// This is determined by the path to the `dart` executable that is running
-  /// the current process. If the current process is AOT (ahead-of-time)
-  /// compiled, this will be `null`.
-  static final current = Dart.current?.sdk;
-
   DartSdk._(this.sdkPath);
 
   /// The path to the root of the Dart SDK.

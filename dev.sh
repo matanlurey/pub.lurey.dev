@@ -1,4 +1,4 @@
-#!/usr/bin/env sh
+#!/usr/bin/env bash
 
 # A development script for managing this monorepo.
 # Requires the Dart SDK to be installed.

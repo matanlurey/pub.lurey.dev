@@ -15,14 +15,11 @@ on:
 jobs:
   build:
     runs-on: ubuntu-latest
-    defaults:
-      run:
-        working-directory: packages/iota
     steps:
       - uses: actions/checkout@v4.2.0
       - uses: dart-lang/setup-dart@v1.6.5
       - uses: browser-actions/setup-chrome@v1.7.2
       - run: dart pub get
-      - run: dart format --output none --set-exit-if-changed .
-      - run: dart analyze
-      - run: dart test
+        working-directory: packages/iota
+      - run: ./dev.sh check --packages packages/iota
+      - run: ./dev.sh test --packages packages/iota

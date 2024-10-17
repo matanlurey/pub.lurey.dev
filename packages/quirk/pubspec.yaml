@@ -1,6 +1,6 @@
 # Format: https://dart.dev/tools/pub/pubspec
 
-name: proc
+name: quirk
 
 # However, a shorter description is often better for a quick summary, so we
 # store an unofficial shorter description as `short_description` which tools
@@ -10,22 +10,18 @@ name: proc
 # store an unofficial shorter description as `short_description` which tools
 # can optionally use.
 description: |-
-  Run and manage OS processes with an extensible and testable API.
-short_description: Extensible process management.
+  Common utilities, patterns, and extensions for Dart and Flutter.
+short_description: Common utilities.
 
-version: 0.2.0+2
+publish_to: none
 
-homepage: https://github.com/matanlurey/pub.lurey.dev/tree/main/packages/proc
-issue_tracker: https://github.com/matanlurey/pub.lurey.dev/labels/pkg-proc
+homepage: https://github.com/matanlurey/pub.lurey.dev/tree/main/packages/quirk
+issue_tracker: https://github.com/matanlurey/pub.lurey.dev/labels/pkg-quirk
 
 resolution: workspace
 
 environment:
   sdk: ^3.5.0
-
-dependencies:
-  meta: ^1.15.0
-  path: ^1.9.0
 
 dev_dependencies:
   checks: ^0.3.0

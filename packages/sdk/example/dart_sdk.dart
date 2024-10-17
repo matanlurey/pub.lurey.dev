@@ -11,8 +11,8 @@ import 'package:sdk/sdk.dart';
 /// dart compile exe example/dart_sdk.dart -o example/dart_sdk && ./example/dart_sdk || rm example/dart_sdk
 /// ```
 void main() async {
-  final sdk = DartSdk.current;
-  if (sdk == null) {
+  final sdk = Dart.fromPath(io.Platform.resolvedExecutable).sdk;
+  if (!io.Directory(sdk.sdkPath).existsSync()) {
     io.stderr.writeln('Could not determine the Dart SDK.');
     io.exitCode = 1;
     return;

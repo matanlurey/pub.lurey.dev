@@ -1,4 +1,3 @@
-import 'dart:io' as io;
 import 'package:async/async.dart';
 import 'package:intl/intl.dart' show DateFormat;
 import 'package:jsonut/jsonut.dart';
@@ -13,22 +12,6 @@ import 'package:sdk/sdk.dart';
 /// scripts, compiling Dart code, and running Dart tests; as well as to access
 /// information about the Dart SDK.
 interface class Dart {
-  /// Current Dart binary that is running the process.
-  ///
-  /// If the current process is AOT (ahead-of-time) compiled, is `null`.
-  static final current = () {
-    final executable = io.Platform.resolvedExecutable;
-    if (p.basenameWithoutExtension(io.Platform.resolvedExecutable) == 'dart') {
-      return Dart.fromPath(executable);
-    } else {
-      return null;
-    }
-  }();
-
-  /// A reference to the `dart` binary that is currently running the process.
-  ///
-  /// If un
-
   /// Creates a reference to the `dart` binary at the given path.
   factory Dart.fromPath(String binPath) = Dart._;
   Dart._(this.binPath);
@@ -40,11 +23,36 @@ interface class Dart {
   late final sdk = DartSdk.fromPath(p.dirname(p.dirname(binPath)));
 
   /// Analyze Dart code using `dart analyze`.
-  (Stream<Diagnostic>, Future<bool>) analyze(
+  Stream<Diagnostic> analyze(
     String directory, {
     ProcessHost? host,
   }) {
-    throw UnimplementedError();
+    host ??= ProcessHost();
+
+    // Using StreamCompleter.
+    // ignore: discarded_futures
+    return StreamCompleter.fromFuture(_analyze(directory, host: host));
+  }
+
+  Future<Stream<Diagnostic>> _analyze(
+    String directory, {
+    required ProcessHost host,
+  }) async {
+    final process = await host.start(
+      binPath,
+      [
+        'analyze',
+        '--format=machine',
+        directory,
+      ],
+    );
+    return process.stdoutText.map((t) {
+      final diagnostic = Diagnostic.tryParsePipe(t);
+      if (diagnostic == null) {
+        throw FormatException('Invalid diagnostic', t);
+      }
+      return diagnostic;
+    });
   }
 
   /// Format files using `dart format`.
@@ -60,7 +68,6 @@ interface class Dart {
       [
         'format',
         '--set-exit-if-changed',
-        '--',
         ...paths,
       ],
     );
@@ -100,7 +107,6 @@ interface class Dart {
         '--output=json',
         '--show=changed',
         '--set-exit-if-changed',
-        '--',
         ...paths,
       ],
     );
@@ -173,7 +179,7 @@ final class Diagnostic {
       return null;
     }
     return Diagnostic(
-      severity: Severity.from(parts[0]),
+      severity: Severity.from(parts[0].toLowerCase()),
       type: parts[1],
       code: parts[2],
       path: parts[3],
