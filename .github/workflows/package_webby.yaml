@@ -23,6 +23,6 @@ jobs:
       - uses: dart-lang/setup-dart@v1.6.5
       - uses: browser-actions/setup-chrome@v1.7.2
       - run: dart pub get
-      - run: dart format --output none --set-exit-if-changed .
-      - run: dart analyze
-      - run: dart test
+        working-directory: packages/webby
+      - run: ./dev.sh check --packages webby
+      - run: ./dev.sh test --packages webby

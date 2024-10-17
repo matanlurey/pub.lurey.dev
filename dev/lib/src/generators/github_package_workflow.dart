@@ -53,11 +53,12 @@ String generateGithubPackageWorkflow({
     writer.writeListValue('uses: browser-actions/setup-chrome@v1.7.2');
   }
   writer.writeListValue('run: dart pub get');
-  writer.writeListValue(
-    'run: dart format --output none --set-exit-if-changed .',
-  );
-  writer.writeListValue('run: dart analyze');
-  writer.writeListValue('run: dart test');
+  writer.indent();
+  writer.writeKeyValue('working-directory', 'packages/$package');
+  writer.unindent();
+
+  writer.writeListValue('run: ./dev.sh check --packages $package');
+  writer.writeListValue('run: ./dev.sh test --packages $package');
 
   return buffer.toString();
 }

@@ -55,8 +55,15 @@ final class Context {
   }
 
   /// Resolves a context based on the given [results] and [rootDir].
-  static Future<Context> resolve(ArgResults results, String rootDir) async {
-    final packages = results.multiOption('packages').toSet();
+  static Future<Context> resolve(
+    ArgResults results,
+    String rootDir, {
+    required Set<String> availablePackages,
+  }) async {
+    var packages = results.multiOption('packages').toSet();
+    if (packages.isEmpty) {
+      packages = availablePackages;
+    }
     return Context(rootDir: rootDir, packages: packages);
   }
 

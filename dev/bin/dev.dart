@@ -16,13 +16,19 @@ void main(List<String> args) async {
   }
 
   final workspace = await Workspace.resolve(root);
+  final available = workspace.packages.where((p) => p != 'dev').toSet();
+
   final earlyArgs = ArgParser();
-  Context.registerArgs(earlyArgs, packages: workspace.packages);
+  Context.registerArgs(earlyArgs, packages: available);
   final argResults = earlyArgs.parse(args);
 
   await Runner(
-    await Context.resolve(argResults, root),
+    await Context.resolve(
+      argResults,
+      root,
+      availablePackages: available,
+    ),
     systemEnvironment,
-    availablePackages: workspace.packages,
+    availablePackages: available,
   ).run(args);
 }
