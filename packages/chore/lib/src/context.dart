@@ -1,10 +1,10 @@
 import 'dart:io' as io;
 
 import 'package:chore/src/internal/pubspec.dart';
-import 'package:collection/collection.dart';
 import 'package:lore/lore.dart';
 import 'package:meta/meta.dart';
 import 'package:path/path.dart' as p;
+import 'package:quirk/quirk.dart';
 
 /// Finds the root directory of a repository.
 ///
@@ -42,44 +42,35 @@ final class Context {
   /// Creates a new context.
   Context({
     required this.rootDir,
-    this.packages = const [],
     this.logLevel = Level.status,
-  });
+    Set<String> packages = const {},
+  }) : packages = Set.unmodifiable(packages);
 
   /// The root directory of the repository.
   final String rootDir;
 
-  /// Packages to consider when running commands.
-  final List<String> packages;
-
   /// What log level to use.
   final Level logLevel;
+
+  /// Packages to consider when running commands.
+  final Set<String> packages;
 
   @override
   bool operator ==(Object other) {
     if (other is! Context) {
       return false;
     }
-
-    const eq = UnorderedIterableEquality<Object?>();
-    if (rootDir != other.rootDir) {
-      return false;
-    }
-    if (!eq.equals(packages, other.packages)) {
-      return false;
-    }
-    if (logLevel != other.logLevel) {
-      return false;
-    }
-    return true;
+    return rootDir == other.rootDir &&
+        logLevel == other.logLevel &&
+        packages.containsOnly(other.packages);
   }
 
   @override
   int get hashCode {
     return Object.hash(
       rootDir,
-      Object.hashAllUnordered(packages),
       logLevel,
+      Object.hashAllUnordered(packages),
     );
   }
 

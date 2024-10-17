@@ -90,4 +90,39 @@ void main() {
       check(list.containsOnlyUnordered(other)).isFalse();
     });
   });
+
+  group('toSetRejectDuplicates', () {
+    test('returns a set with no duplicates', () {
+      final list = [1, 2, 3];
+      final set = list.toSetRejectDuplicates();
+      check(set).deepEquals({1, 2, 3});
+    });
+
+    test('throws an error if duplicates exist', () {
+      final list = [1, 2, 3, 3];
+      check(list.toSetRejectDuplicates).throws<StateError>();
+    });
+  });
+
+  group('toUnmodifiableSet', () {
+    test('returns an unmodifiable set', () {
+      final list = [1, 2, 3];
+      final set = list.toUnmodifiableSet();
+      check(set).deepEquals({1, 2, 3});
+      check(() => set.add(4)).throws<UnsupportedError>();
+    });
+  });
+
+  group('toUnmodifiableSetRejectDuplicates', () {
+    test('returns an unmodifiable set with no duplicates', () {
+      final list = [1, 2, 3];
+      final set = list.toUnmodifiableSetRejectDuplicates();
+      check(set).deepEquals({1, 2, 3});
+    });
+
+    test('throws an error if duplicates exist', () {
+      final list = [1, 2, 3, 3];
+      check(list.toUnmodifiableSetRejectDuplicates).throws<StateError>();
+    });
+  });
 }

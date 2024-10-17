@@ -1,9 +1,9 @@
 import 'dart:io' as io;
 
 import 'package:chore/src/internal/pubspec.dart';
-import 'package:collection/collection.dart';
 import 'package:meta/meta.dart';
 import 'package:path/path.dart' as p;
+import 'package:quirk/quirk.dart';
 
 /// Represents a package within a repository.
 ///
@@ -27,7 +27,7 @@ sealed class Package {
         isPublishable: pubspec.isPublishable,
         description: pubspec.description,
         shortDescription: pubspec.shortDescription,
-        packages: packages,
+        packages: packages.toSetRejectDuplicates(),
       );
     }
 
@@ -77,7 +77,6 @@ sealed class Package {
   final bool isPublishable;
 
   @override
-  @mustCallSuper
   bool operator ==(Object other) {
     return other is Package &&
         name == other.name &&
@@ -87,7 +86,6 @@ sealed class Package {
   }
 
   @override
-  @mustCallSuper
   int get hashCode {
     return Object.hash(
       name,
@@ -124,21 +122,27 @@ final class Workspace extends _Package {
     required super.path,
     required super.name,
     required super.isPublishable,
-    Iterable<String> packages = const [],
+    Set<String> packages = const {},
     super.description,
     super.shortDescription,
-  }) : packages = List.unmodifiable(packages);
+  }) : packages = Set.unmodifiable(packages);
 
   /// Paths of packages that are part of the workspace.
   ///
   /// The paths are relative to [path].
-  final List<String> packages;
+  final Set<String> packages;
 
   @override
   bool operator ==(Object other) {
-    return other is Workspace &&
-        super == other &&
-        const ListEquality<String>().equals(packages, other.packages);
+    if (other is! Workspace || super != other) {
+      return false;
+    }
+    return packages.containsOnly(other.packages);
+  }
+
+  @override
+  int get hashCode {
+    return Object.hash(super.hashCode, Object.hashAllUnordered(packages));
   }
 
   @override

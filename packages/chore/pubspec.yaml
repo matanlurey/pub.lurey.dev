@@ -30,6 +30,8 @@ dependencies:
   meta: ^1.16.0
   path: ^1.9.0
   proc: ^0.2.0+1
+  quirk:
+    path: ../quirk
   sdk:
     path: ../sdk
   yaml: ^3.1.2
