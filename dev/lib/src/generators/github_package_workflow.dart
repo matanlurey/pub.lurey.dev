@@ -60,7 +60,7 @@ String generateGithubPackageWorkflow({
   writer.indent();
   writer.writeKeyValue('github-token', r'${{ secrets.GITHUB_TOKEN }}');
   writer.writeKeyValue('base-path', 'packages/$package');
-  writer.writeKeyValue('path-to-lcov', 'coverage/lcov.info');
+  writer.writeKeyValue('path-to-lcov', 'packages/$package/coverage/lcov.info');
   writer.unindent();
   writer.unindent();
 

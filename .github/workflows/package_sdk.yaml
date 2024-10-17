@@ -27,4 +27,4 @@ jobs:
         with:
           github-token: ${{ secrets.GITHUB_TOKEN }}
           base-path: packages/sdk
-          path-to-lcov: coverage/lcov.info
+          path-to-lcov: packages/sdk/coverage/lcov.info
