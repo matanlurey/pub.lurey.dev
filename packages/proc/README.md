@@ -1,4 +1,4 @@
-<!-- #region(PACKAGE_README_HEADER) -->
+<!-- #region(HEADER) -->
 # `proc`
 
 Run and manage OS processes with an extensible and testable API.
@@ -31,22 +31,8 @@ void main() async {
 }
 ```
 
+<!-- #region(CONTRIBUTING) -->
 ## Contributing
 
-To run the tests, run:
 
-```shell
-dart test
-```
-
-To check code coverage locally, run:
-
-```shell
-./chore coverage
-```
-
-To preview `dartdoc` output locally, run:
-
-```shell
-./chore dartodc
-```
+<!-- #endregion -->

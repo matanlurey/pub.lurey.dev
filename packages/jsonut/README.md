@@ -1,4 +1,4 @@
-<!-- #region(PACKAGE_README_HEADER) -->
+<!-- #region(HEADER) -->
 # `jsonut`
 
 A minimal utility kit for working with JSON in a typesafe manner.
@@ -82,21 +82,7 @@ just using the `object['...'] as ...` pattern, or dynamic calls in JIT mode. In 
 
 In short, the overhead is minimal compared to the benefits.
 
+<!-- #region(CONTRIBUTING) -->
 ## Contributing
 
-The following are guidelines for contributing to this package:
-
-- **Issues**: Open an issue for any non-trivial change you'd like to make.
-- **Pull Requests**: Open a PR against the `main` branch.
-- **Testing**: Add tests for any new functionality or behavior changes.
-- **Dependencies**: Avoid adding dependencies (dev-dependencies are fine~ish).
-
-To check code coverage locally, run:
-
-```sh
-# Generate coverage report
-dart run coverage:test_with_coverage -- -P coverage
-
-# Open coverage report if you have `genhtml` installed
-genhtml coverage/lcov.info -o coverage/html && open coverage/html/index.html
-```
+<!-- #endregion -->

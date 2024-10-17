@@ -60,7 +60,8 @@ final class Generate extends BaseCommand {
     // Generate the README file.
     final sink = FileSink.fromBaseDir(package.path);
     await sink.writeRegions('README.md', {
-      'PACKAGE_README_HEADER': generatePackageReadmeRegion(package),
+      'HEADER': generatePackageReadmeRegion(package),
+      'CONTRIBUTING': generatePackageContributingSection(package),
     });
 
     // Generate the CHANGELOG.md file.

@@ -1,4 +1,4 @@
-<!-- #region(PACKAGE_README_HEADER) -->
+<!-- #region(HEADER) -->
 # `oath`
 
 Swear a Paladin's Oath to code righteousness by enforcing lints.
@@ -40,3 +40,9 @@ Or, for Flutter:
 
 include: package:oath/flutter/relaxed.yaml
 ```
+
+<!-- #region(CONTRIBUTING) -->
+## Contributing
+
+
+<!-- #endregion -->
