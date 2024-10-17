@@ -27,6 +27,6 @@ jobs:
         with:
           github-token: ${{ secrets.GITHUB_TOKEN }}
           debug: true
-          base-path: packages/jsonut
+          # base-path: packages/jsonut
           format: lcov
           file: ./packages/jsonut/coverage/lcov.info
