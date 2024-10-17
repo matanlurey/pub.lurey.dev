@@ -25,6 +25,6 @@ jobs:
       - run: ./dev.sh coverage --packages packages/jsonut
       - uses: coverallsapp/github-action@v2.2.3
         with:
-          github-token: ${{ secrets.GITHUB_TOKEN }}
           base-path: packages/jsonut
           path-to-lcov: ./packages/jsonut/coverage/lcov.info
+          github-token: ${{ secrets.GITHUB_TOKEN }}
