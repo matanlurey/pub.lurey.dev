@@ -15,7 +15,7 @@ final class Runner extends CommandRunner<void> {
       [
         Check(context, environment),
         Test(context, environment),
-        GenerateCommand(context),
+        Generate(context, environment),
       ],
       availablePackages: availablePackages,
     );

@@ -1,7 +1,6 @@
 import 'dart:async';
 import 'dart:io' as io;
 
-import 'package:args/command_runner.dart';
 import 'package:chore/chore.dart';
 import 'package:dev/src/generators/changelog_header.dart';
 import 'package:dev/src/generators/github_package_workflow.dart';
@@ -11,17 +10,15 @@ import 'package:dev/src/sinks/file_sink.dart';
 import 'package:path/path.dart' as p;
 
 /// A command that generates output files.
-final class GenerateCommand extends Command<void> {
+final class Generate extends BaseCommand {
   /// Creates a new generate command.
-  GenerateCommand(this._context) {
+  Generate(super.context, super.environment) {
     argParser.addFlag(
       'root',
       help: 'Whether to also generate repository-level files.',
-      defaultsTo: _context.packages.isEmpty,
+      defaultsTo: true,
     );
   }
-
-  final Context _context;
 
   @override
   String get name => 'generate';
@@ -34,8 +31,8 @@ final class GenerateCommand extends Command<void> {
     // Check for arguments, each positional argument is a package name.
     final genRoot = argResults!.flag('root');
 
-    for (final package in await _context.resolvedPackages) {
-      await _runForPackage(_context.rootDir, package);
+    for (final package in await context.resolvedPackages) {
+      await _runForPackage(context.rootDir, package);
     }
 
     if (genRoot) {
@@ -74,19 +71,11 @@ final class GenerateCommand extends Command<void> {
 
   Future<void> _writeRepoFiles() async {
     // Find all the packages in the repository.
-    final packagesDir = io.Directory(p.join(_context.rootDir, 'packages'));
-    final packages = <Package>[];
-    for (final packageDir in packagesDir.listSync()) {
-      if (packageDir is! io.Directory) {
-        continue;
-      }
-      packages.add(await Package.resolve(packageDir.path));
-    }
-
+    final packages = await context.resolvedPackages;
     packages.sort((a, b) => a.name.compareTo(b.name));
 
     // Generate parts of the root README file.
-    final sink = FileSink.fromBaseDir(_context.rootDir);
+    final sink = FileSink.fromBaseDir(context.rootDir);
     await sink.writeRegions('README.md', {
       'PACKAGE_TABLE': generateRootReadmeRegion(packages),
     });

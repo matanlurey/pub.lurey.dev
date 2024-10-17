@@ -3,6 +3,7 @@ name: sdk
 # Pub requires at 60 chartacters or we are dinged for "too short".
 # https://dart.dev/tools/pub/pubspec#description
 description: Utilities for finding and using the Dart SDK programmatically.
+short_description: Dart SDK utilities.
 
 # Not ready for publishing yet.
 publish_to: none
