@@ -1,6 +1,7 @@
 import 'dart:io' as io;
 
 import 'package:chore/src/internal/pubspec.dart';
+import 'package:collection/collection.dart';
 import 'package:meta/meta.dart';
 import 'package:path/path.dart' as p;
 
@@ -78,10 +79,8 @@ sealed class Package {
   @override
   @mustCallSuper
   bool operator ==(Object other) {
-    assert(other is Package, 'Child classes must override == operator.');
-    other as Package;
-
-    return name == other.name &&
+    return other is Package &&
+        name == other.name &&
         description == other.description &&
         shortDescription == other.shortDescription &&
         isPublishable == other.isPublishable;
@@ -134,6 +133,13 @@ final class Workspace extends _Package {
   ///
   /// The paths are relative to [path].
   final List<String> packages;
+
+  @override
+  bool operator ==(Object other) {
+    return other is Workspace &&
+        super == other &&
+        const ListEquality<String>().equals(packages, other.packages);
+  }
 
   @override
   String toString() {

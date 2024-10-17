@@ -1,0 +1,27 @@
+name: package/quirk
+
+on:
+  # Post-submit.
+  push:
+    branches: [ main ]
+
+  # Pre-submit.
+  pull_request:
+    branches: [ main ]
+    paths:
+      - .github/workflows/package_quirk.yaml
+      - packages/quirk/**
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+    defaults:
+      run:
+        working-directory: packages/quirk
+    steps:
+      - uses: actions/checkout@v4.2.0
+      - uses: dart-lang/setup-dart@v1.6.5
+      - run: dart pub get
+      - run: dart format --output none --set-exit-if-changed .
+      - run: dart analyze
+      - run: dart test
