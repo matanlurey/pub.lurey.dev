@@ -43,7 +43,7 @@ final class Coverage extends BaseCommand {
 
   Future<void> _runForPackage(Dart dart, Package package) async {
     // dart pub global run coverage:format_coverage -i coverage
-    io.stderr.writeln('Formatting coverage for ${package.name}...');
+    io.stderr.writeln('Collecting coverage for ${package.name}...');
     {
       final process = await environment.processHost.start(
         dart.binPath,
@@ -51,20 +51,20 @@ final class Coverage extends BaseCommand {
           'pub',
           'global',
           'run',
-          'coverage:format_coverage',
-          '--lcov',
-          '--in=coverage',
-          '--out=coverage/lcov.info',
+          'coverage:test_with_coverage',
+          '--',
+          '-P',
+          'coverage',
         ],
         workingDirectory: package.path,
       );
       if ((await process.exitCode).isFailure) {
         io.exitCode = 1;
         io.stderr.writeln(await process.stderrText.join('\n'));
-        io.stderr.writeln('❌ Failed to format coverage.');
+        io.stderr.writeln('❌ Failed to collect coverage.');
         return;
       } else {
-        io.stderr.writeln('✅ Formatted coverage.');
+        io.stderr.writeln('✅ Collected coverage.');
       }
     }
 
