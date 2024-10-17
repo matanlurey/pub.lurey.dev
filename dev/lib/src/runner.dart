@@ -1,4 +1,5 @@
 import 'package:args/command_runner.dart';
+import 'package:chore/chore.dart';
 import 'package:dev/src/commands/check.dart';
 import 'package:dev/src/commands/coverage.dart';
 import 'package:dev/src/commands/generate.dart';
@@ -7,14 +8,14 @@ import 'package:meta/meta.dart';
 /// Entry point for the command-line interface.
 final class Runner extends CommandRunner<void> {
   /// Creates a command runner with the default commands.
-  factory Runner({required Iterable<String> packages}) {
+  factory Runner(Context context) {
     return Runner._(
       [
         CheckCommand(),
         CoverageCommand(),
-        GenerateCommand(),
+        GenerateCommand(context),
       ],
-      packages: packages,
+      packages: context.packages,
     );
   }
 

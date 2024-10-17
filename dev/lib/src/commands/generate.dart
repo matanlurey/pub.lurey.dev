@@ -9,19 +9,20 @@ import 'package:dev/src/generators/package_readme.dart';
 import 'package:dev/src/generators/root_readme.dart';
 import 'package:dev/src/parsers/dart_test_yaml.dart';
 import 'package:dev/src/sinks/file_sink.dart';
-import 'package:dev/src/utils/find_root_dir.dart';
 import 'package:path/path.dart' as p;
 import 'package:yaml/yaml.dart';
 
 /// A command that generates output files.
 final class GenerateCommand extends Command<void> {
   /// Creates a new generate command.
-  GenerateCommand() {
+  GenerateCommand(this._context) {
     argParser.addFlag(
       'root',
       help: 'Whether to also generate repository-level files.',
     );
   }
+
+  final Context _context;
 
   @override
   String get name => 'generate';
@@ -32,8 +33,6 @@ final class GenerateCommand extends Command<void> {
   @override
   Future<void> run() async {
     // Check for arguments, each positional argument is a package name.
-    final root = findRootDir();
-
     final bool genRoot;
     if (!argResults!.wasParsed('root')) {
       genRoot = argResults!.rest.isEmpty;
@@ -42,7 +41,7 @@ final class GenerateCommand extends Command<void> {
     }
     final List<String> packages;
     if (argResults!.rest.isEmpty) {
-      final packagesDir = io.Directory(p.join(root, 'packages'));
+      final packagesDir = io.Directory(p.join(_context.rootDir, 'packages'));
       packages = packagesDir.listSync().whereType<io.Directory>().map((e) {
         return p.basename(e.path);
       }).toList();
@@ -52,7 +51,7 @@ final class GenerateCommand extends Command<void> {
     }
 
     for (final package in packages) {
-      await _runForPackage(root, package);
+      await _runForPackage(_context.rootDir, package);
     }
 
     if (genRoot) {
@@ -115,8 +114,7 @@ final class GenerateCommand extends Command<void> {
 
   Future<void> _writeRepoFiles() async {
     // Find all the packages in the repository.
-    final root = findRootDir();
-    final packagesDir = io.Directory(p.join(root, 'packages'));
+    final packagesDir = io.Directory(p.join(_context.rootDir, 'packages'));
     final packages = <Package>[];
     for (final packageDir in packagesDir.listSync()) {
       if (packageDir is! io.Directory) {
@@ -128,7 +126,7 @@ final class GenerateCommand extends Command<void> {
     packages.sort((a, b) => a.name.compareTo(b.name));
 
     // Generate parts of the root README file.
-    final sink = FileSink.fromBaseDir(root);
+    final sink = FileSink.fromBaseDir(_context.rootDir);
     await sink.writeRegions('README.md', {
       'PACKAGE_TABLE': generateRootReadmeRegion(packages),
     });
