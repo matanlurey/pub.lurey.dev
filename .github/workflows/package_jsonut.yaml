@@ -23,7 +23,8 @@ jobs:
       - run: ./dev.sh check --packages packages/jsonut
       - run: ./dev.sh test --packages packages/jsonut
       - run: ./dev.sh coverage --packages packages/jsonut
-      - uses: coverallsapp/github-action@v2.2.3
+      - uses: codecov/codecov-action@v4.6.0
         with:
-          github-token: ${{ secrets.GITHUB_TOKEN }}
+          token: ${{ secrets.CODECOV_TOKEN }}
+          flags: jsonut
           file: packages/jsonut/coverage/lcov.info

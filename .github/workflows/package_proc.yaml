@@ -23,7 +23,8 @@ jobs:
       - run: ./dev.sh check --packages packages/proc
       - run: ./dev.sh test --packages packages/proc
       - run: ./dev.sh coverage --packages packages/proc
-      - uses: coverallsapp/github-action@v2.2.3
+      - uses: codecov/codecov-action@v4.6.0
         with:
-          github-token: ${{ secrets.GITHUB_TOKEN }}
+          token: ${{ secrets.CODECOV_TOKEN }}
+          flags: proc
           file: packages/proc/coverage/lcov.info

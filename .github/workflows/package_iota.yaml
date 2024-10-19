@@ -24,7 +24,8 @@ jobs:
       - run: ./dev.sh check --packages packages/iota
       - run: ./dev.sh test --packages packages/iota
       - run: ./dev.sh coverage --packages packages/iota
-      - uses: coverallsapp/github-action@v2.2.3
+      - uses: codecov/codecov-action@v4.6.0
         with:
-          github-token: ${{ secrets.GITHUB_TOKEN }}
+          token: ${{ secrets.CODECOV_TOKEN }}
+          flags: iota
           file: packages/iota/coverage/lcov.info

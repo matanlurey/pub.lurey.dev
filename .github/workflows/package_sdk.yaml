@@ -23,7 +23,8 @@ jobs:
       - run: ./dev.sh check --packages packages/sdk
       - run: ./dev.sh test --packages packages/sdk
       - run: ./dev.sh coverage --packages packages/sdk
-      - uses: coverallsapp/github-action@v2.2.3
+      - uses: codecov/codecov-action@v4.6.0
         with:
-          github-token: ${{ secrets.GITHUB_TOKEN }}
+          token: ${{ secrets.CODECOV_TOKEN }}
+          flags: sdk
           file: packages/sdk/coverage/lcov.info

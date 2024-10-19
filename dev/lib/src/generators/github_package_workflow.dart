@@ -54,11 +54,12 @@ String generateGithubPackageWorkflow({
   writer.writeListValue('run: ./dev.sh test --packages packages/$package');
   writer.writeListValue('run: ./dev.sh coverage --packages packages/$package');
 
-  writer.writeListValue('uses: coverallsapp/github-action@v2.2.3');
+  writer.writeListValue('uses: codecov/codecov-action@v4.6.0');
   writer.indent();
   writer.writeKey('with');
   writer.indent();
-  writer.writeKeyValue('github-token', r'${{ secrets.GITHUB_TOKEN }}');
+  writer.writeKeyValue('token', r'${{ secrets.CODECOV_TOKEN }}');
+  writer.writeKeyValue('flags', package);
   writer.writeKeyValue('file', 'packages/$package/coverage/lcov.info');
   writer.unindent();
   writer.unindent();
