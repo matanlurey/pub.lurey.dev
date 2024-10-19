@@ -4,8 +4,6 @@ A wide but independent collection of Dart packages and projects.
 
 [![codecov](https://codecov.io/github/matanlurey/pub.lurey.dev/graph/badge.svg?token=YPjEnZQgcl)](https://codecov.io/github/matanlurey/pub.lurey.dev)
 
-<https://codecov.io/github/matanlurey/pub.lurey.dev/graphs/tree.svg?token=YPjEnZQgcl>
-
 ## Packages
 
 <!-- #region(PACKAGE_TABLE) -->

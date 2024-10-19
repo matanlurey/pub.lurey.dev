@@ -29,3 +29,4 @@ jobs:
           token: ${{ secrets.CODECOV_TOKEN }}
           flags: iota
           file: packages/iota/coverage/lcov.info
+          fail_ci_if_error: true

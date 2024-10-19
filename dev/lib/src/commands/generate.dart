@@ -54,6 +54,7 @@ final class Generate extends BaseCommand {
       generateGithubPackageWorkflow(
         package: package.name,
         usesChrome: package.testDependencies.contains(TestDependency.chrome),
+        uploadCoverage: package.supportsCoverage,
       ),
     );
 

@@ -28,3 +28,4 @@ jobs:
           token: ${{ secrets.CODECOV_TOKEN }}
           flags: lore
           file: packages/lore/coverage/lcov.info
+          fail_ci_if_error: true
