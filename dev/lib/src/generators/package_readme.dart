@@ -89,8 +89,8 @@ String generatePackageContributingSection(Package package) {
       'static analysis, and testing. Please run the following commands locally '
       'before submitting a pull request:\n'
       '\n'
-      '- `./dev.sh check --packages packages/${package.name}`\n'
-      '- `./dev.sh test --packages packages/${package.name}`',
+      '- `./dev.sh --packages packages/${package.name} check `\n'
+      '- `./dev.sh --packages packages/${package.name} test `\n',
     );
   }
   return buffer.toString();
