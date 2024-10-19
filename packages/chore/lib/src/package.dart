@@ -36,11 +36,16 @@ sealed class Package {
     // Check if dart_test.yaml exists.
     final dartTestPath = p.join(path, 'dart_test.yaml');
     final testDeps = <TestDependency>{};
+    var supportsCoverage = true;
     try {
       final dartTest = DartTest.parseFrom(
         await io.File(dartTestPath).readAsString(),
         sourceUrl: Uri.parse(dartTestPath),
       );
+      // If a platform is set, 'vm' must also exist to report coverage.
+      if (dartTest.platforms?.isNotEmpty ?? false) {
+        supportsCoverage = dartTest.platforms!.contains('vm');
+      }
       // Check if chrome is required.
       if (dartTest.platforms?.contains('chrome') ?? false) {
         testDeps.add(TestDependency.chrome);
@@ -56,6 +61,7 @@ sealed class Package {
       description: pubspec.description,
       shortDescription: pubspec.shortDescription,
       testDependencies: testDeps,
+      supportsCoverage: supportsCoverage,
     );
   }
 
@@ -64,6 +70,7 @@ sealed class Package {
     required String path,
     required String name,
     required bool isPublishable,
+    required bool supportsCoverage,
     String? description,
     String? shortDescription,
     Set<TestDependency> testDependencies,
@@ -73,6 +80,7 @@ sealed class Package {
     required this.path,
     required this.name,
     required this.isPublishable,
+    required this.supportsCoverage,
     this.description,
     this.shortDescription,
     Set<TestDependency> testDependencies = const {},
@@ -100,13 +108,18 @@ sealed class Package {
   /// Dependencies required for testing.
   final Set<TestDependency> testDependencies;
 
+  /// Whether coverage is supported.
+  final bool supportsCoverage;
+
   @override
   bool operator ==(Object other) {
     return other is Package &&
         name == other.name &&
         description == other.description &&
         shortDescription == other.shortDescription &&
-        isPublishable == other.isPublishable;
+        isPublishable == other.isPublishable &&
+        testDependencies.containsOnlyUnordered(other.testDependencies) &&
+        supportsCoverage == other.supportsCoverage;
   }
 
   @override
@@ -116,6 +129,8 @@ sealed class Package {
       description,
       shortDescription,
       isPublishable,
+      Object.hashAllUnordered(testDependencies),
+      supportsCoverage,
     );
   }
 
@@ -129,6 +144,7 @@ final class _Package extends Package {
     required super.path,
     required super.name,
     required super.isPublishable,
+    required super.supportsCoverage,
     super.description,
     super.shortDescription,
     super.testDependencies,
@@ -159,7 +175,8 @@ final class Workspace extends _Package {
     Set<String> packages = const {},
     super.description,
     super.shortDescription,
-  }) : packages = Set.unmodifiable(packages);
+  })  : packages = Set.unmodifiable(packages),
+        super(supportsCoverage: false);
 
   /// Paths of packages that are part of the workspace.
   ///

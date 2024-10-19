@@ -4,6 +4,7 @@ import 'package:dev/src/sinks/yaml_sink.dart';
 String generateGithubPackageWorkflow({
   required String package,
   required bool usesChrome,
+  required bool uploadCoverage,
 }) {
   final buffer = StringBuffer();
   final writer = YamlSink.fromSink(buffer);
@@ -54,15 +55,18 @@ String generateGithubPackageWorkflow({
   writer.writeListValue('run: ./dev.sh test --packages packages/$package');
   writer.writeListValue('run: ./dev.sh coverage --packages packages/$package');
 
-  writer.writeListValue('uses: codecov/codecov-action@v4.6.0');
-  writer.indent();
-  writer.writeKey('with');
-  writer.indent();
-  writer.writeKeyValue('token', r'${{ secrets.CODECOV_TOKEN }}');
-  writer.writeKeyValue('flags', package);
-  writer.writeKeyValue('file', 'packages/$package/coverage/lcov.info');
-  writer.unindent();
-  writer.unindent();
+  if (uploadCoverage) {
+    writer.writeListValue('uses: codecov/codecov-action@v4.6.0');
+    writer.indent();
+    writer.writeKey('with');
+    writer.indent();
+    writer.writeKeyValue('token', r'${{ secrets.CODECOV_TOKEN }}');
+    writer.writeKeyValue('flags', package);
+    writer.writeKeyValue('file', 'packages/$package/coverage/lcov.info');
+    writer.writeKeyValue('fail_ci_if_error', 'true');
+    writer.unindent();
+    writer.unindent();
+  }
 
   return buffer.toString();
 }
