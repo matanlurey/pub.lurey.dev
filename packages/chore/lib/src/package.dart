@@ -36,15 +36,15 @@ sealed class Package {
     // Check if dart_test.yaml exists.
     final dartTestPath = p.join(path, 'dart_test.yaml');
     final testDeps = <TestDependency>{};
-    var supportsCoverage = true;
+    var supportsCoverage = false;
     try {
       final dartTest = DartTest.parseFrom(
         await io.File(dartTestPath).readAsString(),
         sourceUrl: Uri.parse(dartTestPath),
       );
       // If a platform is set, 'vm' must also exist to report coverage.
-      if (dartTest.platforms?.isNotEmpty ?? false) {
-        supportsCoverage = dartTest.platforms!.contains('vm');
+      if (dartTest.presets?.contains('coverage') ?? false) {
+        supportsCoverage = true;
       }
       // Check if chrome is required.
       if (dartTest.platforms?.contains('chrome') ?? false) {

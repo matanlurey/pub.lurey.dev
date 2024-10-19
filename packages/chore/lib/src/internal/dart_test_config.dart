@@ -33,4 +33,21 @@ final class DartTest extends YamlWrapper {
   ///
   /// If omitted, the default is `null`.
   List<String>? get platforms => loadStringList('platforms');
+
+  /// Presets that exist in the configuration.
+  ///
+  /// If omitted, the default is `null`.
+  Set<String>? get presets {
+    final value = root['presets'];
+    if (value == null) {
+      return null;
+    }
+    if (value is! Map) {
+      throw FormatException(
+        'Expected a map, got ${value.runtimeType}',
+        root.span.text,
+      );
+    }
+    return value.keys.cast<String>().toSet();
+  }
 }

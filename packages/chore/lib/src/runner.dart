@@ -1,6 +1,5 @@
 import 'package:args/command_runner.dart';
 import 'package:chore/chore.dart';
-import 'package:dev/src/commands/generate.dart';
 import 'package:meta/meta.dart';
 
 /// Entry point for the command-line interface.
@@ -10,15 +9,20 @@ final class Runner extends CommandRunner<void> {
     Context context,
     Environment environment, {
     required Iterable<String> availablePackages,
+    String name = 'chore',
+    String description = 'A repository maintenance tool.',
+    Iterable<Command<void>> Function(Context, Environment)? commands,
   }) {
     return Runner._(
       [
         Check(context, environment),
         Coverage(context, environment),
         Test(context, environment),
-        Generate(context, environment),
+        ...?commands?.call(context, environment),
       ],
       availablePackages: availablePackages,
+      name: name,
+      description: description,
     );
   }
 
@@ -29,12 +33,16 @@ final class Runner extends CommandRunner<void> {
   factory Runner.withCommands(
     Iterable<Command<void>> commands, {
     required Iterable<String> availablePackages,
+    required String name,
+    required String description,
   }) = Runner._;
 
   Runner._(
     Iterable<Command<void>> commands, {
     required Iterable<String> availablePackages,
-  }) : super('dev', 'A tool working in the pub.lurey.dev monorepo.') {
+    required String name,
+    required String description,
+  }) : super(name, description) {
     commands.forEach(addCommand);
     Context.registerArgs(argParser, packages: availablePackages);
   }

@@ -4,20 +4,19 @@ import 'dart:io' as io;
 
 import 'package:args/args.dart';
 import 'package:chore/chore.dart';
-import 'package:dev/src/commands/generate.dart';
 
 void main(List<String> args) async {
   // Find the root directory of the repository.
-  final root = await findRootDir(package: 'pub.lurey.dev');
+  final root = await findRootDir();
   if (root == null) {
     io.stderr.writeln('No repository found.');
     io.exitCode = 1;
     return;
   }
 
-  final workspace = await Workspace.resolve(root);
-  final available = workspace.packages.where((p) => p != 'dev').toSet();
-
+  // Resolve the pubspec.yaml file.
+  final pubspec = await Package.resolve(root);
+  final available = pubspec is Workspace ? pubspec.packages : {'.'};
   final earlyArgs = ArgParser();
   Context.registerArgs(earlyArgs, packages: available);
 
@@ -25,7 +24,6 @@ void main(List<String> args) async {
   var end = args.length;
   for (var i = 0; i < args.length; i++) {
     if (const {
-      'generate',
       'check',
       'coverage',
       'test',
@@ -37,7 +35,6 @@ void main(List<String> args) async {
   final argResults = earlyArgs.parse(args.getRange(0, end));
 
   await Runner(
-    name: 'dev',
     await Context.resolve(
       argResults,
       root,
@@ -45,10 +42,5 @@ void main(List<String> args) async {
     ),
     systemEnvironment,
     availablePackages: available,
-    commands: (context, env) {
-      return [
-        Generate(context, env),
-      ];
-    },
   ).run(args);
 }

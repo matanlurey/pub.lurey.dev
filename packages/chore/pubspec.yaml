@@ -13,7 +13,6 @@ description: |-
   Opinionated open source project management tools for Dart packages.
 short_description: Opinionated project management.
 
-# Not ready to publish.
 publish_to: none
 version: 0.0.0
 
@@ -34,6 +33,8 @@ dependencies:
     path: ../quirk
   sdk:
     path: ../sdk
+  strink:
+    path: ../strink
   yaml: ^3.1.2
 
 dev_dependencies:

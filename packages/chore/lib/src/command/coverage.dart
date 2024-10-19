@@ -42,6 +42,12 @@ final class Coverage extends BaseCommand {
   }
 
   Future<void> _runForPackage(Dart dart, Package package) async {
+    if (!package.supportsCoverage) {
+      io.exitCode = 1;
+      io.stderr.writeln('❌ ${package.name} does not support coverage.');
+      return;
+    }
+
     // dart pub global run coverage:format_coverage -i coverage
     io.stderr.writeln('Collecting coverage for ${package.name}...');
     {
