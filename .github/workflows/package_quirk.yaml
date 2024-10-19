@@ -22,3 +22,9 @@ jobs:
         working-directory: packages/quirk
       - run: ./dev.sh check --packages packages/quirk
       - run: ./dev.sh test --packages packages/quirk
+      - run: ./dev.sh coverage --packages packages/quirk
+      - uses: codecov/codecov-action@v4.6.0
+        with:
+          token: ${{ secrets.CODECOV_TOKEN }}
+          flags: quirk
+          file: packages/quirk/coverage/lcov.info

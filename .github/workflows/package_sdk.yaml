@@ -22,3 +22,9 @@ jobs:
         working-directory: packages/sdk
       - run: ./dev.sh check --packages packages/sdk
       - run: ./dev.sh test --packages packages/sdk
+      - run: ./dev.sh coverage --packages packages/sdk
+      - uses: codecov/codecov-action@v4.6.0
+        with:
+          token: ${{ secrets.CODECOV_TOKEN }}
+          flags: sdk
+          file: packages/sdk/coverage/lcov.info

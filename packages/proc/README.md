@@ -1,4 +1,4 @@
-<!-- #region(PACKAGE_README_HEADER) -->
+<!-- #region(HEADER) -->
 # `proc`
 
 Run and manage OS processes with an extensible and testable API.
@@ -31,22 +31,18 @@ void main() async {
 }
 ```
 
+<!-- #region(CONTRIBUTING) -->
 ## Contributing
 
-To run the tests, run:
+We welcome contributions to this package!
 
-```shell
-dart test
-```
+Please [file an issue][] before contributing larger changes.
 
-To check code coverage locally, run:
+[file an issue]: https://github.com/matanlurey/pub.lurey.dev/issues/new?labels=pkg-proc
 
-```shell
-./chore coverage
-```
+This package uses repository specific tooling to enforce formatting, static analysis, and testing. Please run the following commands locally before submitting a pull request:
 
-To preview `dartdoc` output locally, run:
+- `./dev.sh check --packages packages/proc`
+- `./dev.sh test --packages packages/proc`
 
-```shell
-./chore dartodc
-```
+<!-- #endregion -->

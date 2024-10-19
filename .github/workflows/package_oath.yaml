@@ -22,3 +22,9 @@ jobs:
         working-directory: packages/oath
       - run: ./dev.sh check --packages packages/oath
       - run: ./dev.sh test --packages packages/oath
+      - run: ./dev.sh coverage --packages packages/oath
+      - uses: codecov/codecov-action@v4.6.0
+        with:
+          token: ${{ secrets.CODECOV_TOKEN }}
+          flags: oath
+          file: packages/oath/coverage/lcov.info

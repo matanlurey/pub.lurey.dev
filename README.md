@@ -2,7 +2,9 @@
 
 A wide but independent collection of Dart packages and projects.
 
-[![Coverage Status](https://coveralls.io/repos/github/matanlurey/pub.lurey.dev/badge.svg?branch=main)](https://coveralls.io/github/matanlurey/pub.lurey.dev?branch=main)
+[![codecov](https://codecov.io/github/matanlurey/pub.lurey.dev/graph/badge.svg?token=YPjEnZQgcl)](https://codecov.io/github/matanlurey/pub.lurey.dev)
+
+<https://codecov.io/github/matanlurey/pub.lurey.dev/graphs/tree.svg?token=YPjEnZQgcl>
 
 ## Packages
 

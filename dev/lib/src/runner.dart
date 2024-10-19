@@ -14,6 +14,7 @@ final class Runner extends CommandRunner<void> {
     return Runner._(
       [
         Check(context, environment),
+        Coverage(context, environment),
         Test(context, environment),
         Generate(context, environment),
       ],

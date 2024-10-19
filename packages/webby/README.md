@@ -1,4 +1,4 @@
-<!-- #region(PACKAGE_README_HEADER) -->
+<!-- #region(HEADER) -->
 # `webby`
 
 Artisnal hand-crafted interopability library for the web platform.
@@ -8,22 +8,18 @@ Artisnal hand-crafted interopability library for the web platform.
 | [![Build status for package/webby](https://github.com/matanlurey/pub.lurey.dev/actions/workflows/package_webby.yaml/badge.svg)](https://github.com/matanlurey/pub.lurey.dev/actions/workflows/package_webby.yaml) | [![Pub version for package/webby](https://img.shields.io/pub/v/webby)](https://pub.dev/packages/webby) | [![Dart documentation for package/webby](https://img.shields.io/badge/dartdoc-reference-blue.svg)](https://pub.dev/documentation/webby) | [![GitHub Issues for package/webby](https://img.shields.io/github/issues/matanlurey/pub.lurey.dev/pkg-webby?label=issues)](https://github.com/matanlurey/pub.lurey.dev/issues?q=is%3Aopen+is%3Aissue+label%3Apkg-webby) |
 <!-- #endregion -->
 
+<!-- #region(CONTRIBUTING) -->
 ## Contributing
 
-To run the tests, run:
+We welcome contributions to this package!
 
-```shell
-dart test
-```
+Please [file an issue][] before contributing larger changes.
 
-To check code coverage locally, run:
+[file an issue]: https://github.com/matanlurey/pub.lurey.dev/issues/new?labels=pkg-webby
 
-```shell
-./chore coverage
-```
+This package uses repository specific tooling to enforce formatting, static analysis, and testing. Please run the following commands locally before submitting a pull request:
 
-To preview `dartdoc` output locally, run:
+- `./dev.sh check --packages packages/webby`
+- `./dev.sh test --packages packages/webby`
 
-```shell
-./chore dartodc
-```
+<!-- #endregion -->

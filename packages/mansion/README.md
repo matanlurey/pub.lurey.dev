@@ -1,4 +1,4 @@
-<!-- #region(PACKAGE_README_HEADER) -->
+<!-- #region(HEADER) -->
 # `mansion`
 
 A stately library for crafting and deciphering ANSI escape codes.
@@ -64,22 +64,18 @@ functionality.
 Build on top of `mansion` to create your own terminal libraries, or use it to
 style text in your command-line applications.
 
+<!-- #region(CONTRIBUTING) -->
 ## Contributing
 
-To run the tests, run:
+We welcome contributions to this package!
 
-```shell
-dart test
-```
+Please [file an issue][] before contributing larger changes.
 
-To check code coverage locally, run:
+[file an issue]: https://github.com/matanlurey/pub.lurey.dev/issues/new?labels=pkg-mansion
 
-```shell
-dart tool/coverage.dart
-```
+This package uses repository specific tooling to enforce formatting, static analysis, and testing. Please run the following commands locally before submitting a pull request:
 
-To preview `dartdoc` output locally, run:
+- `./dev.sh check --packages packages/mansion`
+- `./dev.sh test --packages packages/mansion`
 
-```shell
-dart tool/dartdoc.dart
-```
+<!-- #endregion -->

@@ -22,3 +22,9 @@ jobs:
         working-directory: packages/jsonut
       - run: ./dev.sh check --packages packages/jsonut
       - run: ./dev.sh test --packages packages/jsonut
+      - run: ./dev.sh coverage --packages packages/jsonut
+      - uses: codecov/codecov-action@v4.6.0
+        with:
+          token: ${{ secrets.CODECOV_TOKEN }}
+          flags: jsonut
+          file: packages/jsonut/coverage/lcov.info

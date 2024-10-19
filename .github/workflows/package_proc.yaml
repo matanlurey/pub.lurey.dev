@@ -22,3 +22,9 @@ jobs:
         working-directory: packages/proc
       - run: ./dev.sh check --packages packages/proc
       - run: ./dev.sh test --packages packages/proc
+      - run: ./dev.sh coverage --packages packages/proc
+      - uses: codecov/codecov-action@v4.6.0
+        with:
+          token: ${{ secrets.CODECOV_TOKEN }}
+          flags: proc
+          file: packages/proc/coverage/lcov.info

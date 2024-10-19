@@ -23,3 +23,9 @@ jobs:
         working-directory: packages/iota
       - run: ./dev.sh check --packages packages/iota
       - run: ./dev.sh test --packages packages/iota
+      - run: ./dev.sh coverage --packages packages/iota
+      - uses: codecov/codecov-action@v4.6.0
+        with:
+          token: ${{ secrets.CODECOV_TOKEN }}
+          flags: iota
+          file: packages/iota/coverage/lcov.info

@@ -22,3 +22,9 @@ jobs:
         working-directory: packages/chore
       - run: ./dev.sh check --packages packages/chore
       - run: ./dev.sh test --packages packages/chore
+      - run: ./dev.sh coverage --packages packages/chore
+      - uses: codecov/codecov-action@v4.6.0
+        with:
+          token: ${{ secrets.CODECOV_TOKEN }}
+          flags: chore
+          file: packages/chore/coverage/lcov.info

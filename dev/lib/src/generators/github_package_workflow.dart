@@ -52,6 +52,17 @@ String generateGithubPackageWorkflow({
 
   writer.writeListValue('run: ./dev.sh check --packages packages/$package');
   writer.writeListValue('run: ./dev.sh test --packages packages/$package');
+  writer.writeListValue('run: ./dev.sh coverage --packages packages/$package');
+
+  writer.writeListValue('uses: codecov/codecov-action@v4.6.0');
+  writer.indent();
+  writer.writeKey('with');
+  writer.indent();
+  writer.writeKeyValue('token', r'${{ secrets.CODECOV_TOKEN }}');
+  writer.writeKeyValue('flags', package);
+  writer.writeKeyValue('file', 'packages/$package/coverage/lcov.info');
+  writer.unindent();
+  writer.unindent();
 
   return buffer.toString();
 }

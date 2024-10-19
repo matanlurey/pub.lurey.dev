@@ -64,3 +64,34 @@ String _githubIssues(String package) {
       '[![GitHub Issues for package/$package](https://img.shields.io/github/issues/matanlurey/pub.lurey.dev/pkg-$package?label=issues)]'
       '(https://github.com/matanlurey/pub.lurey.dev/issues?q=is%3Aopen+is%3Aissue+label%3Apkg-$package)';
 }
+
+/// Generates a contributing section for a package's README file.
+String generatePackageContributingSection(Package package) {
+  final buffer = StringBuffer();
+  buffer.writeln('## Contributing\n');
+  if (!package.isPublishable) {
+    buffer.writeln(
+      'This is an experimental package that is **not intended for general use**.\n'
+      '\n'
+      'Please [file an issue][] if changes to this package are desired.\n'
+      '\n'
+      '[file an issue]: https://github.com/matanlurey/pub.lurey.dev/issues/new',
+    );
+  } else {
+    buffer.writeln(
+      'We welcome contributions to this package!\n'
+      '\n'
+      'Please [file an issue][] before contributing larger changes.\n'
+      '\n'
+      '[file an issue]: https://github.com/matanlurey/pub.lurey.dev/issues/new?labels=pkg-${package.name}'
+      '\n\n'
+      'This package uses repository specific tooling to enforce formatting, '
+      'static analysis, and testing. Please run the following commands locally '
+      'before submitting a pull request:\n'
+      '\n'
+      '- `./dev.sh check --packages packages/${package.name}`\n'
+      '- `./dev.sh test --packages packages/${package.name}`',
+    );
+  }
+  return buffer.toString();
+}

@@ -1,4 +1,4 @@
-<!-- #region(PACKAGE_README_HEADER) -->
+<!-- #region(HEADER) -->
 # `oath`
 
 Swear a Paladin's Oath to code righteousness by enforcing lints.
@@ -40,3 +40,19 @@ Or, for Flutter:
 
 include: package:oath/flutter/relaxed.yaml
 ```
+
+<!-- #region(CONTRIBUTING) -->
+## Contributing
+
+We welcome contributions to this package!
+
+Please [file an issue][] before contributing larger changes.
+
+[file an issue]: https://github.com/matanlurey/pub.lurey.dev/issues/new?labels=pkg-oath
+
+This package uses repository specific tooling to enforce formatting, static analysis, and testing. Please run the following commands locally before submitting a pull request:
+
+- `./dev.sh check --packages packages/oath`
+- `./dev.sh test --packages packages/oath`
+
+<!-- #endregion -->

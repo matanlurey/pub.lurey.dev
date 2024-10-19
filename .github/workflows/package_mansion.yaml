@@ -22,3 +22,9 @@ jobs:
         working-directory: packages/mansion
       - run: ./dev.sh check --packages packages/mansion
       - run: ./dev.sh test --packages packages/mansion
+      - run: ./dev.sh coverage --packages packages/mansion
+      - uses: codecov/codecov-action@v4.6.0
+        with:
+          token: ${{ secrets.CODECOV_TOKEN }}
+          flags: mansion
+          file: packages/mansion/coverage/lcov.info
