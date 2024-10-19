@@ -1,4 +1,5 @@
 @TestOn('vm')
+@Tags(['e2e'])
 library;
 
 import 'dart:io' as io;

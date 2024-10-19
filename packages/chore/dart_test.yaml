@@ -4,6 +4,7 @@ presets:
   # Runs VM-specific tests and captures coverage.
   coverage:
     reporter: github
+    exclude_tags: "e2e"
 
 platforms:
   - vm
