@@ -1,4 +1,4 @@
-import 'package:dev/src/sinks/yaml_sink.dart';
+import 'package:strink/strink.dart';
 
 /// Generates a GitHub Actions workflow file for a package.
 String generateGithubPackageWorkflow({
@@ -7,65 +7,60 @@ String generateGithubPackageWorkflow({
   required bool uploadCoverage,
 }) {
   final buffer = StringBuffer();
-  final writer = YamlSink.fromSink(buffer);
+  final writer = YamlSink(buffer);
 
   writer.writeKeyValue('name', 'package/$package');
   writer.writeNewline();
 
-  writer.writeKey('on');
-  writer.indent();
+  writer.startObjectOrList('on');
   writer.writeComment('Post-submit.');
-  writer.writeKey('push');
-  writer.indent();
+  writer.startObjectOrList('push');
   writer.writeKeyValue('branches', '[ main ]');
-  writer.unindent();
+  writer.endObjectOrList();
   writer.writeNewline();
   writer.writeComment('Pre-submit.');
-  writer.writeKey('pull_request');
-  writer.indent();
+  writer.startObjectOrList('pull_request');
   writer.writeKeyValue('branches', '[ main ]');
-  writer.writeKey('paths');
-  writer.indent();
+  writer.startObjectOrList('paths');
   writer.writeListValue('.github/workflows/package_$package.yaml');
   writer.writeListValue('packages/$package/**');
-  writer.unindent();
-  writer.unindent();
-  writer.unindent();
+  writer.endObjectOrList();
+  writer.endObjectOrList();
+  writer.endObjectOrList();
 
   writer.writeNewline();
-  writer.writeKey('jobs');
-  writer.indent();
-  writer.writeKey('build');
-  writer.indent();
+  writer.startObjectOrList('jobs');
+  writer.startObjectOrList('build');
   writer.writeKeyValue('runs-on', 'ubuntu-latest');
 
-  writer.writeKey('steps');
-  writer.indent();
+  writer.startObjectOrList('steps');
   writer.writeListValue('uses: actions/checkout@v4.2.0');
   writer.writeListValue('uses: dart-lang/setup-dart@v1.6.5');
   if (usesChrome) {
     writer.writeListValue('uses: browser-actions/setup-chrome@v1.7.2');
   }
-  writer.writeListValue('run: dart pub get');
-  writer.indent();
+  writer.writeListObject('run', 'dart pub get');
   writer.writeKeyValue('working-directory', 'packages/$package');
-  writer.unindent();
+  writer.endObjectOrList();
 
   writer.writeListValue('run: ./dev.sh check --packages packages/$package');
   writer.writeListValue('run: ./dev.sh test --packages packages/$package');
-  writer.writeListValue('run: ./dev.sh coverage --packages packages/$package');
 
   if (uploadCoverage) {
-    writer.writeListValue('uses: codecov/codecov-action@v4.6.0');
-    writer.indent();
-    writer.writeKey('with');
-    writer.indent();
+    writer.writeListValue(
+      'run: ./dev.sh coverage --packages packages/$package',
+    );
+    writer.writeListObject(
+      'uses',
+      'codecov/codecov-action@v4.6.0',
+    );
+    writer.startObjectOrList('with');
     writer.writeKeyValue('token', r'${{ secrets.CODECOV_TOKEN }}');
     writer.writeKeyValue('flags', package);
     writer.writeKeyValue('file', 'packages/$package/coverage/lcov.info');
     writer.writeKeyValue('fail_ci_if_error', 'true');
-    writer.unindent();
-    writer.unindent();
+    writer.endObjectOrList();
+    writer.endObjectOrList();
   }
 
   return buffer.toString();
