@@ -21,7 +21,7 @@ final class Check extends BaseCommand {
 
   @override
   Future<void> run() async {
-    for (final package in await context.resolve(topLevelResults)) {
+    for (final package in await context.resolve(globalResults!)) {
       await _runForPackage(package);
     }
   }

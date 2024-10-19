@@ -1,5 +1,5 @@
+import 'package:args/args.dart';
 import 'package:args/command_runner.dart';
-import 'package:args/src/arg_results.dart';
 import 'package:chore/chore.dart';
 import 'package:meta/meta.dart';
 
@@ -48,12 +48,6 @@ final class Runner extends CommandRunner<void> {
     Context.registerArgs(argParser, packages: availablePackages);
   }
 
-  /// The top-level results from the command-line arguments.
-  late final ArgResults topLevelResults;
-
   @override
-  Future<void> runCommand(ArgResults topLevelResults) {
-    this.topLevelResults = topLevelResults;
-    return super.runCommand(topLevelResults);
-  }
+  final argParser = ArgParser(allowTrailingOptions: false);
 }
