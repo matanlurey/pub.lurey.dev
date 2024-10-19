@@ -33,6 +33,7 @@ void main() {
           '}',
           '',
         ].join('\n'),
+        supportCoverage: true,
       );
     });
 

@@ -12,6 +12,7 @@ Future<io.Directory> createPackage(
   String name, {
   required String libContents,
   required String testContents,
+  required bool supportCoverage,
   @doNotSubmit bool debugRetainArtifacts = false,
   SemanticVersion? version,
 }) async {
@@ -71,6 +72,22 @@ Future<io.Directory> createPackage(
     await io.Directory(p.join(package.path, 'test')).create();
     final test = io.File(p.join(package.path, 'test', 'example_test.dart'));
     await test.writeAsString(testContents);
+  }
+
+  if (supportCoverage) {
+    // Add a coverage preset to dart_test.yaml.
+    {
+      final testConfig = io.File(p.join(package.path, 'dart_test.yaml'));
+      final writer = testConfig.openWrite();
+      YamlSink(writer)
+        ..startObjectOrList('presets')
+        ..startObjectOrList('coverage')
+        ..endObjectOrList()
+        ..endObjectOrList()
+        ..writeNewline();
+
+      await writer.close();
+    }
   }
 
   return package;
