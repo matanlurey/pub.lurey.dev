@@ -1,0 +1,31 @@
+name: package/strink
+
+on:
+  # Post-submit.
+  push:
+    branches: [ main ]
+
+  # Pre-submit.
+  pull_request:
+    branches: [ main ]
+    paths:
+      - .github/workflows/package_strink.yaml
+      - packages/strink/**
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4.2.0
+      - uses: dart-lang/setup-dart@v1.6.5
+      - run: dart pub get
+        working-directory: packages/strink
+      - run: ./dev.sh check --packages packages/strink
+      - run: ./dev.sh test --packages packages/strink
+      - run: ./dev.sh coverage --packages packages/strink
+      - uses: codecov/codecov-action@v4.6.0
+        with:
+          token: ${{ secrets.CODECOV_TOKEN }}
+          flags: strink
+          file: packages/strink/coverage/lcov.info
+          fail_ci_if_error: true

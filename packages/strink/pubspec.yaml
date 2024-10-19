@@ -1,0 +1,28 @@
+# Format: https://dart.dev/tools/pub/pubspec
+
+name: strink
+
+# However, a shorter description is often better for a quick summary, so we
+# store an unofficial shorter description as `short_description` which tools
+# can optionally use.
+#
+# However, a shorter description is often better for a quick summary, so we
+# store an unofficial shorter description as `short_description` which tools
+# can optionally use.
+description: |-
+  Output-oriented string and UTF-8 sinks in common structured formats.
+short_description: Structured string output.
+
+publish_to: none
+
+homepage: https://github.com/matanlurey/pub.lurey.dev/tree/main/packages/strink
+issue_tracker: https://github.com/matanlurey/pub.lurey.dev/labels/pkg-strink
+
+resolution: workspace
+
+environment:
+  sdk: ^3.5.0
+
+dev_dependencies:
+  checks: ^0.3.0
+  test: ^1.25.7

@@ -23,4 +23,3 @@ jobs:
         working-directory: packages/webby
       - run: ./dev.sh check --packages packages/webby
       - run: ./dev.sh test --packages packages/webby
-      - run: ./dev.sh coverage --packages packages/webby
