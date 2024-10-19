@@ -6,7 +6,6 @@ import 'package:chore/src/package.dart';
 import 'package:lore/lore.dart';
 import 'package:meta/meta.dart';
 import 'package:path/path.dart' as p;
-import 'package:quirk/quirk.dart';
 
 /// Finds the root directory of a repository.
 ///
@@ -56,25 +55,11 @@ final class Context {
     );
   }
 
-  /// Resolves a context based on the given [results] and [rootDir].
-  static Future<Context> resolve(
-    ArgResults results,
-    String rootDir, {
-    required Set<String> availablePackages,
-  }) async {
-    var packages = results.multiOption('packages').toSet();
-    if (packages.isEmpty) {
-      packages = availablePackages;
-    }
-    return Context(rootDir: rootDir, packages: packages);
-  }
-
   /// Creates a new context.
   Context({
     required this.rootDir,
     this.logLevel = Level.status,
-    Set<String> packages = const {},
-  }) : packages = Set.unmodifiable(packages);
+  });
 
   /// The root directory of the repository.
   final String rootDir;
@@ -82,20 +67,18 @@ final class Context {
   /// What log level to use.
   final Level logLevel;
 
-  /// Packages, relative to [rootDir], to run commands for.
-  final Set<String> packages;
-
-  /// [packages] resolved to [Package] instances based on [rootDir].
-  late final resolvedPackages = Future.wait(packages.map(Package.resolve));
+  /// Resolves the context from the command-line arguments.
+  Future<List<Package>> resolve(ArgResults topLevelArgs) {
+    final packages = topLevelArgs.multiOption('packages');
+    return Future.wait(packages.map(Package.resolve));
+  }
 
   @override
   bool operator ==(Object other) {
     if (other is! Context) {
       return false;
     }
-    return rootDir == other.rootDir &&
-        logLevel == other.logLevel &&
-        packages.containsOnly(other.packages);
+    return rootDir == other.rootDir && logLevel == other.logLevel;
   }
 
   @override
@@ -103,7 +86,6 @@ final class Context {
     return Object.hash(
       rootDir,
       logLevel,
-      Object.hashAllUnordered(packages),
     );
   }
 
@@ -112,7 +94,6 @@ final class Context {
     final buffer = StringBuffer('Context(')..writeln();
     buffer.writeln("  rootDir: '$rootDir',");
     buffer.writeln('  logLevel: $logLevel,');
-    buffer.writeln('  packages: $packages,');
     buffer.write(')');
     return buffer.toString();
   }

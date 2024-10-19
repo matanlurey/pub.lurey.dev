@@ -31,7 +31,7 @@ final class Generate extends BaseCommand {
     // Check for arguments, each positional argument is a package name.
     final genRoot = argResults!.flag('root');
 
-    for (final package in await context.resolvedPackages) {
+    for (final package in await context.resolve(topLevelResults)) {
       await _runForPackage(context.rootDir, package);
     }
 
@@ -73,7 +73,7 @@ final class Generate extends BaseCommand {
 
   Future<void> _writeRepoFiles() async {
     // Find all the packages in the repository.
-    final packages = await context.resolvedPackages;
+    final packages = await context.resolve(topLevelResults);
     packages.sort((a, b) => a.name.compareTo(b.name));
 
     // Generate parts of the root README file.

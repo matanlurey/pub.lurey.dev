@@ -36,7 +36,7 @@ final class Coverage extends BaseCommand {
       io.stderr.writeln('✅ Activated coverage.');
     }
 
-    for (final package in await context.resolvedPackages) {
+    for (final package in await context.resolve(topLevelResults)) {
       await _runForPackage(dartBin, package);
     }
   }

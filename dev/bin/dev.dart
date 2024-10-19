@@ -2,7 +2,6 @@
 
 import 'dart:io' as io;
 
-import 'package:args/args.dart';
 import 'package:chore/chore.dart';
 import 'package:dev/src/commands/generate.dart';
 
@@ -18,31 +17,9 @@ void main(List<String> args) async {
   final workspace = await Workspace.resolve(root);
   final available = workspace.packages.where((p) => p != 'dev').toSet();
 
-  final earlyArgs = ArgParser();
-  Context.registerArgs(earlyArgs, packages: available);
-
-  // Find the first command.
-  var end = args.length;
-  for (var i = 0; i < args.length; i++) {
-    if (const {
-      'generate',
-      'check',
-      'coverage',
-      'test',
-    }.contains(args[i])) {
-      end = i;
-      break;
-    }
-  }
-  final argResults = earlyArgs.parse(args.getRange(0, end));
-
   await Runner(
     name: 'dev',
-    await Context.resolve(
-      argResults,
-      root,
-      availablePackages: available,
-    ),
+    Context(rootDir: root),
     systemEnvironment,
     availablePackages: available,
     commands: (context, env) {
