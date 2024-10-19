@@ -20,7 +20,21 @@ void main(List<String> args) async {
 
   final earlyArgs = ArgParser();
   Context.registerArgs(earlyArgs, packages: available);
-  final argResults = earlyArgs.parse(args);
+
+  // Find the first command.
+  var end = args.length;
+  for (var i = 0; i < args.length; i++) {
+    if (const {
+      'generate',
+      'check',
+      'coverage',
+      'test',
+    }.contains(args[i])) {
+      end = i;
+      break;
+    }
+  }
+  final argResults = earlyArgs.parse(args.getRange(0, end));
 
   await Runner(
     await Context.resolve(

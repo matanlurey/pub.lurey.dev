@@ -9,7 +9,7 @@ final class Check extends BaseCommand {
   Check(super.context, super.environment) {
     argParser.addFlag(
       'fix',
-      help: 'Automaticallyfix issues when possible.',
+      help: 'Automatically fix issues when possible.',
     );
   }
 
@@ -57,6 +57,8 @@ final class Check extends BaseCommand {
       if ((await process.exitCode).isFailure) {
         io.exitCode = 1;
         io.stderr.writeln('❌ Found formatting issues.');
+      } else if (fix) {
+        io.stderr.writeln('✅ Ran formatter.');
       } else {
         io.stderr.writeln('✅ No formatting issues found.');
       }
