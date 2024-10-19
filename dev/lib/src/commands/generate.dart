@@ -3,7 +3,6 @@ import 'dart:io' as io;
 
 import 'package:chore/chore.dart';
 import 'package:dev/src/generators/changelog_header.dart';
-import 'package:dev/src/generators/codecov_yaml.dart';
 import 'package:dev/src/generators/github_package_workflow.dart';
 import 'package:dev/src/generators/package_readme.dart';
 import 'package:dev/src/generators/root_readme.dart';
@@ -82,8 +81,5 @@ final class Generate extends BaseCommand {
     await sink.writeRegions('README.md', {
       'PACKAGE_TABLE': generateRootReadmeRegion(packages),
     });
-
-    // Generate codecov.yaml.
-    await sink.write('codecov.yaml', generateCodecovYaml(packages: packages));
   }
 }
