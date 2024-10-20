@@ -1,6 +1,7 @@
 import 'package:args/args.dart';
 import 'package:args/command_runner.dart';
 import 'package:chore/chore.dart';
+import 'package:chore/src/command/dartdoc.dart';
 import 'package:meta/meta.dart';
 
 /// Entry point for the command-line interface.
@@ -18,6 +19,7 @@ final class Runner extends CommandRunner<void> {
       [
         Check(context, environment),
         Coverage(context, environment),
+        Dartdoc(context, environment),
         Test(context, environment),
         ...?commands?.call(context, environment),
       ],

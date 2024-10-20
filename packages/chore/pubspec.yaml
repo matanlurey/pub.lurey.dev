@@ -33,6 +33,8 @@ dependencies:
     path: ../quirk
   sdk:
     path: ../sdk
+  shelf: ^1.4.2
+  shelf_static: ^1.1.3
   strink:
     path: ../strink
   yaml: ^3.1.2

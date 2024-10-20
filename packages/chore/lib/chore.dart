@@ -5,5 +5,6 @@ export 'src/command/test.dart' show Test;
 export 'src/context.dart' show Context, findRootDir;
 export 'src/environment.dart' show Environment, systemEnvironment;
 export 'src/package.dart' show Package, Workspace;
+export 'src/preview.dart' show preview;
 export 'src/runner.dart' show Runner;
 export 'src/test_deps.dart' show TestDependency;
