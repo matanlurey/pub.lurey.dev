@@ -41,6 +41,10 @@ abstract base class Environment {
   ///
   /// If the environment variable is not set, returns `null`.
   String? getEnv(String name);
+
+  /// Whether the current process is running in a continuous integration
+  /// environment.
+  bool get isCI => getEnv('CI') != null;
 }
 
 final class _SystemEnvironment extends Environment {
