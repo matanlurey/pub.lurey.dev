@@ -10,6 +10,8 @@ version: 0.1.6+2
 homepage: https://github.com/matanlurey/pub.lurey.dev/tree/main/packages/lodim
 issue_tracker: https://github.com/matanlurey/pub.lurey.dev/labels/pkg-lodim
 
+resolution: workspace
+
 environment:
   sdk: ^3.5.0
 
