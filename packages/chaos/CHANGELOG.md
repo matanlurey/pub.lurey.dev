@@ -8,6 +8,10 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 <!-- #endregion -->
 
+## 0.1.2+1
+
+- Expand `package:binary` to `^4.0.0` (was accidentally `4.0.0`).
+
 ## 0.1.2
 
 **New features:**
