@@ -1,11 +1,12 @@
-# lodim
+<!-- #region(HEADER) -->
+# `lodim`
 
-_Fast_ and _pixel accurate_ fixed-point 2D geometry with minimal approximations.
+Fixed-point pixel accurate 2D geometry with minimal approximations.
 
-[![CI](https://github.com/matanlurey/lodim/actions/workflows/ci.yaml/badge.svg)](https://github.com/matanlurey/lodim/actions/workflows/ci.yaml)
-[![Coverage Status](https://coveralls.io/repos/github/matanlurey/lodim/badge.svg?branch=main)](https://coveralls.io/github/matanlurey/lodim?branch=main)
-[![Pub Package](https://img.shields.io/pub/v/lodim.svg)](https://pub.dev/packages/lodim)
-[![Dartdoc reference](https://img.shields.io/badge/dartdoc-reference-blue.svg)](https://pub.dev/documentation/lodim/latest/)
+| ✅ Health | 🚀 Release | 📝 Docs | ♻️ Maintenance |
+|:----------|:-----------|:--------|:--------------|
+| [![Build status for package/lodim](https://github.com/matanlurey/pub.lurey.dev/actions/workflows/package_lodim.yaml/badge.svg)](https://github.com/matanlurey/pub.lurey.dev/actions/workflows/package_lodim.yaml) | [![Pub version for package/lodim](https://img.shields.io/pub/v/lodim)](https://pub.dev/packages/lodim) | [![Dart documentation for package/lodim](https://img.shields.io/badge/dartdoc-reference-blue.svg)](https://pub.dev/documentation/lodim) | [![GitHub Issues for package/lodim](https://img.shields.io/github/issues/matanlurey/pub.lurey.dev/pkg-lodim?label=issues)](https://github.com/matanlurey/pub.lurey.dev/issues?q=is%3Aopen+is%3Aissue+label%3Apkg-lodim) |
+<!-- #endregion -->
 
 Optimal for the following use cases:
 
@@ -130,22 +131,19 @@ In local benchmarks on a M2 Macbook Pro, compared to [baseline][^2] code.
 Specializing based on fixed-point geometry allows for optimizations that are
 not possible with general-purpose code, such as jump-table based rotations.
 
+<!-- #region(CONTRIBUTING) -->
 ## Contributing
 
-To run the tests, run:
+We welcome contributions to this package!
 
-```shell
-dart test
-```
+Please [file an issue][] before contributing larger changes.
 
-To check code coverage locally, run:
+[file an issue]: https://github.com/matanlurey/pub.lurey.dev/issues/new?labels=pkg-lodim
 
-```shell
-dart tool/coverage.dart
-```
+This package uses repository specific tooling to enforce formatting, static analysis, and testing. Please run the following commands locally before submitting a pull request:
 
-To preview `dartdoc` output locally, run:
+- `./dev.sh --packages packages/lodim check `
+- `./dev.sh --packages packages/lodim test `
 
-```shell
-dart tool/dartdoc.dart
-```
+
+<!-- #endregion -->

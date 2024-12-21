@@ -16,6 +16,7 @@ workspace:
   - packages/chore
   - packages/iota
   - packages/jsonut
+  - packages/lodim
   - packages/lore
   - packages/mansion
   - packages/mirage
