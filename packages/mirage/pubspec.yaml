@@ -4,11 +4,17 @@ name: mirage
 description: |-
   Generate noise and patterns algorithmically for use in software, textures, and
   graphics.
-version: 0.2.0
-repository: https://github.com/matanlurey/mirage.dart
+short_description: Noise and pattern generation.
+
+version: 0.2.0+1
+
+homepage: https://github.com/matanlurey/pub.lurey.dev/tree/main/packages/mirage
+issue_tracker: https://github.com/matanlurey/pub.lurey.dev/labels/pkg-mirage
+
+resolution: workspace
 
 environment:
-  sdk: ^3.4.0
+  sdk: ^3.5.0
 
 dependencies:
   chaos: ^0.1.1

@@ -1,23 +1,13 @@
-# Mirage
+<!-- #region(HEADER) -->
+# `mirage`
 
-Generates noise and patterns algorithmically for use in software, textures, and graphics.
+Generate noise and patterns algorithmically for use in software, textures, and
+graphics.
 
-[![Mirage on pub.dev][pub_img]][pub_url]
-[![Code coverage][cov_img]][cov_url]
-[![Github action status][gha_img]][gha_url]
-[![Dartdocs][doc_img]][doc_url]
-[![Style guide][sty_img]][sty_url]
-
-[pub_url]: https://pub.dartlang.org/packages/chaos
-[pub_img]: https://img.shields.io/pub/v/mirage.svg
-[gha_url]: https://github.com/matanlurey/mirage.dart/actions
-[gha_img]: https://github.com/matanlurey/mirage.dart/actions/workflows/check.yaml/badge.svg
-[cov_url]: https://coveralls.io/github/matanlurey/mirage.dart?branch=main
-[cov_img]: https://coveralls.io/repos/github/matanlurey/mirage.dart/badge.svg?branch=main
-[doc_url]: https://www.dartdocs.org/documentation/chaos/latest
-[doc_img]: https://img.shields.io/badge/Documentation-mirage-blue.svg
-[sty_url]: https://pub.dev/packages/oath
-[sty_img]: https://img.shields.io/badge/style-oath-9cf.svg
+| ✅ Health | 🚀 Release | 📝 Docs | ♻️ Maintenance |
+|:----------|:-----------|:--------|:--------------|
+| [![Build status for package/mirage](https://github.com/matanlurey/pub.lurey.dev/actions/workflows/package_mirage.yaml/badge.svg)](https://github.com/matanlurey/pub.lurey.dev/actions/workflows/package_mirage.yaml) | [![Pub version for package/mirage](https://img.shields.io/pub/v/mirage)](https://pub.dev/packages/mirage) | [![Dart documentation for package/mirage](https://img.shields.io/badge/dartdoc-reference-blue.svg)](https://pub.dev/documentation/mirage) | [![GitHub Issues for package/mirage](https://img.shields.io/github/issues/matanlurey/pub.lurey.dev/pkg-mirage?label=issues)](https://github.com/matanlurey/pub.lurey.dev/issues?q=is%3Aopen+is%3Aissue+label%3Apkg-mirage) |
+<!-- #endregion -->
 
 ## Usage
 
@@ -48,22 +38,19 @@ For a full example, see the [example](./example) directory.
 - Build your own generator functions with the `Pattern2d` interface.
 - Thoughtfully tested and documented for ease of use.
 
+<!-- #region(CONTRIBUTING) -->
 ## Contributing
 
-To run the tests, run:
+We welcome contributions to this package!
 
-```shell
-dart test
-```
+Please [file an issue][] before contributing larger changes.
 
-To check code coverage locally, run:
+[file an issue]: https://github.com/matanlurey/pub.lurey.dev/issues/new?labels=pkg-mirage
 
-```shell
-./chore coverage
-```
+This package uses repository specific tooling to enforce formatting, static analysis, and testing. Please run the following commands locally before submitting a pull request:
 
-To preview `dartdoc` output locally, run:
+- `./dev.sh --packages packages/mirage check `
+- `./dev.sh --packages packages/mirage test `
 
-```shell
-./chore dartodc
-```
+
+<!-- #endregion -->

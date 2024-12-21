@@ -2,7 +2,10 @@
 @TestOn('vm')
 library;
 
+import 'dart:io' as io;
 import 'dart:typed_data';
+
+import 'package:path/path.dart' as p;
 
 import '../tool/ffi/xoshiro128p.dart' as xoshiro_128_plus;
 import '../tool/ffi/xoshiro128pp.dart' as xoshiro_128_plus_plus;
@@ -14,6 +17,18 @@ import 'src/xoshiro_pregen.dart';
 /// We don't export these in the Dart library, but they are used for testing
 /// the Dart implementation.
 void main() {
+  // Compile the C implementations of the PRNGs.
+  setUpAll(() async {
+    final process = await io.Process.start(
+      p.join('tool', 'compile_ffi.dart'),
+      const [],
+      mode: io.ProcessStartMode.inheritStdio,
+    );
+    if (await process.exitCode != 0) {
+      fail('Failed to compile');
+    }
+  });
+
   group('xoshiro128plus', () {
     setUp(() {
       xoshiro_128_plus.seed(Uint32List.fromList([1, 2, 3, 4]));

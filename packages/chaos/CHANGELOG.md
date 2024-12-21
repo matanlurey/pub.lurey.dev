@@ -12,6 +12,7 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 **New features:**
 
+- Merged into the `pub.luery.dev` monorepo.
 - Exported `PersistentRandom` to the public API.
 - Bumped the minimum SDK constraint to Dart `3.5.0`.
 
