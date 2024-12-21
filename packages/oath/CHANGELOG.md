@@ -8,6 +8,10 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 <!-- #endregion -->
 
+## 0.2.2+1
+
+- No changes, just testing publish automation.
+
 ## 0.2.2
 
 - Uses `package:lints` `^5.1.0`.
