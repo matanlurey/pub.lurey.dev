@@ -1,11 +1,12 @@
 @Tags(['ffi'])
-@TestOn('vm')
+@TestOn('posix')
 library;
 
 import 'dart:io' as io;
 import 'dart:typed_data';
 
 import 'package:path/path.dart' as p;
+import 'package:test/test.dart';
 
 import '../tool/ffi/xoshiro128p.dart' as xoshiro_128_plus;
 import '../tool/ffi/xoshiro128pp.dart' as xoshiro_128_plus_plus;
@@ -17,6 +18,10 @@ import 'src/xoshiro_pregen.dart';
 /// We don't export these in the Dart library, but they are used for testing
 /// the Dart implementation.
 void main() {
+  if (io.Platform.isLinux) {
+    return markTestSkipped('Needs tweaking to get FFI tests working on Linux');
+  }
+
   // Compile the C implementations of the PRNGs.
   setUpAll(() async {
     final process = await io.Process.start(
