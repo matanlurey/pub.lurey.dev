@@ -21,5 +21,5 @@ environment:
   sdk: ^3.5.0
 
 dependencies:
-  lints: ^4.0.0
+  lints: ^5.1.0
   test: ^1.25.2
