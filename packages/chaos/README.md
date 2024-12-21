@@ -1,24 +1,12 @@
-# Chaos
+<!-- #region(HEADER) -->
+# `chaos`
 
-Fast and high quality pseudo-random number generators (PRNGs) with cloneable
-state.
+Fast and high quality pseudo-random number generators (PRNGs) with cloneable state.
 
-[![Binary on pub.dev][pub_img]][pub_url]
-[![Code coverage][cov_img]][cov_url]
-[![Github action status][gha_img]][gha_url]
-[![Dartdocs][doc_img]][doc_url]
-[![Style guide][sty_img]][sty_url]
-
-[pub_url]: https://pub.dartlang.org/packages/chaos
-[pub_img]: https://img.shields.io/pub/v/chaos.svg
-[gha_url]: https://github.com/matanlurey/chaos.dart/actions
-[gha_img]: https://github.com/matanlurey/chaos.dart/actions/workflows/check.yaml/badge.svg
-[cov_url]: https://coveralls.io/github/matanlurey/chaos.dart?branch=main
-[cov_img]: https://coveralls.io/repos/github/matanlurey/chaos.dart/badge.svg?branch=main
-[doc_url]: https://www.dartdocs.org/documentation/chaos/latest
-[doc_img]: https://img.shields.io/badge/Documentation-binary-blue.svg
-[sty_url]: https://pub.dev/packages/oath
-[sty_img]: https://img.shields.io/badge/style-oath-9cf.svg
+| ✅ Health | 🚀 Release | 📝 Docs | ♻️ Maintenance |
+|:----------|:-----------|:--------|:--------------|
+| [![Build status for package/chaos](https://github.com/matanlurey/pub.lurey.dev/actions/workflows/package_chaos.yaml/badge.svg)](https://github.com/matanlurey/pub.lurey.dev/actions/workflows/package_chaos.yaml) | [![Pub version for package/chaos](https://img.shields.io/pub/v/chaos)](https://pub.dev/packages/chaos) | [![Dart documentation for package/chaos](https://img.shields.io/badge/dartdoc-reference-blue.svg)](https://pub.dev/documentation/chaos) | [![GitHub Issues for package/chaos](https://img.shields.io/github/issues/matanlurey/pub.lurey.dev/pkg-chaos?label=issues)](https://github.com/matanlurey/pub.lurey.dev/issues?q=is%3Aopen+is%3Aissue+label%3Apkg-chaos) |
+<!-- #endregion -->
 
 ## Usage
 
@@ -81,22 +69,19 @@ development, simulations, and testing:
   can can be created with a seed. Want your own PRNG? Implement this interface
   and swap PRNGs with ease.
 
+<!-- #region(CONTRIBUTING) -->
 ## Contributing
 
-To run the tests, run:
+We welcome contributions to this package!
 
-```shell
-dart test
-```
+Please [file an issue][] before contributing larger changes.
 
-To check code coverage locally, run:
+[file an issue]: https://github.com/matanlurey/pub.lurey.dev/issues/new?labels=pkg-chaos
 
-```shell
-./chore coverage
-```
+This package uses repository specific tooling to enforce formatting, static analysis, and testing. Please run the following commands locally before submitting a pull request:
 
-To preview `dartdoc` output locally, run:
+- `./dev.sh --packages packages/chaos check `
+- `./dev.sh --packages packages/chaos test `
 
-```shell
-./chore dartodc
-```
+
+<!-- #endregion -->

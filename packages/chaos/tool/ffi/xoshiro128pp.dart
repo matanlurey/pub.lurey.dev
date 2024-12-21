@@ -1,3 +1,4 @@
+// Used to make FFI names match the C names.
 // ignore_for_file: avoid_private_typedef_functions
 
 import 'dart:ffi' as ffi;

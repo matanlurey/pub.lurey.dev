@@ -12,6 +12,7 @@ environment:
 
 workspace:
   - dev
+  - packages/chaos
   - packages/chore
   - packages/iota
   - packages/jsonut
