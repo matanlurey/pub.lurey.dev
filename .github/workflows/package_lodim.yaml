@@ -1,0 +1,43 @@
+name: package/lodim
+
+on:
+  # Post-submit.
+  push:
+    branches: [ main ]
+
+  # Pre-submit.
+  pull_request:
+    branches: [ main ]
+    paths:
+      - .github/workflows/package_lodim.yaml
+      - packages/lodim/**
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4.2.0
+      - uses: dart-lang/setup-dart@v1.6.5
+      - run: dart pub get
+        working-directory: packages/lodim
+      - run: ./dev.sh check --packages packages/lodim
+      - run: ./dev.sh test --packages packages/lodim
+      - run: ./dev.sh coverage --packages packages/lodim
+      - uses: codecov/codecov-action@v4.6.0
+        with:
+          token: ${{ secrets.CODECOV_TOKEN }}
+          flags: lodim
+          file: packages/lodim/coverage/lcov.info
+          fail_ci_if_error: true
+  publish:
+    if: github.event_name == 'push'
+    needs: build
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4.2.0
+      - uses: dart-lang/setup-dart@v1.6.5
+      - run: dart pub get
+        working-directory: packages/lodim
+      - run: ./dev.sh publish --packages packages/lodim
+        env:
+          PUB_CREDENTIALS: ${{ secrets.PUB_CREDENTIALS }}

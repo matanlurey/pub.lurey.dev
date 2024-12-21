@@ -1,0 +1,35 @@
+# https://github.com/dart-lang/test/blob/master/pkgs/test/doc/configuration.md
+
+presets:
+  # Runs VM-specific tests and captures coverage.
+  coverage:
+    reporter: github
+
+  # Comprehensive test suite that runs on all platforms/compilers.
+  all:
+    platforms:
+      - chrome
+      - node
+      - vm
+    compilers:
+      - exe
+      - kernel
+      - dart2js
+      - dart2wasm
+
+  # Excludes tests that use dart:ffi.
+  no_ffi:
+    exclude_tags: ffi
+
+platforms:
+  - vm
+
+fold_stack_frames:
+  except:
+    - checks
+    - test
+    - test_api
+    - stream_channel
+
+tags:
+  ffi: # tests that use dart:ffi

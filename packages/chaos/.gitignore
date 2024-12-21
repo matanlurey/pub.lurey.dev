@@ -1,0 +1,11 @@
+.dart_tool/
+doc/api/
+coverage/
+pubspec.lock
+
+tool/**/*.o
+CMakeCache.txt
+CMakeFiles
+Makefile
+cmake_install.cmake
+*.dylib

@@ -12,11 +12,14 @@ environment:
 
 workspace:
   - dev
+  - packages/chaos
   - packages/chore
   - packages/iota
   - packages/jsonut
+  - packages/lodim
   - packages/lore
   - packages/mansion
+  - packages/mirage
   - packages/oath
   - packages/proc
   - packages/quirk
