@@ -18,10 +18,16 @@ import 'src/xoshiro_pregen.dart';
 /// We don't export these in the Dart library, but they are used for testing
 /// the Dart implementation.
 void main() {
-  if (io.Platform.isLinux) {
-    return markTestSkipped('Needs tweaking to get FFI tests working on Linux');
-  }
+  group(
+    '',
+    _test,
+    onPlatform: {
+      'linux': Skip('Not currently supported on Linux'),
+    },
+  );
+}
 
+void _test() {
   // Compile the C implementations of the PRNGs.
   setUpAll(() async {
     final process = await io.Process.start(
