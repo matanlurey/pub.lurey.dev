@@ -80,7 +80,15 @@ String generateGithubPackageWorkflow({
     writer.writeKeyValue('working-directory', 'packages/$package');
     writer.endObjectOrList();
 
-    writer.writeListValue('run: ./dev.sh publish --packages packages/$package');
+    writer.writeListObject(
+      'run',
+      './dev.sh publish --packages packages/$package',
+    );
+
+    // Include PUB_CREDENTIALS --> "${{ secrets.PUB_CREDENTIALS }}"
+    writer.startObjectOrList('env');
+    writer.writeKeyValue('PUB_CREDENTIALS', r'${{ secrets.PUB_CREDENTIALS }}');
+    writer.endObjectOrList();
   }
 
   return buffer.toString();
