@@ -14,7 +14,7 @@ Future<void> _compile(String path) async {
 
   final cmakeResult = await io.Process.start(
     'cmake',
-    const ['.'],
+    io.Platform.isMacOS ? const ['.'] : const [],
     mode: io.ProcessStartMode.inheritStdio,
     workingDirectory: path,
   );
