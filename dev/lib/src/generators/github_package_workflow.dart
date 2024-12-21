@@ -3,6 +3,7 @@ import 'package:strink/strink.dart';
 /// Generates a GitHub Actions workflow file for a package.
 String generateGithubPackageWorkflow({
   required String package,
+  required bool publishable,
   required bool usesChrome,
   required bool uploadCoverage,
 }) {
@@ -61,6 +62,25 @@ String generateGithubPackageWorkflow({
     writer.writeKeyValue('fail_ci_if_error', 'true');
     writer.endObjectOrList();
     writer.endObjectOrList();
+  }
+
+  writer.endObjectOrList();
+  writer.endObjectOrList();
+
+  if (publishable) {
+    // Add a post-submit job for publishing.
+    writer.startObjectOrList('publish');
+    writer.writeKeyValue('if', "github.event_name == 'push'");
+    writer.writeKeyValue('needs', 'build');
+    writer.writeKeyValue('runs-on', 'ubuntu-latest');
+    writer.startObjectOrList('steps');
+    writer.writeListValue('uses: actions/checkout@v4.2.0');
+    writer.writeListValue('uses: dart-lang/setup-dart@v1.6.5');
+    writer.writeListObject('run', 'dart pub get');
+    writer.writeKeyValue('working-directory', 'packages/$package');
+    writer.endObjectOrList();
+
+    writer.writeListValue('run: ./dev.sh publish --packages packages/$package');
   }
 
   return buffer.toString();

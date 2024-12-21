@@ -53,6 +53,7 @@ final class Generate extends BaseCommand {
     await workflowFile.writeAsString(
       generateGithubPackageWorkflow(
         package: package.name,
+        publishable: package.isPublishable,
         usesChrome: package.testDependencies.contains(TestDependency.chrome),
         uploadCoverage: package.supportsCoverage,
       ),

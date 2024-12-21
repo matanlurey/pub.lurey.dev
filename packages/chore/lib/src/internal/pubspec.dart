@@ -34,6 +34,11 @@ final class Pubspec extends YamlWrapper {
   /// Name of the package.
   String get name => loadString('name') ?? isRequired('name');
 
+  /// Version of the package.
+  ///
+  /// If omitted, the default is `null`.
+  String? get version => loadString('version');
+
   /// If publishing is enabled.
   bool get isPublishable => root['publish_to'] != 'none';
 
