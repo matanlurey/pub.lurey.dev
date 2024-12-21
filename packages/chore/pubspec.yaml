@@ -24,6 +24,7 @@ resolution: workspace
 
 dependencies:
   args: ^2.5.0
+  jsonut: ^0.4.1+2
   lore:
     path: ../lore
   meta: ^1.16.0

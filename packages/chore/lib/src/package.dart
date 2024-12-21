@@ -57,6 +57,7 @@ sealed class Package {
     return Package(
       path: path,
       name: pubspec.name,
+      version: pubspec.version,
       isPublishable: pubspec.isPublishable,
       description: pubspec.description,
       shortDescription: pubspec.shortDescription,
@@ -71,6 +72,7 @@ sealed class Package {
     required String name,
     required bool isPublishable,
     required bool supportsCoverage,
+    String? version,
     String? description,
     String? shortDescription,
     Set<TestDependency> testDependencies,
@@ -81,6 +83,7 @@ sealed class Package {
     required this.name,
     required this.isPublishable,
     required this.supportsCoverage,
+    this.version,
     this.description,
     this.shortDescription,
     Set<TestDependency> testDependencies = const {},
@@ -91,6 +94,11 @@ sealed class Package {
 
   /// Name of the package.
   final String name;
+
+  /// Version of the package.
+  ///
+  /// If omitted, the package is considered to have no version.
+  final String? version;
 
   /// Description of the package.
   ///
@@ -115,6 +123,7 @@ sealed class Package {
   bool operator ==(Object other) {
     return other is Package &&
         name == other.name &&
+        version == other.version &&
         description == other.description &&
         shortDescription == other.shortDescription &&
         isPublishable == other.isPublishable &&
@@ -126,6 +135,7 @@ sealed class Package {
   int get hashCode {
     return Object.hash(
       name,
+      version,
       description,
       shortDescription,
       isPublishable,
@@ -145,6 +155,7 @@ final class _Package extends Package {
     required super.name,
     required super.isPublishable,
     required super.supportsCoverage,
+    super.version,
     super.description,
     super.shortDescription,
     super.testDependencies,

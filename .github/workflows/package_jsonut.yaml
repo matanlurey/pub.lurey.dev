@@ -29,3 +29,13 @@ jobs:
           flags: jsonut
           file: packages/jsonut/coverage/lcov.info
           fail_ci_if_error: true
+  publish:
+    if: github.event_name == 'push'
+    needs: build
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4.2.0
+      - uses: dart-lang/setup-dart@v1.6.5
+      - run: dart pub get
+        working-directory: packages/jsonut
+      - run: ./dev.sh publish --packages packages/jsonut
