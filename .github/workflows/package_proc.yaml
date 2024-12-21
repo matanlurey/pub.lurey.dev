@@ -39,3 +39,5 @@ jobs:
       - run: dart pub get
         working-directory: packages/proc
       - run: ./dev.sh publish --packages packages/proc
+        env:
+          PUB_CREDENTIALS: ${{ secrets.PUB_CREDENTIALS }}

@@ -39,3 +39,5 @@ jobs:
       - run: dart pub get
         working-directory: packages/jsonut
       - run: ./dev.sh publish --packages packages/jsonut
+        env:
+          PUB_CREDENTIALS: ${{ secrets.PUB_CREDENTIALS }}

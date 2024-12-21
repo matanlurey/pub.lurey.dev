@@ -39,3 +39,5 @@ jobs:
       - run: dart pub get
         working-directory: packages/oath
       - run: ./dev.sh publish --packages packages/oath
+        env:
+          PUB_CREDENTIALS: ${{ secrets.PUB_CREDENTIALS }}

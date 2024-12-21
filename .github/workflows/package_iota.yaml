@@ -40,3 +40,5 @@ jobs:
       - run: dart pub get
         working-directory: packages/iota
       - run: ./dev.sh publish --packages packages/iota
+        env:
+          PUB_CREDENTIALS: ${{ secrets.PUB_CREDENTIALS }}

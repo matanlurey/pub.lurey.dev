@@ -2,6 +2,7 @@ import 'dart:io' as io;
 
 import 'package:chore/chore.dart';
 import 'package:chore/src/internal/pub_service.dart';
+import 'package:path/path.dart' as p;
 import 'package:proc/proc.dart';
 
 /// A command that publishes a package.
@@ -46,6 +47,54 @@ final class Publish extends BaseCommand {
     return argResults!.flag('skip-if-already-published');
   }
 
+  /// The pub credentials passed as an environment variable.
+  String? get _pubCredentials {
+    return io.Platform.environment['PUB_CREDENTIALS'];
+  }
+
+  /// Path to the credentials file on the current platform.
+  late final io.File _pubCredentialsFile = () {
+    // https://github.com/dart-lang/pub/blob/master/doc/cache_layout.md#layout
+    if (io.Platform.isLinux) {
+      final String home;
+      if (environment.getEnv('XDG_CACHE_HOME') case final xdgCacheHome?) {
+        home = xdgCacheHome;
+      } else if (environment.getEnv('HOME') case final homeEnv?) {
+        home = homeEnv;
+      } else {
+        throw StateError('HOME environment variable not set.');
+      }
+      return io.File(p.join(home, '.config', 'dart', 'pub-credentials.json'));
+    }
+    if (io.Platform.isWindows) {
+      if (environment.getEnv('APPDATA') case final appData?) {
+        return io.File(p.join(appData, 'dart', 'pub-credentials.json'));
+      } else {
+        throw StateError('APPDATA environment variable not set.');
+      }
+    }
+    if (io.Platform.isMacOS) {
+      final String home;
+      if (environment.getEnv('HOME') case final homeEnv?) {
+        home = homeEnv;
+      } else {
+        throw StateError('HOME environment variable not set.');
+      }
+      return io.File(
+        p.join(
+          home,
+          'Library',
+          'Application Support',
+          'Dart',
+          'pub-credentials.json',
+        ),
+      );
+    }
+    throw UnsupportedError(
+      'Unsupported platform: ${io.Platform.operatingSystem}',
+    );
+  }();
+
   @override
   Future<void> run() async {
     Iterable<Package> packages = await context.resolve(globalResults!);
@@ -53,6 +102,13 @@ final class Publish extends BaseCommand {
       // Skip packages that are not publishable.
       packages = packages.where((package) => package.isPublishable);
     }
+
+    // If credentials are provided, write them to a file.
+    if (_pubCredentials case final pubCredentials?) {
+      await _pubCredentialsFile.create(recursive: true);
+      await _pubCredentialsFile.writeAsString(pubCredentials);
+    }
+
     for (final package in packages) {
       await _runForPackage(package);
     }
