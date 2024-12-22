@@ -24,6 +24,9 @@ final class Generate extends BaseCommand {
   String get name => 'generate';
 
   @override
+  List<String> get aliases => const ['gen'];
+
+  @override
   String get description => 'Generate output files.';
 
   @override

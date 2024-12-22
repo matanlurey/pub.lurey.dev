@@ -46,7 +46,7 @@ String generateGithubPackageWorkflow({
   }
 
   // Initialize the workspace.
-  writer.writeListObject('run', 'dart pub get');
+  writer.writeListValue('run: dart pub get');
 
   writer.writeListObject('run', './dev.sh setup --packages packages/$package');
   writer.endObjectOrList();
