@@ -18,8 +18,7 @@ jobs:
     steps:
       - uses: actions/checkout@v4.2.0
       - uses: dart-lang/setup-dart@v1.6.5
-      - run: dart pub get
-        working-directory: packages/mirage
+      - run: ./dev.sh setup --packages packages/mirage
       - run: ./dev.sh check --packages packages/mirage
       - run: ./dev.sh test --packages packages/mirage
       - run: ./dev.sh coverage --packages packages/mirage

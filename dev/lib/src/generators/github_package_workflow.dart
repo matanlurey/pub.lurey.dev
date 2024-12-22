@@ -4,6 +4,7 @@ import 'package:strink/strink.dart';
 String generateGithubPackageWorkflow({
   required String package,
   required bool publishable,
+  required bool usesFlutter,
   required bool usesChrome,
   required bool uploadCoverage,
 }) {
@@ -37,6 +38,9 @@ String generateGithubPackageWorkflow({
   writer.startObjectOrList('steps');
   writer.writeListValue('uses: actions/checkout@v4.2.0');
   writer.writeListValue('uses: dart-lang/setup-dart@v1.6.5');
+  if (usesFlutter) {
+    writer.writeListValue('uses: subosito/flutter-action@v2');
+  }
   if (usesChrome) {
     writer.writeListValue('uses: browser-actions/setup-chrome@v1.7.2');
   }

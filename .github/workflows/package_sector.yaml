@@ -18,8 +18,8 @@ jobs:
     steps:
       - uses: actions/checkout@v4.2.0
       - uses: dart-lang/setup-dart@v1.6.5
-      - run: dart pub get
-        working-directory: packages/sector
+      - uses: subosito/flutter-action@v2
+      - run: ./dev.sh setup --packages packages/sector
       - run: ./dev.sh check --packages packages/sector
       - run: ./dev.sh test --packages packages/sector
       - run: ./dev.sh coverage --packages packages/sector

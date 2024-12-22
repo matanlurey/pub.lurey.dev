@@ -55,6 +55,8 @@ final class Generate extends BaseCommand {
         package: package.name,
         publishable: package.isPublishable,
         usesChrome: package.testDependencies.contains(TestDependency.chrome),
+        usesFlutter: package.isFlutterPackage ||
+            package.nestedPackages.any((p) => p.isFlutterPackage),
         uploadCoverage: package.supportsCoverage,
       ),
     );
