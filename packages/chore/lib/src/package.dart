@@ -27,6 +27,7 @@ sealed class Package {
         path: path,
         name: pubspec.name,
         isPublishable: pubspec.isPublishable,
+        isFlutterPackage: pubspec.dependencies.contains('flutter'),
         description: pubspec.description,
         shortDescription: pubspec.shortDescription,
         packages: packages.toSetRejectDuplicates(),
@@ -54,14 +55,27 @@ sealed class Package {
       // Ignore.
     }
 
+    // Check for other pubspec.yaml files in the package.
+    final nestedPackages = <Package>{};
+    await for (final entity in io.Directory(path).list(recursive: true)) {
+      if (entity is io.Directory) {
+        final nestedPubspecPath = p.join(entity.path, 'pubspec.yaml');
+        if (await io.File(nestedPubspecPath).exists()) {
+          nestedPackages.add(await resolve(entity.path));
+        }
+      }
+    }
+
     return Package(
       path: path,
       name: pubspec.name,
       version: pubspec.version,
       isPublishable: pubspec.isPublishable,
+      isFlutterPackage: pubspec.dependencies.contains('flutter'),
       description: pubspec.description,
       shortDescription: pubspec.shortDescription,
       testDependencies: testDeps,
+      nestedPackages: nestedPackages,
       supportsCoverage: supportsCoverage,
     );
   }
@@ -71,11 +85,13 @@ sealed class Package {
     required String path,
     required String name,
     required bool isPublishable,
+    required bool isFlutterPackage,
     required bool supportsCoverage,
     String? version,
     String? description,
     String? shortDescription,
     Set<TestDependency> testDependencies,
+    Set<Package> nestedPackages,
   }) = _Package;
 
   Package._({
@@ -83,11 +99,14 @@ sealed class Package {
     required this.name,
     required this.isPublishable,
     required this.supportsCoverage,
+    required this.isFlutterPackage,
     this.version,
     this.description,
     this.shortDescription,
     Set<TestDependency> testDependencies = const {},
-  }) : testDependencies = Set.unmodifiable(testDependencies);
+    Set<Package> nestedPackages = const {},
+  })  : testDependencies = Set.unmodifiable(testDependencies),
+        nestedPackages = Set.unmodifiable(nestedPackages);
 
   /// Path of the package.
   final String path;
@@ -113,11 +132,17 @@ sealed class Package {
   /// Whether the package is publishable.
   final bool isPublishable;
 
+  /// Whether the package uses the Flutter SDK.
+  final bool isFlutterPackage;
+
   /// Dependencies required for testing.
   final Set<TestDependency> testDependencies;
 
   /// Whether coverage is supported.
   final bool supportsCoverage;
+
+  /// Nested packages, often examples or test fixtures.
+  final Set<Package> nestedPackages;
 
   @override
   bool operator ==(Object other) {
@@ -127,7 +152,9 @@ sealed class Package {
         description == other.description &&
         shortDescription == other.shortDescription &&
         isPublishable == other.isPublishable &&
+        isFlutterPackage == other.isFlutterPackage &&
         testDependencies.containsOnlyUnordered(other.testDependencies) &&
+        nestedPackages.containsOnlyUnordered(other.nestedPackages) &&
         supportsCoverage == other.supportsCoverage;
   }
 
@@ -139,7 +166,9 @@ sealed class Package {
       description,
       shortDescription,
       isPublishable,
+      isFlutterPackage,
       Object.hashAllUnordered(testDependencies),
+      Object.hashAllUnordered(nestedPackages),
       supportsCoverage,
     );
   }
@@ -155,10 +184,12 @@ final class _Package extends Package {
     required super.name,
     required super.isPublishable,
     required super.supportsCoverage,
+    required super.isFlutterPackage,
     super.version,
     super.description,
     super.shortDescription,
     super.testDependencies,
+    super.nestedPackages,
   }) : super._();
 
   @override
@@ -183,6 +214,7 @@ final class Workspace extends _Package {
     required super.path,
     required super.name,
     required super.isPublishable,
+    required super.isFlutterPackage,
     Set<String> packages = const {},
     super.description,
     super.shortDescription,
