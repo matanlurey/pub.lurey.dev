@@ -3,13 +3,17 @@
 name: sector
 description: |-
   Fast and intuitive 2D data structures: grids, graphs, pathfinding & more.
-version: 0.4.0
+short_description: 2D data structures.
+
+version: 0.4.0+1
+
+homepage: https://github.com/matanlurey/pub.lurey.dev/tree/main/packages/sector
+issue_tracker: https://github.com/matanlurey/pub.lurey.dev/labels/pkg-sector
+
+resolution: workspace
 
 environment:
   sdk: ^3.5.0
-
-repository: https://github.com/matanlurey/sector.dart/tree/main/packages/sector
-issue_tracker: https://github.com/matanlurey/sector.dart/issues
 
 dependencies:
   lodim: ^0.1.6+1
