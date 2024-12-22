@@ -75,8 +75,7 @@ Please [file an issue][] before contributing larger changes.
 
 This package uses repository specific tooling to enforce formatting, static analysis, and testing. Please run the following commands locally before submitting a pull request:
 
-- `./dev.sh --packages packages/mansion check `
-- `./dev.sh --packages packages/mansion test `
-
+- `./dev.sh --packages packages/mansion check`
+- `./dev.sh --packages packages/mansion test`
 
 <!-- #endregion -->

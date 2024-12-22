@@ -23,6 +23,7 @@ workspace:
   - packages/oath
   - packages/proc
   - packages/quirk
+  - packages/sector
   - packages/sdk
   - packages/strink
   - packages/webby

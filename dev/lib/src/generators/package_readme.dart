@@ -78,7 +78,7 @@ String generatePackageContributingSection(Package package) {
       '[file an issue]: https://github.com/matanlurey/pub.lurey.dev/issues/new',
     );
   } else {
-    buffer.writeln(
+    buffer.write(
       'We welcome contributions to this package!\n'
       '\n'
       'Please [file an issue][] before contributing larger changes.\n'
@@ -89,8 +89,8 @@ String generatePackageContributingSection(Package package) {
       'static analysis, and testing. Please run the following commands locally '
       'before submitting a pull request:\n'
       '\n'
-      '- `./dev.sh --packages packages/${package.name} check `\n'
-      '- `./dev.sh --packages packages/${package.name} test `\n',
+      '- `./dev.sh --packages packages/${package.name} check`\n'
+      '- `./dev.sh --packages packages/${package.name} test`\n',
     );
   }
   return buffer.toString();

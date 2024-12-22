@@ -3,6 +3,7 @@ import 'package:args/command_runner.dart';
 import 'package:chore/chore.dart';
 import 'package:chore/src/command/dartdoc.dart';
 import 'package:chore/src/command/publish.dart';
+import 'package:chore/src/command/setup.dart';
 import 'package:meta/meta.dart';
 
 /// Entry point for the command-line interface.
@@ -22,6 +23,7 @@ final class Runner extends CommandRunner<void> {
         Coverage(context, environment),
         Dartdoc(context, environment),
         Publish(context, environment),
+        Setup(context, environment),
         Test(context, environment),
         ...?commands?.call(context, environment),
       ]..sort((a, b) => a.name.compareTo(b.name)),

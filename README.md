@@ -22,6 +22,7 @@ A wide but independent collection of Dart packages and projects.
 | [`proc`](./packages/proc) | [![Pub version for package/proc](https://img.shields.io/pub/v/proc?label=%20)](https://pub.dev/packages/proc) | Extensible process management. |
 | [`quirk`](./packages/quirk) | _Unreleased_ | Common utilities. |
 | [`sdk`](./packages/sdk) | _Unreleased_ | Dart SDK utilities. |
+| [`sector`](./packages/sector) | [![Pub version for package/sector](https://img.shields.io/pub/v/sector?label=%20)](https://pub.dev/packages/sector) | 2D data structures. |
 | [`strink`](./packages/strink) | _Unreleased_ | Structured string output. |
 | [`webby`](./packages/webby) | [![Pub version for package/webby](https://img.shields.io/pub/v/webby?label=%20)](https://pub.dev/packages/webby) | Hand-crafted interop for web apps. |
 

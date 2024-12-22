@@ -56,4 +56,19 @@ final class Pubspec extends YamlWrapper {
   ///
   /// If this is not a workspace, the default is `null`.
   List<String>? get workspace => loadStringList('workspace');
+
+  /// Packages listed as dependencies.
+  List<String> get dependencies {
+    final deps = root['dependencies'];
+    if (deps == null) {
+      return const [];
+    }
+    if (deps is! YamlMap) {
+      throw FormatException(
+        'Expected a map, got ${deps.runtimeType}',
+        root.span.text,
+      );
+    }
+    return deps.keys.cast<String>().toList();
+  }
 }
