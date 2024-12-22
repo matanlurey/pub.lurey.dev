@@ -44,6 +44,10 @@ String generateGithubPackageWorkflow({
   if (usesChrome) {
     writer.writeListValue('uses: browser-actions/setup-chrome@v1.7.2');
   }
+
+  // Initialize the workspace.
+  writer.writeListObject('run', 'dart pub get');
+
   writer.writeListObject('run', './dev.sh setup --packages packages/$package');
   writer.endObjectOrList();
 

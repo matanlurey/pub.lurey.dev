@@ -18,25 +18,26 @@ jobs:
     steps:
       - uses: actions/checkout@v4.2.0
       - uses: dart-lang/setup-dart@v1.6.5
-      - run: ./dev.sh setup --packages packages/chaos
-      - run: ./dev.sh check --packages packages/chaos
-      - run: ./dev.sh test --packages packages/chaos
-      - run: ./dev.sh coverage --packages packages/chaos
-      - uses: codecov/codecov-action@v4.6.0
-        with:
-          token: ${{ secrets.CODECOV_TOKEN }}
-          flags: chaos
-          file: packages/chaos/coverage/lcov.info
-          fail_ci_if_error: true
-  publish:
-    if: github.event_name == 'push'
-    needs: build
-    runs-on: ubuntu-latest
-    steps:
-      - uses: actions/checkout@v4.2.0
-      - uses: dart-lang/setup-dart@v1.6.5
       - run: dart pub get
-        working-directory: packages/chaos
-      - run: ./dev.sh publish --packages packages/chaos
-        env:
-          PUB_CREDENTIALS: ${{ secrets.PUB_CREDENTIALS }}
+        - run: ./dev.sh setup --packages packages/chaos
+        - run: ./dev.sh check --packages packages/chaos
+        - run: ./dev.sh test --packages packages/chaos
+        - run: ./dev.sh coverage --packages packages/chaos
+        - uses: codecov/codecov-action@v4.6.0
+          with:
+            token: ${{ secrets.CODECOV_TOKEN }}
+            flags: chaos
+            file: packages/chaos/coverage/lcov.info
+            fail_ci_if_error: true
+    publish:
+      if: github.event_name == 'push'
+      needs: build
+      runs-on: ubuntu-latest
+      steps:
+        - uses: actions/checkout@v4.2.0
+        - uses: dart-lang/setup-dart@v1.6.5
+        - run: dart pub get
+          working-directory: packages/chaos
+        - run: ./dev.sh publish --packages packages/chaos
+          env:
+            PUB_CREDENTIALS: ${{ secrets.PUB_CREDENTIALS }}

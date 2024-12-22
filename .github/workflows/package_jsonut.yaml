@@ -18,25 +18,26 @@ jobs:
     steps:
       - uses: actions/checkout@v4.2.0
       - uses: dart-lang/setup-dart@v1.6.5
-      - run: ./dev.sh setup --packages packages/jsonut
-      - run: ./dev.sh check --packages packages/jsonut
-      - run: ./dev.sh test --packages packages/jsonut
-      - run: ./dev.sh coverage --packages packages/jsonut
-      - uses: codecov/codecov-action@v4.6.0
-        with:
-          token: ${{ secrets.CODECOV_TOKEN }}
-          flags: jsonut
-          file: packages/jsonut/coverage/lcov.info
-          fail_ci_if_error: true
-  publish:
-    if: github.event_name == 'push'
-    needs: build
-    runs-on: ubuntu-latest
-    steps:
-      - uses: actions/checkout@v4.2.0
-      - uses: dart-lang/setup-dart@v1.6.5
       - run: dart pub get
-        working-directory: packages/jsonut
-      - run: ./dev.sh publish --packages packages/jsonut
-        env:
-          PUB_CREDENTIALS: ${{ secrets.PUB_CREDENTIALS }}
+        - run: ./dev.sh setup --packages packages/jsonut
+        - run: ./dev.sh check --packages packages/jsonut
+        - run: ./dev.sh test --packages packages/jsonut
+        - run: ./dev.sh coverage --packages packages/jsonut
+        - uses: codecov/codecov-action@v4.6.0
+          with:
+            token: ${{ secrets.CODECOV_TOKEN }}
+            flags: jsonut
+            file: packages/jsonut/coverage/lcov.info
+            fail_ci_if_error: true
+    publish:
+      if: github.event_name == 'push'
+      needs: build
+      runs-on: ubuntu-latest
+      steps:
+        - uses: actions/checkout@v4.2.0
+        - uses: dart-lang/setup-dart@v1.6.5
+        - run: dart pub get
+          working-directory: packages/jsonut
+        - run: ./dev.sh publish --packages packages/jsonut
+          env:
+            PUB_CREDENTIALS: ${{ secrets.PUB_CREDENTIALS }}
