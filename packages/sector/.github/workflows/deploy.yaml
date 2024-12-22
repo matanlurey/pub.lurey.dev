@@ -1,0 +1,32 @@
+name: Deploy
+
+on:
+  # Post-submit.
+  push:
+    branches: [ main ]
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+    defaults:
+      run:
+        working-directory: packages/sector
+    steps:
+      - uses: actions/checkout@v4.1.1
+      - name: Set up Flutter
+        uses: subosito/flutter-action@v2
+        with:
+          channel: 'stable'
+      - name: Download Dependencies
+        run: dart pub get
+      - name: Build PWA
+        run: |
+          dart run tool/demo.dart --release -- --base-href /sector.dart/
+      - name: Build API Docs
+        run: |
+          ./chore dartdoc --output build/api
+      - name: Deploy to GitHub Pages
+        uses: peaceiris/actions-gh-pages@v4
+        with:
+          github_token: ${{ secrets.GITHUB_TOKEN }}
+          publish_dir: ./packages/sector/build

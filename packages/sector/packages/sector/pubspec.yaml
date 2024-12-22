@@ -1,0 +1,26 @@
+# Format: https://dart.dev/tools/pub/pubspec
+
+name: sector
+description: |-
+  Fast and intuitive 2D data structures: grids, graphs, pathfinding & more.
+version: 0.4.0
+
+environment:
+  sdk: ^3.5.0
+
+repository: https://github.com/matanlurey/sector.dart/tree/main/packages/sector
+issue_tracker: https://github.com/matanlurey/sector.dart/issues
+
+dependencies:
+  lodim: ^0.1.6+1
+  meta: ^1.15.0
+
+dev_dependencies:
+  args: ^2.5.0
+  benchmark_harness: ^2.2.2
+  checks: ^0.3.0
+  collection: ^1.19.0
+  coverage: ^1.8.0
+  oath: ^0.2.1
+  path: ^1.9.0
+  test: ^1.25.8

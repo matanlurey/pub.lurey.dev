@@ -1,0 +1,23 @@
+name: sector_demo
+publish_to: 'none'
+
+environment:
+  sdk: ^3.5.0
+
+dependencies:
+  flutter:
+    sdk: flutter
+  sector:
+    path: ../sector
+
+dev_dependencies:
+  flutter_test:
+    sdk: flutter
+  oath: ^0.2.1
+
+dependency_overrides:
+  http_parser: any
+  meta: any
+
+flutter:
+  uses-material-design: true
