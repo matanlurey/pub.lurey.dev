@@ -42,8 +42,7 @@ Please [file an issue][] before contributing larger changes.
 
 This package uses repository specific tooling to enforce formatting, static analysis, and testing. Please run the following commands locally before submitting a pull request:
 
-- `./dev.sh --packages packages/proc check `
-- `./dev.sh --packages packages/proc test `
-
+- `./dev.sh --packages packages/proc check`
+- `./dev.sh --packages packages/proc test`
 
 <!-- #endregion -->

@@ -142,8 +142,7 @@ Please [file an issue][] before contributing larger changes.
 
 This package uses repository specific tooling to enforce formatting, static analysis, and testing. Please run the following commands locally before submitting a pull request:
 
-- `./dev.sh --packages packages/lodim check `
-- `./dev.sh --packages packages/lodim test `
-
+- `./dev.sh --packages packages/lodim check`
+- `./dev.sh --packages packages/lodim test`
 
 <!-- #endregion -->
