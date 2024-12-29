@@ -9,7 +9,7 @@ final class Dartdoc extends BaseCommand {
   /// Creates a new dartdoc command.
   Dartdoc(super.context, super.environment) {
     argParser.addOption(
-      'preview',
+      'port',
       abbr: 'p',
       help: ''
           'The port to preview the HTML coverage report on. '
@@ -17,9 +17,9 @@ final class Dartdoc extends BaseCommand {
       defaultsTo: '8080',
     );
     argParser.addFlag(
-      'no-preview',
-      help: 'Do not preview the HTML coverage report.',
-      defaultsTo: environment.isCI,
+      'preview',
+      help: 'Whether to preview the HTML coverage report.',
+      defaultsTo: !environment.isCI,
     );
   }
 
@@ -37,21 +37,21 @@ final class Dartdoc extends BaseCommand {
     }
 
     final packages = await context.resolve(globalResults!);
-    final int? preview;
+    final int? port;
     if (packages.length == 1) {
-      preview = int.tryParse(argResults!.option('preview')!);
-    } else if (!argResults!.flag('no-preview')) {
+      port = int.tryParse(argResults!.option('port')!);
+    } else if (argResults!.flag('preview')) {
       io.exitCode = 1;
       io.stderr.writeln(
         '❌ Only a single package can be previewed at a time.',
       );
       return;
     } else {
-      preview = null;
+      port = null;
     }
 
     for (final package in packages) {
-      await _runForPackage(dartBin.binPath, package, port: preview);
+      await _runForPackage(dartBin.binPath, package, port: port);
     }
   }
 
