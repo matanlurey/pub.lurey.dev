@@ -38,7 +38,7 @@ final class Dartdoc extends BaseCommand {
 
     final packages = await context.resolve(globalResults!);
     final int? port;
-    if (packages.length == 1) {
+    if (packages.length == 1 && argResults!.wasParsed('port')) {
       port = int.tryParse(argResults!.option('port')!);
     } else if (argResults!.flag('preview')) {
       io.exitCode = 1;
