@@ -41,13 +41,7 @@ void main() {
   });
 
   test('could not find published package', () async {
-    await check(
-      pubService.fetchLatestVersion('not_found'),
-    ).throws<ArgumentError>(
-      (e) => e
-          .has((e) => e.toString(), 'toString()')
-          .containsInOrder(['Package not found', 'not_found']),
-    );
+    check(await pubService.fetchLatestVersion('not_found')).isNull();
   });
 
   test('error occurred finding package', () async {

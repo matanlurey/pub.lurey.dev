@@ -38,11 +38,13 @@ final class PubService {
   }
 
   /// Fetches the latest version of a package from the pub host.
-  Future<String> fetchLatestVersion(String package) async {
+  ///
+  /// If the package is not found, returns `null`.
+  Future<String?> fetchLatestVersion(String package) async {
     final uri = _pubHost.replace(path: '/packages/$package.json');
     final response = await _httpGet(uri);
     return switch (response.statusCode) {
-      404 => throw ArgumentError('Package not found: $package'),
+      404 => null,
       200 => response.decodeAsJson()['versions'].array().first.string(),
       _ => throw StateError('Error fetching $package: ${response.statusCode}'),
     };
