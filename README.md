@@ -20,7 +20,7 @@ A wide but independent collection of Dart packages and projects.
 | [`mirage`](./packages/mirage) | [![Pub version for package/mirage](https://img.shields.io/pub/v/mirage?label=%20)](https://pub.dev/packages/mirage) | Noise and pattern generation. |
 | [`oath`](./packages/oath) | [![Pub version for package/oath](https://img.shields.io/pub/v/oath?label=%20)](https://pub.dev/packages/oath) | Strict linting for Dart packages. |
 | [`proc`](./packages/proc) | [![Pub version for package/proc](https://img.shields.io/pub/v/proc?label=%20)](https://pub.dev/packages/proc) | Extensible process management. |
-| [`quirk`](./packages/quirk) | _Unreleased_ | Common utilities. |
+| [`quirk`](./packages/quirk) | [![Pub version for package/quirk](https://img.shields.io/pub/v/quirk?label=%20)](https://pub.dev/packages/quirk) | Common utilities. |
 | [`sdk`](./packages/sdk) | _Unreleased_ | Dart SDK utilities. |
 | [`sector`](./packages/sector) | [![Pub version for package/sector](https://img.shields.io/pub/v/sector?label=%20)](https://pub.dev/packages/sector) | 2D data structures. |
 | [`strink`](./packages/strink) | _Unreleased_ | Structured string output. |
