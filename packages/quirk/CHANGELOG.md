@@ -8,6 +8,10 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 <!-- #endregion -->
 
+## Unreleased
+
+- Added optional arguments `name` and `message` to `to[Unmodifiable]SetRejectDuplicates`.
+
 ## 0.1.0
 
 Initial release.

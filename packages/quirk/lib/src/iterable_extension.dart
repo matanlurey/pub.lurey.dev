@@ -250,10 +250,14 @@ extension IterableExtension<T> on Iterable<T> {
   /// print(list.toSet()); // {1, 2, 3}
   /// print(list.toSetRejectDuplicates()); // Throws
   /// ```
-  Set<T> toSetRejectDuplicates() {
+  Set<T> toSetRejectDuplicates({String? name, String? message}) {
     final set = toSet();
     if (set.length != length) {
-      throw StateError('Duplicate elements found');
+      throw ArgumentError.value(
+        this,
+        name,
+        message ?? 'Duplicate elements found',
+      );
     }
     return set;
   }
@@ -281,10 +285,14 @@ extension IterableExtension<T> on Iterable<T> {
   /// print(list.toUnmodifiableSet()); // {1, 2, 3}
   /// print(list.toUnmodifiableSetRejectDuplicates()); // Throws
   /// ```
-  Set<T> toUnmodifiableSetRejectDuplicates() {
+  Set<T> toUnmodifiableSetRejectDuplicates({String? name, String? message}) {
     final set = toUnmodifiableSet();
     if (set.length != length) {
-      throw StateError('Duplicate elements found');
+      throw ArgumentError.value(
+        this,
+        name,
+        message ?? 'Duplicate elements found',
+      );
     }
     return set;
   }

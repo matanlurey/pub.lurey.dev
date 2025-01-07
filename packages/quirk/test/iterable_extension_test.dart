@@ -101,7 +101,7 @@ void main() {
 
     test('throws an error if duplicates exist', () {
       final list = [1, 2, 3, 3];
-      check(list.toSetRejectDuplicates).throws<StateError>();
+      check(list.toSetRejectDuplicates).throws<ArgumentError>();
     });
   });
 
@@ -123,7 +123,7 @@ void main() {
 
     test('throws an error if duplicates exist', () {
       final list = [1, 2, 3, 3];
-      check(list.toUnmodifiableSetRejectDuplicates).throws<StateError>();
+      check(list.toUnmodifiableSetRejectDuplicates).throws<ArgumentError>();
     });
   });
 }
