@@ -3,6 +3,7 @@
 import 'dart:io' as io;
 
 import 'package:chore/chore.dart';
+import 'package:lore/lore.dart';
 
 void main(List<String> args) async {
   // Find the root directory of the repository.
@@ -18,7 +19,12 @@ void main(List<String> args) async {
   final available = pubspec is Workspace ? pubspec.packages : {'.'};
 
   await Runner(
-    Context(rootDir: root),
+    Context(
+      rootDir: root,
+      logLevel: args.any((arg) => arg == '--verbose' || arg == '-v')
+          ? Level.debug
+          : Level.status,
+    ),
     systemEnvironment,
     availablePackages: available,
   ).run(args);

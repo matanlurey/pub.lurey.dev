@@ -40,7 +40,7 @@ final class Dartdoc extends BaseCommand {
     final int? port;
     if (packages.length == 1 && argResults!.wasParsed('port')) {
       port = int.tryParse(argResults!.option('port')!);
-    } else if (argResults!.flag('preview')) {
+    } else if (packages.length > 1 && argResults!.flag('preview')) {
       io.exitCode = 1;
       io.stderr.writeln(
         '❌ Only a single package can be previewed at a time.',

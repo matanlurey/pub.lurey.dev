@@ -44,6 +44,7 @@ final class Context {
   static void registerArgs(
     ArgParser parser, {
     required Iterable<String> packages,
+    bool verbose = false,
   }) {
     parser.addMultiOption(
       'packages',
@@ -51,7 +52,7 @@ final class Context {
       help: 'Configuration to use for the command.',
       allowed: packages,
       defaultsTo: packages.length == 1 ? [packages.first] : packages,
-      hide: packages.length <= 1,
+      hide: !verbose && packages.length <= 1,
     );
   }
 
