@@ -30,5 +30,6 @@ dev_dependencies:
   benchmark_harness: ^2.2.2
   checks: ^0.3.0
   coverage: ^1.8.0
-  oath: ^0.2.1
+  oath:
+    path: ../oath
   test: ^1.25.7

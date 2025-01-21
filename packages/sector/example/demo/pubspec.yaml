@@ -4,6 +4,8 @@ publish_to: 'none'
 environment:
   sdk: ^3.5.0
 
+resolution: workspace
+
 dependencies:
   flutter:
     sdk: flutter
@@ -13,7 +15,8 @@ dependencies:
 dev_dependencies:
   flutter_test:
     sdk: flutter
-  oath: ^0.2.1
+  oath:
+    path: ../../../oath
 
 dependency_overrides:
   http_parser: any

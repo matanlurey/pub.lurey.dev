@@ -8,6 +8,12 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 <!-- #endregion -->
 
+## 0.3.0
+
+- Bumped Dart to `^3.6.0`.
+- Removed `prefer_const_constructors[_in_immutables]` from `flutter/relaxed.yaml`.
+- Added [`avoid_futureor_void`](https://dart.dev/tools/linter-rules/avoid_futureor_void) and [`use_truncating_division`](https://dart.dev/tools/linter-rules/use_truncating_division) to all rule sets.
+
 ## 0.2.2+1
 
 - No changes, just testing publish automation.

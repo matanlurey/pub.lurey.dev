@@ -28,5 +28,6 @@ dependencies:
 
 dev_dependencies:
   checks: ^0.3.0
-  oath: ^0.2.1
+  oath:
+    path: ../oath
   test: ^1.25.7
