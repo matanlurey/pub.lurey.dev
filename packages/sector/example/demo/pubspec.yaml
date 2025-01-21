@@ -4,8 +4,6 @@ publish_to: 'none'
 environment:
   sdk: ^3.5.0
 
-resolution: workspace
-
 dependencies:
   flutter:
     sdk: flutter

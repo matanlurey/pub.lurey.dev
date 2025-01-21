@@ -24,7 +24,6 @@ workspace:
   - packages/proc
   - packages/quirk
   - packages/sector
-  - packages/sector/example/demo
   - packages/sdk
   - packages/strink
   - packages/webby
