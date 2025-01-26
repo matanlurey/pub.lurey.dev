@@ -1,6 +1,5 @@
 import 'package:checks/checks.dart';
 import 'package:quirk/quirk.dart';
-import 'package:quirk/src/iterable_extension.dart';
 import 'package:test/test.dart';
 
 void main() {
