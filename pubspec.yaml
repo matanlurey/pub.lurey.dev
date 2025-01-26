@@ -10,6 +10,10 @@ publish_to: none
 environment:
   sdk: ^3.6.0
 
+dev_dependencies:
+  oath:
+    path: packages/oath
+
 workspace:
   - dev
   - packages/chaos
