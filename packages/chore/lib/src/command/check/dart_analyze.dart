@@ -9,7 +9,7 @@ final class DartAnalyze extends Checker {
   const DartAnalyze();
 
   @override
-  String get name => 'Dart Analyze';
+  String get name => 'dart-analyze';
 
   @override
   Future<bool> run(

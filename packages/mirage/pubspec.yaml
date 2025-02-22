@@ -6,7 +6,7 @@ description: |-
   graphics.
 short_description: Noise and pattern generation.
 
-version: 0.2.0+1
+version: 0.2.0+2
 
 homepage: https://github.com/matanlurey/pub.lurey.dev/tree/main/packages/mirage
 issue_tracker: https://github.com/matanlurey/pub.lurey.dev/labels/pkg-mirage

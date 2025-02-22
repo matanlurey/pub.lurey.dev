@@ -13,7 +13,7 @@ description: |-
   Fast, structured, and idiomatic logging with an extensible API.
 short_description: Fast, structured, and idiomatic logging.
 
-version: 0.1.0-dev
+version: 0.0.0
 
 resolution: workspace
 

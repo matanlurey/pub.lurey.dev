@@ -12,7 +12,7 @@ final class PubspecVersionSync extends Checker {
   const PubspecVersionSync();
 
   @override
-  String get name => 'Pubspec Version Sync';
+  String get name => 'pubspec-version-sync';
 
   @override
   Future<bool> run(
@@ -53,16 +53,17 @@ final class PubspecVersionSync extends Checker {
         'version: $changelogVersion',
       );
       await pubspecFile.writeAsString(contents);
+      stderr.writeln('Updated pubspec.yaml version to $changelogVersion.');
       return false;
     }
 
     stderr.writeln(
-      '❌ Found mismatch between pubspec.yaml (${package.version}) and '
+      'Mismatch between pubspec.yaml (${package.version}) and '
       'CHANGELOG.md ($changelogVersion).',
     );
     return true;
   }
 
-  static final _changelogVersion = RegExp(r'^## (\d+\.\d+\.\d+.*)$');
-  static final _pubspecVersion = RegExp(r'^version: (\d+\.\d+\.\d+.*)$');
+  static final _changelogVersion = RegExp(r'## (\d+\.\d+\.\d+.*)');
+  static final _pubspecVersion = RegExp(r'version: (\d+\.\d+\.\d+.*)');
 }

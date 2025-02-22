@@ -9,7 +9,7 @@ final class DartFormat extends Checker {
   const DartFormat();
 
   @override
-  String get name => 'Dart Format';
+  String get name => 'dart-format';
 
   @override
   Future<bool> run(

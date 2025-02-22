@@ -12,7 +12,7 @@ name: mansion
 description: A stately library for crafting and deciphering ANSI escape codes.
 short_description: Create and parse ANSI escape codes.
 
-version: 0.1.0+1
+version: 0.1.0+2
 
 environment:
   sdk: ^3.7.0

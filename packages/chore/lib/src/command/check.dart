@@ -19,6 +19,12 @@ final class Check extends BaseCommand {
     ],
   }) : _checkers = checkers.toList() {
     argParser.addFlag('fix', help: 'Automatically fix issues when possible.');
+    argParser.addMultiOption(
+      'check',
+      help: 'Run only the specified checkers.',
+      allowed: _checkers.map((c) => c.name),
+      defaultsTo: _checkers.map((c) => c.name).toList(),
+    );
   }
 
   final List<Checker> _checkers;
@@ -39,6 +45,11 @@ final class Check extends BaseCommand {
   Future<void> _runForPackage(Package package) async {
     // Run each checker.
     for (final checker in _checkers) {
+      // Potentially skip the checker.
+      if (!argResults!.multiOption('check').contains(checker.name)) {
+        continue;
+      }
+
       io.stderr.writeln('Running ${checker.name} on ${package.name}...');
       final foundIssues = await checker.run(
         package,

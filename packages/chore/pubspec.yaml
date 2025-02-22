@@ -30,6 +30,7 @@ dependencies:
   meta: ^1.16.0
   path: ^1.9.0
   proc: ^0.2.0+1
+  pub_semver: ^2.1.5
   quirk:
     path: ../quirk
   sdk:
