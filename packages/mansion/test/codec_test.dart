@@ -101,10 +101,7 @@ void main() {
       sink.close();
 
       check(out).deepEquals([
-        [
-          SetStyles(Style.foreground(Color4.red)),
-          Print('Hello, World!'),
-        ],
+        [SetStyles(Style.foreground(Color4.red)), Print('Hello, World!')],
       ]);
     });
 
@@ -125,10 +122,7 @@ void main() {
       sink.close();
 
       check(out).deepEquals([
-        [
-          SetStyles(Style.foreground(Color4.red)),
-          Print('Hello, World!'),
-        ],
+        [SetStyles(Style.foreground(Color4.red)), Print('Hello, World!')],
       ]);
     });
 
@@ -166,10 +160,9 @@ void main() {
     final sequence = Unknown('\x1B[3W', offset: 0);
 
     check(() => encoder.convert([sequence])).throws<UnsupportedError>();
-    final encoded = const AnsiEncoder(allowInvalid: true).convert([
-      sequence,
-      Print('Hello, World!'),
-    ]);
+    final encoded = const AnsiEncoder(
+      allowInvalid: true,
+    ).convert([sequence, Print('Hello, World!')]);
     final decoded = decoder.convert(encoded);
 
     check(decoded).deepEquals([sequence, Print('Hello, World!')]);

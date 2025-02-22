@@ -122,12 +122,7 @@ final class _PathfindViewState extends State<_PathfindView> {
     final graph = grid.asWeighted(weight: _weight);
     switch (pathfinder) {
       case final Pathfinder<Pos> p:
-        path = p.findPath(
-          graph,
-          start!,
-          Goal.node(end!),
-          tracer: recorder,
-        );
+        path = p.findPath(graph, start!, Goal.node(end!), tracer: recorder);
       case final BestPathfinder<Pos> p:
         final (result, _) = p.findBestPath(
           graph,

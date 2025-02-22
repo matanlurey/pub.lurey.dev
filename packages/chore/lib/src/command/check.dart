@@ -1,17 +1,33 @@
 import 'dart:io' as io;
 
 import 'package:chore/chore.dart';
-import 'package:proc/proc.dart';
+import 'package:chore/src/command/check/dart_analyze.dart';
+import 'package:chore/src/command/check/dart_format.dart';
+import 'package:chore/src/command/check/pubspec_version_sync.dart';
+import 'package:meta/meta.dart';
 
 /// A command that checks the repository for issues.
 final class Check extends BaseCommand {
   /// Creates a new check command.
-  Check(super.context, super.environment) {
-    argParser.addFlag(
-      'fix',
-      help: 'Automatically fix issues when possible.',
+  Check(
+    super.context,
+    super.environment, {
+    Iterable<Checker> checkers = const [
+      DartAnalyze(),
+      DartFormat(),
+      PubspecVersionSync(),
+    ],
+  }) : _checkers = checkers.toList() {
+    argParser.addFlag('fix', help: 'Automatically fix issues when possible.');
+    argParser.addMultiOption(
+      'check',
+      help: 'Run only the specified checkers.',
+      allowed: _checkers.map((c) => c.name),
+      defaultsTo: _checkers.map((c) => c.name).toList(),
     );
   }
+
+  final List<Checker> _checkers;
 
   @override
   String get name => 'check';
@@ -27,60 +43,49 @@ final class Check extends BaseCommand {
   }
 
   Future<void> _runForPackage(Package package) async {
-    final dartBin = environment.getDartSdk()?.dart;
-    if (dartBin == null) {
-      throw StateError('Unable to find dart executable.');
-    }
-
-    final fix = argResults!.flag('fix');
-
-    // Run dartfmt.
-    io.stderr.writeln('Checking formatting of ${package.name}...');
-    {
-      final process = await environment.processHost.start(
-        dartBin.binPath,
-        [
-          'format',
-          '--fix',
-          if (fix) ...[
-            '--output=write',
-          ] else ...[
-            '--output=show',
-            '--show=changed',
-            '--set-exit-if-changed',
-          ],
-          '.',
-        ],
-        runMode: ProcessRunMode.inheritStdio,
-        workingDirectory: package.path,
-      );
-      if ((await process.exitCode).isFailure) {
-        io.exitCode = 1;
-        io.stderr.writeln('❌ Found formatting issues.');
-      } else if (fix) {
-        io.stderr.writeln('✅ Ran formatter.');
-      } else {
-        io.stderr.writeln('✅ No formatting issues found.');
+    // Run each checker.
+    for (final checker in _checkers) {
+      // Potentially skip the checker.
+      if (!argResults!.multiOption('check').contains(checker.name)) {
+        continue;
       }
-      io.stderr.writeln();
-    }
 
-    // Run dartanalyzer.
-    io.stderr.writeln('Running static analysis of ${package.name}...');
-    {
-      final process = await environment.processHost.start(
-        dartBin.binPath,
-        ['analyze', '.'],
-        runMode: ProcessRunMode.inheritStdio,
-        workingDirectory: package.path,
+      io.stderr.writeln('Running ${checker.name} on ${package.name}...');
+      final foundIssues = await checker.run(
+        package,
+        environment,
+        fix: argResults!.flag('fix'),
       );
-      if ((await process.exitCode).isFailure) {
+      if (foundIssues) {
         io.exitCode = 1;
-        io.stderr.writeln('❌ Found analysis issues.');
+        io.stderr.writeln('❌ ${checker.name}: found issues.');
       } else {
-        io.stderr.writeln('✅ No analysis issues found.');
+        io.stderr.writeln('✅ ${checker.name}: no issues found.');
       }
       io.stderr.writeln();
     }
   }
+}
+
+/// A check implementation.
+@immutable
+abstract base class Checker {
+  // Not part of public API.
+  // ignore: public_member_api_docs
+  const Checker();
+
+  /// Name of the checker.
+  String get name;
+
+  /// Executes the checker.
+  ///
+  /// If [fix] is `true`, the checker should attempt to fix issues.
+  ///
+  /// Returns `true` if the checker found issues, `false` otherwise.
+  @useResult
+  Future<bool> run(
+    Package package,
+    Environment environment, {
+    bool fix = false,
+  });
 }

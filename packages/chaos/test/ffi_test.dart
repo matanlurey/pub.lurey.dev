@@ -21,9 +21,7 @@ void main() {
   group(
     '',
     _test,
-    onPlatform: {
-      'linux': Skip('Not currently supported on Linux'),
-    },
+    onPlatform: {'linux': Skip('Not currently supported on Linux')},
   );
 }
 
@@ -46,23 +44,23 @@ void _test() {
     });
 
     test('generates expected random numbers', () {
-      check(
-        [for (var i = 0; i < 10; i++) xoshiro_128_plus.next()],
-      ).deepEquals(xoshiro128P$0_1_2_4$first10Integers);
+      check([
+        for (var i = 0; i < 10; i++) xoshiro_128_plus.next(),
+      ]).deepEquals(xoshiro128P$0_1_2_4$first10Integers);
     });
 
     test('jump, and then generate 10 random numbers', () {
       xoshiro_128_plus.jump();
-      check(
-        [for (var i = 0; i < 10; i++) xoshiro_128_plus.next()],
-      ).deepEquals(xoshiro128P$0_1_2_4$jump$next10Integers);
+      check([
+        for (var i = 0; i < 10; i++) xoshiro_128_plus.next(),
+      ]).deepEquals(xoshiro128P$0_1_2_4$jump$next10Integers);
     });
 
     test('long jump, and then generate 10 random numbers', () {
       xoshiro_128_plus.longJump();
-      check(
-        [for (var i = 0; i < 10; i++) xoshiro_128_plus.next()],
-      ).deepEquals(xoshiro128P$0_1_2_4$longJump$next10Integers);
+      check([
+        for (var i = 0; i < 10; i++) xoshiro_128_plus.next(),
+      ]).deepEquals(xoshiro128P$0_1_2_4$longJump$next10Integers);
     });
   });
 
@@ -72,23 +70,23 @@ void _test() {
     });
 
     test('generates expected random numbers', () {
-      check(
-        [for (var i = 0; i < 10; i++) xoshiro_128_plus_plus.next()],
-      ).deepEquals(xoshiro128PP$0_1_2_4$first10Integers);
+      check([
+        for (var i = 0; i < 10; i++) xoshiro_128_plus_plus.next(),
+      ]).deepEquals(xoshiro128PP$0_1_2_4$first10Integers);
     });
 
     test('jump, and then generate 10 random numbers', () {
       xoshiro_128_plus_plus.jump();
-      check(
-        [for (var i = 0; i < 10; i++) xoshiro_128_plus_plus.next()],
-      ).deepEquals(xoshiro128PP$0_1_2_4$jump$next10Integers);
+      check([
+        for (var i = 0; i < 10; i++) xoshiro_128_plus_plus.next(),
+      ]).deepEquals(xoshiro128PP$0_1_2_4$jump$next10Integers);
     });
 
     test('long jump, and then generate 10 random numbers', () {
       xoshiro_128_plus_plus.longJump();
-      check(
-        [for (var i = 0; i < 10; i++) xoshiro_128_plus_plus.next()],
-      ).deepEquals(xoshiro128PP$0_1_2_4$longJump$next10Integers);
+      check([
+        for (var i = 0; i < 10; i++) xoshiro_128_plus_plus.next(),
+      ]).deepEquals(xoshiro128PP$0_1_2_4$longJump$next10Integers);
     });
   });
 }

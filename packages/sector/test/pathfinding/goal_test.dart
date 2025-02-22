@@ -30,10 +30,7 @@ void main() {
   });
 
   test('Goal.any matches any of the goals in the list', () {
-    final goal = Goal.any([
-      Goal.node(1),
-      Goal.node(2),
-    ]);
+    final goal = Goal.any([Goal.node(1), Goal.node(2)]);
 
     check(goal.success(1)).isTrue();
     check(goal.success(2)).isTrue();
@@ -41,10 +38,7 @@ void main() {
   });
 
   test('Goal.every matches all of the goals in the list', () {
-    final goal = Goal.every([
-      Goal.node(1),
-      Goal.node(2),
-    ]);
+    final goal = Goal.every([Goal.node(1), Goal.node(2)]);
 
     check(goal.success(1)).isFalse();
     check(goal.success(2)).isFalse();

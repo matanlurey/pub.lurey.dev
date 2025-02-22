@@ -70,20 +70,15 @@ void main() {
   });
 
   test('should fail if fromRows empty and no empty', () {
-    check(
-      () => ListGrid<int>.fromRows([[]]),
-    ).throws<Error>();
+    check(() => ListGrid<int>.fromRows([[]])).throws<Error>();
   });
 
   test('should create a grid fromCells', () {
-    final grid = ListGrid.fromCells(
-      [
-        0, 1, 2, 3, 4, //
-        1, 2, 3, 4, 5, //
-        2, 3, 4, 5, 6, //
-      ],
-      width: 5,
-    );
+    final grid = ListGrid.fromCells([
+      0, 1, 2, 3, 4, //
+      1, 2, 3, 4, 5, //
+      2, 3, 4, 5, 6, //
+    ], width: 5);
 
     check(grid).rows.deepEquals([
       [0, 1, 2, 3, 4],
@@ -225,14 +220,11 @@ void main() {
   });
 
   test('should adapt diagonal to a walkable', () {
-    final grid = ListGrid<double>.fromRows(
-      [
-        [1, 2, 3],
-        [4, 5, 6],
-        [7, 8, 9],
-      ],
-      empty: 0,
-    );
+    final grid = ListGrid<double>.fromRows([
+      [1, 2, 3],
+      [4, 5, 6],
+      [7, 8, 9],
+    ], empty: 0);
 
     final graph = GridWalkable.diagonal(
       grid,
@@ -259,14 +251,11 @@ void main() {
   });
 
   test('should adapt all8Positions to a walkable', () {
-    final grid = ListGrid<double>.fromRows(
-      [
-        [1, 2, 3],
-        [4, 5, 6],
-        [7, 8, 9],
-      ],
-      empty: 0,
-    );
+    final grid = ListGrid<double>.fromRows([
+      [1, 2, 3],
+      [4, 5, 6],
+      [7, 8, 9],
+    ], empty: 0);
 
     final graph = GridWalkable.all8Directions(
       grid,
@@ -306,12 +295,7 @@ void main() {
 
     final graph = GridWalkable.from(
       grid,
-      directions: [
-        Pos(1, 0),
-        Pos(0, 1),
-        Pos(-1, 0),
-        Pos(0, -1),
-      ],
+      directions: [Pos(1, 0), Pos(0, 1), Pos(-1, 0), Pos(0, -1)],
       weight: (a, b, _) => (a - b).abs(),
     );
 
@@ -336,14 +320,11 @@ void main() {
   });
 
   test('should fill the full grid', () {
-    final grid = ListGrid<int>.fromRows(
-      [
-        [0, 1, 2, 3, 4],
-        [1, 2, 3, 4, 5],
-        [2, 3, 4, 5, 6],
-      ],
-      empty: 0,
-    );
+    final grid = ListGrid<int>.fromRows([
+      [0, 1, 2, 3, 4],
+      [1, 2, 3, 4, 5],
+      [2, 3, 4, 5, 6],
+    ], empty: 0);
     grid.fill(7);
     check(grid.rows).deepEquals([
       [7, 7, 7, 7, 7],
@@ -353,14 +334,11 @@ void main() {
   });
 
   test('should fill a part of the grid', () {
-    final grid = ListGrid<int>.fromRows(
-      [
-        [0, 1, 2, 3, 4],
-        [1, 2, 3, 4, 5],
-        [2, 3, 4, 5, 6],
-      ],
-      empty: 0,
-    );
+    final grid = ListGrid<int>.fromRows([
+      [0, 1, 2, 3, 4],
+      [1, 2, 3, 4, 5],
+      [2, 3, 4, 5, 6],
+    ], empty: 0);
     grid.fill(7, Rect.fromLTWH(1, 1, 3, 2));
     check(grid.rows).deepEquals([
       [0, 1, 2, 3, 4],
@@ -370,14 +348,11 @@ void main() {
   });
 
   test('should clamp when filling part of the grid', () {
-    final grid = ListGrid<int>.fromRows(
-      [
-        [0, 1, 2, 3, 4],
-        [1, 2, 3, 4, 5],
-        [2, 3, 4, 5, 6],
-      ],
-      empty: 0,
-    );
+    final grid = ListGrid<int>.fromRows([
+      [0, 1, 2, 3, 4],
+      [1, 2, 3, 4, 5],
+      [2, 3, 4, 5, 6],
+    ], empty: 0);
     grid.fill(7, Rect.fromLTWH(1, 1, 5, 5));
     check(grid.rows).deepEquals([
       [0, 1, 2, 3, 4],

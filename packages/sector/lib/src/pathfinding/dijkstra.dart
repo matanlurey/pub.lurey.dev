@@ -31,6 +31,8 @@ final class Dijkstra<E> with BestPathfinder<E> {
   const Dijkstra();
 
   @override
+  // Intentionally unsafe variance.
+  // ignore: unsafe_variance
   (Path<T> path, double cost) findBestPathExclusive<T extends E>(
     WeightedWalkable<T> graph,
     T start,

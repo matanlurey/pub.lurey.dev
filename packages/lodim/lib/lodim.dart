@@ -108,16 +108,19 @@ bool get _assertionsEnabled {
 const _isJs = identical(1, 1.0);
 
 /// A pragma hint requesting the compiler to inline the annotated function.
-const _pragmaInline = _isJs //
-    ? pragma('dart2js:prefer-inline')
-    : pragma('vm:prefer-inline');
+const _pragmaInline =
+    _isJs //
+        ? pragma('dart2js:prefer-inline')
+        : pragma('vm:prefer-inline');
 
 /// A pragma hint requesting the compiler to specialize the annotated function.
-const _pragmaSpecialize = _isJs //
-    ? pragma('dart2js:prefer-inline')
-    : pragma('vm:always-consider-inlining');
+const _pragmaSpecialize =
+    _isJs //
+        ? pragma('dart2js:prefer-inline')
+        : pragma('vm:always-consider-inlining');
 
 /// A pragma hint requesting the compiler to omit array bounds checks.
-const _pragmaOmitBoundsChecks = _isJs //
-    ? pragma('dart2js:index-bounds:trust')
-    : pragma('vm:unsafe:no-bounds-checks');
+const _pragmaOmitBoundsChecks =
+    _isJs //
+        ? pragma('dart2js:index-bounds:trust')
+        : pragma('vm:unsafe:no-bounds-checks');

@@ -54,11 +54,7 @@ void main() {
     final sink = LogSink.fromStringSink(buffer);
     final raw = RawLogger.fromLogSink(
       sink,
-      formatString: (
-        level,
-        message, {
-        time,
-      }) {
+      formatString: (level, message, {time}) {
         return '${level.name}: $message';
       },
     );
@@ -74,11 +70,7 @@ void main() {
     final sink = LogSink.fromStringSink(buffer);
     final raw = RawLogger.fromLogSink(
       sink,
-      formatString: (
-        level,
-        message, {
-        time,
-      }) {
+      formatString: (level, message, {time}) {
         return '${level.name}: $message';
       },
     );
@@ -94,11 +86,7 @@ void main() {
     final sink = LogSink.fromStringSink(buffer);
     final raw = RawLogger.fromLogSink(
       sink,
-      formatString: (
-        level,
-        message, {
-        time,
-      }) {
+      formatString: (level, message, {time}) {
         return '${level.name}: $message';
       },
     );
@@ -114,11 +102,7 @@ void main() {
     final sink = LogSink.fromStringSink(buffer);
     final raw = RawLogger.fromLogSink(
       sink,
-      formatString: (
-        level,
-        message, {
-        time,
-      }) {
+      formatString: (level, message, {time}) {
         return '${level.name}: $message';
       },
     );
@@ -134,11 +118,7 @@ void main() {
     final sink = LogSink.fromStringSink(buffer);
     final raw = RawLogger.fromLogSink(
       sink,
-      formatString: (
-        level,
-        message, {
-        time,
-      }) {
+      formatString: (level, message, {time}) {
         return '${level.name}: $message';
       },
     );
@@ -154,11 +134,7 @@ void main() {
     final sink = LogSink.fromStringSink(buffer);
     final raw = RawLogger.fromLogSink(
       sink,
-      formatString: (
-        level,
-        message, {
-        time,
-      }) {
+      formatString: (level, message, {time}) {
         return '${level.name}: $message';
       },
     );
@@ -174,11 +150,7 @@ void main() {
     final sink = LogSink.fromStringSink(buffer);
     final raw = RawLogger.fromLogSink(
       sink,
-      formatString: (
-        level,
-        message, {
-        time,
-      }) {
+      formatString: (level, message, {time}) {
         return '${level.name}: $message';
       },
     );
@@ -194,11 +166,7 @@ void main() {
     final sink = LogSink.fromStringSink(buffer);
     final raw = RawLogger.fromLogSink(
       sink,
-      formatString: (
-        level,
-        message, {
-        time,
-      }) {
+      formatString: (level, message, {time}) {
         return '${level.name}: $message';
       },
     );
@@ -214,11 +182,7 @@ void main() {
     final sink = LogSink.fromStringSink(buffer);
     final raw = RawLogger.fromLogSink(
       sink,
-      formatString: (
-        level,
-        message, {
-        time,
-      }) {
+      formatString: (level, message, {time}) {
         return '${level.name}: $message';
       },
     );
@@ -234,11 +198,7 @@ void main() {
     final sink = LogSink.fromStringSink(buffer);
     final raw = RawLogger.fromLogSink(
       sink,
-      formatString: (
-        level,
-        message, {
-        time,
-      }) {
+      formatString: (level, message, {time}) {
         return '${level.name}: $message';
       },
     );
@@ -285,22 +245,14 @@ void main() {
     final raw1 = RawLogger.fromLogSink(
       sink,
       level: Level.warning,
-      formatString: (
-        level,
-        message, {
-        time,
-      }) {
+      formatString: (level, message, {time}) {
         return '${level.name}: $message';
       },
     );
     final raw2 = RawLogger.fromLogSink(
       sink,
       level: Level.status,
-      formatString: (
-        level,
-        message, {
-        time,
-      }) {
+      formatString: (level, message, {time}) {
         return '${level.name}: $message';
       },
     );

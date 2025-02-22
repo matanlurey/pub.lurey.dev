@@ -22,15 +22,15 @@ void main() {
     });
 
     test('succeeds on array', () {
-      check(JsonAny.from(['hello']))
-          .isA<JsonArray>()
-          .deepEquals(JsonArray([JsonString('hello')]));
+      check(
+        JsonAny.from(['hello']),
+      ).isA<JsonArray>().deepEquals(JsonArray([JsonString('hello')]));
     });
 
     test('succeeds on object', () {
-      check(JsonAny.from({'hello': 'world'}))
-          .isA<JsonObject>()
-          .deepEquals(JsonObject({'hello': JsonString('world')}));
+      check(JsonAny.from({'hello': 'world'})).isA<JsonObject>().deepEquals(
+        JsonObject({'hello': JsonString('world')}),
+      );
     });
 
     test('succeeds on boolean', () {
@@ -42,43 +42,41 @@ void main() {
     });
 
     test('fails on custom', () {
-      check(
-        () => JsonAny.from(Duration.zero),
-      ).throws<ArgumentError>();
+      check(() => JsonAny.from(Duration.zero)).throws<ArgumentError>();
     });
   });
 
   group('JsonAny.parse forwards to JsonValue.parse', () {
     test('boolean', () {
-      check(JsonAny.parse('true'))
-          .has((a) => a.boolean(), 'boolean()')
-          .isTrue();
+      check(
+        JsonAny.parse('true'),
+      ).has((a) => a.boolean(), 'boolean()').isTrue();
     });
 
     test('number', () {
-      check(JsonAny.parse('42'))
-          .has((a) => a.number(), 'number()')
-          .equals(JsonNumber(42));
+      check(
+        JsonAny.parse('42'),
+      ).has((a) => a.number(), 'number()').equals(JsonNumber(42));
     });
 
     test('string', () {
-      check(JsonAny.parse('"hello"'))
-          .has((a) => a.string(), 'string()')
-          .equals(JsonString('hello'));
+      check(
+        JsonAny.parse('"hello"'),
+      ).has((a) => a.string(), 'string()').equals(JsonString('hello'));
     });
 
     test('array', () {
       final expected = JsonArray([JsonString('hello')]);
-      check(JsonAny.parse('["hello"]'))
-          .has((a) => a.array(), 'array()')
-          .deepEquals(expected);
+      check(
+        JsonAny.parse('["hello"]'),
+      ).has((a) => a.array(), 'array()').deepEquals(expected);
     });
 
     test('object', () {
       final expected = JsonObject({'hello': JsonString('world')});
-      check(JsonAny.parse('{"hello":"world"}'))
-          .has((a) => a.object(), 'object()')
-          .deepEquals(expected);
+      check(
+        JsonAny.parse('{"hello":"world"}'),
+      ).has((a) => a.object(), 'object()').deepEquals(expected);
     });
 
     test('null', () {
@@ -88,41 +86,41 @@ void main() {
 
   group('JsonAny.parseUtf8', () {
     test('boolean', () {
-      check(JsonAny.parseUtf8(utf8.encode('true')))
-          .has((a) => a.boolean(), 'boolean()')
-          .isTrue();
+      check(
+        JsonAny.parseUtf8(utf8.encode('true')),
+      ).has((a) => a.boolean(), 'boolean()').isTrue();
     });
 
     test('number', () {
-      check(JsonAny.parseUtf8(utf8.encode('42')))
-          .has((a) => a.number(), 'number()')
-          .equals(JsonNumber(42));
+      check(
+        JsonAny.parseUtf8(utf8.encode('42')),
+      ).has((a) => a.number(), 'number()').equals(JsonNumber(42));
     });
 
     test('string', () {
-      check(JsonAny.parseUtf8(utf8.encode('"hello"')))
-          .has((a) => a.string(), 'string()')
-          .equals(JsonString('hello'));
+      check(
+        JsonAny.parseUtf8(utf8.encode('"hello"')),
+      ).has((a) => a.string(), 'string()').equals(JsonString('hello'));
     });
 
     test('array', () {
       final expected = JsonArray([JsonString('hello')]);
-      check(JsonAny.parseUtf8(utf8.encode('["hello"]')))
-          .has((a) => a.array(), 'array()')
-          .deepEquals(expected);
+      check(
+        JsonAny.parseUtf8(utf8.encode('["hello"]')),
+      ).has((a) => a.array(), 'array()').deepEquals(expected);
     });
 
     test('object', () {
       final expected = JsonObject({'hello': JsonString('world')});
-      check(JsonAny.parseUtf8(utf8.encode('{"hello":"world"}')))
-          .has((a) => a.object(), 'object()')
-          .deepEquals(expected);
+      check(
+        JsonAny.parseUtf8(utf8.encode('{"hello":"world"}')),
+      ).has((a) => a.object(), 'object()').deepEquals(expected);
     });
 
     test('null', () {
-      check(JsonAny.parseUtf8(utf8.encode('null')))
-          .has((a) => a.isNull, 'isNull')
-          .isTrue();
+      check(
+        JsonAny.parseUtf8(utf8.encode('null')),
+      ).has((a) => a.isNull, 'isNull').isTrue();
     });
   });
 
@@ -142,9 +140,9 @@ void main() {
     });
 
     test('boolean failure coerced to null', () {
-      check(JsonAny.from(42))
-          .has((a) => a.asOrNull<bool>(), 'asOrNull<bool>()')
-          .isNull();
+      check(
+        JsonAny.from(42),
+      ).has((a) => a.asOrNull<bool>(), 'asOrNull<bool>()').isNull();
     });
 
     test('number success', () {
@@ -162,15 +160,15 @@ void main() {
     });
 
     test('number failure coerced to null', () {
-      check(JsonAny.from(true))
-          .has((a) => a.asOrNull<int>(), 'asOrNull<int>()')
-          .isNull();
+      check(
+        JsonAny.from(true),
+      ).has((a) => a.asOrNull<int>(), 'asOrNull<int>()').isNull();
     });
 
     test('string success', () {
-      check(JsonAny.from('hello'))
-          .has((a) => a.as<String>(), 'as<String>()')
-          .equals('hello');
+      check(
+        JsonAny.from('hello'),
+      ).has((a) => a.as<String>(), 'as<String>()').equals('hello');
     });
 
     test('string failure', () {
@@ -184,16 +182,16 @@ void main() {
     });
 
     test('string failure coerced to null', () {
-      check(JsonAny.from(42))
-          .has((a) => a.asOrNull<String>(), 'asOrNull<String>()')
-          .isNull();
+      check(
+        JsonAny.from(42),
+      ).has((a) => a.asOrNull<String>(), 'asOrNull<String>()').isNull();
     });
 
     test('array success', () {
       final expected = ['hello'];
-      check(JsonAny.from(['hello']))
-          .has((a) => a.as<List<String>>(), 'as<List>()')
-          .deepEquals(expected);
+      check(
+        JsonAny.from(['hello']),
+      ).has((a) => a.as<List<String>>(), 'as<List>()').deepEquals(expected);
     });
 
     test('array failure', () {
@@ -207,9 +205,9 @@ void main() {
     });
 
     test('array failure coerced to null', () {
-      check(JsonAny.from(42))
-          .has((a) => a.asOrNull<List<Object?>>(), 'asOrNull<List>()')
-          .isNull();
+      check(
+        JsonAny.from(42),
+      ).has((a) => a.asOrNull<List<Object?>>(), 'asOrNull<List>()').isNull();
     });
 
     test('object success', () {
@@ -250,9 +248,9 @@ void main() {
     });
 
     test('null failure coerced to null', () {
-      check(JsonAny.from(42))
-          .has((a) => a.asOrNull<Null>(), 'asOrNull<Null>()')
-          .isNull();
+      check(
+        JsonAny.from(42),
+      ).has((a) => a.asOrNull<Null>(), 'asOrNull<Null>()').isNull();
     });
 
     test('custom failure', () {
@@ -266,9 +264,9 @@ void main() {
     });
 
     test('custom failure coerced to null', () {
-      check(JsonAny.from(42))
-          .has((a) => a.asOrNull<Duration>(), 'asOrNull<Duration>()')
-          .isNull();
+      check(
+        JsonAny.from(42),
+      ).has((a) => a.asOrNull<Duration>(), 'asOrNull<Duration>()').isNull();
     });
   });
 
@@ -288,15 +286,15 @@ void main() {
     });
 
     test('returns null if not a boolean', () {
-      check(JsonAny.from(42))
-          .has((a) => a.booleanOrNull(), 'booleanOrNull()')
-          .isNull();
+      check(
+        JsonAny.from(42),
+      ).has((a) => a.booleanOrNull(), 'booleanOrNull()').isNull();
     });
 
     test('returns false if not a boolean', () {
-      check(JsonAny.from(42))
-          .has((a) => a.booleanOrFalse(), 'booleanOrFalse()')
-          .isFalse();
+      check(
+        JsonAny.from(42),
+      ).has((a) => a.booleanOrFalse(), 'booleanOrFalse()').isFalse();
     });
 
     test('isBool if a boolean', () {
@@ -310,9 +308,9 @@ void main() {
 
   group('number', () {
     test('returns a number', () {
-      check(JsonAny.from(42))
-          .has((a) => a.number(), 'number()')
-          .equals(JsonNumber(42));
+      check(
+        JsonAny.from(42),
+      ).has((a) => a.number(), 'number()').equals(JsonNumber(42));
     });
 
     test('throws if not a number', () {
@@ -326,15 +324,15 @@ void main() {
     });
 
     test('returns null if not a number', () {
-      check(JsonAny.from(true))
-          .has((a) => a.numberOrNull(), 'numberOrNull()')
-          .isNull();
+      check(
+        JsonAny.from(true),
+      ).has((a) => a.numberOrNull(), 'numberOrNull()').isNull();
     });
 
     test('returns 0 if not a number', () {
-      check(JsonAny.from(true))
-          .has((a) => a.numberOrZero(), 'numberOrZero()')
-          .equals(JsonNumber(0));
+      check(
+        JsonAny.from(true),
+      ).has((a) => a.numberOrZero(), 'numberOrZero()').equals(JsonNumber(0));
     });
 
     test('isNumber if a number', () {
@@ -348,9 +346,9 @@ void main() {
 
   group('string', () {
     test('returns a string', () {
-      check(JsonAny.from('hello'))
-          .has((a) => a.string(), 'string()')
-          .equals(JsonString('hello'));
+      check(
+        JsonAny.from('hello'),
+      ).has((a) => a.string(), 'string()').equals(JsonString('hello'));
     });
 
     test('throws if not a string', () {
@@ -364,15 +362,15 @@ void main() {
     });
 
     test('returns null if not a string', () {
-      check(JsonAny.from(42))
-          .has((a) => a.stringOrNull(), 'stringOrNull()')
-          .isNull();
+      check(
+        JsonAny.from(42),
+      ).has((a) => a.stringOrNull(), 'stringOrNull()').isNull();
     });
 
     test('returns an empty string if not a string', () {
-      check(JsonAny.from(42))
-          .has((a) => a.stringOrEmpty(), 'stringOrEmpty()')
-          .equals(JsonString(''));
+      check(
+        JsonAny.from(42),
+      ).has((a) => a.stringOrEmpty(), 'stringOrEmpty()').equals(JsonString(''));
     });
 
     test('isString if a string', () {
@@ -387,9 +385,9 @@ void main() {
   group('array', () {
     test('returns an array', () {
       final expected = JsonArray([JsonString('hello')]);
-      check(JsonAny.from(['hello']))
-          .has((a) => a.array(), 'array()')
-          .deepEquals(expected);
+      check(
+        JsonAny.from(['hello']),
+      ).has((a) => a.array(), 'array()').deepEquals(expected);
     });
 
     test('throws if not an array', () {
@@ -403,9 +401,9 @@ void main() {
     });
 
     test('returns null if not an array', () {
-      check(JsonAny.from(42))
-          .has((a) => a.arrayOrNull(), 'arrayOrNull()')
-          .isNull();
+      check(
+        JsonAny.from(42),
+      ).has((a) => a.arrayOrNull(), 'arrayOrNull()').isNull();
     });
 
     test('returns an empty array if not an array', () {
@@ -426,9 +424,9 @@ void main() {
   group('object', () {
     test('returns an object', () {
       final expected = JsonObject({'hello': JsonString('world')});
-      check(JsonAny.from({'hello': 'world'}))
-          .has((a) => a.object(), 'object()')
-          .deepEquals(expected);
+      check(
+        JsonAny.from({'hello': 'world'}),
+      ).has((a) => a.object(), 'object()').deepEquals(expected);
     });
 
     test('throws if not an object', () {
@@ -442,9 +440,9 @@ void main() {
     });
 
     test('returns null if not an object', () {
-      check(JsonAny.from(42))
-          .has((a) => a.objectOrNull(), 'objectOrNull()')
-          .isNull();
+      check(
+        JsonAny.from(42),
+      ).has((a) => a.objectOrNull(), 'objectOrNull()').isNull();
     });
 
     test('returns an empty object if not an object', () {
@@ -454,9 +452,9 @@ void main() {
     });
 
     test('isObject if an object', () {
-      check(JsonAny.from({'hello': 'world'}))
-          .has((a) => a.isObject, 'isObject')
-          .isTrue();
+      check(
+        JsonAny.from({'hello': 'world'}),
+      ).has((a) => a.isObject, 'isObject').isTrue();
     });
 
     test('isObject is false if not an object', () {

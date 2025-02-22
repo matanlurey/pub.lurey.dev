@@ -329,17 +329,17 @@ final class SetStyles implements Escape {
     Style? i,
     Style? j,
   ]) : styles = {
-          a,
-          if (b != null) b,
-          if (c != null) c,
-          if (d != null) d,
-          if (e != null) e,
-          if (f != null) f,
-          if (g != null) g,
-          if (h != null) h,
-          if (i != null) i,
-          if (j != null) j,
-        };
+         a,
+         if (b != null) b,
+         if (c != null) c,
+         if (d != null) d,
+         if (e != null) e,
+         if (f != null) f,
+         if (g != null) g,
+         if (h != null) h,
+         if (i != null) i,
+         if (j != null) j,
+       };
 
   /// The styles to set.
   ///
@@ -391,26 +391,22 @@ final class SetStyles implements Escape {
   }
 
   void _writeFgColor(StringBuffer out, Color color) {
-    out.write(
-      switch (color) {
-        ColorReset() => '39',
-        Color4(:final index) => color.isDim ? '${30 + index}' : '${82 + index}',
-        Color8(:final index) => '38;5;$index',
-        Color24(:final red, :final green, :final blue) =>
-          '38;2;$red;$green;$blue',
-      },
-    );
+    out.write(switch (color) {
+      ColorReset() => '39',
+      Color4(:final index) => color.isDim ? '${30 + index}' : '${82 + index}',
+      Color8(:final index) => '38;5;$index',
+      Color24(:final red, :final green, :final blue) =>
+        '38;2;$red;$green;$blue',
+    });
   }
 
   void _writeBgColor(StringBuffer out, Color color) {
-    out.write(
-      switch (color) {
-        ColorReset() => '49',
-        Color4(:final index) => color.isDim ? '${40 + index}' : '${92 + index}',
-        Color8(:final index) => '48;5;$index',
-        Color24(:final red, :final green, :final blue) =>
-          '48;2;$red;$green;$blue',
-      },
-    );
+    out.write(switch (color) {
+      ColorReset() => '49',
+      Color4(:final index) => color.isDim ? '${40 + index}' : '${92 + index}',
+      Color8(:final index) => '48;5;$index',
+      Color24(:final red, :final green, :final blue) =>
+        '48;2;$red;$green;$blue',
+    });
   }
 }

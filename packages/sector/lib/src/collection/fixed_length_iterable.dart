@@ -203,11 +203,8 @@ abstract base class FixedLengthIterable<E> extends Iterable<E> {
 }
 
 final class _SubRangeIterable<E> extends FixedLengthIterable<E> {
-  _SubRangeIterable(
-    this._iterable,
-    this._start, [
-    int? count,
-  ]) : _endOrLength = count == null ? null : _start + count {
+  _SubRangeIterable(this._iterable, this._start, [int? count])
+    : _endOrLength = count == null ? null : _start + count {
     RangeError.checkNotNegative(_start, 'start');
     if (count != null) {
       RangeError.checkValueInInterval(count, _start, _iterable.length, 'count');

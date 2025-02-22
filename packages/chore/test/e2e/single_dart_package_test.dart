@@ -39,31 +39,31 @@ void main() {
     });
 
     tearDownAll(() async {
-      // await sandbox.delete(recursive: true);
+      await sandbox.delete(recursive: true);
     });
 
     test('check', () async {
-      await runCommand(
-        dartBin.binPath,
-        ['run', 'chore', 'check'],
-        workingDirectory: sandbox.path,
-      );
+      await runCommand(dartBin.binPath, [
+        'run',
+        'chore',
+        'check',
+      ], workingDirectory: sandbox.path);
     });
 
     test('test', () async {
-      await runCommand(
-        dartBin.binPath,
-        ['run', 'chore', 'test'],
-        workingDirectory: sandbox.path,
-      );
+      await runCommand(dartBin.binPath, [
+        'run',
+        'chore',
+        'test',
+      ], workingDirectory: sandbox.path);
     });
 
     test('coverage', () async {
-      await runCommand(
-        dartBin.binPath,
-        ['run', 'chore', 'coverage'],
-        workingDirectory: sandbox.path,
-      );
+      await runCommand(dartBin.binPath, [
+        'run',
+        'chore',
+        'coverage',
+      ], workingDirectory: sandbox.path);
     });
   });
 }

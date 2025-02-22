@@ -10,23 +10,20 @@ void main(List<String> arguments) {
     return;
   }
 
-  final grid = Grid.fromRows(
-    [
-      [' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' '],
-      [' ', ' ', ' ', '#', '#', '#', '#', '#', '#', '#', '#', '#', '#', ' '],
-      [' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', '#', ' '],
-      [' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', '#', ' '],
-      [' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', '#', ' '],
-      [' ', ' ', ' ', ' ', ' ', ' ', ' ', 'S', ' ', ' ', ' ', ' ', '#', ' '],
-      [' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', '#', ' '],
-      [' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', '#', ' '],
-      [' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', '#', ' '],
-      [' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', '#', ' '],
-      [' ', ' ', ' ', '#', '#', '#', '#', '#', '#', '#', '#', '#', '#', ' '],
-      [' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', 'X'],
-    ],
-    empty: '#',
-  );
+  final grid = Grid.fromRows([
+    [' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' '],
+    [' ', ' ', ' ', '#', '#', '#', '#', '#', '#', '#', '#', '#', '#', ' '],
+    [' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', '#', ' '],
+    [' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', '#', ' '],
+    [' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', '#', ' '],
+    [' ', ' ', ' ', ' ', ' ', ' ', ' ', 'S', ' ', ' ', ' ', ' ', '#', ' '],
+    [' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', '#', ' '],
+    [' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', '#', ' '],
+    [' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', '#', ' '],
+    [' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', '#', ' '],
+    [' ', ' ', ' ', '#', '#', '#', '#', '#', '#', '#', '#', '#', '#', ' '],
+    [' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', 'X'],
+  ], empty: '#');
 
   final start = grid.cells.firstWhere((cell) => cell.$2 == 'S').$1;
   final goal = grid.cells.firstWhere((cell) => cell.$2 == 'X').$1;
@@ -103,37 +100,30 @@ void main(List<String> arguments) {
   );
 }
 
-final _parser = ArgParser(allowTrailingOptions: false)
-  ..addFlag(
-    'help',
-    negatable: false,
-  )
-  ..addOption(
-    'algorithm',
-    abbr: 'a',
-    allowed: [
-      'bfs',
-      'dfs',
-      // TODO: Enable when it doesn't hang.
-      // 'iddfs',
-      'dijkstra',
-      'greedy',
-      'astar',
-      'astar-fringe',
-    ],
-    defaultsTo: 'dijkstra',
-  )
-  ..addOption(
-    'heuristic',
-    abbr: 'h',
-    allowed: [
-      'always-min',
-      'always-max',
-      'manhattan',
-      'euclidean',
-    ],
-    defaultsTo: 'manhattan',
-  );
+final _parser =
+    ArgParser(allowTrailingOptions: false)
+      ..addFlag('help', negatable: false)
+      ..addOption(
+        'algorithm',
+        abbr: 'a',
+        allowed: [
+          'bfs',
+          'dfs',
+          // TODO: Enable when it doesn't hang.
+          // 'iddfs',
+          'dijkstra',
+          'greedy',
+          'astar',
+          'astar-fringe',
+        ],
+        defaultsTo: 'dijkstra',
+      )
+      ..addOption(
+        'heuristic',
+        abbr: 'h',
+        allowed: ['always-min', 'always-max', 'manhattan', 'euclidean'],
+        defaultsTo: 'manhattan',
+      );
 
 void _printGrid(Grid<String> grid, Pos start, Pos goal) {
   for (var row = 0; row < grid.height; row++) {

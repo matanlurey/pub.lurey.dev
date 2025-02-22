@@ -27,6 +27,8 @@ final class Astar<E> with HeuristicPathfinder<E> {
   const Astar();
 
   @override
+  // Intentionally unsafe variance.
+  // ignore: unsafe_variance
   (Path<T> path, double cost) findBestPathExclusive<T extends E>(
     WeightedWalkable<T> graph,
     T start,

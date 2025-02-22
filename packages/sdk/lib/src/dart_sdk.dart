@@ -29,7 +29,7 @@ interface class DartSdk {
   }
 
   /// Revision information for the Dart SDK.
-  Future<String> get revision async {
+  Future<String> get revision {
     return io.File(p.join(sdkPath, 'revision')).readAsString();
   }
 }

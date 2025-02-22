@@ -23,8 +23,8 @@ final class ProcessHost extends base.ProcessHost {
     super.includeParentEnvironment,
     super.runInShell,
   }) : super.base(
-          workingDirectory: workingDirectory ?? io.Directory.current.path,
-        );
+         workingDirectory: workingDirectory ?? io.Directory.current.path,
+       );
 
   @override
   ProcessHost copyWith({

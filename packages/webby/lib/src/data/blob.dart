@@ -65,10 +65,7 @@ extension type Blob._(JSObject _) implements JSObject {
 }
 
 extension type _BlobOptions._(JSObject _) implements JSObject {
-  external factory _BlobOptions({
-    JSString? type,
-    JSString? endings,
-  });
+  external factory _BlobOptions({JSString? type, JSString? endings});
 }
 
 /// Value representing a part of a call into [Blob.new].

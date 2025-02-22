@@ -45,11 +45,7 @@ void main() {
     test('defaults to bresenham', () {
       final a = Pos(0, 0);
       final b = Pos(2, 2);
-      check(a.pathTo(b)).deepEquals([
-        Pos(0, 0),
-        Pos(1, 1),
-        Pos(2, 2),
-      ]);
+      check(a.pathTo(b)).deepEquals([Pos(0, 0), Pos(1, 1), Pos(2, 2)]);
     });
 
     test('can specify an alternate line function', () {
@@ -61,10 +57,7 @@ void main() {
         yield b;
       }
 
-      check(a.pathTo(b, using: fakeLine)).deepEquals([
-        a,
-        b,
-      ]);
+      check(a.pathTo(b, using: fakeLine)).deepEquals([a, b]);
     });
   });
 

@@ -14,9 +14,10 @@ void main() {
   setUp(() async {
     parent = await window.navigator.storage.getDirectory().toDart;
     final random = Random().nextInt(1 << 32 - 1).toRadixString(16);
-    tmpDir = await parent
-        .getDirectoryHandle('webby_test_$random', create: true)
-        .toDart;
+    tmpDir =
+        await parent
+            .getDirectoryHandle('webby_test_$random', create: true)
+            .toDart;
   });
 
   tearDown(() async {

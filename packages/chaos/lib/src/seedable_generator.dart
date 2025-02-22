@@ -201,7 +201,8 @@ final class _DefaultSeedableRandom with SeedableGenerator<Random> {
   Random fromSeed(List<int> seed) {
     var value = Uint8.zero;
     for (var i = 0; i < seed.length; i++) {
-      value = (value.wrappedShiftLeft(8)) |
+      value =
+          (value.wrappedShiftLeft(8)) |
           (Uint8.fromWrapped(seed[i]) & Uint8.max);
     }
     return Random(value);

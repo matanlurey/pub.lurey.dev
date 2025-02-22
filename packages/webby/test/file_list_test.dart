@@ -6,14 +6,12 @@ import 'package:webby/webby.dart';
 import '_prelude.dart';
 
 void main() {
-  test('FileList', () async {
+  test('FileList', () {
     final input = HTMLInputElement(type: 'file', multiple: true);
 
     final data = DataTransfer();
     final file = File(
-      [
-        BlobPart.fromString('Hello World'.toJS),
-      ].toJS,
+      [BlobPart.fromString('Hello World'.toJS)].toJS,
       'file.txt'.toJS,
     );
 

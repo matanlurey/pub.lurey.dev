@@ -58,7 +58,7 @@ void main() {
     await check(process.stdoutText).withQueue.emits((e) => e.equals('Hello'));
   });
 
-  test('copyWith copies the host', () async {
+  test('copyWith copies the host', () {
     final container = ExecutableContainer();
     final host = container.createProcessHost();
 

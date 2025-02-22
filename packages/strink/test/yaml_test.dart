@@ -17,18 +17,8 @@ void main() {
     final buffer = StringBuffer();
     final yaml = YamlSink(buffer);
 
-    yaml.writeKeyValue(
-      'name',
-      'Alice',
-      quoteKey: true,
-      quoteValue: true,
-    );
-    yaml.writeKeyValue(
-      'age',
-      '30',
-      quoteKey: true,
-      quoteValue: true,
-    );
+    yaml.writeKeyValue('name', 'Alice', quoteKey: true, quoteValue: true);
+    yaml.writeKeyValue('age', '30', quoteKey: true, quoteValue: true);
 
     check(buffer.toString()).equals('"name": "Alice"\n"age": "30"\n');
   });
@@ -92,9 +82,9 @@ void main() {
     yaml.writeKeyValue('age', '30', quoteKey: true, quoteValue: true);
     yaml.endObjectOrList();
 
-    check(buffer.toString()).equals(
-      '"person":\n  "name": "Alice"\n  "age": "30"\n',
-    );
+    check(
+      buffer.toString(),
+    ).equals('"person":\n  "name": "Alice"\n  "age": "30"\n');
   });
 
   test('starts and writes a nested list', () {

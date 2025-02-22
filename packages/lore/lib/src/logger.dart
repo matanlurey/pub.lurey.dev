@@ -19,25 +19,13 @@ abstract base mixin class Logger {
   Future<void> flush();
 
   /// Logs a message at the given [level].
-  void log(
-    Level level,
-    String message, {
-    DateTime? time,
-  });
+  void log(Level level, String message, {DateTime? time});
 
   /// Invokes and logs a result of [callback] if [level] is enabled.
-  void logLazy(
-    Level level,
-    String Function() callback, {
-    DateTime? time,
-  });
+  void logLazy(Level level, String Function() callback, {DateTime? time});
 
   /// Logs a binary message at the given [level].
-  void logBytes(
-    Level level,
-    List<int> bytes, {
-    DateTime? time,
-  });
+  void logBytes(Level level, List<int> bytes, {DateTime? time});
 
   /// Invokes and logs a binary result of [callback] if [level] is enabled.
   void logBytesLazy(
@@ -115,29 +103,17 @@ final class _Logger with Logger {
   Future<void> flush() => _logger.flush();
 
   @override
-  void log(
-    Level level,
-    String message, {
-    DateTime? time,
-  }) {
+  void log(Level level, String message, {DateTime? time}) {
     _logger.logString(level, message, time: time);
   }
 
   @override
-  void logLazy(
-    Level level,
-    String Function() callback, {
-    DateTime? time,
-  }) {
+  void logLazy(Level level, String Function() callback, {DateTime? time}) {
     _logger.logStringLazy(level, callback, time: time);
   }
 
   @override
-  void logBytes(
-    Level level,
-    List<int> bytes, {
-    DateTime? time,
-  }) {
+  void logBytes(Level level, List<int> bytes, {DateTime? time}) {
     _logger.logBytes(level, bytes, time: time);
   }
 
@@ -159,33 +135,21 @@ final class _MultiLogger with Logger {
   Future<void> flush() => Future.wait(_loggers.map((logger) => logger.flush()));
 
   @override
-  void log(
-    Level level,
-    String message, {
-    DateTime? time,
-  }) {
+  void log(Level level, String message, {DateTime? time}) {
     for (final logger in _loggers) {
       logger.logString(level, message, time: time);
     }
   }
 
   @override
-  void logLazy(
-    Level level,
-    String Function() callback, {
-    DateTime? time,
-  }) {
+  void logLazy(Level level, String Function() callback, {DateTime? time}) {
     for (final logger in _loggers) {
       logger.logStringLazy(level, callback, time: time);
     }
   }
 
   @override
-  void logBytes(
-    Level level,
-    List<int> bytes, {
-    DateTime? time,
-  }) {
+  void logBytes(Level level, List<int> bytes, {DateTime? time}) {
     for (final logger in _loggers) {
       logger.logBytes(level, bytes, time: time);
     }

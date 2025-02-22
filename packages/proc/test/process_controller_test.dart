@@ -25,17 +25,14 @@ void main() {
   test('custom onKill', () async {
     late final ProcessController controller;
     controller = ProcessController(
-      onKill: expectAsync1(
-        (signal) {
-          if (controller.isClosed) {
-            return false;
-          }
-          check(signal).equals(ProcessSignal.sigkill);
-          controller.complete(ExitCode.failure);
-          return true;
-        },
-        count: 2,
-      ),
+      onKill: expectAsync1((signal) {
+        if (controller.isClosed) {
+          return false;
+        }
+        check(signal).equals(ProcessSignal.sigkill);
+        controller.complete(ExitCode.failure);
+        return true;
+      }, count: 2),
     );
     final process = controller.process;
 
@@ -135,13 +132,11 @@ void main() {
 
     check(
       () => process.stdin.addStream(
-        Stream.fromIterable(
-          [
-            utf8.encode('a'),
-            utf8.encode('b'),
-            utf8.encode('c'),
-          ],
-        ),
+        Stream.fromIterable([
+          utf8.encode('a'),
+          utf8.encode('b'),
+          utf8.encode('c'),
+        ]),
       ),
     ).returnsNormally();
 
@@ -166,15 +161,13 @@ void main() {
   });
 
   test('addStdoutLine with custom lineTerminator', () async {
-    final controller = ProcessController(
-      lineTerminator: '\r\n',
-    );
+    final controller = ProcessController(lineTerminator: '\r\n');
     final process = controller.process;
 
     controller.addStdoutLine('Hello');
-    await check(process.stdoutText)
-        .withQueue
-        .emits((s) => s.equals('Hello\r\n'));
+    await check(
+      process.stdoutText,
+    ).withQueue.emits((s) => s.equals('Hello\r\n'));
   });
 
   test('addStdoutBytes', () async {
@@ -210,15 +203,13 @@ void main() {
   });
 
   test('addStderrLine with custom lineTerminator', () async {
-    final controller = ProcessController(
-      lineTerminator: '\r\n',
-    );
+    final controller = ProcessController(lineTerminator: '\r\n');
     final process = controller.process;
 
     controller.addStderrLine('Hello');
-    await check(process.stderrText)
-        .withQueue
-        .emits((s) => s.equals('Hello\r\n'));
+    await check(
+      process.stderrText,
+    ).withQueue.emits((s) => s.equals('Hello\r\n'));
   });
 
   test('cannot close stdin twice', () async {

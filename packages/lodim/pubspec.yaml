@@ -5,7 +5,7 @@ description: |-
   Fixed-point pixel accurate 2D geometry with minimal approximations.
 short_description: Fixed-point 2D geometry.
 
-version: 0.1.6+2
+version: 0.1.6+3
 
 homepage: https://github.com/matanlurey/pub.lurey.dev/tree/main/packages/lodim
 issue_tracker: https://github.com/matanlurey/pub.lurey.dev/labels/pkg-lodim
@@ -13,7 +13,7 @@ issue_tracker: https://github.com/matanlurey/pub.lurey.dev/labels/pkg-lodim
 resolution: workspace
 
 environment:
-  sdk: ^3.5.0
+  sdk: ^3.7.0
 
 dependencies:
   meta: ^1.15.0

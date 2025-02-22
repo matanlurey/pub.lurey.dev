@@ -12,9 +12,7 @@ void main() {
     });
 
     test('with stdout', () async {
-      final process = Process.complete(
-        stdout: ['Hello, World!'],
-      );
+      final process = Process.complete(stdout: ['Hello, World!']);
       await check(
         process.exitCode,
       ).completes((s) => s.equals(ExitCode.success));
@@ -24,9 +22,7 @@ void main() {
     });
 
     test('with stderr', () async {
-      final process = Process.complete(
-        stderr: ['Hello, World!'],
-      );
+      final process = Process.complete(stderr: ['Hello, World!']);
       await check(
         process.exitCode,
       ).completes((s) => s.equals(ExitCode.success));
@@ -36,9 +32,7 @@ void main() {
     });
 
     test('as failure', () async {
-      final process = Process.complete(
-        exitCode: ExitCode.failure,
-      );
+      final process = Process.complete(exitCode: ExitCode.failure);
       await check(
         process.exitCode,
       ).completes((s) => s.equals(ExitCode.failure));

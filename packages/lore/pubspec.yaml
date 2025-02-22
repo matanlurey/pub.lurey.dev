@@ -13,7 +13,7 @@ description: |-
   Fast, structured, and idiomatic logging with an extensible API.
 short_description: Fast, structured, and idiomatic logging.
 
-version: 0.1.0-dev
+version: 0.0.0
 
 resolution: workspace
 
@@ -21,7 +21,7 @@ homepage: https://github.com/matanlurey/pub.lurey.dev/tree/main/packages/lore
 issue_tracker: https://github.com/matanlurey/pub.lurey.dev/labels/pkg-lore
 
 environment:
-  sdk: ^3.5.0
+  sdk: ^3.7.0
 
 dependencies:
   meta: ^1.15.0

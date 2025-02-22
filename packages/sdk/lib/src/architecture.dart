@@ -22,14 +22,7 @@ final class Architecture {
   static const riscv = Architecture._('riscv');
 
   /// All officially supported architectures.
-  static const supported = [
-    x64,
-    arm64,
-    armv8,
-    armv7,
-    ia32,
-    riscv,
-  ];
+  static const supported = [x64, arm64, armv8, armv7, ia32, riscv];
 
   /// Returns an architecture with the given [name].
   ///

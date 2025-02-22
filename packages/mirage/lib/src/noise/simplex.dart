@@ -73,7 +73,8 @@ final class Simplex with Pattern2d {
       corner2.t2 * corner2.t * corner2.gradient.dot(offset3),
     );
     dnoise = dnoise.scale(-8.0);
-    dnoise += corner0.gradient.scale(corner0.t4) +
+    dnoise +=
+        corner0.gradient.scale(corner0.t4) +
         corner1.gradient.scale(corner1.t4) +
         corner2.gradient.scale(corner2.t4);
 
@@ -100,10 +101,7 @@ final class Simplex with Pattern2d {
 }
 
 final class _Surflet {
-  factory _Surflet.from(
-    Vec2 point, {
-    required int gradientIndex,
-  }) {
+  factory _Surflet.from(Vec2 point, {required int gradientIndex}) {
     final t = 1.0 - (point.length2 * 2.0);
     if (t > 0.0) {
       final gradient = gradient2d(gradientIndex);

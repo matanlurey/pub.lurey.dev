@@ -8,11 +8,8 @@ import 'package:proc/proc.dart';
 /// A command that publishes a package.
 final class Publish extends BaseCommand {
   /// Creates a new publish command.
-  Publish(
-    super.context,
-    super.environment, {
-    PubService? pubService,
-  }) : _pubService = pubService ?? PubService() {
+  Publish(super.context, super.environment, {PubService? pubService})
+    : _pubService = pubService ?? PubService() {
     argParser.addFlag(
       'skip-if-already-published',
       defaultsTo: environment.isCI,
@@ -29,7 +26,8 @@ final class Publish extends BaseCommand {
   String get name => 'publish';
 
   @override
-  String get description => 'Publishes packages.\n'
+  String get description =>
+      'Publishes packages.\n'
       '\n'
       'If no --packages are provided, all publishable packages are attempted.\n'
       '\n'
@@ -150,11 +148,7 @@ final class Publish extends BaseCommand {
     {
       final process = await environment.processHost.start(
         dartBin.binPath,
-        [
-          'pub',
-          'lish',
-          if (!_confirm) '--force',
-        ],
+        ['pub', 'lish', if (!_confirm) '--force'],
         runMode: ProcessRunMode.inheritStdio,
         workingDirectory: package.path,
       );

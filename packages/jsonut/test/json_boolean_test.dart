@@ -10,9 +10,7 @@ void main() {
   });
 
   test('JsonBoolean.parse invalid', () {
-    check(
-      () => JsonBoolean.parse('invalid'),
-    ).throws<FormatException>();
+    check(() => JsonBoolean.parse('invalid')).throws<FormatException>();
   });
 
   test('JsonBoolean.parseUtf8', () {

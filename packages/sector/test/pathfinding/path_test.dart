@@ -15,15 +15,15 @@ void main() {
 
   group('sIn', () {
     test('is always false for notFound', () {
-      check(Path.notFound)
-          .has((p) => p.isIn(Walkable.empty()), 'isIn')
-          .isFalse();
+      check(
+        Path.notFound,
+      ).has((p) => p.isIn(Walkable.empty()), 'isIn').isFalse();
     });
 
     test('is true for one-node paths where the node is itself', () {
-      check(Path([1]))
-          .has((p) => p.isIn(Walkable.linear({1})), 'isIn')
-          .isTrue();
+      check(
+        Path([1]),
+      ).has((p) => p.isIn(Walkable.linear({1})), 'isIn').isTrue();
     });
   });
 }

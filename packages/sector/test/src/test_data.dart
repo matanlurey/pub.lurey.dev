@@ -164,10 +164,7 @@ WalkableBase<T> startIsGoal<T>(T a) => Walkable.linear({a});
 
 /// Returns a graph where the end node is unreachable.
 WalkableBase<T> unreachableGoal<T>(T a, T b) {
-  return Walkable.from({
-    a: [],
-    b: [],
-  });
+  return Walkable.from({a: [], b: []});
 }
 
 /// A test fixture for weighted graphs.
@@ -229,34 +226,12 @@ final class WeightedGraphFixture {
 WeightedGraphFixture weightedGraph() {
   return WeightedGraphFixture(
     WeightedWalkable.from({
-      'A': [
-        ('B', 4.0),
-        ('C', 1.0),
-      ],
-      'B': [
-        ('A', 4.0),
-        ('C', 2.0),
-        ('D', 6.0),
-      ],
-      'C': [
-        ('A', 1.0),
-        ('B', 2.0),
-        ('D', 8.0),
-        ('F', 3.0),
-      ],
-      'D': [
-        ('B', 6.0),
-        ('C', 8.0),
-        ('E', 2.0),
-      ],
-      'E': [
-        ('D', 2.0),
-        ('F', 5.0),
-      ],
-      'F': [
-        ('C', 3.0),
-        ('E', 5.0),
-      ],
+      'A': [('B', 4.0), ('C', 1.0)],
+      'B': [('A', 4.0), ('C', 2.0), ('D', 6.0)],
+      'C': [('A', 1.0), ('B', 2.0), ('D', 8.0), ('F', 3.0)],
+      'D': [('B', 6.0), ('C', 8.0), ('E', 2.0)],
+      'E': [('D', 2.0), ('F', 5.0)],
+      'F': [('C', 3.0), ('E', 5.0)],
     }),
     start: 'A',
     goal: 'E',
@@ -279,28 +254,11 @@ WeightedGraphFixture weightedGraph() {
 WeightedGraphFixture weightedUnreachable() {
   return WeightedGraphFixture(
     WeightedWalkable.from({
-      'A': [
-        ('B', 1.0),
-        ('C', 2.0),
-      ],
-      'B': [
-        ('A', 1.0),
-        ('C', 2.0),
-        ('D', 6.0),
-      ],
-      'C': [
-        ('A', 2.0),
-        ('B', 2.0),
-        ('D', 5.0),
-      ],
-      'D': [
-        ('B', 6.0),
-        ('C', 5.0),
-        ('E', double.infinity),
-      ],
-      'E': [
-        ('D', double.infinity),
-      ],
+      'A': [('B', 1.0), ('C', 2.0)],
+      'B': [('A', 1.0), ('C', 2.0), ('D', 6.0)],
+      'C': [('A', 2.0), ('B', 2.0), ('D', 5.0)],
+      'D': [('B', 6.0), ('C', 5.0), ('E', double.infinity)],
+      'E': [('D', double.infinity)],
     }),
     start: 'A',
     goal: 'E',
@@ -324,34 +282,12 @@ WeightedGraphFixture weightedUnreachable() {
 WeightedGraphFixture weightedCyclic() {
   return WeightedGraphFixture(
     WeightedWalkable.from({
-      'A': [
-        ('B', 4.0),
-        ('C', 1.0),
-      ],
-      'B': [
-        ('A', 4.0),
-        ('C', 2.0),
-        ('D', 6.0),
-      ],
-      'C': [
-        ('A', 1.0),
-        ('B', 2.0),
-        ('D', 8.0),
-        ('F', 3.0),
-      ],
-      'D': [
-        ('B', 6.0),
-        ('C', 8.0),
-        ('E', 1.0),
-      ],
-      'E': [
-        ('D', 1.0),
-        ('F', 5.0),
-      ],
-      'F': [
-        ('C', 3.0),
-        ('E', 5.0),
-      ],
+      'A': [('B', 4.0), ('C', 1.0)],
+      'B': [('A', 4.0), ('C', 2.0), ('D', 6.0)],
+      'C': [('A', 1.0), ('B', 2.0), ('D', 8.0), ('F', 3.0)],
+      'D': [('B', 6.0), ('C', 8.0), ('E', 1.0)],
+      'E': [('D', 1.0), ('F', 5.0)],
+      'F': [('C', 3.0), ('E', 5.0)],
     }),
     start: 'A',
     goal: 'E',
@@ -372,32 +308,12 @@ WeightedGraphFixture weightedCyclic() {
 WeightedGraphFixture weightedMultipleShortestPaths() {
   return WeightedGraphFixture(
     WeightedWalkable.from({
-      'A': [
-        ('B', 4.0),
-        ('D', 1.0),
-      ],
-      'B': [
-        ('A', 4.0),
-        ('C', 4.0),
-        ('E', 1.0),
-      ],
-      'C': [
-        ('B', 4.0),
-        ('F', 1.0),
-      ],
-      'D': [
-        ('A', 1.0),
-        ('E', 4.0),
-      ],
-      'E': [
-        ('B', 1.0),
-        ('D', 4.0),
-        ('F', 1.0),
-      ],
-      'F': [
-        ('C', 1.0),
-        ('E', 1.0),
-      ],
+      'A': [('B', 4.0), ('D', 1.0)],
+      'B': [('A', 4.0), ('C', 4.0), ('E', 1.0)],
+      'C': [('B', 4.0), ('F', 1.0)],
+      'D': [('A', 1.0), ('E', 4.0)],
+      'E': [('B', 1.0), ('D', 4.0), ('F', 1.0)],
+      'F': [('C', 1.0), ('E', 1.0)],
     }),
     start: 'A',
     goal: 'F',
@@ -420,22 +336,10 @@ WeightedGraphFixture weightedMultipleShortestPaths() {
 WeightedGraphFixture weightedZeroWeightEdges() {
   return WeightedGraphFixture(
     WeightedWalkable.from({
-      'A': [
-        ('B', 0.0),
-        ('C', 1.0),
-      ],
-      'B': [
-        ('A', 0.0),
-        ('D', 6.0),
-      ],
-      'C': [
-        ('A', 1.0),
-        ('D', 3.0),
-      ],
-      'D': [
-        ('B', 6.0),
-        ('C', 3.0),
-      ],
+      'A': [('B', 0.0), ('C', 1.0)],
+      'B': [('A', 0.0), ('D', 6.0)],
+      'C': [('A', 1.0), ('D', 3.0)],
+      'D': [('B', 6.0), ('C', 3.0)],
     }),
     start: 'A',
     goal: 'D',
@@ -452,9 +356,7 @@ WeightedGraphFixture weightedZeroWeightEdges() {
 WeightedGraphFixture weightedImpassableNode() {
   return WeightedGraphFixture(
     WeightedWalkable.from({
-      'A': [
-        ('B', double.infinity),
-      ],
+      'A': [('B', double.infinity)],
       'B': [],
     }),
     start: 'A',

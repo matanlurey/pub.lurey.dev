@@ -36,7 +36,5 @@ extension type FileSystemFileHandle._(JSObject _) implements FileSystemHandle {
 }
 
 extension type _CreateWritableOptions._(JSObject _) {
-  external factory _CreateWritableOptions({
-    JSBoolean? keepExistingData,
-  });
+  external factory _CreateWritableOptions({JSBoolean? keepExistingData});
 }

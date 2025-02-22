@@ -52,10 +52,7 @@ base class YamlWrapper {
       );
     }
     if (value.any((e) => e is! String)) {
-      throw FormatException(
-        'Expected a list of strings',
-        root.span.text,
-      );
+      throw FormatException('Expected a list of strings', root.span.text);
     }
     return List<String>.from(value);
   }
@@ -69,9 +66,6 @@ base class YamlWrapper {
   /// ```
   @protected
   Never isRequired(String name) {
-    throw FormatException(
-      'Missing required field: $name',
-      root.span.text,
-    );
+    throw FormatException('Missing required field: $name', root.span.text);
   }
 }

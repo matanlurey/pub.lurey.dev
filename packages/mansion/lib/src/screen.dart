@@ -135,10 +135,7 @@ enum Clear implements Escape {
 final class SetSize implements Escape {
   /// Creates an escape code that sets the screen size to [rows] by [columns].
   @literal
-  const SetSize({
-    required this.rows,
-    required this.columns,
-  });
+  const SetSize({required this.rows, required this.columns});
 
   /// The number of rows in the screen.
   final int rows;

@@ -7,11 +7,7 @@ part of '../lodim.dart';
 /// the exact definition is implementation-specific; for example, for a line
 /// path, it may refer to the last position of the line, while for a rectangular
 /// path, it may refer to the last column and row of the rectangle).
-typedef Path = Iterable<Pos> Function(
-  Pos start,
-  Pos end, {
-  bool exclusive,
-});
+typedef Path = Iterable<Pos> Function(Pos start, Pos end, {bool exclusive});
 
 /// A function that returns positions along a path between `start` and `end`.
 ///

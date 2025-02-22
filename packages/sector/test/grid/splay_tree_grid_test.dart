@@ -45,9 +45,7 @@ void main() {
     check(grid.nonEmptyEntries.first).equals((Pos(1, 1), 1));
     check(grid.nonEmptyEntries.last).equals((Pos(1, 1), 1));
     check(grid.nonEmptyEntries.length).equals(1);
-    check(grid).nonEmptyEntries.deepEquals([
-      (Pos(1, 1), 1),
-    ]);
+    check(grid).nonEmptyEntries.deepEquals([(Pos(1, 1), 1)]);
   });
 
   test('should iterate through rows with non-empty grid', () {
@@ -77,12 +75,7 @@ void main() {
   });
 
   test('should generate a splay tree grid', () {
-    final grid = SplayTreeGrid.generate(
-      5,
-      3,
-      (pos) => pos.x + pos.y,
-      empty: 0,
-    );
+    final grid = SplayTreeGrid.generate(5, 3, (pos) => pos.x + pos.y, empty: 0);
     check(grid).rows.deepEquals([
       [0, 1, 2, 3, 4],
       [1, 2, 3, 4, 5],
@@ -100,12 +93,7 @@ void main() {
   });
 
   test('should copy from another grid type', () {
-    final other = ListGrid.generate(
-      5,
-      3,
-      (pos) => pos.x + pos.y,
-      empty: 0,
-    );
+    final other = ListGrid.generate(5, 3, (pos) => pos.x + pos.y, empty: 0);
 
     final grid = SplayTreeGrid.from(other);
     check(grid).rows.deepEquals([

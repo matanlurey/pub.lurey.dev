@@ -12,11 +12,9 @@ final class PubService {
   /// The [pubHost] defaults to `https://pub.dev` if not provided.
   ///
   /// The [httpGet] function defaults to using `dart:io` if not provided.
-  PubService({
-    Uri? pubHost,
-    Future<HttpResponse> Function(Uri)? httpGet,
-  })  : _pubHost = pubHost ?? _defaultHost,
-        _httpGet = httpGet ?? _defaultHttpGet;
+  PubService({Uri? pubHost, Future<HttpResponse> Function(Uri)? httpGet})
+    : _pubHost = pubHost ?? _defaultHost,
+      _httpGet = httpGet ?? _defaultHttpGet;
   final Uri _pubHost;
   static final _defaultHost = Uri(scheme: 'https', host: 'pub.dev');
 
@@ -54,10 +52,7 @@ final class PubService {
 /// A minimal HTTP response.
 final class HttpResponse {
   /// Creates a new HTTP response.
-  const HttpResponse({
-    required this.statusCode,
-    required this.body,
-  });
+  const HttpResponse({required this.statusCode, required this.body});
 
   /// The status code of the response.
   final int statusCode;

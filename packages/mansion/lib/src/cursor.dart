@@ -123,10 +123,7 @@ sealed class CursorPosition implements Escape {
   /// If [resetColumn] is `true`, the column position is reset to the left-most
   /// column after moving up, similar to using a [AsciiControl.carriageReturn].
   @literal
-  const factory CursorPosition.moveUp(
-    int rows, {
-    bool resetColumn,
-  }) = MoveUp._;
+  const factory CursorPosition.moveUp(int rows, {bool resetColumn}) = MoveUp._;
 
   /// Creates an escape code that moves the cursor down by [rows].
   ///
@@ -134,10 +131,8 @@ sealed class CursorPosition implements Escape {
   /// column after moving down, similar to using a
   /// [AsciiControl.carriageReturn].
   @literal
-  const factory CursorPosition.moveDown(
-    int rows, {
-    bool resetColumn,
-  }) = MoveDown._;
+  const factory CursorPosition.moveDown(int rows, {bool resetColumn}) =
+      MoveDown._;
 
   /// Creates an escape code that moves the cursor left by [columns].
   @literal
@@ -155,10 +150,7 @@ sealed class CursorPosition implements Escape {
   ///
   /// See also [CursorPosition.reset] and [CursorPosition.resetColumn].
   @literal
-  const factory CursorPosition.moveTo([
-    int row,
-    int column,
-  ]) = MoveTo._;
+  const factory CursorPosition.moveTo([int row, int column]) = MoveTo._;
 
   /// An escape code that moves the cursor to the top-left corner.
   ///
@@ -173,9 +165,7 @@ sealed class CursorPosition implements Escape {
   ///
   /// See also [CursorPosition.resetColumn].
   @literal
-  const factory CursorPosition.moveToColumn([
-    int column,
-  ]) = MoveToColumn._;
+  const factory CursorPosition.moveToColumn([int column]) = MoveToColumn._;
 
   /// An escape code that moves the cursor to the left-most column.
   ///
@@ -235,10 +225,7 @@ final class RestoreCursor implements CursorPosition {
 /// {@category Cursors and Positioning}
 final class MoveUp implements CursorPosition {
   @literal
-  const MoveUp._(
-    this.rows, {
-    this.resetColumn = false,
-  });
+  const MoveUp._(this.rows, {this.resetColumn = false});
 
   /// The number of rows to move the cursor up.
   final int rows;
@@ -282,10 +269,7 @@ final class MoveUp implements CursorPosition {
 /// {@category Cursors and Positioning}
 final class MoveDown implements CursorPosition {
   @literal
-  const MoveDown._(
-    this.rows, {
-    this.resetColumn = false,
-  });
+  const MoveDown._(this.rows, {this.resetColumn = false});
 
   /// The number of rows to move the cursor down.
   final int rows;

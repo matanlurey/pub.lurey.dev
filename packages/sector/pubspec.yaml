@@ -5,7 +5,7 @@ description: |-
   Fast and intuitive 2D data structures: grids, graphs, pathfinding & more.
 short_description: 2D data structures.
 
-version: 0.4.0+1
+version: 0.4.0+2
 
 homepage: https://github.com/matanlurey/pub.lurey.dev/tree/main/packages/sector
 issue_tracker: https://github.com/matanlurey/pub.lurey.dev/labels/pkg-sector
@@ -13,7 +13,7 @@ issue_tracker: https://github.com/matanlurey/pub.lurey.dev/labels/pkg-sector
 resolution: workspace
 
 environment:
-  sdk: ^3.5.0
+  sdk: ^3.7.0
 
 dependencies:
   lodim: ^0.1.6+1

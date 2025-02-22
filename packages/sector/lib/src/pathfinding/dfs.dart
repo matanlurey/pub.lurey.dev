@@ -29,6 +29,8 @@ final class DepthFirstSearch<E> with Pathfinder<E> {
   const DepthFirstSearch();
 
   @override
+  // Intentionally unsafe variance.
+  // ignore: unsafe_variance
   Path<T> findPathExclusive<T extends E>(
     WalkableBase<T> graph,
     T start,
@@ -36,13 +38,7 @@ final class DepthFirstSearch<E> with Pathfinder<E> {
     Tracer<T>? tracer,
   }) {
     final path = [start];
-    if (_recurse(
-      path,
-      graph.asUnweighted(),
-      goal,
-      tracer,
-      check: false,
-    )) {
+    if (_recurse(path, graph.asUnweighted(), goal, tracer, check: false)) {
       return Path(path);
     } else {
       return Path.notFound;
@@ -72,12 +68,7 @@ final class DepthFirstSearch<E> with Pathfinder<E> {
         continue;
       }
       path.add(neighbor);
-      if (_recurse(
-        path,
-        graph,
-        goal,
-        tracer,
-      )) {
+      if (_recurse(path, graph, goal, tracer)) {
         return true;
       }
       path.removeLast();

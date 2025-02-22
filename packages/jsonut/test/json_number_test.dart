@@ -17,9 +17,7 @@ void main() {
   });
 
   test('JsonNumber.parse invalid', () {
-    check(
-      () => JsonNumber.parse('invalid'),
-    ).throws<FormatException>();
+    check(() => JsonNumber.parse('invalid')).throws<FormatException>();
   });
 
   test('JsonNumber.parseUtf8', () {

@@ -51,11 +51,9 @@ final class Constant with Pattern2d {
 /// ```
 final class Checkerboard with Pattern2d {
   /// Creates a new checkerboard pattern with the given [even] and [odd] values.
-  const Checkerboard({
-    required double even,
-    required double odd,
-  })  : _even = even,
-        _odd = odd;
+  const Checkerboard({required double even, required double odd})
+    : _even = even,
+      _odd = odd;
   final double _even;
   final double _odd;
 

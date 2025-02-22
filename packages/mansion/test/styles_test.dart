@@ -50,8 +50,10 @@ void main() {
   test('$SetStyles has expected equality semantics', () {
     check(SetStyles(StyleText.bold))
       ..equals(SetStyles(StyleText.bold))
-      ..has((a) => a.hashCode, 'hashCode')
-          .equals(SetStyles(StyleText.bold).hashCode)
+      ..has(
+        (a) => a.hashCode,
+        'hashCode',
+      ).equals(SetStyles(StyleText.bold).hashCode)
       ..has((a) => a.toString(), 'toString()').equals('SetStyles(Style.bold)');
   });
 
@@ -69,9 +71,7 @@ void main() {
       StyleText.fraktur,
     );
 
-    check(
-      styles,
-    ).writesAnsiString.equals('\x1B[1;2;3;4;5;6;7;8;9;20m');
+    check(styles).writesAnsiString.equals('\x1B[1;2;3;4;5;6;7;8;9;20m');
   });
 
   test('$StyleReset has expected equality semantics', () {

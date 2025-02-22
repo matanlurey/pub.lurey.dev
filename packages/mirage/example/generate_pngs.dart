@@ -48,30 +48,12 @@ void main(List<String> args) async {
     await i.writeFile(p.join(output, '$name.png'), i.encodePng(image));
   }
 
-  await generate(
-    'checkerboard',
-    (_) => Checkerboard.odd,
-  );
-  await generate(
-    'white_noise',
-    White.new,
-  );
-  await generate(
-    'value_noise',
-    (r) => Value(NoiseTable(r)),
-  );
-  await generate(
-    'perlin_noise',
-    (r) => Perlin(NoiseTable(r)),
-  );
-  await generate(
-    'simplex_noise',
-    (r) => Simplex(NoiseTable(r)),
-  );
-  await generate(
-    'worley_value',
-    (r) => Worley.value(hasher: NoiseTable(r)),
-  );
+  await generate('checkerboard', (_) => Checkerboard.odd);
+  await generate('white_noise', White.new);
+  await generate('value_noise', (r) => Value(NoiseTable(r)));
+  await generate('perlin_noise', (r) => Perlin(NoiseTable(r)));
+  await generate('simplex_noise', (r) => Simplex(NoiseTable(r)));
+  await generate('worley_value', (r) => Worley.value(hasher: NoiseTable(r)));
   await generate(
     'worley_distance',
     (r) => Worley.distance(hasher: NoiseTable(r)),

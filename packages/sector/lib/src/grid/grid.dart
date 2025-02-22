@@ -27,12 +27,8 @@ abstract base mixin class Grid<E> {
   /// print(grid.get(Pos(0, 0))); // 0
   /// print(grid.get(Pos(1, 0))); // 1
   /// ```
-  factory Grid.filled(
-    int width,
-    int height, {
-    required E empty,
-    E? fill,
-  }) = ListGrid<E>.filled;
+  factory Grid.filled(int width, int height, {required E empty, E? fill}) =
+      ListGrid<E>.filled;
 
   /// Creates a new [ListGrid] with the given [width] and [height].
   ///
@@ -83,10 +79,8 @@ abstract base mixin class Grid<E> {
   /// at index `(x, y)` is `rows.elementAt(y).elementAt(x)`. If the [empty]
   /// element is omitted, the most common element in the rows is used, in which
   /// case the rows must be non-empty.
-  factory Grid.fromRows(
-    Iterable<Iterable<E>> rows, {
-    E? empty,
-  }) = ListGrid<E>.fromRows;
+  factory Grid.fromRows(Iterable<Iterable<E>> rows, {E? empty}) =
+      ListGrid<E>.fromRows;
 
   /// Creates a new [ListGrid] from [elements] in row-major order.
   ///
@@ -98,11 +92,8 @@ abstract base mixin class Grid<E> {
   /// at index `(x, y)` is `rows.elementAt(y).elementAt(x)`. If the [empty]
   /// element is omitted, the most common element in the rows is used, in which
   /// case the rows must be non-empty.
-  factory Grid.fromCells(
-    Iterable<E> elements, {
-    required int width,
-    E? empty,
-  }) = ListGrid<E>.fromCells;
+  factory Grid.fromCells(Iterable<E> elements, {required int width, E? empty}) =
+      ListGrid<E>.fromCells;
 
   /// The default element for the grid, or the "empty" element.
   ///
@@ -184,12 +175,7 @@ abstract base mixin class Grid<E> {
     } else {
       source = bounds.intersect(src.bounds);
     }
-    copyRect(
-      source,
-      src.get,
-      dst.set,
-      target: target,
-    );
+    copyRect(source, src.get, dst.set, target: target);
   }
 
   /// Total number of elements in the grid.
@@ -392,9 +378,7 @@ abstract base mixin class Grid<E> {
   /// are pairs of elements at each position. The [directions] are the relative
   /// positions of the neighbors to connect each node to, which by default are
   /// the four cardinal directions (north, east, south, west).
-  Walkable<Pos> asUnweighted({
-    Iterable<Pos> directions = Direction.cardinal,
-  }) {
+  Walkable<Pos> asUnweighted({Iterable<Pos> directions = Direction.cardinal}) {
     return asWeighted(
       directions: directions,
       weight: _eachWeightIs1,
@@ -415,11 +399,7 @@ abstract base mixin class Grid<E> {
     required double Function(E, E, Pos) weight,
     Iterable<Pos> directions = Direction.cardinal,
   }) {
-    return GridWalkable.from(
-      this,
-      directions: directions,
-      weight: weight,
-    );
+    return GridWalkable.from(this, directions: directions, weight: weight);
   }
 
   /// Converts a [Grid] to a string like [toString].

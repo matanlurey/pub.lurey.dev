@@ -4,9 +4,9 @@ import '_prelude.dart';
 
 void main() {
   test('normal', () {
-    check(ProcessRunMode.normal)
-        .has((a) => a.toString(), 'toString()')
-        .equals('ProcessRunMode.normal');
+    check(
+      ProcessRunMode.normal,
+    ).has((a) => a.toString(), 'toString()').equals('ProcessRunMode.normal');
   });
 
   test('inheritStdio', () {
@@ -16,9 +16,9 @@ void main() {
   });
 
   test('detached', () {
-    check(ProcessRunMode.detached)
-        .has((a) => a.toString(), 'toString()')
-        .equals('ProcessRunMode.detached');
+    check(
+      ProcessRunMode.detached,
+    ).has((a) => a.toString(), 'toString()').equals('ProcessRunMode.detached');
   });
 
   test('detachedWithOutput', () {

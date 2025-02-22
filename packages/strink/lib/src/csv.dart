@@ -36,11 +36,9 @@ abstract final class CsvSink {
     String fieldDelimiter,
   }) = _StringCsvSink;
 
-  CsvSink._({
-    String lineTerminator = '\n',
-    String fieldDelimiter = ',',
-  })  : _lineTerminator = lineTerminator,
-        _fieldDelimiter = fieldDelimiter;
+  CsvSink._({String lineTerminator = '\n', String fieldDelimiter = ','})
+    : _lineTerminator = lineTerminator,
+      _fieldDelimiter = fieldDelimiter;
 
   /// Writes raw string output.
   void _writeRaw(String output);
@@ -118,11 +116,8 @@ abstract final class CsvSink {
 }
 
 final class _StringCsvSink extends CsvSink {
-  _StringCsvSink(
-    this._sink, {
-    super.lineTerminator,
-    super.fieldDelimiter,
-  }) : super._();
+  _StringCsvSink(this._sink, {super.lineTerminator, super.fieldDelimiter})
+    : super._();
 
   final StringSink _sink;
 

@@ -52,9 +52,9 @@ void main() {
       ..createSync()
       ..writeAsStringSync('void   main() {}');
 
-    await check(dart.formatCheck([tmpDir.path]))
-        .withQueue
-        .emits((e) => e.endsWith('file.dart'));
+    await check(
+      dart.formatCheck([tmpDir.path]),
+    ).withQueue.emits((e) => e.endsWith('file.dart'));
   });
 
   test('well-formed Dart returns no diagnostics', () async {
@@ -70,15 +70,8 @@ void main() {
       ..createSync()
       ..writeAsStringSync('void main() {\n');
 
-    await check(
-      dart.analyze(tmpDir.path),
-    ).withQueue.emits(
-          (e) => e
-              .has(
-                (d) => d.severity,
-                'severity',
-              )
-              .equals(Severity.error),
-        );
+    await check(dart.analyze(tmpDir.path)).withQueue.emits(
+      (e) => e.has((d) => d.severity, 'severity').equals(Severity.error),
+    );
   });
 }

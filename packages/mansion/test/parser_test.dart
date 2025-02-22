@@ -45,11 +45,9 @@ void main() {
 
   test('parses literal text interweaved with literal text', () {
     final (output, partial) = parseAnsi('hello\nworld');
-    check(output).deepEquals([
-      Print('hello'),
-      AsciiControl.lineFeed,
-      Print('world'),
-    ]);
+    check(
+      output,
+    ).deepEquals([Print('hello'), AsciiControl.lineFeed, Print('world')]);
     check(partial).isNull();
   });
 
@@ -61,18 +59,13 @@ void main() {
 
   test('parses incomplete escape code interweaved with literal text', () {
     final (output, partial) = parseAnsi('\x1Bhello\x1B');
-    check(output).deepEquals([
-      Unknown('\x1B', offset: 0),
-      Print('hello'),
-    ]);
+    check(output).deepEquals([Unknown('\x1B', offset: 0), Print('hello')]);
     check(partial).isNotNull().equals(Unknown('\x1B', offset: 6));
   });
 
   test('parses multiple incomplete escape codes', () {
     final (output, partial) = parseAnsi('\x1B\x1B');
-    check(output).deepEquals([
-      Unknown('\x1B', offset: 0),
-    ]);
+    check(output).deepEquals([Unknown('\x1B', offset: 0)]);
     check(partial).isNotNull().equals(Unknown('\x1B', offset: 1));
   });
 
@@ -91,18 +84,13 @@ void main() {
 
     test('parses multiple unknown (invalid) CSI', () {
       final (output, partial) = parseAnsi('\x1B[#\x1B[');
-      check(output).deepEquals([
-        Unknown('\x1B[', offset: 0),
-        Print('#'),
-      ]);
+      check(output).deepEquals([Unknown('\x1B[', offset: 0), Print('#')]);
       check(partial).isNotNull().equals(Unknown('\x1B[', offset: 3));
     });
 
     test('parses multiple unknown (unmatched) CSI', () {
       final (output, partial) = parseAnsi('\x1B[x\x1B[y');
-      check(output).deepEquals([
-        Unknown('\x1B[x', offset: 0),
-      ]);
+      check(output).deepEquals([Unknown('\x1B[x', offset: 0)]);
       check(partial).isNotNull().equals(Unknown('\x1B[y', offset: 3));
     });
 
@@ -216,17 +204,17 @@ void main() {
 
         test('parses resetColumn', () {
           final (output, partial) = parseAnsi('\x1B[5F');
-          check(output).deepEquals([
-            CursorPosition.moveUp(5, resetColumn: true),
-          ]);
+          check(
+            output,
+          ).deepEquals([CursorPosition.moveUp(5, resetColumn: true)]);
           check(partial).isNull();
         });
 
         test('parses resetColumn default value (1)', () {
           final (output, partial) = parseAnsi('\x1B[F');
-          check(output).deepEquals([
-            CursorPosition.moveUp(1, resetColumn: true),
-          ]);
+          check(
+            output,
+          ).deepEquals([CursorPosition.moveUp(1, resetColumn: true)]);
           check(partial).isNull();
         });
 
@@ -264,17 +252,17 @@ void main() {
 
         test('parses resetColumn', () {
           final (output, partial) = parseAnsi('\x1B[5E');
-          check(output).deepEquals([
-            CursorPosition.moveDown(5, resetColumn: true),
-          ]);
+          check(
+            output,
+          ).deepEquals([CursorPosition.moveDown(5, resetColumn: true)]);
           check(partial).isNull();
         });
 
         test('parses resetColumn default value (1)', () {
           final (output, partial) = parseAnsi('\x1B[E');
-          check(output).deepEquals([
-            CursorPosition.moveDown(1, resetColumn: true),
-          ]);
+          check(
+            output,
+          ).deepEquals([CursorPosition.moveDown(1, resetColumn: true)]);
           check(partial).isNull();
         });
 
@@ -361,9 +349,9 @@ void main() {
         test('bad params', () {
           final (output, partial) = parseAnsi('\x1B[5;10;15H');
           check(output).isEmpty();
-          check(partial)
-              .isNotNull()
-              .equals(Unknown('\x1B[5;10;15H', offset: 0));
+          check(
+            partial,
+          ).isNotNull().equals(Unknown('\x1B[5;10;15H', offset: 0));
         });
       });
     });
@@ -459,9 +447,9 @@ void main() {
     test('parses invalid SGR: invalid format', () {
       final (output, partial) = parseAnsi('\x1B[38;9;0;0;0;0m');
       check(output).isEmpty();
-      check(partial)
-          .isNotNull()
-          .equals(Unknown('\x1B[38;9;0;0;0;0m', offset: 0));
+      check(
+        partial,
+      ).isNotNull().equals(Unknown('\x1B[38;9;0;0;0;0m', offset: 0));
     });
 
     test('parses invalid SGR: invalid command', () {
@@ -525,26 +513,22 @@ void main() {
     group(SetTitle, () {
       test('parses', () {
         final (output, partial) = parseAnsi('\x1B]0;Hello, World!\x07');
-        check(output).deepEquals([
-          SetTitle('Hello, World!'),
-        ]);
+        check(output).deepEquals([SetTitle('Hello, World!')]);
         check(partial).isNull();
       });
 
       test('bad params', () {
         final (output, partial) = parseAnsi('\x1B]1;Hello, World!\x07');
         check(output).isEmpty();
-        check(partial)
-            .isNotNull()
-            .equals(Unknown('\x1B]1;Hello, World!\x07', offset: 0));
+        check(
+          partial,
+        ).isNotNull().equals(Unknown('\x1B]1;Hello, World!\x07', offset: 0));
       });
     });
 
     test('did not found the end of the sequence', () {
       final (output, partial) = parseAnsi('\x1B]\x1B]');
-      check(output).deepEquals([
-        Unknown('\x1B]', offset: 0),
-      ]);
+      check(output).deepEquals([Unknown('\x1B]', offset: 0)]);
       check(partial).isNotNull().equals(Unknown('\x1B]', offset: 2));
     });
   });

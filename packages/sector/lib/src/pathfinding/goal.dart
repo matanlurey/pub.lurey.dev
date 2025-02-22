@@ -47,6 +47,9 @@ abstract interface class Goal<T> {
 
 final class _TestGoal<T> implements Goal<T> {
   const _TestGoal(this._isGoal);
+
+  // Only accessed via `this`.
+  // ignore: unsafe_variance
   final bool Function(T) _isGoal;
 
   @override

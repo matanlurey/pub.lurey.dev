@@ -23,10 +23,7 @@ interface class Dart {
   late final sdk = DartSdk.fromPath(p.dirname(p.dirname(binPath)));
 
   /// Analyze Dart code using `dart analyze`.
-  Stream<Diagnostic> analyze(
-    String directory, {
-    ProcessHost? host,
-  }) {
+  Stream<Diagnostic> analyze(String directory, {ProcessHost? host}) {
     host ??= ProcessHost();
 
     // Using StreamCompleter.
@@ -38,14 +35,11 @@ interface class Dart {
     String directory, {
     required ProcessHost host,
   }) async {
-    final process = await host.start(
-      binPath,
-      [
-        'analyze',
-        '--format=machine',
-        directory,
-      ],
-    );
+    final process = await host.start(binPath, [
+      'analyze',
+      '--format=machine',
+      directory,
+    ]);
     return process.stdoutText.map((t) {
       final diagnostic = Diagnostic.tryParsePipe(t);
       if (diagnostic == null) {
@@ -63,14 +57,11 @@ interface class Dart {
   /// default will be used.
   Future<bool> format(Iterable<String> paths, {ProcessHost? host}) async {
     host ??= ProcessHost();
-    final process = await host.start(
-      binPath,
-      [
-        'format',
-        '--set-exit-if-changed',
-        ...paths,
-      ],
-    );
+    final process = await host.start(binPath, [
+      'format',
+      '--set-exit-if-changed',
+      ...paths,
+    ]);
     return await process.exitCode != ExitCode.success;
   }
 
@@ -80,43 +71,37 @@ interface class Dart {
   ///
   /// May optionally specify a process [host] to use for running; otherwise, a
   /// default will be used.
-  Stream<String> formatCheck(
-    Iterable<String> paths, {
-    ProcessHost? host,
-  }) {
+  Stream<String> formatCheck(Iterable<String> paths, {ProcessHost? host}) {
     host ??= ProcessHost();
     // Using StreamCompleter.
     // ignore: discarded_futures
     final future = _formatCheck(paths, host: host);
-    return StreamCompleter.fromFuture(future).where((line) {
-      return line.startsWith('{');
-    }).map((line) {
-      final object = JsonObject.parse(line);
-      return object['path'].string();
-    });
+    return StreamCompleter.fromFuture(future)
+        .where((line) {
+          return line.startsWith('{');
+        })
+        .map((line) {
+          final object = JsonObject.parse(line);
+          return object['path'].string();
+        });
   }
 
   Future<Stream<String>> _formatCheck(
     Iterable<String> paths, {
     required ProcessHost host,
   }) async {
-    final process = await host.start(
-      binPath,
-      [
-        'format',
-        '--output=json',
-        '--show=changed',
-        '--set-exit-if-changed',
-        ...paths,
-      ],
-    );
+    final process = await host.start(binPath, [
+      'format',
+      '--output=json',
+      '--show=changed',
+      '--set-exit-if-changed',
+      ...paths,
+    ]);
     return process.stdoutText;
   }
 
   /// Result of `dart --version`.
-  Future<SdkVersion> version({
-    ProcessHost? host,
-  }) async {
+  Future<SdkVersion> version({ProcessHost? host}) async {
     host ??= ProcessHost();
     final process = await host.start(binPath, ['--version']);
     final version = (await process.stdoutText.join()).trim();
@@ -126,9 +111,7 @@ interface class Dart {
     }
     final DateTime releasedOn;
     try {
-      releasedOn = DateFormat(
-        'E MMM d HH:mm:ss yyyy Z',
-      ).parse(match[3]!);
+      releasedOn = DateFormat('E MMM d HH:mm:ss yyyy Z').parse(match[3]!);
     } on FormatException {
       throw FormatException('Invalid release date', match[3]);
     }

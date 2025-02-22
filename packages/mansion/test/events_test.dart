@@ -43,10 +43,7 @@ void main() {
       final b = PasteEvent('Hello, World!');
       check(a)
         ..equals(b)
-        ..has(
-          (e) => e.hashCode,
-          'hashCode',
-        ).equals(b.hashCode)
+        ..has((e) => e.hashCode, 'hashCode').equals(b.hashCode)
         ..has(
           (e) => e.toString(),
           'toString()',
@@ -70,14 +67,8 @@ void main() {
       );
       check(a)
         ..equals(b)
-        ..has(
-          (e) => e.hashCode,
-          'hashCode',
-        ).equals(b.hashCode)
-        ..has(
-          (e) => e.toString(),
-          'toString()',
-        ).equals(
+        ..has((e) => e.hashCode, 'hashCode').equals(b.hashCode)
+        ..has((e) => e.toString(), 'toString()').equals(
           'MouseEvent(row: 1, column: 2, kind: MouseEventKind.down, button: MouseButton.left)',
         );
     });
@@ -88,43 +79,19 @@ void main() {
       final modifiers = KeyModifiers();
       check(modifiers)
         ..equals(KeyModifiers.none)
-        ..has(
-          (m) => m.hashCode,
-          'hashCode',
-        ).equals(KeyModifiers().hashCode)
-        ..has(
-          (m) => m.shiftKey,
-          'shiftKey',
-        ).isFalse()
-        ..has(
-          (m) => m.controlKey,
-          'controlKey',
-        ).isFalse()
-        ..has(
-          (m) => m.altKey,
-          'altKey',
-        ).isFalse()
-        ..has(
-          (m) => m.toString(),
-          'toString()',
-        ).equals('KeyModifiers.none');
+        ..has((m) => m.hashCode, 'hashCode').equals(KeyModifiers().hashCode)
+        ..has((m) => m.shiftKey, 'shiftKey').isFalse()
+        ..has((m) => m.controlKey, 'controlKey').isFalse()
+        ..has((m) => m.altKey, 'altKey').isFalse()
+        ..has((m) => m.toString(), 'toString()').equals('KeyModifiers.none');
     });
 
     test('shiftKey', () {
       final modifiers = KeyModifiers(shiftKey: true);
       check(modifiers)
-        ..has(
-          (m) => m.shiftKey,
-          'shiftKey',
-        ).isTrue()
-        ..has(
-          (m) => m.controlKey,
-          'controlKey',
-        ).isFalse()
-        ..has(
-          (m) => m.altKey,
-          'altKey',
-        ).isFalse()
+        ..has((m) => m.shiftKey, 'shiftKey').isTrue()
+        ..has((m) => m.controlKey, 'controlKey').isFalse()
+        ..has((m) => m.altKey, 'altKey').isFalse()
         ..equals(KeyModifiers(shiftKey: true))
         ..has(
           (m) => m.hashCode,
@@ -139,18 +106,9 @@ void main() {
     test('controlKey', () {
       final modifiers = KeyModifiers(controlKey: true);
       check(modifiers)
-        ..has(
-          (m) => m.shiftKey,
-          'shiftKey',
-        ).isFalse()
-        ..has(
-          (m) => m.controlKey,
-          'controlKey',
-        ).isTrue()
-        ..has(
-          (m) => m.altKey,
-          'altKey',
-        ).isFalse()
+        ..has((m) => m.shiftKey, 'shiftKey').isFalse()
+        ..has((m) => m.controlKey, 'controlKey').isTrue()
+        ..has((m) => m.altKey, 'altKey').isFalse()
         ..equals(KeyModifiers(controlKey: true))
         ..has(
           (m) => m.hashCode,
@@ -165,27 +123,15 @@ void main() {
     test('altKey', () {
       final modifiers = KeyModifiers(altKey: true);
       check(modifiers)
-        ..has(
-          (m) => m.shiftKey,
-          'shiftKey',
-        ).isFalse()
-        ..has(
-          (m) => m.controlKey,
-          'controlKey',
-        ).isFalse()
-        ..has(
-          (m) => m.altKey,
-          'altKey',
-        ).isTrue()
+        ..has((m) => m.shiftKey, 'shiftKey').isFalse()
+        ..has((m) => m.controlKey, 'controlKey').isFalse()
+        ..has((m) => m.altKey, 'altKey').isTrue()
         ..equals(KeyModifiers(altKey: true))
         ..has(
           (m) => m.hashCode,
           'hashCode',
         ).equals(KeyModifiers(altKey: true).hashCode)
-        ..has(
-          (m) => m.toString(),
-          'toString()',
-        ).equals('KeyModifiers(altKey)');
+        ..has((m) => m.toString(), 'toString()').equals('KeyModifiers(altKey)');
     });
 
     test('all', () {
@@ -195,39 +141,14 @@ void main() {
         altKey: true,
       );
       check(modifiers)
-        ..has(
-          (m) => m.shiftKey,
-          'shiftKey',
-        ).isTrue()
-        ..has(
-          (m) => m.controlKey,
-          'controlKey',
-        ).isTrue()
-        ..has(
-          (m) => m.altKey,
-          'altKey',
-        ).isTrue()
-        ..equals(
-          KeyModifiers(
-            shiftKey: true,
-            controlKey: true,
-            altKey: true,
-          ),
+        ..has((m) => m.shiftKey, 'shiftKey').isTrue()
+        ..has((m) => m.controlKey, 'controlKey').isTrue()
+        ..has((m) => m.altKey, 'altKey').isTrue()
+        ..equals(KeyModifiers(shiftKey: true, controlKey: true, altKey: true))
+        ..has((m) => m.hashCode, 'hashCode').equals(
+          KeyModifiers(shiftKey: true, controlKey: true, altKey: true).hashCode,
         )
-        ..has(
-          (m) => m.hashCode,
-          'hashCode',
-        ).equals(
-          KeyModifiers(
-            shiftKey: true,
-            controlKey: true,
-            altKey: true,
-          ).hashCode,
-        )
-        ..has(
-          (m) => m.toString(),
-          'toString()',
-        ).equals(
+        ..has((m) => m.toString(), 'toString()').equals(
           'KeyModifiers('
           'shiftKey, '
           'controlKey, '
@@ -253,53 +174,33 @@ void main() {
       });
 
       test('with a key and modifiers', () {
-        check(
-          KeyEvent(CharKey('x'), modifiers: KeyModifiers(shiftKey: true)),
-        )
+        check(KeyEvent(CharKey('x'), modifiers: KeyModifiers(shiftKey: true)))
           ..equals(
             KeyEvent(CharKey('x'), modifiers: KeyModifiers(shiftKey: true)),
           )
-          ..has(
-            (e) => e.hashCode,
-            'hashCode',
-          ).equals(
-            KeyEvent(CharKey('x'), modifiers: KeyModifiers(shiftKey: true))
-                .hashCode,
-          )
-          ..has(
-            (e) => e.toString(),
-            'toString()',
-          ).equals(
-            'KeyEvent(CharKeyCode(x), modifiers: KeyModifiers(shiftKey))',
-          );
-      });
-
-      test('with a key and modifiers', () {
-        check(
-          KeyEvent(
-            CharKey('x'),
-            modifiers: KeyModifiers(shiftKey: true),
-          ),
-        )
-          ..equals(
-            KeyEvent(
-              CharKey('x'),
-              modifiers: KeyModifiers(shiftKey: true),
-            ),
-          )
-          ..has(
-            (e) => e.hashCode,
-            'hashCode',
-          ).equals(
+          ..has((e) => e.hashCode, 'hashCode').equals(
             KeyEvent(
               CharKey('x'),
               modifiers: KeyModifiers(shiftKey: true),
             ).hashCode,
           )
-          ..has(
-            (e) => e.toString(),
-            'toString()',
-          ).equals(
+          ..has((e) => e.toString(), 'toString()').equals(
+            'KeyEvent(CharKeyCode(x), modifiers: KeyModifiers(shiftKey))',
+          );
+      });
+
+      test('with a key and modifiers', () {
+        check(KeyEvent(CharKey('x'), modifiers: KeyModifiers(shiftKey: true)))
+          ..equals(
+            KeyEvent(CharKey('x'), modifiers: KeyModifiers(shiftKey: true)),
+          )
+          ..has((e) => e.hashCode, 'hashCode').equals(
+            KeyEvent(
+              CharKey('x'),
+              modifiers: KeyModifiers(shiftKey: true),
+            ).hashCode,
+          )
+          ..has((e) => e.toString(), 'toString()').equals(
             'KeyEvent('
             'CharKeyCode(x), '
             'modifiers: KeyModifiers(shiftKey)'
@@ -311,14 +212,8 @@ void main() {
     test('CharKeyCode', () {
       check(CharKey('x'))
         ..equals(CharKey('x'))
-        ..has(
-          (c) => c.hashCode,
-          'hashCode',
-        ).equals(CharKey('x').hashCode)
-        ..has(
-          (c) => c.toString(),
-          'toString()',
-        ).equals('CharKeyCode(x)');
+        ..has((c) => c.hashCode, 'hashCode').equals(CharKey('x').hashCode)
+        ..has((c) => c.toString(), 'toString()').equals('CharKeyCode(x)');
     });
   });
 
@@ -376,13 +271,7 @@ void main() {
     group(MouseEvent, () {
       test(MouseEventKind.down, () {
         final header = [0x1B, 0x5B, 0x3c];
-        final data = utf8.encode(
-          [
-            '0',
-            '1',
-            '1',
-          ].join(';'),
-        );
+        final data = utf8.encode(['0', '1', '1'].join(';'));
         check(Event.tryParse([...header, ...data, 0x4D])).equals(
           MouseEvent(
             row: 1,
@@ -395,13 +284,7 @@ void main() {
 
       test(MouseEventKind.moved, () {
         final header = [0x1B, 0x5B, 0x3c];
-        final data = utf8.encode(
-          [
-            '32',
-            '1',
-            '1',
-          ].join(';'),
-        );
+        final data = utf8.encode(['32', '1', '1'].join(';'));
         check(Event.tryParse([...header, ...data, 0x4D])).equals(
           MouseEvent(
             row: 1,
@@ -414,13 +297,7 @@ void main() {
 
       test(MouseButton.left, () {
         final header = [0x1B, 0x5B, 0x3c];
-        final data = utf8.encode(
-          [
-            '0',
-            '1',
-            '1',
-          ].join(';'),
-        );
+        final data = utf8.encode(['0', '1', '1'].join(';'));
         check(Event.tryParse([...header, ...data, 0x4D])).equals(
           MouseEvent(
             row: 1,
@@ -433,13 +310,7 @@ void main() {
 
       test(MouseButton.middle, () {
         final header = [0x1B, 0x5B, 0x3c];
-        final data = utf8.encode(
-          [
-            '1',
-            '1',
-            '1',
-          ].join(';'),
-        );
+        final data = utf8.encode(['1', '1', '1'].join(';'));
         check(Event.tryParse([...header, ...data, 0x4D])).equals(
           MouseEvent(
             row: 1,
@@ -452,13 +323,7 @@ void main() {
 
       test(MouseButton.right, () {
         final header = [0x1B, 0x5B, 0x3c];
-        final data = utf8.encode(
-          [
-            '2',
-            '1',
-            '1',
-          ].join(';'),
-        );
+        final data = utf8.encode(['2', '1', '1'].join(';'));
         check(Event.tryParse([...header, ...data, 0x4D])).equals(
           MouseEvent(
             row: 1,

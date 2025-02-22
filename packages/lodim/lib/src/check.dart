@@ -81,12 +81,7 @@ int assertNonNegative(int value, [String? name, String? message]) {
   required int width,
   int? height,
 }) {
-  return _checkRectangular1D(
-    cells,
-    check: true,
-    width: width,
-    height: height,
-  );
+  return _checkRectangular1D(cells, check: true, width: width, height: height);
 }
 
 /// Checks that [cells] is a non-empty iterable and that it is rectangular.
@@ -129,11 +124,7 @@ int assertNonNegative(int value, [String? name, String? message]) {
 
     // Check that it divides the length.
     if (length % width != 0) {
-      throw RangeError.value(
-        width,
-        'width',
-        'must divide the length of cells',
-      );
+      throw RangeError.value(width, 'width', 'must divide the length of cells');
     }
   }
 

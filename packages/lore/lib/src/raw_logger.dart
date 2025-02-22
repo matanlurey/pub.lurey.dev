@@ -17,11 +17,7 @@ interface class RawLogger {
   @pragma('vm:invisible')
   static Never _throwOnFatal() => throw FatalError._();
 
-  static String _defaultString(
-    Level level,
-    String message, {
-    DateTime? time,
-  }) {
+  static String _defaultString(Level level, String message, {DateTime? time}) {
     return message;
   }
 
@@ -51,10 +47,10 @@ interface class RawLogger {
     String Function(Level, String, {DateTime? time})? formatString,
     List<int> Function(Level, List<int>, {DateTime? time})? formatBytes,
     Never Function()? throwOnFatal,
-  })  : _formatString = formatString ?? _defaultString,
-        _formatBytes = formatBytes ?? _defaultBytes,
-        _level = level ?? Level.debug,
-        _throwFatal = throwOnFatal ?? _throwOnFatal;
+  }) : _formatString = formatString ?? _defaultString,
+       _formatBytes = formatBytes ?? _defaultBytes,
+       _level = level ?? Level.debug,
+       _throwFatal = throwOnFatal ?? _throwOnFatal;
 
   final LogSink _sink;
   final String Function(Level, String, {DateTime? time}) _formatString;

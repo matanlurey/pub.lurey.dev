@@ -4,9 +4,7 @@ import 'prelude.dart';
 
 void main() {
   test('AsciiEscapeCode writes the expected output', () {
-    check(
-      AsciiControl.values,
-    ).writesAnsiStrings.deepEquals({
+    check(AsciiControl.values).writesAnsiStrings.deepEquals({
       AsciiControl.terminalBell: '\x07',
       AsciiControl.backspace: '\x08',
       AsciiControl.horizontalTab: '\x09',

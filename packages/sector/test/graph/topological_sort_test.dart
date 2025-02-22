@@ -24,9 +24,7 @@ void main() {
       };
     }
 
-    check(
-      () => topologicalSort([1], successors: successors),
-    )
+    check(() => topologicalSort([1], successors: successors))
         .throws<CycleException<int>>()
         .has((e) => e.involved, 'involved')
         .equals(1);

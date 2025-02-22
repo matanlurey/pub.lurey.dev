@@ -66,10 +66,9 @@ void main() {
   test('GridHeuristic.euclidean uses the Euclidean distance', () {
     final heuristic = GridHeuristic.euclidean(Pos(9, 9));
 
-    check(heuristic.estimateTotalCost(Pos(0, 0))).isCloseTo(
-      12.727922061357855,
-      0.0001,
-    );
+    check(
+      heuristic.estimateTotalCost(Pos(0, 0)),
+    ).isCloseTo(12.727922061357855, 0.0001);
     check(heuristic.estimateTotalCost(Pos(9, 9))).equals(0);
   });
 

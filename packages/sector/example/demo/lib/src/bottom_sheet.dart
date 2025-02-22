@@ -18,11 +18,7 @@ final class PathfinderBottomSheet<T> extends StatefulWidget {
     Map<String, PathfinderBase<T>>? algorithms,
   }) : algorithms = algorithms ?? _defaultAlgorithms() {
     if (this.algorithms.isEmpty) {
-      throw ArgumentError.value(
-        algorithms,
-        'algorithms',
-        'must not be empty',
-      );
+      throw ArgumentError.value(algorithms, 'algorithms', 'must not be empty');
     }
   }
 
@@ -30,6 +26,8 @@ final class PathfinderBottomSheet<T> extends StatefulWidget {
   final void Function() onClear;
 
   /// Called when the "Find Path" button is pressed.
+  // This is just an example, it is OK to have a meh API.
+  // ignore: unsafe_variance
   final void Function(PathfinderBase<T>, {bool trace})? onFindPath;
 
   /// Which algorithms to display in the dropdown.
@@ -76,20 +74,14 @@ final class _BottomSheetState<T> extends State<PathfinderBottomSheet<T>> {
   Widget build(BuildContext context) {
     // Lookup the background color of the current theme.
     final items = widget.algorithms.entries.map(
-      (entry) => DropdownMenuItem(
-        value: entry.key,
-        child: Text(entry.key),
-      ),
+      (entry) => DropdownMenuItem(value: entry.key, child: Text(entry.key)),
     );
     return Padding(
       padding: const EdgeInsets.all(8.0),
       child: Row(
         mainAxisAlignment: MainAxisAlignment.spaceEvenly,
         children: [
-          ElevatedButton(
-            onPressed: widget.onClear,
-            child: const Text('Clear'),
-          ),
+          ElevatedButton(onPressed: widget.onClear, child: const Text('Clear')),
           const SizedBox(width: 8),
           Row(
             children: [

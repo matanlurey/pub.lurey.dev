@@ -27,6 +27,8 @@ final class GreedyBestFirstSearch<E> with HeuristicPathfinder<E> {
   const GreedyBestFirstSearch();
 
   @override
+  // Intentionally unsafe variance.
+  // ignore: unsafe_variance
   (Path<T> path, double cost) findBestPathExclusive<T extends E>(
     WeightedWalkable<T> graph,
     T start,
@@ -47,11 +49,7 @@ final class GreedyBestFirstSearch<E> with HeuristicPathfinder<E> {
       final neighbors = [
         for (final next in graph.successors(start))
           if (next.$2 < double.infinity)
-            (
-              next.$1,
-              next.$2,
-              heuristic.estimateTotalCost(next.$1),
-            ),
+            (next.$1, next.$2, heuristic.estimateTotalCost(next.$1)),
       ];
       if (neighbors.isEmpty) {
         break;

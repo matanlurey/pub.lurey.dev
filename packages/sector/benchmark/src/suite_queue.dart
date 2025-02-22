@@ -44,10 +44,8 @@ abstract base class QueueSuite<C> {
 
 final class _EmptyPriorityQueueBenchmark<C> extends BenchmarkBase {
   final QueueSuite<C> _suite;
-  _EmptyPriorityQueueBenchmark(
-    String name,
-    this._suite,
-  ) : super('$name:EmptyPriorityQueue');
+  _EmptyPriorityQueueBenchmark(String name, this._suite)
+    : super('$name:EmptyPriorityQueue');
 
   @override
   void run() {
@@ -57,19 +55,18 @@ final class _EmptyPriorityQueueBenchmark<C> extends BenchmarkBase {
 
 final class _Add1kEntriesBenchmark<C> extends BenchmarkBase {
   final QueueSuite<C> _suite;
-  _Add1kEntriesBenchmark(
-    String name,
-    this._suite,
-  ) : super('$name:Add1kEntries');
+  _Add1kEntriesBenchmark(String name, this._suite)
+    : super('$name:Add1kEntries');
 
-  static final Uint32List _entries = (() {
-    final entries = Uint32List(1000);
-    for (var i = 0; i < 1000; i++) {
-      entries[i] = i;
-    }
-    entries.shuffle(Random(0));
-    return entries;
-  })();
+  static final Uint32List _entries =
+      (() {
+        final entries = Uint32List(1000);
+        for (var i = 0; i < 1000; i++) {
+          entries[i] = i;
+        }
+        entries.shuffle(Random(0));
+        return entries;
+      })();
 
   @override
   void setup() {
@@ -88,19 +85,18 @@ final class _Add1kEntriesBenchmark<C> extends BenchmarkBase {
 
 final class _Pop1kEntriesBenchmark<C> extends BenchmarkBase {
   final QueueSuite<C> _suite;
-  _Pop1kEntriesBenchmark(
-    String name,
-    this._suite,
-  ) : super('$name:Pop1kEntries');
+  _Pop1kEntriesBenchmark(String name, this._suite)
+    : super('$name:Pop1kEntries');
 
-  static final Uint32List _entries = (() {
-    final entries = Uint32List(1000);
-    for (var i = 0; i < 1000; i++) {
-      entries[i] = i;
-    }
-    entries.shuffle(Random(0));
-    return entries;
-  })();
+  static final Uint32List _entries =
+      (() {
+        final entries = Uint32List(1000);
+        for (var i = 0; i < 1000; i++) {
+          entries[i] = i;
+        }
+        entries.shuffle(Random(0));
+        return entries;
+      })();
 
   late C _queue;
   C _createQueue() {

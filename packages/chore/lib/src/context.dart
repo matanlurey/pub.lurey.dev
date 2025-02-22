@@ -57,10 +57,7 @@ final class Context {
   }
 
   /// Creates a new context.
-  Context({
-    required this.rootDir,
-    this.logLevel = Level.status,
-  });
+  Context({required this.rootDir, this.logLevel = Level.status});
 
   /// The root directory of the repository.
   final String rootDir;
@@ -84,10 +81,7 @@ final class Context {
 
   @override
   int get hashCode {
-    return Object.hash(
-      rootDir,
-      logLevel,
-    );
+    return Object.hash(rootDir, logLevel);
   }
 
   @override

@@ -36,10 +36,8 @@ abstract base mixin class Graph<E> implements GraphBase<E>, Walkable<E> {
   /// an edge has an explicit source and a target node. If [directed] is
   /// `false`, the graph is undirected, and the inverse of an edge is also an
   /// edge.
-  factory Graph.from(
-    WalkableBase<E> walkable, {
-    bool directed,
-  }) = AdjacencyListGraph<E>.from;
+  factory Graph.from(WalkableBase<E> walkable, {bool directed}) =
+      AdjacencyListGraph<E>.from;
 
   /// Creates a [AdjacencyListGraph] graph from [edges].
   ///
@@ -47,10 +45,8 @@ abstract base mixin class Graph<E> implements GraphBase<E>, Walkable<E> {
   /// an edge has an explicit source and a target node. If [directed] is
   /// `false`, the graph is undirected, and the inverse of an edge is also an
   /// edge.
-  factory Graph.fromEdges(
-    Iterable<Edge<E>> edges, {
-    bool directed,
-  }) = AdjacencyListGraph<E>.fromEdges;
+  factory Graph.fromEdges(Iterable<Edge<E>> edges, {bool directed}) =
+      AdjacencyListGraph<E>.fromEdges;
 
   /// Adds an [edge] from to the graph.
   ///

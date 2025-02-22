@@ -28,6 +28,8 @@ final class IterativeDepthFirstSearch<E> with Pathfinder<E> {
   const IterativeDepthFirstSearch();
 
   @override
+  // Intentionally unsafe variance.
+  // ignore: unsafe_variance
   Path<T> findPathExclusive<T extends E>(
     WalkableBase<T> graph,
     T start,
@@ -84,13 +86,7 @@ final class IterativeDepthFirstSearch<E> with Pathfinder<E> {
         continue;
       }
       path.add(next);
-      final result = _depthStep(
-        path,
-        graph,
-        goal,
-        tracer,
-        depth: depth - 1,
-      );
+      final result = _depthStep(path, graph, goal, tracer, depth: depth - 1);
       if (result == _Iddfs.foundOptimum) {
         return _Iddfs.foundOptimum;
       }
@@ -103,8 +99,4 @@ final class IterativeDepthFirstSearch<E> with Pathfinder<E> {
   }
 }
 
-enum _Iddfs {
-  foundOptimum,
-  impossible,
-  noneAtThisDepth,
-}
+enum _Iddfs { foundOptimum, impossible, noneAtThisDepth }

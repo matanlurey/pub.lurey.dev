@@ -7,11 +7,7 @@ void main() {
   test('planar + value', () {
     final random = SequenceRandom([0.0, 0.5, 1.0]);
     final value = Value(NoiseTable(random));
-    final planar = buildFlatPlane(
-      3,
-      3,
-      value.get2df,
-    );
+    final planar = buildFlatPlane(3, 3, value.get2df);
 
     check(planar.values).deepEquals([
       -959.9333333333334,
@@ -29,12 +25,7 @@ void main() {
   test('planar + value (seamless)', () {
     final random = SequenceRandom([0.0, 0.5, 1.0]);
     final value = Value(NoiseTable(random));
-    final planar = buildFlatPlane(
-      3,
-      3,
-      value.get2df,
-      seamless: true,
-    );
+    final planar = buildFlatPlane(3, 3, value.get2df, seamless: true);
 
     check(planar.values).deepEquals([
       -0.9607843137254902,

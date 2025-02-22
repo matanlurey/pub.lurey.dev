@@ -5,9 +5,9 @@ import '_prelude.dart';
 void main() {
   test('returns currentLevel', () {
     final enabler = _TestLevelEnabler((level) => level >= Level.warning);
-    check(enabler)
-        .has((l) => l.currentLevel, 'currentLevel')
-        .equals(Level.warning);
+    check(
+      enabler,
+    ).has((l) => l.currentLevel, 'currentLevel').equals(Level.warning);
   });
 
   test('throws if no level is enabled', () {
