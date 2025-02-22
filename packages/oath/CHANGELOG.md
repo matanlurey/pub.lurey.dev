@@ -8,6 +8,15 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 <!-- #endregion -->
 
+## 0.4.0
+
+- Bumped Dart to `^3.7.0`.
+- Added [`strict_top_level_inference`](https://dart.dev/tools/linter-rules/strict_top_level_inference) to all rule sets.
+- Added [`unnecessary_underscores`](https://dart.dev/tools/linter-rules/unnecessary_underscores) to all rule sets.
+- Added [`unnecessary_async`](https://dart.dev/tools/linter-rules/unnecessary_async) to all rule sets.
+- Added [`unsafe_variance`](https://dart.dev/tools/linter-rules/unsafe_variance) to all rule sets.
+- Removed [`package_api_docs`](https://dart.dev/tools/linter-rules/package_api_docs) from all rule sets.
+
 ## 0.3.0
 
 - Bumped Dart to `^3.6.0`.
