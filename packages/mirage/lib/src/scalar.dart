@@ -139,10 +139,8 @@ final class ScalarField {
 @immutable
 final class ScalarFieldComparison {
   /// Creates a comparison that is considered no difference, or exactly equal.
-  ScalarFieldComparison.none(
-    this.width,
-    this.height,
-  ) : _delta = Float64List(width * height);
+  ScalarFieldComparison.none(this.width, this.height)
+    : _delta = Float64List(width * height);
 
   /// Width of the maps being compared.
   final int width;

@@ -34,14 +34,17 @@ void main() {
   test('== and hashCode', () {
     check(SpecificVersion(1, 2, 3))
       ..has((v) => v == SpecificVersion(1, 2, 3), '==').isTrue()
-      ..has((v) => v.hashCode, 'hashCode')
-          .equals(SpecificVersion(1, 2, 3).hashCode);
+      ..has(
+        (v) => v.hashCode,
+        'hashCode',
+      ).equals(SpecificVersion(1, 2, 3).hashCode);
   });
 
   test('tryParse (success)', () {
     check(SpecificVersion.tryParse('1.2.3')).equals(SpecificVersion(1, 2, 3));
-    check(SpecificVersion.tryParse('1.2.3-pre'))
-        .equals(SpecificVersion(1, 2, 3, 'pre'));
+    check(
+      SpecificVersion.tryParse('1.2.3-pre'),
+    ).equals(SpecificVersion(1, 2, 3, 'pre'));
   });
 
   test('tryParse (failure)', () {
@@ -50,8 +53,9 @@ void main() {
 
   test('from (success)', () {
     check(SpecificVersion.parse('1.2.3')).equals(SpecificVersion(1, 2, 3));
-    check(SpecificVersion.parse('1.2.3-pre'))
-        .equals(SpecificVersion(1, 2, 3, 'pre'));
+    check(
+      SpecificVersion.parse('1.2.3-pre'),
+    ).equals(SpecificVersion(1, 2, 3, 'pre'));
   });
 
   test('from (failure)', () {

@@ -4,15 +4,11 @@ import 'prelude.dart';
 
 void main() {
   group('$Color4.dim contains the dim colors', () {
-    check(
-      Color4.values.where((v) => v.isDim),
-    ).deepEquals(Color4.dim);
+    check(Color4.values.where((v) => v.isDim)).deepEquals(Color4.dim);
   });
 
   group('$Color4.bright contains the bright colors', () {
-    check(
-      Color4.values.where((v) => v.isBright),
-    ).deepEquals(Color4.bright);
+    check(Color4.values.where((v) => v.isBright)).deepEquals(Color4.bright);
   });
 
   test('$Color4 has expected output', () {
@@ -59,8 +55,10 @@ void main() {
     test('should have equality semantics', () {
       check(Color.from256(0xff))
         ..equals(Color.from256(0xff))
-        ..has((c) => c.hashCode, 'hashCode')
-            .equals(Color.from256(0xff).hashCode)
+        ..has(
+          (c) => c.hashCode,
+          'hashCode',
+        ).equals(Color.from256(0xff).hashCode)
         ..has((c) => c.toString(), 'toString()').equals('Color.from256(0xff)');
     });
 
@@ -73,10 +71,14 @@ void main() {
     test('should have equality semantics', () {
       check(Color.fromRGB(0x00, 0x00, 0xff))
         ..equals(Color.fromRGB(0x00, 0x00, 0xff))
-        ..has((c) => c.hashCode, 'hashCode')
-            .equals(Color.fromRGB(0x00, 0x00, 0xff).hashCode)
-        ..has((c) => c.toString(), 'toString()')
-            .equals('Color.fromRGB(0x00, 0x00, 0xff)');
+        ..has(
+          (c) => c.hashCode,
+          'hashCode',
+        ).equals(Color.fromRGB(0x00, 0x00, 0xff).hashCode)
+        ..has(
+          (c) => c.toString(),
+          'toString()',
+        ).equals('Color.fromRGB(0x00, 0x00, 0xff)');
     });
 
     test('should separate into red/green/blue components', () {
@@ -96,9 +98,9 @@ void main() {
     });
 
     test('should provide a lazy iterable of all colors', () {
-      check(Color24.generate(sample: 32))
-          .has((c) => c.length, 'length')
-          .equals(512);
+      check(
+        Color24.generate(sample: 32),
+      ).has((c) => c.length, 'length').equals(512);
     });
 
     test('toRGB should return the 24-bit RGB value', () {
@@ -118,8 +120,10 @@ void main() {
         check(style)
           ..equals(style)
           ..has((s) => s.hashCode, 'hashCode').equals(style.hashCode)
-          ..has((s) => s.toString(), 'toString()')
-              .equals('SetStyles(Style.foreground(Color.reset))');
+          ..has(
+            (s) => s.toString(),
+            'toString()',
+          ).equals('SetStyles(Style.foreground(Color.reset))');
       });
     });
 
@@ -134,8 +138,10 @@ void main() {
         check(style)
           ..equals(style)
           ..has((s) => s.hashCode, 'hashCode').equals(style.hashCode)
-          ..has((s) => s.toString(), 'toString()')
-              .equals('SetStyles(Style.background(Color.reset))');
+          ..has(
+            (s) => s.toString(),
+            'toString()',
+          ).equals('SetStyles(Style.background(Color.reset))');
       });
     });
 
@@ -173,9 +179,10 @@ void main() {
         check(style)
           ..equals(style)
           ..has((s) => s.hashCode, 'hashCode').equals(style.hashCode)
-          ..has((s) => s.toString(), 'toString()').equals(
-            'SetStyles(Style.foreground(Color.from256(0xff)))',
-          );
+          ..has(
+            (s) => s.toString(),
+            'toString()',
+          ).equals('SetStyles(Style.foreground(Color.from256(0xff)))');
       });
     });
 
@@ -190,9 +197,10 @@ void main() {
         check(style)
           ..equals(style)
           ..has((s) => s.hashCode, 'hashCode').equals(style.hashCode)
-          ..has((s) => s.toString(), 'toString()').equals(
-            'SetStyles(Style.background(Color.from256(0xff)))',
-          );
+          ..has(
+            (s) => s.toString(),
+            'toString()',
+          ).equals('SetStyles(Style.background(Color.from256(0xff)))');
       });
     });
 
@@ -208,11 +216,11 @@ void main() {
 
       test('should have expected equality semantics', () {
         check(
-          SetStyles(
-            Style.background(Color.from256(0xff)),
-            Style.foreground(Color.from256(0xff)),
-          ),
-        )
+            SetStyles(
+              Style.background(Color.from256(0xff)),
+              Style.foreground(Color.from256(0xff)),
+            ),
+          )
           ..equals(
             SetStyles(
               Style.background(Color.from256(0xff)),

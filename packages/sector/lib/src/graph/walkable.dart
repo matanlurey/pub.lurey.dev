@@ -91,9 +91,7 @@ abstract mixin class Walkable<E> implements WalkableBase<E> {
   /// });
   /// print(walkable.edges); // {a -> b, b -> c, c -> d}
   /// ```
-  const factory Walkable.from(
-    Map<E, Iterable<E>> edges,
-  ) = _EdgesWalkable<E>;
+  const factory Walkable.from(Map<E, Iterable<E>> edges) = _EdgesWalkable<E>;
 
   /// Creates a walkable which generates successors dynamically.
   ///
@@ -235,9 +233,7 @@ abstract mixin class Walkable<E> implements WalkableBase<E> {
   /// final weighted = unweighted.asWeighted((source, target) => 1);
   /// print(weighted.successors('a')); // [('a', 1)]
   /// ```
-  WeightedWalkable<E> asWeighted(
-    double Function(E source, E target) weight,
-  ) {
+  WeightedWalkable<E> asWeighted(double Function(E source, E target) weight) {
     return _AsWeightedWalkable(this, weight);
   }
 
@@ -331,9 +327,11 @@ final class _GeneratedWalkable<E> with Walkable<E> {
   const _GeneratedWalkable({
     required Iterable<E> Function(E node) successors,
     required Iterable<E> Function() roots,
-  })  : _successors = successors,
-        _roots = roots;
+  }) : _successors = successors,
+       _roots = roots;
 
+  // Only accessed in `this`.
+  // ignore: unsafe_variance
   final Iterable<E> Function(E node) _successors;
   final Iterable<E> Function() _roots;
 
@@ -347,6 +345,9 @@ final class _GeneratedWalkable<E> with Walkable<E> {
 final class _AsWeightedWalkable<V> with WeightedWalkable<V> {
   const _AsWeightedWalkable(this._walkable, this._weight);
   final Walkable<V> _walkable;
+
+  // Only accessed in `this`.
+  // ignore: unsafe_variance
   final double Function(V source, V target) _weight;
 
   @override

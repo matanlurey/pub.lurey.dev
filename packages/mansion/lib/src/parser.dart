@@ -17,10 +17,7 @@ final _csiRegExp = RegExp(r'\x1B\[(.*?)([a-zA-Z])');
 /// class.
 @internal
 @visibleForTesting
-Unknown? parseAnsi(
-  String input,
-  List<Sequence> output,
-) {
+Unknown? parseAnsi(String input, List<Sequence> output) {
   var consumed = 0;
   void addLiteralText(int end) {
     if (consumed == end) {
@@ -93,10 +90,7 @@ Unknown? parseAnsi(
             if (match == null) {
               // Create an unknown escape code for the incomplete sequence.
               // i.e. the escape code and the bracket, but no command.
-              final unknown = Unknown(
-                input.substring(i, next + 1),
-                offset: i,
-              );
+              final unknown = Unknown(input.substring(i, next + 1), offset: i);
 
               // Are we at the end of the input?
               if (next + 1 == input.length) {
@@ -109,10 +103,7 @@ Unknown? parseAnsi(
             }
 
             Unknown? unrecognizedMatch() {
-              final unknown = Unknown(
-                input.substring(i, match.end),
-                offset: i,
-              );
+              final unknown = Unknown(input.substring(i, match.end), offset: i);
 
               // Are we at the end of the input?
               if (match.end == input.length) {
@@ -497,17 +488,11 @@ Unknown? parseAnsi(
               // Are we at the end of the input?
               if (end + 1 == input.length ||
                   end == -1 && next + 1 == input.length) {
-                return Unknown(
-                  input.substring(i),
-                  offset: i,
-                );
+                return Unknown(input.substring(i), offset: i);
               }
 
               output.add(
-                Unknown(
-                  input.substring(i, end == -1 ? i + 2 : end),
-                  offset: i,
-                ),
+                Unknown(input.substring(i, end == -1 ? i + 2 : end), offset: i),
               );
               consumed = next + 1;
               i = consumed - 1;
@@ -528,10 +513,7 @@ Unknown? parseAnsi(
             consumed = next + 1;
             i = consumed - 1;
           default:
-            final unknown = Unknown(
-              input.substring(i, next),
-              offset: i,
-            );
+            final unknown = Unknown(input.substring(i, next), offset: i);
             consumed = next;
             output.add(unknown);
         }

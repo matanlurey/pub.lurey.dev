@@ -35,11 +35,7 @@ extension type File._(JSObject _) implements Blob {
       return File._native(
         fileBits,
         fileName,
-        _FileOptions(
-          type: type,
-          endings: endings,
-          lastModified: lastModified,
-        ),
+        _FileOptions(type: type, endings: endings, lastModified: lastModified),
       );
     }
     return File._native(fileBits, fileName);

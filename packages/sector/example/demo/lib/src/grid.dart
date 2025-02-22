@@ -84,12 +84,7 @@ final class _PathfinderGridState extends State<PathfinderGrid>
         end: end,
       );
     } else {
-      painter = _GridPainter(
-        grid: grid,
-        start: start,
-        end: end,
-        path: path,
-      );
+      painter = _GridPainter(grid: grid, start: start, end: end, path: path);
     }
     return Listener(
       child: CustomPaint(
@@ -123,13 +118,9 @@ final class _PathfinderGridState extends State<PathfinderGrid>
 }
 
 final class _GridPainter extends CustomPainter {
-  _GridPainter({
-    required this.grid,
-    this.start,
-    this.end,
-    this.path,
-  })  : trace = null,
-        animation = null;
+  _GridPainter({required this.grid, this.start, this.end, this.path})
+    : trace = null,
+      animation = null;
 
   _GridPainter.withTrace({
     required this.grid,
@@ -148,24 +139,30 @@ final class _GridPainter extends CustomPainter {
   final Animation<double>? animation;
 
   static final _paintGrid = Paint()..style = PaintingStyle.stroke;
-  static final _paintFill = Paint()
-    ..color = Colors.black
-    ..style = PaintingStyle.fill;
-  static final _paintStart = Paint()
-    ..color = Colors.green
-    ..style = PaintingStyle.fill;
-  static final _paintEnd = Paint()
-    ..color = Colors.red
-    ..style = PaintingStyle.fill;
-  static final _paintPath = Paint()
-    ..color = Colors.blue
-    ..style = PaintingStyle.fill;
-  static final _paintVisit = Paint()
-    ..color = Colors.grey.shade300
-    ..style = PaintingStyle.fill;
-  static final _paintSkip = Paint()
-    ..color = Colors.grey.shade100
-    ..style = PaintingStyle.fill;
+  static final _paintFill =
+      Paint()
+        ..color = Colors.black
+        ..style = PaintingStyle.fill;
+  static final _paintStart =
+      Paint()
+        ..color = Colors.green
+        ..style = PaintingStyle.fill;
+  static final _paintEnd =
+      Paint()
+        ..color = Colors.red
+        ..style = PaintingStyle.fill;
+  static final _paintPath =
+      Paint()
+        ..color = Colors.blue
+        ..style = PaintingStyle.fill;
+  static final _paintVisit =
+      Paint()
+        ..color = Colors.grey.shade300
+        ..style = PaintingStyle.fill;
+  static final _paintSkip =
+      Paint()
+        ..color = Colors.grey.shade100
+        ..style = PaintingStyle.fill;
 
   @override
   void paint(Canvas canvas, Size size) {

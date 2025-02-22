@@ -112,10 +112,7 @@ final class ExecutableContainer {
     );
   }
 
-  ExecutableContainer._({
-    required this.context,
-    required this.onWatch,
-  });
+  ExecutableContainer._({required this.context, required this.onWatch});
 
   /// The path context used to resolve the path to the executable.
   ///

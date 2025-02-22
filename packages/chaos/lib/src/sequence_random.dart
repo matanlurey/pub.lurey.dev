@@ -196,10 +196,8 @@ final class SequenceRandom implements PersistentRandom {
     return SequenceRandom._(s, terminal: terminal);
   }
 
-  SequenceRandom._(
-    this._sequence, {
-    required bool terminal,
-  }) : _terminal = terminal;
+  SequenceRandom._(this._sequence, {required bool terminal})
+    : _terminal = terminal;
   final Float64List _sequence;
   var _index = 0;
   bool _terminal;

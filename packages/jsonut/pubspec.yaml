@@ -20,7 +20,7 @@ issue_tracker: https://github.com/matanlurey/pub.lurey.dev/labels/pkg-jsonut
 resolution: workspace
 
 environment:
-  sdk: ^3.5.0
+  sdk: ^3.7.0
 
 dev_dependencies:
   benchmark_harness: ^2.2.2

@@ -176,11 +176,7 @@ extension type JsonAny._(Object? _value) implements JsonValue {
       case null:
         return JsonAny._(value);
       default:
-        throw ArgumentError.value(
-          value,
-          'value',
-          'Not a valid JSON value.',
-        );
+        throw ArgumentError.value(value, 'value', 'Not a valid JSON value.');
     }
   }
 

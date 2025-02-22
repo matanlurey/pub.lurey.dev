@@ -3,10 +3,7 @@ part of '../lodim.dart';
 /// Returns the start  indices of the full-width rectangle.
 ///
 /// If the rectangle is not full-width, returns `null`.
-int? _checkFullWidth(
-  Rect rect, {
-  required int width,
-}) {
+int? _checkFullWidth(Rect rect, {required int width}) {
   if (rect.width == width) {
     return rect.topLeft.toRowMajor(width: width);
   }
@@ -160,14 +157,11 @@ Iterable<E> getRectLinear<E>(
   }
 
   // General case: Multiple regions.
-  return Iterable.generate(
-    bounds.height,
-    (y) {
-      final start = bounds.topLeft.toRowMajor(width: width) + y * width;
-      final end = start + bounds.width;
-      return linear.getRange(start, end);
-    },
-  ).expand((e) => e);
+  return Iterable.generate(bounds.height, (y) {
+    final start = bounds.topLeft.toRowMajor(width: width) + y * width;
+    final end = start + bounds.width;
+    return linear.getRange(start, end);
+  }).expand((e) => e);
 }
 
 /// Fills each element within [bounds], exclusive of the bottom-right edge,
@@ -579,11 +573,7 @@ void copyRectLinear<E>(
   Pos target = Pos.zero,
 }) {
   // Check that the source and destination bounds are valid.
-  _assertValidLinearBounds(
-    src.length,
-    width: srcWidth,
-    bounds: source,
-  );
+  _assertValidLinearBounds(src.length, width: srcWidth, bounds: source);
   _assertValidLinearBounds(
     dst.length,
     width: dstWidth,

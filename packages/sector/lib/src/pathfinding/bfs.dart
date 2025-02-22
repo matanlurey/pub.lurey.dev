@@ -29,6 +29,8 @@ final class BreadthFirstSearch<E> with Pathfinder<E> {
   const BreadthFirstSearch();
 
   @override
+  // Intentionally unsafe variance.
+  // ignore: unsafe_variance
   Path<T> findPathExclusive<T extends E>(
     WalkableBase<T> graph,
     T start,
@@ -47,11 +49,7 @@ final class BreadthFirstSearch<E> with Pathfinder<E> {
       tracer?.onVisit(node.key);
       for (final successor in search.successors(node.key)) {
         if (goal.success(successor)) {
-          final path = _reversePath(
-            parents,
-            (p) => p,
-            i,
-          );
+          final path = _reversePath(parents, (p) => p, i);
           path.add(successor);
           return Path(path);
         }

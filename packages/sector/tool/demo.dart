@@ -46,27 +46,24 @@ void main(List<String> args) async {
   }
 }
 
-final _parser = ArgParser()
-  ..addFlag(
-    'help',
-    abbr: 'h',
-    help: 'Prints this help message.',
-    negatable: false,
-  )
-  ..addFlag(
-    'release',
-    abbr: 'r',
-    help: 'Builds in (web) release mode.',
-  )
-  ..addOption(
-    'device',
-    abbr: 'd',
-    help: 'The device to run the app on.',
-    defaultsTo: io.Platform.isMacOS ? 'macos' : 'chrome',
-  )
-  ..addOption(
-    'out-dir',
-    abbr: 'o',
-    help: 'Output directory for the release mode.',
-    defaultsTo: p.join('build'),
-  );
+final _parser =
+    ArgParser()
+      ..addFlag(
+        'help',
+        abbr: 'h',
+        help: 'Prints this help message.',
+        negatable: false,
+      )
+      ..addFlag('release', abbr: 'r', help: 'Builds in (web) release mode.')
+      ..addOption(
+        'device',
+        abbr: 'd',
+        help: 'The device to run the app on.',
+        defaultsTo: io.Platform.isMacOS ? 'macos' : 'chrome',
+      )
+      ..addOption(
+        'out-dir',
+        abbr: 'o',
+        help: 'Output directory for the release mode.',
+        defaultsTo: p.join('build'),
+      );

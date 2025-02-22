@@ -16,10 +16,7 @@ extension type FileSystemDirectoryHandle._(JSObject _)
     bool create = false,
   }) {
     if (create) {
-      return _getDirectoryHandle(
-        name,
-        _GetHandleOptions(create: true.toJS),
-      );
+      return _getDirectoryHandle(name, _GetHandleOptions(create: true.toJS));
     }
     return _getDirectoryHandle(name);
   }
@@ -36,10 +33,7 @@ extension type FileSystemDirectoryHandle._(JSObject _)
     bool create = false,
   }) {
     if (create) {
-      return _getFileHandle(
-        name,
-        _GetHandleOptions(create: true.toJS),
-      );
+      return _getFileHandle(name, _GetHandleOptions(create: true.toJS));
     }
     return _getFileHandle(name);
   }
@@ -58,10 +52,7 @@ extension type FileSystemDirectoryHandle._(JSObject _)
   /// If [recursive] is `true`, the operation will be recursive.
   JSPromise removeEntry(String name, {bool recursive = false}) {
     if (recursive) {
-      return _removeEntry(
-        name,
-        _RemoveEntryOptions(recursive: true.toJS),
-      );
+      return _removeEntry(name, _RemoveEntryOptions(recursive: true.toJS));
     }
     return _removeEntry(name);
   }

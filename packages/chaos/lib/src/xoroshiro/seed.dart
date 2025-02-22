@@ -1,11 +1,12 @@
 part of '../xoroshiro.dart';
 
 abstract class _Xohsiro128Seed<T extends Xoshiro128> with SeedableGenerator<T> {
-  static final _defaultBadSeed = Uint32List(4)
-    ..[0] = 0xBAD5EED
-    ..[1] = 0xBAD5EED
-    ..[2] = 0xBAD5EED
-    ..[3] = 0xBAD5EED;
+  static final _defaultBadSeed =
+      Uint32List(4)
+        ..[0] = 0xBAD5EED
+        ..[1] = 0xBAD5EED
+        ..[2] = 0xBAD5EED
+        ..[3] = 0xBAD5EED;
 
   const _Xohsiro128Seed();
 

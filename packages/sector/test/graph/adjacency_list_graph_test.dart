@@ -23,9 +23,7 @@ void main() {
   });
 
   group('graph from a traversable base', () {
-    final graph = Graph.from(
-      Walkable.linear({1, 2, 3}),
-    );
+    final graph = Graph.from(Walkable.linear({1, 2, 3}));
 
     test('should not be empty', () {
       check(graph).isNotEmpty();
@@ -33,10 +31,7 @@ void main() {
     });
 
     test('should have edges', () {
-      check(graph.edges).unorderedEquals([
-        Edge(1, 2),
-        Edge(2, 3),
-      ]);
+      check(graph.edges).unorderedEquals([Edge(1, 2), Edge(2, 3)]);
     });
 
     test('should have successors', () {
@@ -54,10 +49,7 @@ void main() {
   });
 
   group('graph from edges', () {
-    final graph = Graph.fromEdges([
-      Edge(1, 2),
-      Edge(2, 3),
-    ]);
+    final graph = Graph.fromEdges([Edge(1, 2), Edge(2, 3)]);
 
     test('should not be empty', () {
       check(graph).isNotEmpty();
@@ -65,10 +57,7 @@ void main() {
     });
 
     test('should have edges', () {
-      check(graph.edges).unorderedEquals([
-        Edge(1, 2),
-        Edge(2, 3),
-      ]);
+      check(graph.edges).unorderedEquals([Edge(1, 2), Edge(2, 3)]);
     });
 
     test('should have successors', () {
@@ -95,56 +84,35 @@ void main() {
   });
 
   test('addEdge should add an edge', () {
-    final graph = Graph.fromEdges([
-      Edge(1, 2),
-    ]);
+    final graph = Graph.fromEdges([Edge(1, 2)]);
 
     check(graph.addEdge(Edge(2, 3))).isTrue();
-    check(graph.edges).unorderedEquals([
-      Edge(1, 2),
-      Edge(2, 3),
-    ]);
+    check(graph.edges).unorderedEquals([Edge(1, 2), Edge(2, 3)]);
   });
 
   test('addEdge should not add an existing edge', () {
-    final graph = Graph.fromEdges([
-      Edge(1, 2),
-    ]);
+    final graph = Graph.fromEdges([Edge(1, 2)]);
 
     check(graph.addEdge(Edge(1, 2))).isFalse();
-    check(graph.edges).unorderedEquals([
-      Edge(1, 2),
-    ]);
+    check(graph.edges).unorderedEquals([Edge(1, 2)]);
   });
 
   test('removeEdge should remove an edge', () {
-    final graph = Graph.fromEdges([
-      Edge(1, 2),
-      Edge(2, 3),
-    ]);
+    final graph = Graph.fromEdges([Edge(1, 2), Edge(2, 3)]);
 
     check(graph.removeEdge(Edge(2, 3))).isTrue();
-    check(graph.edges).unorderedEquals([
-      Edge(1, 2),
-    ]);
+    check(graph.edges).unorderedEquals([Edge(1, 2)]);
   });
 
   test('removeEdge should not remove a non-existing edge', () {
-    final graph = Graph.fromEdges([
-      Edge(1, 2),
-    ]);
+    final graph = Graph.fromEdges([Edge(1, 2)]);
 
     check(graph.removeEdge(Edge(2, 3))).isFalse();
-    check(graph.edges).unorderedEquals([
-      Edge(1, 2),
-    ]);
+    check(graph.edges).unorderedEquals([Edge(1, 2)]);
   });
 
   test('clear should remove all nodes and edges', () {
-    final graph = Graph.fromEdges([
-      Edge(1, 2),
-      Edge(2, 3),
-    ]);
+    final graph = Graph.fromEdges([Edge(1, 2), Edge(2, 3)]);
 
     graph.clear();
     check(graph).isEmpty();
@@ -157,32 +125,20 @@ void main() {
     });
 
     test('should contain an edge in one direction', () {
-      final graph = Graph.fromEdges(
-        [Edge(1, 2)],
-        directed: false,
-      );
+      final graph = Graph.fromEdges([Edge(1, 2)], directed: false);
 
       check(graph).containsEdge(Edge(1, 2));
       check(graph).containsEdge(Edge(2, 1));
     });
 
     test('should add an edge in both directions', () {
-      final graph = Graph.fromEdges(
-        [Edge(1, 2)],
-        directed: false,
-      );
+      final graph = Graph.fromEdges([Edge(1, 2)], directed: false);
 
-      check(graph.edges).unorderedEquals([
-        Edge(1, 2),
-        Edge(2, 1),
-      ]);
+      check(graph.edges).unorderedEquals([Edge(1, 2), Edge(2, 1)]);
     });
 
     test('should remove an edge in both directions', () {
-      final graph = Graph.fromEdges(
-        [Edge(1, 2)],
-        directed: false,
-      );
+      final graph = Graph.fromEdges([Edge(1, 2)], directed: false);
 
       check(graph.removeEdge(Edge(1, 2))).isTrue();
       check(graph).isEmpty();

@@ -8,6 +8,10 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 <!-- #endregion -->
 
+## 0.4.0+2
+
+- Bumped Dart to `^3.7.0`.
+
 ## 0.4.0+1
 
 - Merged into the `pub.luery.dev` monorepo.

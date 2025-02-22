@@ -129,12 +129,9 @@ void main() {
       // # #
       // # #
       final rect = Rect.fromLTWH(0, 0, 2, 2);
-      check(rect.center).deepEquals([
-        Pos(1, 1),
-        Pos(2, 1),
-        Pos(1, 2),
-        Pos(2, 2),
-      ]);
+      check(
+        rect.center,
+      ).deepEquals([Pos(1, 1), Pos(2, 1), Pos(1, 2), Pos(2, 2)]);
     });
 
     test('even width and odd height returns two points', () {
@@ -142,20 +139,14 @@ void main() {
       // # #
       // # #
       final rect = Rect.fromLTWH(0, 0, 3, 2);
-      check(rect.center).deepEquals([
-        Pos(1, 1),
-        Pos(1, 2),
-      ]);
+      check(rect.center).deepEquals([Pos(1, 1), Pos(1, 2)]);
     });
 
     test('odd width and even height returns two points', () {
       // # # #
       // # # #
       final rect = Rect.fromLTWH(0, 0, 2, 3);
-      check(rect.center).deepEquals([
-        Pos(1, 1),
-        Pos(2, 1),
-      ]);
+      check(rect.center).deepEquals([Pos(1, 1), Pos(2, 1)]);
     });
 
     test('odd width and height returns a single point', () {
@@ -163,9 +154,7 @@ void main() {
       // # # #
       // # # #
       final rect = Rect.fromLTWH(0, 0, 3, 3);
-      check(rect.center).deepEquals([
-        Pos(1, 1),
-      ]);
+      check(rect.center).deepEquals([Pos(1, 1)]);
     });
 
     test('empty rect returns an empty list', () {

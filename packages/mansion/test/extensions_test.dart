@@ -24,7 +24,7 @@ void main() {
     });
   });
 
-  test('syncAnsiUpdate', () async {
+  test('syncAnsiUpdate', () {
     final buffer = StringBuffer();
     buffer.syncAnsiUpdate((out) {
       out.writeAnsiAll([
@@ -35,9 +35,9 @@ void main() {
       ]);
     });
 
-    check(buffer.toString()).equals(
-      '\x1B[?2026h\x1B[31mHello, World!\n\x1B[0m\x1B[?2026l',
-    );
+    check(
+      buffer.toString(),
+    ).equals('\x1B[?2026h\x1B[31mHello, World!\n\x1B[0m\x1B[?2026l');
   });
 
   test('syncAnsiUpdate that throws still ends the update', () {

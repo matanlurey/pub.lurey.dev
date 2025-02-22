@@ -27,7 +27,8 @@ final class Coverage extends BaseCommand {
     argParser.addOption(
       'preview',
       abbr: 'p',
-      help: ''
+      help:
+          ''
           'The port to preview the HTML coverage report on. '
           'Only a single package can be previewed at a time.',
       defaultsTo: '8080',
@@ -65,10 +66,12 @@ final class Coverage extends BaseCommand {
     }
 
     // dart pub global activate coverage
-    final process = await environment.processHost.start(
-      dartBin.binPath,
-      ['pub', 'global', 'activate', 'coverage'],
-    );
+    final process = await environment.processHost.start(dartBin.binPath, [
+      'pub',
+      'global',
+      'activate',
+      'coverage',
+    ]);
     if ((await process.exitCode).isFailure) {
       io.exitCode = 1;
       io.stderr.writeln(await process.stderrText.join('\n'));
@@ -79,12 +82,7 @@ final class Coverage extends BaseCommand {
     }
 
     for (final package in packages) {
-      await _runForPackage(
-        dartBin,
-        package,
-        genHtml: genHtml,
-        port: preview,
-      );
+      await _runForPackage(dartBin, package, genHtml: genHtml, port: preview);
     }
   }
 
@@ -103,19 +101,15 @@ final class Coverage extends BaseCommand {
     // dart pub global run coverage:format_coverage -i coverage
     io.stderr.writeln('Collecting coverage for ${package.name}...');
     {
-      final process = await environment.processHost.start(
-        dart.binPath,
-        [
-          'pub',
-          'global',
-          'run',
-          'coverage:test_with_coverage',
-          '--',
-          '-P',
-          'coverage',
-        ],
-        workingDirectory: package.path,
-      );
+      final process = await environment.processHost.start(dart.binPath, [
+        'pub',
+        'global',
+        'run',
+        'coverage:test_with_coverage',
+        '--',
+        '-P',
+        'coverage',
+      ], workingDirectory: package.path);
       if ((await process.exitCode).isFailure) {
         io.exitCode = 1;
         io.stderr.writeln(await process.stderrText.join('\n'));
@@ -141,14 +135,11 @@ final class Coverage extends BaseCommand {
     // genhtml coverage/lcov.info -o coverage/html
     io.stderr.writeln('Generating HTML coverage report for ${package.name}...');
     {
-      final process = await environment.processHost.start(
-        'genhtml',
-        [
-          p.join(package.path, 'coverage', 'lcov.info'),
-          '-o',
-          p.join(package.path, 'coverage', 'html'),
-        ],
-      );
+      final process = await environment.processHost.start('genhtml', [
+        p.join(package.path, 'coverage', 'lcov.info'),
+        '-o',
+        p.join(package.path, 'coverage', 'html'),
+      ]);
       if ((await process.exitCode).isFailure) {
         io.exitCode = 1;
         io.stderr.writeln(await process.stderrText.join('\n'));
@@ -178,9 +169,7 @@ final class Coverage extends BaseCommand {
 
 /// The format to output coverage data in.
 enum _Format {
-  lcov(
-    'Output coverage data in LCOV format.',
-  ),
+  lcov('Output coverage data in LCOV format.'),
   html(
     'Output coverage data in both LCOV and HTML formats.\n\n'
     'Requires the `genhtml` tool to be installed:\n'

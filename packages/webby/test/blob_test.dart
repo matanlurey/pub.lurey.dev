@@ -8,11 +8,7 @@ import '_prelude.dart';
 void main() {
   test('Blob from ArrayBuffer', () async {
     final data = ByteData(32)..buffer.asUint8List().fillRange(0, 32, 1);
-    final blob = Blob(
-      [
-        BlobPart.fromArrayBuffer(data.buffer.toJS),
-      ].toJS,
-    );
+    final blob = Blob([BlobPart.fromArrayBuffer(data.buffer.toJS)].toJS);
 
     check(blob)
       ..has((a) => a.size, 'size').equalsInt(32)
@@ -31,11 +27,7 @@ void main() {
 
   test('Blob from TypedArray', () async {
     final data = Uint8List(32)..fillRange(0, 32, 1);
-    final blob = Blob(
-      [
-        BlobPart.fromTypedArray(data.toJS),
-      ].toJS,
-    );
+    final blob = Blob([BlobPart.fromTypedArray(data.toJS)].toJS);
 
     check(blob)
       ..has((a) => a.size, 'size').equalsInt(32)
@@ -46,20 +38,13 @@ void main() {
 
     check(arrayBuffer)
       ..has((a) => a.lengthInBytes, 'lengthInBytes').equals(32)
-      ..has(
-        (a) => a.asUint8List(),
-        'asUint8List',
-      ).deepEquals(data);
+      ..has((a) => a.asUint8List(), 'asUint8List').deepEquals(data);
   });
 
   test('Blob from DataView', () async {
     final data = ByteData(32)..buffer.asUint8List().fillRange(0, 32, 1);
     final view = data.buffer.asByteData();
-    final blob = Blob(
-      [
-        BlobPart.fromDataView(view.toJS),
-      ].toJS,
-    );
+    final blob = Blob([BlobPart.fromDataView(view.toJS)].toJS);
 
     check(blob)
       ..has((a) => a.size, 'size').equalsInt(32)
@@ -78,17 +63,9 @@ void main() {
 
   test('Blob from Blob', () async {
     final data = ByteData(32)..buffer.asUint8List().fillRange(0, 32, 1);
-    final blob = Blob(
-      [
-        BlobPart.fromArrayBuffer(data.buffer.toJS),
-      ].toJS,
-    );
+    final blob = Blob([BlobPart.fromArrayBuffer(data.buffer.toJS)].toJS);
 
-    final copy = Blob(
-      [
-        BlobPart.fromBlob(blob),
-      ].toJS,
-    );
+    final copy = Blob([BlobPart.fromBlob(blob)].toJS);
 
     check(copy)
       ..has((a) => a.size, 'size').equalsInt(32)
@@ -107,11 +84,7 @@ void main() {
 
   test('Blob from String', () async {
     final data = 'Hello, world!';
-    final blob = Blob(
-      [
-        BlobPart.fromString(data.toJS),
-      ].toJS,
-    );
+    final blob = Blob([BlobPart.fromString(data.toJS)].toJS);
 
     check(blob)
       ..has((a) => a.size, 'size').equalsInt(13)
@@ -123,11 +96,9 @@ void main() {
     check(text).equals(data);
   });
 
-  test('type', () async {
+  test('type', () {
     final blob = Blob(
-      [
-        BlobPart.fromString('Hello, world!'.toJS),
-      ].toJS,
+      [BlobPart.fromString('Hello, world!'.toJS)].toJS,
       type: 'text/plain',
     );
 
@@ -138,11 +109,7 @@ void main() {
 
   test('slice contents', () async {
     final data = ByteData(32)..buffer.asUint8List().fillRange(0, 32, 1);
-    final blob = Blob(
-      [
-        BlobPart.fromArrayBuffer(data.buffer.toJS),
-      ].toJS,
-    );
+    final blob = Blob([BlobPart.fromArrayBuffer(data.buffer.toJS)].toJS);
 
     final slice = blob.slice(8.toJS, 24.toJS);
 
@@ -163,11 +130,7 @@ void main() {
 
   test('stream contents', () async {
     final data = ByteData(32)..buffer.asUint8List().fillRange(0, 32, 1);
-    final blob = Blob(
-      [
-        BlobPart.fromArrayBuffer(data.buffer.toJS),
-      ].toJS,
-    );
+    final blob = Blob([BlobPart.fromArrayBuffer(data.buffer.toJS)].toJS);
 
     final stream = blob.stream();
     final reader = stream.getReader();

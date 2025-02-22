@@ -151,7 +151,4 @@ final class Worley with Pattern2d {
   }
 }
 
-enum _ReturnType {
-  distance,
-  value,
-}
+enum _ReturnType { distance, value }

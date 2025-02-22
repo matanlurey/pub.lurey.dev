@@ -8,9 +8,10 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 <!-- #endregion -->
 
-## [Unreleased]
+## 0.2.0+2
 
 - Fixed a bug where `ProcessRunMode` was ignored in the default implementation.
+- Bumped Dart to `^3.7.0`.
 
 ## 0.2.0+1
 

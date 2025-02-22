@@ -10,9 +10,7 @@ import 'package:test/test.dart';
 void main() {
   group('parse', () {
     test('invalid json', () {
-      check(
-        () => JsonValue.parse('invalid'),
-      ).throws<FormatException>();
+      check(() => JsonValue.parse('invalid')).throws<FormatException>();
     });
 
     test('null success', () {
@@ -25,8 +23,8 @@ void main() {
 
     test('boolean failure', () {
       check(
-        () => JsonValue.parse<JsonBoolean>('42'),
-      ).throws<FormatException>().has((e) => e.message, 'message')
+          () => JsonValue.parse<JsonBoolean>('42'),
+        ).throws<FormatException>().has((e) => e.message, 'message')
         ..contains('is JsonNumber')
         ..contains('expected JsonBoolean');
     });
@@ -37,8 +35,8 @@ void main() {
 
     test('number failure', () {
       check(
-        () => JsonValue.parse<JsonNumber>('true'),
-      ).throws<FormatException>().has((e) => e.message, 'message')
+          () => JsonValue.parse<JsonNumber>('true'),
+        ).throws<FormatException>().has((e) => e.message, 'message')
         ..contains('is JsonBoolean')
         ..contains('expected JsonNumber');
     });
@@ -49,8 +47,8 @@ void main() {
 
     test('string failure', () {
       check(
-        () => JsonValue.parse<JsonString>('42'),
-      ).throws<FormatException>().has((e) => e.message, 'message')
+          () => JsonValue.parse<JsonString>('42'),
+        ).throws<FormatException>().has((e) => e.message, 'message')
         ..contains('is JsonNumber')
         ..contains('expected JsonString');
     });
@@ -64,8 +62,8 @@ void main() {
 
     test('array failure', () {
       check(
-        () => JsonValue.parse<JsonArray>('42'),
-      ).throws<FormatException>().has((e) => e.message, 'message')
+          () => JsonValue.parse<JsonArray>('42'),
+        ).throws<FormatException>().has((e) => e.message, 'message')
         ..contains('is JsonNumber')
         ..contains('expected JsonArray');
     });
@@ -79,8 +77,8 @@ void main() {
 
     test('object failure', () {
       check(
-        () => JsonValue.parse<JsonObject>('42'),
-      ).throws<FormatException>().has((e) => e.message, 'message')
+          () => JsonValue.parse<JsonObject>('42'),
+        ).throws<FormatException>().has((e) => e.message, 'message')
         ..contains('is JsonNumber')
         ..contains('expected JsonObject');
     });
@@ -94,15 +92,15 @@ void main() {
     });
 
     test('boolean success', () {
-      check(JsonValue.parseUtf8(utf8.encode('true')))
-          .isA<JsonBoolean>()
-          .isTrue();
+      check(
+        JsonValue.parseUtf8(utf8.encode('true')),
+      ).isA<JsonBoolean>().isTrue();
     });
 
     test('boolean failure', () {
       check(
-        () => JsonValue.parseUtf8<JsonBoolean>(utf8.encode('42')),
-      ).throws<FormatException>().has((e) => e.message, 'message')
+          () => JsonValue.parseUtf8<JsonBoolean>(utf8.encode('42')),
+        ).throws<FormatException>().has((e) => e.message, 'message')
         ..contains('is JsonNumber')
         ..contains('expected JsonBoolean');
     });
@@ -113,21 +111,22 @@ void main() {
 
     test('number failure', () {
       check(
-        () => JsonValue.parseUtf8<JsonNumber>(utf8.encode('true')),
-      ).throws<FormatException>().has((e) => e.message, 'message')
+          () => JsonValue.parseUtf8<JsonNumber>(utf8.encode('true')),
+        ).throws<FormatException>().has((e) => e.message, 'message')
         ..contains('is JsonBoolean')
         ..contains('expected JsonNumber');
     });
 
     test('string success', () {
-      check(JsonValue.parseUtf8(utf8.encode('"hello"')))
-          .equals(JsonString('hello'));
+      check(
+        JsonValue.parseUtf8(utf8.encode('"hello"')),
+      ).equals(JsonString('hello'));
     });
 
     test('string failure', () {
       check(
-        () => JsonValue.parseUtf8<JsonString>(utf8.encode('42')),
-      ).throws<FormatException>().has((e) => e.message, 'message')
+          () => JsonValue.parseUtf8<JsonString>(utf8.encode('42')),
+        ).throws<FormatException>().has((e) => e.message, 'message')
         ..contains('is JsonNumber')
         ..contains('expected JsonString');
     });
@@ -141,8 +140,8 @@ void main() {
 
     test('array failure', () {
       check(
-        () => JsonValue.parseUtf8<JsonArray>(utf8.encode('42')),
-      ).throws<FormatException>().has((e) => e.message, 'message')
+          () => JsonValue.parseUtf8<JsonArray>(utf8.encode('42')),
+        ).throws<FormatException>().has((e) => e.message, 'message')
         ..contains('is JsonNumber')
         ..contains('expected JsonArray');
     });
@@ -156,8 +155,8 @@ void main() {
 
     test('object failure', () {
       check(
-        () => JsonValue.parseUtf8<JsonObject>(utf8.encode('42')),
-      ).throws<FormatException>().has((e) => e.message, 'message')
+          () => JsonValue.parseUtf8<JsonObject>(utf8.encode('42')),
+        ).throws<FormatException>().has((e) => e.message, 'message')
         ..contains('is JsonNumber')
         ..contains('expected JsonObject');
     });

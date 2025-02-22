@@ -188,16 +188,7 @@ enum Color4 implements Color {
   brightWhite;
 
   /// A subset of [values]; 8 original colors, sometimes called _dim_ or _dark_.
-  static const dim = [
-    black,
-    red,
-    green,
-    yellow,
-    blue,
-    magenta,
-    cyan,
-    white,
-  ];
+  static const dim = [black, red, green, yellow, blue, magenta, cyan, white];
 
   /// A subset of [values]; 8 bright colors, sometimes called _light_.
   static const bright = [
@@ -296,11 +287,8 @@ final class Color24 implements Color {
   ///
   /// Each value should be in the range 0-255.
   @literal
-  const Color24.fromRGB(
-    int red,
-    int green,
-    int blue,
-  ) : _value = ((red & 0xFF) << 16) | ((green & 0xFF) << 8) | blue & 0xFF;
+  const Color24.fromRGB(int red, int green, int blue)
+    : _value = ((red & 0xFF) << 16) | ((green & 0xFF) << 8) | blue & 0xFF;
 
   final int _value;
 

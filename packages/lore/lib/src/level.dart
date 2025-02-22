@@ -25,13 +25,7 @@ final class Level with LevelEnabler implements Comparable<Level> {
   static const fatal = Level._(4, 'fatal');
 
   /// All possible levels.
-  static const values = [
-    debug,
-    status,
-    warning,
-    error,
-    fatal,
-  ];
+  static const values = [debug, status, warning, error, fatal];
 
   /// Parses a string representation of a level as it exactly matches [name].
   ///

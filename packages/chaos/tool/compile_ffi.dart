@@ -12,11 +12,9 @@ void main() async {
 Future<void> _compile(String path) async {
   io.stderr.writeln('Compiling $path');
 
-  final cmakeResult = await io.Process.start(
-    'cmake',
-    [path],
-    mode: io.ProcessStartMode.inheritStdio,
-  );
+  final cmakeResult = await io.Process.start('cmake', [
+    path,
+  ], mode: io.ProcessStartMode.inheritStdio);
 
   final exitCode = await cmakeResult.exitCode;
   if (exitCode != 0) {

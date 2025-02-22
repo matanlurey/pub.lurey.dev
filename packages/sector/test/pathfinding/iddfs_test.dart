@@ -46,11 +46,7 @@ void main() {
       Goal.node('analyst'),
       tracer: TestTracer<String>(expectRepeatedVisits: true),
     );
-    check(path).nodesEquals([
-      'president',
-      'vice-president',
-      'analyst',
-    ]);
+    check(path).nodesEquals(['president', 'vice-president', 'analyst']);
   });
 
   test('should find a path in a cyclic graph', () {

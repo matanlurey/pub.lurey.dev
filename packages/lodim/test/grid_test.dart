@@ -13,9 +13,7 @@ void main() {
       test('callbacks', () {
         final grid = fixture.to2D();
         get(Pos p) => grid[p.y][p.x];
-        check(
-          getRect(fixture.toBounds(), get),
-        ).deepEquals([
+        check(getRect(fixture.toBounds(), get)).deepEquals([
           1, 2, 3, //
           4, 5, 6, //
         ]);
@@ -23,9 +21,7 @@ void main() {
 
       test('linear', () {
         final grid = fixture.to1D();
-        check(
-          getRectLinear(grid, width: fixture.width),
-        ).deepEquals([
+        check(getRectLinear(grid, width: fixture.width)).deepEquals([
           1, 2, 3, //
           4, 5, 6, //
         ]);
@@ -42,9 +38,7 @@ void main() {
       test('callbacks', () {
         final grid = fixture.to2D();
         get(Pos p) => grid[p.y][p.x];
-        check(
-          getRect(Rect.fromLTWH(0, 1, 3, 2), get),
-        ).deepEquals([
+        check(getRect(Rect.fromLTWH(0, 1, 3, 2), get)).deepEquals([
           4, 5, 6, //
           7, 8, 9, //
         ]);
@@ -75,9 +69,7 @@ void main() {
       test('callbacks', () {
         final grid = fixture.to2D();
         get(Pos p) => grid[p.y][p.x];
-        check(
-          getRect(Rect.fromLTWH(1, 0, 2, 3), get),
-        ).deepEquals([
+        check(getRect(Rect.fromLTWH(1, 0, 2, 3), get)).deepEquals([
           2, 3, //
           5, 6, //
           8, 9, //
@@ -110,9 +102,7 @@ void main() {
       test('callbacks', () {
         final grid = fixture.to2D();
         get(Pos p) => grid[p.y][p.x];
-        check(
-          getRect(Rect.fromLTWH(1, 1, 2, 2), get),
-        ).deepEquals([
+        check(getRect(Rect.fromLTWH(1, 1, 2, 2), get)).deepEquals([
           5, 6, //
           8, 9, //
         ]);
@@ -141,11 +131,7 @@ void main() {
       test('callbacks', () {
         final grid = fixture.to2D();
         set(Pos p, int value) => grid[p.y][p.x] = value;
-        fillRect(
-          fixture.toBounds(),
-          set,
-          1,
-        );
+        fillRect(fixture.toBounds(), set, 1);
         check(grid).deepEquals([
           [1, 1, 1],
           [1, 1, 1],
@@ -154,11 +140,7 @@ void main() {
 
       test('linear', () {
         final grid = fixture.to1D();
-        fillRectLinear(
-          grid,
-          1,
-          width: fixture.width,
-        );
+        fillRectLinear(grid, 1, width: fixture.width);
         check(grid).deepEquals([
           1, 1, 1, //
           1, 1, 1, //
@@ -172,11 +154,7 @@ void main() {
       test('callbacks', () {
         final grid = fixture.to2D();
         set(Pos p, int value) => grid[p.y][p.x] = value;
-        fillRect(
-          Rect.fromLTWH(0, 1, 3, 2),
-          set,
-          1,
-        );
+        fillRect(Rect.fromLTWH(0, 1, 3, 2), set, 1);
         check(grid).deepEquals([
           [0, 0, 0],
           [1, 1, 1],
@@ -206,11 +184,7 @@ void main() {
       test('callbacks', () {
         final grid = fixture.to2D();
         set(Pos p, int value) => grid[p.y][p.x] = value;
-        fillRect(
-          Rect.fromLTWH(1, 0, 2, 3),
-          set,
-          1,
-        );
+        fillRect(Rect.fromLTWH(1, 0, 2, 3), set, 1);
         check(grid).deepEquals([
           [0, 1, 1],
           [0, 1, 1],
@@ -240,11 +214,7 @@ void main() {
       test('callbacks', () {
         final grid = fixture.to2D();
         set(Pos p, int value) => grid[p.y][p.x] = value;
-        fillRect(
-          Rect.fromLTWH(1, 1, 2, 2),
-          set,
-          1,
-        );
+        fillRect(Rect.fromLTWH(1, 1, 2, 2), set, 1);
         check(grid).deepEquals([
           [0, 0, 0],
           [0, 1, 1],
@@ -276,11 +246,7 @@ void main() {
       test('callbacks', () {
         final grid = fixture.to2D();
         set(Pos p, int value) => grid[p.y][p.x] = value;
-        fillRectFrom(
-          fixture.toBounds(),
-          set,
-          [1, 2, 3, 4, 5, 6],
-        );
+        fillRectFrom(fixture.toBounds(), set, [1, 2, 3, 4, 5, 6]);
         check(grid).deepEquals([
           [1, 2, 3],
           [4, 5, 6],
@@ -289,11 +255,7 @@ void main() {
 
       test('linear', () {
         final grid = fixture.to1D();
-        fillRectFromLinear(
-          grid,
-          [1, 2, 3, 4, 5, 6],
-          width: fixture.width,
-        );
+        fillRectFromLinear(grid, [1, 2, 3, 4, 5, 6], width: fixture.width);
         check(grid).deepEquals([1, 2, 3, 4, 5, 6]);
       });
     });
@@ -304,11 +266,7 @@ void main() {
       test('callbacks', () {
         final grid = fixture.to2D();
         set(Pos p, int value) => grid[p.y][p.x] = value;
-        fillRectFrom(
-          Rect.fromLTWH(0, 1, 3, 2),
-          set,
-          [1, 2, 3, 4, 5, 6],
-        );
+        fillRectFrom(Rect.fromLTWH(0, 1, 3, 2), set, [1, 2, 3, 4, 5, 6]);
         check(grid).deepEquals([
           [0, 0, 0],
           [1, 2, 3],
@@ -338,11 +296,7 @@ void main() {
       test('callbacks', () {
         final grid = fixture.to2D();
         set(Pos p, int value) => grid[p.y][p.x] = value;
-        fillRectFrom(
-          Rect.fromLTWH(1, 0, 2, 3),
-          set,
-          [1, 2, 3, 4, 5, 6],
-        );
+        fillRectFrom(Rect.fromLTWH(1, 0, 2, 3), set, [1, 2, 3, 4, 5, 6]);
         check(grid).deepEquals([
           [0, 1, 2],
           [0, 3, 4],
@@ -372,11 +326,7 @@ void main() {
       test('callbacks', () {
         final grid = fixture.to2D();
         set(Pos p, int value) => grid[p.y][p.x] = value;
-        fillRectFrom(
-          Rect.fromLTWH(1, 1, 2, 2),
-          set,
-          [1, 2, 3, 4],
-        );
+        fillRectFrom(Rect.fromLTWH(1, 1, 2, 2), set, [1, 2, 3, 4]);
         check(grid).deepEquals([
           [0, 0, 0],
           [0, 1, 2],
@@ -418,11 +368,7 @@ void main() {
         final dstGrid = dst.to2D();
         getSrc(Pos p) => srcGrid[p.y][p.x];
         setDst(Pos p, int value) => dstGrid[p.y][p.x] = value;
-        copyRect(
-          src.toBounds(),
-          getSrc,
-          setDst,
-        );
+        copyRect(src.toBounds(), getSrc, setDst);
         check(dstGrid).deepEquals([
           [1, 2, 3],
           [4, 5, 6],
@@ -462,11 +408,7 @@ void main() {
         final dstGrid = dst.to2D();
         getSrc(Pos p) => srcGrid[p.y][p.x];
         setDst(Pos p, int value) => dstGrid[p.y][p.x] = value;
-        copyRect(
-          src.toBounds(),
-          getSrc,
-          setDst,
-        );
+        copyRect(src.toBounds(), getSrc, setDst);
         check(dstGrid).deepEquals([
           [1, 2, 3],
           [4, 5, 6],
@@ -606,11 +548,7 @@ void main() {
       final dstGrid = dst.to2D();
       getSrc(Pos p) => srcGrid[p.y][p.x];
       setDst(Pos p, int value) => dstGrid[p.y][p.x] = value;
-      copyRect(
-        Rect.fromLTWH(2, 1, 2, 2),
-        getSrc,
-        setDst,
-      );
+      copyRect(Rect.fromLTWH(2, 1, 2, 2), getSrc, setDst);
       check(dstGrid).deepEquals([
         [1, 2],
         [3, 4],
@@ -652,12 +590,7 @@ void main() {
       final dstGrid = dst.to2D();
       getSrc(Pos p) => srcGrid[p.y][p.x];
       setDst(Pos p, int value) => dstGrid[p.y][p.x] = value;
-      copyRect(
-        Rect.fromLTWH(2, 1, 2, 2),
-        getSrc,
-        setDst,
-        target: Pos(1, 0),
-      );
+      copyRect(Rect.fromLTWH(2, 1, 2, 2), getSrc, setDst, target: Pos(1, 0));
       check(dstGrid).deepEquals([
         [0, 1, 2],
         [0, 3, 4],
@@ -690,31 +623,20 @@ class GridFixture<T> {
   /// Creates a new grid fixture from a 2D list.
   ///
   /// The [grid] must be a 2D list with a consistent width and height.
-  GridFixture.from2D(
-    List<List<T>> grid,
-  ) : this._from2D(grid, width: grid[0].length, height: grid.length);
+  GridFixture.from2D(List<List<T>> grid)
+    : this._from2D(grid, width: grid[0].length, height: grid.length);
 
   /// Creates a new grid fixture from a 2D list with a fixed width and height.
   ///
   /// Each element defaults to [fill].
-  GridFixture.filled(
-    int width,
-    int height,
-    T fill,
-  ) : this._from2D(
-          List.generate(
-            height,
-            (_) => List.filled(width, fill),
-          ),
-          width: width,
-          height: height,
-        );
+  GridFixture.filled(int width, int height, T fill)
+    : this._from2D(
+        List.generate(height, (_) => List.filled(width, fill)),
+        width: width,
+        height: height,
+      );
 
-  GridFixture._from2D(
-    this._grid, {
-    required this.width,
-    required this.height,
-  }) {
+  GridFixture._from2D(this._grid, {required this.width, required this.height}) {
     checkPositive(width, 'width');
     checkPositive(height, 'height');
     if (_grid.length != height) {
@@ -746,9 +668,7 @@ class GridFixture<T> {
 
   /// Converts the grid to a linear list.
   List<T> to1D() {
-    return [
-      for (final row in _grid) ...row,
-    ];
+    return [for (final row in _grid) ...row];
   }
 
   /// Converts the grid to a bounds.

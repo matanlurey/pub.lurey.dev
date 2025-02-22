@@ -21,8 +21,10 @@ void main() {
     check(OperatingSystem.windows)
       ..has((os) => os.isSupported, 'isSupported').isTrue()
       ..has((os) => os.name, 'name').equals('windows')
-      ..has((os) => os.toString(), 'toString')
-          .equals('OperatingSystem.windows');
+      ..has(
+        (os) => os.toString(),
+        'toString',
+      ).equals('OperatingSystem.windows');
   });
 
   test('unsupported', () {
@@ -38,7 +40,9 @@ void main() {
   test('== and hashCode', () {
     check(OperatingSystem.linux)
       ..has((os) => os == OperatingSystem.linux, '==').isTrue()
-      ..has((os) => os.hashCode, 'hashCode')
-          .equals(OperatingSystem.linux.hashCode);
+      ..has(
+        (os) => os.hashCode,
+        'hashCode',
+      ).equals(OperatingSystem.linux.hashCode);
   });
 }

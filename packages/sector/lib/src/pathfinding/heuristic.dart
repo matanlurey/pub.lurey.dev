@@ -38,9 +38,8 @@ abstract mixin class Heuristic<T> {
   /// i.e. the most pessimistic estimate of the cost of any goal.
   ///
   /// If an empty collection is used, the result is always [double.maxFinite].
-  const factory Heuristic.every(
-    List<Heuristic<T>> heuristics,
-  ) = _EveryHeuristic<T>;
+  const factory Heuristic.every(List<Heuristic<T>> heuristics) =
+      _EveryHeuristic<T>;
 
   /// Estimates the minimum total cost of reaching the goal from [node].
   ///
@@ -72,6 +71,9 @@ abstract mixin class Heuristic<T> {
 
 final class _Heuristic<T> with Heuristic<T> {
   const _Heuristic(this._estimateTotalCost);
+
+  // Accessed via `this`.
+  // ignore: unsafe_variance
   final double Function(T) _estimateTotalCost;
 
   @override
@@ -114,10 +116,8 @@ abstract final class GridHeuristic with Heuristic<Pos> {
   /// total cost.
   ///
   /// {@macro sector.GridHeuristic:ratio}
-  const factory GridHeuristic.euclidean(
-    Pos goal, {
-    double ratio,
-  }) = _EucledianHeuristic;
+  const factory GridHeuristic.euclidean(Pos goal, {double ratio}) =
+      _EucledianHeuristic;
 
   /// Uses [distanceManhattan] to estimate the total cost.
   ///
@@ -128,26 +128,20 @@ abstract final class GridHeuristic with Heuristic<Pos> {
   /// A* run faster, while a lower value makes it tend to underestimate the cost
   /// which makes the algorithm run slower but may find a more optimal path.
   /// {@endtemplate}
-  const factory GridHeuristic.manhattan(
-    Pos goal, {
-    double ratio,
-  }) = _ManhattanHeuristic;
+  const factory GridHeuristic.manhattan(Pos goal, {double ratio}) =
+      _ManhattanHeuristic;
 
   /// Uses [distanceDiagonal] distance to estimate the total cost.
   ///
   /// {@macro sector.GridHeuristic:ratio}
-  const factory GridHeuristic.diagonal(
-    Pos goal, {
-    double ratio,
-  }) = _DiagonalHeuristic;
+  const factory GridHeuristic.diagonal(Pos goal, {double ratio}) =
+      _DiagonalHeuristic;
 
   /// Uses [distanceChebyshev] distance to estimate the total cost.
   ///
   /// {@macro sector.GridHeuristic:ratio}
-  const factory GridHeuristic.chebyshev(
-    Pos goal, {
-    double ratio,
-  }) = _ChebyshevHeuristic;
+  const factory GridHeuristic.chebyshev(Pos goal, {double ratio}) =
+      _ChebyshevHeuristic;
 
   const GridHeuristic(this._goal, {this.ratio = 1});
 

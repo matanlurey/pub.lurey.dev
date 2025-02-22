@@ -31,10 +31,7 @@ void main() {
     });
 
     test('should have edges', () {
-      check(edges.edges).unorderedEquals([
-        Edge(1, 2),
-        Edge(2, 3),
-      ]);
+      check(edges.edges).unorderedEquals([Edge(1, 2), Edge(2, 3)]);
 
       check(edges.roots).unorderedEquals([1, 2]);
     });
@@ -70,10 +67,7 @@ void main() {
     });
 
     test('should have edges', () {
-      check(generated.edges).unorderedEquals([
-        Edge(1, 2),
-        Edge(2, 3),
-      ]);
+      check(generated.edges).unorderedEquals([Edge(1, 2), Edge(2, 3)]);
     });
 
     test('should have successors', () {
@@ -101,12 +95,8 @@ void main() {
     });
 
     test('should have successors', () {
-      check(weighted.successors(1.0)).unorderedEquals([
-        (3.0, 2.0),
-      ]);
-      check(weighted.successors(3.0)).unorderedEquals([
-        (10.0, 7.0),
-      ]);
+      check(weighted.successors(1.0)).unorderedEquals([(3.0, 2.0)]);
+      check(weighted.successors(3.0)).unorderedEquals([(10.0, 7.0)]);
     });
   });
 
@@ -163,16 +153,10 @@ void main() {
   });
 
   test('Walkable.undirected should form undirected edges', () {
-    final walkable = Walkable.undirected({
-      (1, 2),
-      (2, 3),
-    });
-    check(walkable.edges).unorderedEquals([
-      Edge(1, 2),
-      Edge(2, 1),
-      Edge(2, 3),
-      Edge(3, 2),
-    ]);
+    final walkable = Walkable.undirected({(1, 2), (2, 3)});
+    check(
+      walkable.edges,
+    ).unorderedEquals([Edge(1, 2), Edge(2, 1), Edge(2, 3), Edge(3, 2)]);
     check(walkable.roots).unorderedEquals([1, 2, 3]);
     check(walkable.successors(1)).unorderedEquals([2]);
     check(walkable.successors(2)).unorderedEquals([1, 3]);

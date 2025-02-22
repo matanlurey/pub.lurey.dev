@@ -80,12 +80,10 @@ final class FlatQueue {
   /// ```dart
   /// final queue = FlatQueue(initialCapacity: 100, growthRate: 1.5);
   /// ```
-  FlatQueue({
-    int? initialCapacity,
-    double? growthRate,
-  })  : _ids = Uint32List(initialCapacity ?? 16),
-        _priorities = Float32List(initialCapacity ?? 16),
-        _growthRate = growthRate ?? 1.0;
+  FlatQueue({int? initialCapacity, double? growthRate})
+    : _ids = Uint32List(initialCapacity ?? 16),
+      _priorities = Float32List(initialCapacity ?? 16),
+      _growthRate = growthRate ?? 1.0;
 
   Uint32List _ids;
   Float32List _priorities;
@@ -189,25 +187,13 @@ final class FlatQueue {
       if (priority >= _priorities[parent]) {
         break;
       }
-      _set(
-        _ids[parent],
-        _priorities[parent],
-        index: pos,
-      );
+      _set(_ids[parent], _priorities[parent], index: pos);
       pos = parent;
     }
-    _set(
-      element,
-      priority,
-      index: pos,
-    );
+    _set(element, priority, index: pos);
   }
 
-  void _set(
-    int a,
-    double b, {
-    required int index,
-  }) {
+  void _set(int a, double b, {required int index}) {
     if (index == _ids.length) {
       final int newLength;
       if (capacity == 0) {

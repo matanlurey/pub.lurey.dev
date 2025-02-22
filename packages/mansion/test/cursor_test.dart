@@ -4,9 +4,7 @@ import 'prelude.dart';
 
 void main() {
   test('CursorVisibility writes the expected output', () {
-    check(
-      CursorVisibility.values,
-    ).writesAnsiStrings.deepEquals({
+    check(CursorVisibility.values).writesAnsiStrings.deepEquals({
       CursorVisibility.hide: '\x1B[?25l',
       CursorVisibility.show: '\x1B[?25h',
     });
@@ -36,9 +34,7 @@ void main() {
           (p) => p.hashCode,
           'hashCode',
         ).equals(CursorPosition.save.hashCode)
-        ..has((p) => p.toString(), 'toString()').equals(
-          'CursorPosition.save',
-        );
+        ..has((p) => p.toString(), 'toString()').equals('CursorPosition.save');
     });
 
     test('.restore writes the expected output', () {
@@ -52,9 +48,10 @@ void main() {
           (p) => p.hashCode,
           'hashCode',
         ).equals(CursorPosition.restore.hashCode)
-        ..has((p) => p.toString(), 'toString()').equals(
-          'CursorPosition.restore',
-        );
+        ..has(
+          (p) => p.toString(),
+          'toString()',
+        ).equals('CursorPosition.restore');
     });
 
     test('.moveUp writes the expected output', () {
@@ -68,15 +65,16 @@ void main() {
           (p) => p.hashCode,
           'hashCode',
         ).equals(CursorPosition.moveUp(5).hashCode)
-        ..has((p) => p.toString(), 'toString()').equals(
-          'CursorPosition.moveUp(5)',
-        );
+        ..has(
+          (p) => p.toString(),
+          'toString()',
+        ).equals('CursorPosition.moveUp(5)');
     });
 
     test('.moveUp with resetColumn: true writes the expected output', () {
-      check(CursorPosition.moveUp(5, resetColumn: true))
-          .writesAnsiString
-          .equals('\x1B[5F');
+      check(
+        CursorPosition.moveUp(5, resetColumn: true),
+      ).writesAnsiString.equals('\x1B[5F');
     });
 
     test('.moveUp with resetColumn: true has the equality semantics', () {
@@ -86,9 +84,10 @@ void main() {
           (p) => p.hashCode,
           'hashCode',
         ).equals(CursorPosition.moveUp(5, resetColumn: true).hashCode)
-        ..has((p) => p.toString(), 'toString()').equals(
-          'CursorPosition.moveUp(5, resetColumn: true)',
-        );
+        ..has(
+          (p) => p.toString(),
+          'toString()',
+        ).equals('CursorPosition.moveUp(5, resetColumn: true)');
     });
 
     test('.moveDown writes the expected output', () {
@@ -102,15 +101,16 @@ void main() {
           (p) => p.hashCode,
           'hashCode',
         ).equals(CursorPosition.moveDown(5).hashCode)
-        ..has((p) => p.toString(), 'toString()').equals(
-          'CursorPosition.moveDown(5)',
-        );
+        ..has(
+          (p) => p.toString(),
+          'toString()',
+        ).equals('CursorPosition.moveDown(5)');
     });
 
     test('.moveDown with resetColumn: true writes the expected output', () {
-      check(CursorPosition.moveDown(5, resetColumn: true))
-          .writesAnsiString
-          .equals('\x1B[5E');
+      check(
+        CursorPosition.moveDown(5, resetColumn: true),
+      ).writesAnsiString.equals('\x1B[5E');
     });
 
     test('.moveDown with resetColumn: true has the equality semantics', () {
@@ -120,9 +120,10 @@ void main() {
           (p) => p.hashCode,
           'hashCode',
         ).equals(CursorPosition.moveDown(5, resetColumn: true).hashCode)
-        ..has((p) => p.toString(), 'toString()').equals(
-          'CursorPosition.moveDown(5, resetColumn: true)',
-        );
+        ..has(
+          (p) => p.toString(),
+          'toString()',
+        ).equals('CursorPosition.moveDown(5, resetColumn: true)');
     });
 
     test('.moveRight writes the expected output', () {
@@ -136,9 +137,10 @@ void main() {
           (p) => p.hashCode,
           'hashCode',
         ).equals(CursorPosition.moveRight(5).hashCode)
-        ..has((p) => p.toString(), 'toString()').equals(
-          'CursorPosition.moveRight(5)',
-        );
+        ..has(
+          (p) => p.toString(),
+          'toString()',
+        ).equals('CursorPosition.moveRight(5)');
     });
 
     test('.moveLeft writes the expected output', () {
@@ -152,9 +154,10 @@ void main() {
           (p) => p.hashCode,
           'hashCode',
         ).equals(CursorPosition.moveLeft(5).hashCode)
-        ..has((p) => p.toString(), 'toString()').equals(
-          'CursorPosition.moveLeft(5)',
-        );
+        ..has(
+          (p) => p.toString(),
+          'toString()',
+        ).equals('CursorPosition.moveLeft(5)');
     });
 
     test('.moveRowColumn writes the expected output', () {
@@ -168,9 +171,10 @@ void main() {
           (p) => p.hashCode,
           'hashCode',
         ).equals(CursorPosition.moveTo(5, 10).hashCode)
-        ..has((p) => p.toString(), 'toString()').equals(
-          'CursorPosition.moveTo(5, 10)',
-        );
+        ..has(
+          (p) => p.toString(),
+          'toString()',
+        ).equals('CursorPosition.moveTo(5, 10)');
     });
 
     test('.resetRowColumn writes the expected output', () {
@@ -184,9 +188,7 @@ void main() {
           (p) => p.hashCode,
           'hashCode',
         ).equals(CursorPosition.reset.hashCode)
-        ..has((p) => p.toString(), 'toString()').equals(
-          'CursorPosition.reset',
-        );
+        ..has((p) => p.toString(), 'toString()').equals('CursorPosition.reset');
     });
 
     test('.moveColumn writes the expected output', () {
@@ -200,9 +202,10 @@ void main() {
           (p) => p.hashCode,
           'hashCode',
         ).equals(CursorPosition.moveToColumn(5).hashCode)
-        ..has((p) => p.toString(), 'toString()').equals(
-          'CursorPosition.moveToColumn(5)',
-        );
+        ..has(
+          (p) => p.toString(),
+          'toString()',
+        ).equals('CursorPosition.moveToColumn(5)');
     });
 
     test('.resetColumn writes the expected output', () {
@@ -216,9 +219,10 @@ void main() {
           (p) => p.hashCode,
           'hashCode',
         ).equals(CursorPosition.resetColumn.hashCode)
-        ..has((p) => p.toString(), 'toString()').equals(
-          'CursorPosition.resetColumn',
-        );
+        ..has(
+          (p) => p.toString(),
+          'toString()',
+        ).equals('CursorPosition.resetColumn');
     });
   });
 }

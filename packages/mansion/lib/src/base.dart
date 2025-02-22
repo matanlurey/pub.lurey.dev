@@ -158,10 +158,7 @@ final class Print extends Sequence {
   /// ```dart
   /// Print('hello\x07', allowAscii: true); // 'hello\x07'
   /// ```
-  factory Print(
-    String text, {
-    bool allowAscii = false,
-  }) {
+  factory Print(String text, {bool allowAscii = false}) {
     return Print.fromUnchecked(escape(text, allowAscii: allowAscii));
   }
 
@@ -174,10 +171,7 @@ final class Print extends Sequence {
   /// ```
   ///
   /// Provide `allowAscii: true` to allow ASCII control characters.
-  factory Print.checkInvalid(
-    String text, {
-    bool allowAscii = false,
-  }) {
+  factory Print.checkInvalid(String text, {bool allowAscii = false}) {
     if (allowAscii) {
       final index = text.indexOf('\x1B');
       if (index != -1) {
@@ -188,11 +182,7 @@ final class Print extends Sequence {
 
     final match = _asciiEscape.firstMatch(text);
     if (match != null) {
-      throw FormatException(
-        'Contains control character',
-        text,
-        match.start,
-      );
+      throw FormatException('Contains control character', text, match.start);
     }
     return Print.fromUnchecked(text);
   }

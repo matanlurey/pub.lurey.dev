@@ -234,9 +234,8 @@ abstract final class IndexMap<K, V> implements Map<K, V> {
 }
 
 final class _IndexMap<K, V> with MapBase<K, V> implements IndexMap<K, V> {
-  _IndexMap([
-    HashMap<K, int>? indices,
-  ]) : _indices = indices ?? HashMap<K, int>();
+  _IndexMap([HashMap<K, int>? indices])
+    : _indices = indices ?? HashMap<K, int>();
   final HashMap<K, int> _indices;
   final _entries = <PresentMapEntry<K, V>>[];
 

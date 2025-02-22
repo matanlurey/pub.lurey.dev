@@ -10,9 +10,7 @@ import '_prelude.dart';
 void main() {
   test('read text file', () async {
     final file = File(
-      [
-        BlobPart.fromString('Hello World'.toJS),
-      ].toJS,
+      [BlobPart.fromString('Hello World'.toJS)].toJS,
       'file.txt'.toJS,
     );
 

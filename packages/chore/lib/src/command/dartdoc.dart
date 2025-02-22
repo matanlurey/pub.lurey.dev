@@ -11,7 +11,8 @@ final class Dartdoc extends BaseCommand {
     argParser.addOption(
       'port',
       abbr: 'p',
-      help: ''
+      help:
+          ''
           'The port to preview the HTML coverage report on. '
           'Only a single package can be previewed at a time.',
       defaultsTo: '8080',
@@ -44,9 +45,7 @@ final class Dartdoc extends BaseCommand {
       port = int.tryParse(argResults!.option('port')!);
     } else if (packages.length > 1 && argResults!.flag('preview')) {
       io.exitCode = 1;
-      io.stderr.writeln(
-        '❌ Only a single package can be previewed at a time.',
-      );
+      io.stderr.writeln('❌ Only a single package can be previewed at a time.');
       return;
     } else {
       port = null;

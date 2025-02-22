@@ -14,25 +14,13 @@ void main() {
     check(map).containsKey('b');
     check(map).containsKey('c');
 
-    check(map).deepEquals({
-      'a': 1,
-      'b': 2,
-      'c': 3,
-    });
+    check(map).deepEquals({'a': 1, 'b': 2, 'c': 3});
   });
 
   test('should create from another map', () {
-    final map = IndexMap<String, int>.from({
-      'a': 1,
-      'b': 2,
-      'c': 3,
-    });
+    final map = IndexMap<String, int>.from({'a': 1, 'b': 2, 'c': 3});
 
-    check(map).deepEquals({
-      'a': 1,
-      'b': 2,
-      'c': 3,
-    });
+    check(map).deepEquals({'a': 1, 'b': 2, 'c': 3});
   });
 
   test('should create from other entries', () {
@@ -42,11 +30,7 @@ void main() {
       MapEntry('c', 3),
     ]);
 
-    check(map).deepEquals({
-      'a': 1,
-      'b': 2,
-      'c': 3,
-    });
+    check(map).deepEquals({'a': 1, 'b': 2, 'c': 3});
   });
 
   test('should not add, nor re-order, when an element exists', () {
@@ -56,10 +40,7 @@ void main() {
     check(map['b'] = 2).equals(2);
     check(map['a'] = 3).equals(3);
 
-    check(map).deepEquals({
-      'a': 3,
-      'b': 2,
-    });
+    check(map).deepEquals({'a': 3, 'b': 2});
   });
 
   test('should provide entryAt access to map entries', () {
@@ -85,20 +66,11 @@ void main() {
     map.entryAt(1).setOrUpdate(5);
     map.entryAt(2).setOrUpdate(6);
 
-    check(map).deepEquals({
-      'a': 4,
-      'b': 5,
-      'c': 6,
-    });
+    check(map).deepEquals({'a': 4, 'b': 5, 'c': 6});
 
     map.entryOf('d').setOrUpdate(7);
 
-    check(map).deepEquals({
-      'a': 4,
-      'b': 5,
-      'c': 6,
-      'd': 7,
-    });
+    check(map).deepEquals({'a': 4, 'b': 5, 'c': 6, 'd': 7});
   });
 
   test('remove swaps elements with the last element', () {
@@ -110,10 +82,7 @@ void main() {
 
     map.remove('a');
 
-    check(map).deepEquals({
-      'c': 3,
-      'b': 2,
-    });
+    check(map).deepEquals({'c': 3, 'b': 2});
   });
 
   test('should clear all elements', () {
@@ -146,19 +115,13 @@ void main() {
     check(map['a']).equals(1);
 
     map.putIfAbsent('c', () => 3);
-    check(map).deepEquals({
-      'a': 1,
-      'b': 2,
-      'c': 3,
-    });
+    check(map).deepEquals({'a': 1, 'b': 2, 'c': 3});
 
     check(map.keys).deepEquals(['a', 'b', 'c']);
     check(map.values).deepEquals([1, 2, 3]);
-    check(map.entries.map((m) => (m.key, m.value))).deepEquals([
-      ('a', 1),
-      ('b', 2),
-      ('c', 3),
-    ]);
+    check(
+      map.entries.map((m) => (m.key, m.value)),
+    ).deepEquals([('a', 1), ('b', 2), ('c', 3)]);
 
     check(map).containsValue(1);
   });
@@ -173,23 +136,13 @@ void main() {
     map.update('a', (value) => value + 1, ifAbsent: () => 0);
     map.update('d', (value) => value + 1, ifAbsent: () => 0);
 
-    check(map).deepEquals({
-      'a': 2,
-      'b': 2,
-      'c': 3,
-      'd': 0,
-    });
+    check(map).deepEquals({'a': 2, 'b': 2, 'c': 3, 'd': 0});
 
     check(() => map.update('e', (value) => value + 1)).throws<Error>();
 
     map.updateAll((key, value) => value + 1);
 
-    check(map).deepEquals({
-      'a': 3,
-      'b': 3,
-      'c': 4,
-      'd': 1,
-    });
+    check(map).deepEquals({'a': 3, 'b': 3, 'c': 4, 'd': 1});
   });
 
   test('supports identity equality', () {
@@ -229,38 +182,25 @@ void main() {
     map['A'] = 2;
     map['b'] = 3;
 
-    check(map).deepEquals({
-      'a': 2,
-      'b': 3,
-    });
+    check(map).deepEquals({'a': 2, 'b': 3});
   });
 
   test('supports totally borked custom equality (no hashCode)', () {
-    final map = IndexMap<String, int>(
-      equals: (a, b) => false,
-    );
+    final map = IndexMap<String, int>(equals: (a, b) => false);
 
     map['a'] = 1;
     map['b'] = 2;
 
-    check(map).deepEquals({
-      'a': 1,
-      'b': 2,
-    });
+    check(map).deepEquals({'a': 1, 'b': 2});
   });
 
   test('supports totally borked custom equality (no equals)', () {
-    final map = IndexMap<String, int>(
-      hashCode: (e) => 0,
-    );
+    final map = IndexMap<String, int>(hashCode: (e) => 0);
 
     map['a'] = 1;
     map['b'] = 2;
 
-    check(map).deepEquals({
-      'a': 1,
-      'b': 2,
-    });
+    check(map).deepEquals({'a': 1, 'b': 2});
   });
 
   test('entries have useful fields', () {

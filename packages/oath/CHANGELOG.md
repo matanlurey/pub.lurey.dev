@@ -16,6 +16,7 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 - Added [`unnecessary_async`](https://dart.dev/tools/linter-rules/unnecessary_async) to all rule sets.
 - Added [`unsafe_variance`](https://dart.dev/tools/linter-rules/unsafe_variance) to all rule sets.
 - Removed [`package_api_docs`](https://dart.dev/tools/linter-rules/package_api_docs) from all rule sets.
+- Removed [`require_trailing_commas`](https://dart.dev/tools/linter-rules/require_trailing_commas) from all rule sets.
 
 ## 0.3.0
 

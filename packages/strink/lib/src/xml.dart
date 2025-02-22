@@ -32,17 +32,12 @@ abstract final class XmlSink {
   ///
   /// The [pretty] parameter can be used to enable pretty-printing. By default,
   /// pretty-printing is disabled.
-  factory XmlSink(
-    StringSink sink, {
-    String lineTerminator,
-    bool pretty,
-  }) = _StringXmlSink;
+  factory XmlSink(StringSink sink, {String lineTerminator, bool pretty}) =
+      _StringXmlSink;
 
-  XmlSink._({
-    String lineTerminator = '\n',
-    bool pretty = false,
-  })  : _lineTerminator = lineTerminator,
-        _pretty = pretty;
+  XmlSink._({String lineTerminator = '\n', bool pretty = false})
+    : _lineTerminator = lineTerminator,
+      _pretty = pretty;
 
   final String _lineTerminator;
   final bool _pretty;
@@ -207,11 +202,7 @@ abstract final class XmlSink {
 }
 
 final class _StringXmlSink extends XmlSink {
-  _StringXmlSink(
-    this._sink, {
-    super.lineTerminator,
-    super.pretty,
-  }) : super._();
+  _StringXmlSink(this._sink, {super.lineTerminator, super.pretty}) : super._();
 
   final StringSink _sink;
 

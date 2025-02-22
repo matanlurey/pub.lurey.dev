@@ -44,10 +44,9 @@ final class Xoshiro128PP extends Xoshiro128 {
 
   @override
   Uint32 _startUint32() {
-    return Uint32(_state[0])
-        .wrappedAdd(Uint32(_state[3]))
-        .rotateLeft(7)
-        .wrappedAdd(Uint32(_state[0]));
+    return Uint32(
+      _state[0],
+    ).wrappedAdd(Uint32(_state[3])).rotateLeft(7).wrappedAdd(Uint32(_state[0]));
   }
 }
 

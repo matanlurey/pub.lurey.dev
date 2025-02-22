@@ -20,10 +20,7 @@ abstract base class MapSuite {
     _CreateMapWith1kStringIntEntriesBenchmark(
       name,
       this,
-      List.generate(
-        1000,
-        (index) => MapEntry(index.toString(), index),
-      ),
+      List.generate(1000, (index) => MapEntry(index.toString(), index)),
     ).report();
     _IterateMapWith1kStringIntEntriesBenchmark(name, this).report();
     _Hash1kEntriesBenchmark(name, this).report();
@@ -45,10 +42,8 @@ abstract base class MapSuite {
 
 final class _EmptyStringIntMapBenchmark extends BenchmarkBase {
   final MapSuite _suite;
-  _EmptyStringIntMapBenchmark(
-    String name,
-    this._suite,
-  ) : super('$name:EmptyStringIntMap');
+  _EmptyStringIntMapBenchmark(String name, this._suite)
+    : super('$name:EmptyStringIntMap');
 
   @override
   void run() {
@@ -73,20 +68,15 @@ final class _CreateMapWith1kStringIntEntriesBenchmark extends BenchmarkBase {
 
 final class _Hash1kEntriesBenchmark extends BenchmarkBase {
   final MapSuite _suite;
-  _Hash1kEntriesBenchmark(
-    String name,
-    this._suite,
-  ) : super('$name:Hash1kEntries');
+  _Hash1kEntriesBenchmark(String name, this._suite)
+    : super('$name:Hash1kEntries');
 
   late Map<String, int> _map;
 
   @override
   void setup() {
     _map = _suite.newMapWith1kEntries<String, int>(
-      List.generate(
-        1000,
-        (index) => MapEntry(index.toString(), index),
-      ),
+      List.generate(1000, (index) => MapEntry(index.toString(), index)),
     );
   }
 
@@ -100,20 +90,15 @@ final class _Hash1kEntriesBenchmark extends BenchmarkBase {
 
 final class _IterateMapWith1kStringIntEntriesBenchmark extends BenchmarkBase {
   final MapSuite _suite;
-  _IterateMapWith1kStringIntEntriesBenchmark(
-    String name,
-    this._suite,
-  ) : super('$name:IterateMapWith1kStringIntEntries');
+  _IterateMapWith1kStringIntEntriesBenchmark(String name, this._suite)
+    : super('$name:IterateMapWith1kStringIntEntries');
 
   late Map<String, int> _map;
 
   @override
   void setup() {
     _map = _suite.newMapWith1kEntries<String, int>(
-      List.generate(
-        1000,
-        (index) => MapEntry(index.toString(), index),
-      ),
+      List.generate(1000, (index) => MapEntry(index.toString(), index)),
     );
   }
 
@@ -127,10 +112,8 @@ final class _IterateMapWith1kStringIntEntriesBenchmark extends BenchmarkBase {
 
 final class _RemoveEveryOtherEntry1KEntriesBenchmark extends BenchmarkBase {
   final MapSuite _suite;
-  _RemoveEveryOtherEntry1KEntriesBenchmark(
-    String name,
-    this._suite,
-  ) : super('$name:RemoveEveryOtherEntry1kEntries');
+  _RemoveEveryOtherEntry1KEntriesBenchmark(String name, this._suite)
+    : super('$name:RemoveEveryOtherEntry1kEntries');
 
   late Map<String, int> _map;
   late List<String> _keys;
@@ -138,10 +121,7 @@ final class _RemoveEveryOtherEntry1KEntriesBenchmark extends BenchmarkBase {
   @override
   void setup() {
     _map = _suite.newMapWith1kEntries<String, int>(
-      List.generate(
-        1000,
-        (index) => MapEntry(index.toString(), index),
-      ),
+      List.generate(1000, (index) => MapEntry(index.toString(), index)),
     );
     _keys = _map.keys.toList();
   }

@@ -124,9 +124,9 @@ void main() {
     xml.writeText('Hello, world!');
     xml.closeElement();
 
-    check(buffer.toString()).equals(
-      '<person name="Alice">\r\n  Hello, world!\r\n</person>',
-    );
+    check(
+      buffer.toString(),
+    ).equals('<person name="Alice">\r\n  Hello, world!\r\n</person>');
   });
 
   test('write a new line explicitly', () {

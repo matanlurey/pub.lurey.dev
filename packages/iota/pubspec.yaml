@@ -21,7 +21,7 @@ issue_tracker: https://github.com/matanlurey/pub.lurey.dev/labels/pkg-iota
 resolution: workspace
 
 environment:
-  sdk: ^3.5.0
+  sdk: ^3.7.0
 
 dependencies:
   meta: ^1.15.0

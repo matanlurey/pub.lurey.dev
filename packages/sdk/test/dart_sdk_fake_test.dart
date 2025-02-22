@@ -21,9 +21,9 @@ void main() {
     await file.writeAsString('2.14.0');
 
     final sdk = DartSdk.fromPath(tmpDir.path);
-    await check(sdk.version).completes(
-      (e) => e.equals(SemanticVersion.from(2, 14, 0)),
-    );
+    await check(
+      sdk.version,
+    ).completes((e) => e.equals(SemanticVersion.from(2, 14, 0)));
   });
 
   test('revision', () async {

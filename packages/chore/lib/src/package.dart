@@ -105,8 +105,8 @@ sealed class Package {
     this.shortDescription,
     Set<TestDependency> testDependencies = const {},
     Set<Package> nestedPackages = const {},
-  })  : testDependencies = Set.unmodifiable(testDependencies),
-        nestedPackages = Set.unmodifiable(nestedPackages);
+  }) : testDependencies = Set.unmodifiable(testDependencies),
+       nestedPackages = Set.unmodifiable(nestedPackages);
 
   /// Path of the package.
   final String path;
@@ -218,8 +218,8 @@ final class Workspace extends _Package {
     Set<String> packages = const {},
     super.description,
     super.shortDescription,
-  })  : packages = Set.unmodifiable(packages),
-        super(supportsCoverage: false);
+  }) : packages = Set.unmodifiable(packages),
+       super(supportsCoverage: false);
 
   /// Paths of packages that are part of the workspace.
   ///

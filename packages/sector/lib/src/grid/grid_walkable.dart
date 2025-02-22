@@ -39,14 +39,11 @@ final class GridWalkable<E> with WeightedWalkable<Pos> {
     double Function(E, E, Pos) weight = _defaultWeight,
     Iterable<Pos> directions = Direction.cardinal,
   }) {
-    final list = identical(directions, Direction.cardinal)
-        ? Direction.cardinal
-        : List.of(directions);
-    return GridWalkable._(
-      grid,
-      list,
-      weight,
-    );
+    final list =
+        identical(directions, Direction.cardinal)
+            ? Direction.cardinal
+            : List.of(directions);
+    return GridWalkable._(grid, list, weight);
   }
 
   /// Creates a new lazily built weighted graph from a [grid].
@@ -58,11 +55,7 @@ final class GridWalkable<E> with WeightedWalkable<Pos> {
     Grid<E> grid, {
     double Function(E, E, Pos) weight = _defaultWeight,
   }) {
-    return GridWalkable._(
-      grid,
-      Direction.ordinal,
-      weight,
-    );
+    return GridWalkable._(grid, Direction.ordinal, weight);
   }
 
   /// Creates a new lazily built weighted graph from a [grid].
@@ -74,21 +67,16 @@ final class GridWalkable<E> with WeightedWalkable<Pos> {
     Grid<E> grid, {
     double Function(E, E, Pos) weight = _defaultWeight,
   }) {
-    return GridWalkable._(
-      grid,
-      Direction.all,
-      weight,
-    );
+    return GridWalkable._(grid, Direction.all, weight);
   }
 
-  const GridWalkable._(
-    this._grid,
-    this._directions,
-    this._weight,
-  );
+  const GridWalkable._(this._grid, this._directions, this._weight);
 
   final Grid<E> _grid;
   final List<Pos> _directions;
+
+  // Only accessed in `this`.
+  // ignore: unsafe_variance
   final double Function(E, E, Pos) _weight;
 
   @override

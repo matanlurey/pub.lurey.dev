@@ -8,6 +8,10 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 <!-- #endregion -->
 
+## 0.4.1+3
+
+- Bumped Dart to `^3.7.0`.
+
 ## 0.4.1+2
 
 - Move the package into a monorepo.

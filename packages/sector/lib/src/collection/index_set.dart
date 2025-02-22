@@ -147,9 +147,7 @@ abstract final class IndexSet<E> implements Set<E> {
 }
 
 final class _IndexSet<E> with SetBase<E> implements IndexSet<E> {
-  _IndexSet([
-    HashMap<E, int>? indices,
-  ]) : _indices = indices ?? HashMap();
+  _IndexSet([HashMap<E, int>? indices]) : _indices = indices ?? HashMap();
   final HashMap<E, int> _indices;
   final _entries = <E>[];
 
@@ -319,18 +317,19 @@ final class _CustomIndexSet<E> extends _IndexSet<E> {
     required bool Function(E e1, E e2) equals,
     required int Function(E e) hashCode,
     bool Function(Object? potentialKey)? isValidKey,
-  })  : _equals = equals,
-        _hashCode = hashCode,
-        _isValidKey = isValidKey,
-        super(
-          HashMap(
-            equals: equals,
-            hashCode: hashCode,
-            isValidKey: isValidKey,
-          ),
-        );
+  }) : _equals = equals,
+       _hashCode = hashCode,
+       _isValidKey = isValidKey,
+       super(
+         HashMap(equals: equals, hashCode: hashCode, isValidKey: isValidKey),
+       );
 
+  // Only accessed in `this`.
+  // ignore: unsafe_variance
   final bool Function(E e1, E e2) _equals;
+
+  // Only accessed in `this`.
+  // ignore: unsafe_variance
   final int Function(E e) _hashCode;
   final bool Function(Object? potentialKey)? _isValidKey;
 

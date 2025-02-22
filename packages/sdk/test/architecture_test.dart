@@ -62,9 +62,9 @@ void main() {
   });
 
   test('tryFrom (success)', () {
-    check(Architecture.tryFrom('x64'))
-        .has((a) => a, 'tryFrom')
-        .equals(Architecture.x64);
+    check(
+      Architecture.tryFrom('x64'),
+    ).has((a) => a, 'tryFrom').equals(Architecture.x64);
   });
 
   test('tryFrom (failure)', () {
@@ -72,9 +72,9 @@ void main() {
   });
 
   test('from (success)', () {
-    check(Architecture.from('x64'))
-        .has((a) => a, 'from')
-        .equals(Architecture.x64);
+    check(
+      Architecture.from('x64'),
+    ).has((a) => a, 'from').equals(Architecture.x64);
   });
 
   test('from (failure)', () {

@@ -47,9 +47,7 @@ final class _RemoteSdkUrls implements RemoteSdkUrls {
     'dart-archive',
   );
 
-  _RemoteSdkUrls({
-    Uri? baseUrl,
-  }) : _baseUrl = baseUrl ?? _defaultBaseUrl;
+  _RemoteSdkUrls({Uri? baseUrl}) : _baseUrl = baseUrl ?? _defaultBaseUrl;
 
   final Uri _baseUrl;
 

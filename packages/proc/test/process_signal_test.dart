@@ -16,8 +16,8 @@ void main() {
   });
 
   test('toString()', () {
-    check(ProcessSignal.sigint)
-        .has((a) => a.toString(), 'toString()')
-        .equals('ProcessSignal.sigint');
+    check(
+      ProcessSignal.sigint,
+    ).has((a) => a.toString(), 'toString()').equals('ProcessSignal.sigint');
   });
 }

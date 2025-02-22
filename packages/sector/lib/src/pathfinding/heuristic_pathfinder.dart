@@ -76,6 +76,8 @@ mixin HeuristicPathfinder<E> implements PathfinderBase<E> {
   /// print(path); // Path(['a', 'c', 'd'])
   /// print(cost); // 6.0
   /// ```
+  // Intentionally unsafe variance.
+  // ignore: unsafe_variance
   (Path<T> path, double cost) findBestPath<T extends E>(
     WeightedWalkable<T> graph,
     T start,
@@ -86,13 +88,7 @@ mixin HeuristicPathfinder<E> implements PathfinderBase<E> {
     if (goal.success(start)) {
       return (Path([start]), 0.0);
     }
-    return findBestPathExclusive(
-      graph,
-      start,
-      goal,
-      heuristic,
-      tracer: tracer,
-    );
+    return findBestPathExclusive(graph, start, goal, heuristic, tracer: tracer);
   }
 
   /// Returns an optimal path (and it's total cost) in [graph] from [start] to a
@@ -128,6 +124,8 @@ mixin HeuristicPathfinder<E> implements PathfinderBase<E> {
   /// print(path); // Path(['a', 'c', 'd'])
   /// print(cost); // 6.0
   /// ```
+  // Intentionally unsafe variance.
+  // ignore: unsafe_variance
   (Path<T> path, double cost) findBestPathExclusive<T extends E>(
     WeightedWalkable<T> graph,
     T start,
@@ -157,6 +155,8 @@ mixin HeuristicPathfinder<E> implements PathfinderBase<E> {
   ///   },
   /// );
   /// ```
+  // Intentionally unsafe variance.
+  // ignore: unsafe_variance
   BestPathfinder<E> asBestPathfinder<G extends Goal<E>>({
     required Heuristic<T> Function<T extends E>(E) toNode,
     required Heuristic<T> Function<T extends E>(E, G) orElse,
@@ -166,17 +166,21 @@ mixin HeuristicPathfinder<E> implements PathfinderBase<E> {
 }
 
 final class _AsBestPathfinder<E, G extends Goal<E>> with BestPathfinder<E> {
-  const _AsBestPathfinder(
-    this._pathfinder,
-    this._toNode,
-    this._orElse,
-  );
+  const _AsBestPathfinder(this._pathfinder, this._toNode, this._orElse);
 
   final HeuristicPathfinder<E> _pathfinder;
+
+  // Accessed via `this`.
+  // ignore: unsafe_variance
   final Heuristic<T> Function<T extends E>(E) _toNode;
+
+  // Accessed via `this`.
+  // ignore: unsafe_variance
   final Heuristic<T> Function<T extends E>(E, G) _orElse;
 
   @override
+  // Intentionally unsafe variance.
+  // ignore: unsafe_variance
   (Path<T>, double) findBestPathExclusive<T extends E>(
     WeightedWalkable<T> graph,
     T start,

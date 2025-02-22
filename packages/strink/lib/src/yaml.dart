@@ -5,14 +5,9 @@ abstract final class YamlSink {
   /// Creates a YAML sink that writes to a [StringSink].
   ///
   /// The [lineTerminator] defaults to `'\n'`.
-  factory YamlSink(
-    StringSink sink, {
-    String lineTerminator,
-  }) = _StringYamlSink;
+  factory YamlSink(StringSink sink, {String lineTerminator}) = _StringYamlSink;
 
-  YamlSink._({
-    String lineTerminator = '\n',
-  }) : _lineTerminator = lineTerminator;
+  YamlSink._({String lineTerminator = '\n'}) : _lineTerminator = lineTerminator;
 
   final String _lineTerminator;
 
@@ -133,10 +128,7 @@ abstract final class YamlSink {
 }
 
 final class _StringYamlSink extends YamlSink {
-  _StringYamlSink(
-    this._sink, {
-    super.lineTerminator,
-  }) : super._();
+  _StringYamlSink(this._sink, {super.lineTerminator}) : super._();
 
   final StringSink _sink;
 

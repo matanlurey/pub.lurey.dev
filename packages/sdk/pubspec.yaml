@@ -14,7 +14,7 @@ issue_tracker: https://github.com/matanlurey/pub.lurey.dev/labels/pkg-sdk
 resolution: workspace
 
 environment:
-  sdk: ^3.5.0
+  sdk: ^3.7.0
 
 dependencies:
   async: ^2.11.0

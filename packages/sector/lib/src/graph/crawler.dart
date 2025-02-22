@@ -32,8 +32,9 @@ part of '../graph.dart';
 /// ```
 ///
 /// {@category Graphs}
-typedef Crawler<E> = Iterable<T> Function<T extends E>(
-  WalkableBase<T> nodes, {
-  required T start,
-  Tracer<T>? tracer,
-});
+typedef Crawler<E> =
+    Iterable<T> Function<T extends E>(
+      WalkableBase<T> nodes, {
+      required T start,
+      Tracer<T>? tracer,
+    });

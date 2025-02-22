@@ -41,19 +41,10 @@ abstract final class ListGrid<E> with Grid<E> {
   ///
   /// print(grid.get(Pos(0, 0))); // 0
   /// ```
-  factory ListGrid.filled(
-    int width,
-    int height, {
-    required E empty,
-    E? fill,
-  }) {
+  factory ListGrid.filled(int width, int height, {required E empty, E? fill}) {
     checkPositive(width, 'width');
     checkPositive(height, 'height');
-    final list = List.filled(
-      width * height,
-      fill ?? empty,
-      growable: true,
-    );
+    final list = List.filled(width * height, fill ?? empty, growable: true);
     return _ListGrid(width, height, empty, list);
   }
 
@@ -111,12 +102,7 @@ abstract final class ListGrid<E> with Grid<E> {
       );
     }
     final list = List.of(other.cells.map((c) => c.$2));
-    return _ListGrid(
-      other.width,
-      other.height,
-      empty ?? other.empty,
-      list,
-    );
+    return _ListGrid(other.width, other.height, empty ?? other.empty, list);
   }
 
   /// Creates a new list grid from a 2D list of rows of columns.
@@ -205,18 +191,10 @@ abstract final class ListGrid<E> with Grid<E> {
 }
 
 final class _ListGrid<E> extends ListGrid<E> {
-  _ListGrid(
-    this._width,
-    this._height,
-    this.empty, [
-    List<E>? elements,
-  ])  : _elements = elements ??
-            List.filled(
-              _width * _height,
-              empty,
-              growable: true,
-            ),
-        super._();
+  _ListGrid(this._width, this._height, this.empty, [List<E>? elements])
+    : _elements =
+          elements ?? List.filled(_width * _height, empty, growable: true),
+      super._();
   final List<E> _elements;
 
   @override
@@ -257,10 +235,7 @@ final class _ListGrid<E> extends ListGrid<E> {
       for (var y = 0; y < _height; y++) {
         _elements.insertAll(
           y * value + _width,
-          List.filled(
-            value - _width,
-            empty,
-          ),
+          List.filled(value - _width, empty),
         );
       }
     }

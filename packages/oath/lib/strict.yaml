@@ -72,7 +72,6 @@ linter:
     - prefer_if_elements_to_conditional_expressions
     - prefer_single_quotes
     - public_member_api_docs
-    - require_trailing_commas
     - sort_pub_dependencies
     - strict_top_level_inference
     - throw_in_finally

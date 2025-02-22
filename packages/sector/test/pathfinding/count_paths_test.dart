@@ -42,12 +42,7 @@ void main() {
   test('should return 3432 for an 8x8 chess board', () {
     final graph = Grid.filled(8, 8, empty: 0, fill: 1);
     final paths = countPaths(
-      graph.asUnweighted(
-        directions: [
-          Direction.right,
-          Direction.down,
-        ],
-      ),
+      graph.asUnweighted(directions: [Direction.right, Direction.down]),
       start: graph.topLeft,
       goal: Goal.node(graph.bottomRight),
       tracer: TestTracer<Pos>(),

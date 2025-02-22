@@ -7,10 +7,7 @@ part of '../../webby.dart';
 /// See <https://developer.mozilla.org/en-US/docs/Web/API/HTMLInputElement>.
 extension type HTMLInputElement._(JSObject _) implements HTMLElement {
   /// Creates a new input element.
-  factory HTMLInputElement({
-    String? type,
-    bool? multiple,
-  }) {
+  factory HTMLInputElement({String? type, bool? multiple}) {
     final el = window.document.createElement('input'.toJS) as HTMLInputElement;
     if (type != null) {
       el.type = type.toJS;

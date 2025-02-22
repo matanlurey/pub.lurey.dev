@@ -24,17 +24,14 @@ void main() {
         check(extension).equals('json');
         return switch (name) {
           'exists' => HttpResponse(
-              statusCode: 200,
-              body: utf8.encode('{"versions": ["1.0.0"]}'),
-            ),
+            statusCode: 200,
+            body: utf8.encode('{"versions": ["1.0.0"]}'),
+          ),
           'error' => HttpResponse(
-              statusCode: 500,
-              body: utf8.encode('Internal Server Error'),
-            ),
-          _ => HttpResponse(
-              statusCode: 404,
-              body: utf8.encode('Not Found'),
-            ),
+            statusCode: 500,
+            body: utf8.encode('Internal Server Error'),
+          ),
+          _ => HttpResponse(statusCode: 404, body: utf8.encode('Not Found')),
         };
       },
     );
@@ -45,12 +42,12 @@ void main() {
   });
 
   test('error occurred finding package', () async {
-    await check(
-      pubService.fetchLatestVersion('error'),
-    ).throws<StateError>(
-      (e) => e
-          .has((e) => e.toString(), 'toString()')
-          .containsInOrder(['Error fetching', 'error', '500']),
+    await check(pubService.fetchLatestVersion('error')).throws<StateError>(
+      (e) => e.has((e) => e.toString(), 'toString()').containsInOrder([
+        'Error fetching',
+        'error',
+        '500',
+      ]),
     );
   });
 

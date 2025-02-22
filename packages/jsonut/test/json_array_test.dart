@@ -21,9 +21,7 @@ void main() {
   });
 
   test('JsonArray.parse invalid', () {
-    check(
-      () => JsonArray.parse('invalid'),
-    ).throws<FormatException>();
+    check(() => JsonArray.parse('invalid')).throws<FormatException>();
   });
 
   test('JsonArray.parseUtf8', () {

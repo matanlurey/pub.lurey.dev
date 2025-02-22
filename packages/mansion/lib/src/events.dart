@@ -191,29 +191,27 @@ sealed class Event {
       [0x09] => const KeyEvent(ControlKey.tab),
       [0x1b] => const KeyEvent(ControlKey.escape),
       [0x1b, 0x5b, ...final rest] => switch (rest) {
-          [0x32, 0x30, 0x30, 0x7e, ...final data] => PasteEvent._tryParse(data),
-          [0x32, 0x7e] => const KeyEvent(ControlKey.insert),
-          [0x33, 0x7e] => const KeyEvent(ControlKey.delete),
-          [0x35, 0x7e] => const KeyEvent(ControlKey.pageUp),
-          [0x36, 0x7e] => const KeyEvent(ControlKey.pageDown),
-          [0x3c, ...final rest] => MouseEvent._tryParseSgr(rest),
-          [0x41] => const KeyEvent(ControlKey.upArrow),
-          [0x42] => const KeyEvent(ControlKey.downArrow),
-          [0x43] => const KeyEvent(ControlKey.rightArrow),
-          [0x44] => const KeyEvent(ControlKey.leftArrow),
-          [0x46] => const KeyEvent(ControlKey.end),
-          [0x48] => const KeyEvent(ControlKey.home),
-          [0x49] => FocusEvent.gained,
-          [0x4f] => FocusEvent.lost,
-          [0x5a] => const KeyEvent(ControlKey.backTab),
-          _ => null,
-        },
+        [0x32, 0x30, 0x30, 0x7e, ...final data] => PasteEvent._tryParse(data),
+        [0x32, 0x7e] => const KeyEvent(ControlKey.insert),
+        [0x33, 0x7e] => const KeyEvent(ControlKey.delete),
+        [0x35, 0x7e] => const KeyEvent(ControlKey.pageUp),
+        [0x36, 0x7e] => const KeyEvent(ControlKey.pageDown),
+        [0x3c, ...final rest] => MouseEvent._tryParseSgr(rest),
+        [0x41] => const KeyEvent(ControlKey.upArrow),
+        [0x42] => const KeyEvent(ControlKey.downArrow),
+        [0x43] => const KeyEvent(ControlKey.rightArrow),
+        [0x44] => const KeyEvent(ControlKey.leftArrow),
+        [0x46] => const KeyEvent(ControlKey.end),
+        [0x48] => const KeyEvent(ControlKey.home),
+        [0x49] => FocusEvent.gained,
+        [0x4f] => FocusEvent.lost,
+        [0x5a] => const KeyEvent(ControlKey.backTab),
+        _ => null,
+      },
       [0x7f] => const KeyEvent(ControlKey.backspace),
       [final char]
           when char >= 32 && char <= 126 || char >= 128 && char <= 255 =>
-        KeyEvent(
-          CharKey(String.fromCharCode(char)),
-        ),
+        KeyEvent(CharKey(String.fromCharCode(char))),
       _ => null,
     };
   }
@@ -227,7 +225,7 @@ enum FocusEvent implements Event {
   gained,
 
   /// The terminal has lost focus.
-  lost;
+  lost,
 }
 
 /// Represents a mouse event.
@@ -292,12 +290,7 @@ final class MouseEvent implements Event {
       _ => null,
     };
 
-    return MouseEvent(
-      row: y,
-      column: x,
-      kind: kind,
-      button: mouseButton,
-    );
+    return MouseEvent(row: y, column: x, kind: kind, button: mouseButton);
   }
 
   /// Which mouse button was used for the event.
@@ -344,7 +337,7 @@ enum MouseButton {
   right,
 
   /// Middle mouse button.
-  middle;
+  middle,
 }
 
 /// A [MouseEvent] kind.
@@ -355,7 +348,7 @@ enum MouseEventKind {
   down,
 
   /// Moved the mouse cursor without pressing a button.
-  moved;
+  moved,
 }
 
 const _shiftKey = /*0b0000_0001*/ 0x01;
@@ -373,10 +366,11 @@ final class KeyModifiers {
     bool shiftKey = false,
     bool controlKey = false,
     bool altKey = false,
-  }) : _flags = 0x00 |
-            (shiftKey ? _shiftKey : 0) |
-            (controlKey ? _controlKey : 0) |
-            (altKey ? _altKey : 0);
+  }) : _flags =
+           0x00 |
+           (shiftKey ? _shiftKey : 0) |
+           (controlKey ? _controlKey : 0) |
+           (altKey ? _altKey : 0);
 
   /// A set of key modifiers with no flags set.
   static const none = KeyModifiers._fromFlags(0);
@@ -427,10 +421,7 @@ final class KeyModifiers {
 final class KeyEvent implements Event {
   /// Creates a key event with the given properties.
   @literal
-  const KeyEvent(
-    this.key, {
-    this.modifiers = KeyModifiers.none,
-  });
+  const KeyEvent(this.key, {this.modifiers = KeyModifiers.none});
 
   /// The key itself.
   final Key key;
@@ -515,7 +506,7 @@ enum ControlKey implements Key {
   null$,
 
   /// Escape key.
-  escape;
+  escape,
 }
 
 /// A character key code, representing a single [character] key.
@@ -555,9 +546,7 @@ final class PasteEvent implements Event {
     if (escapeIndex == -1) {
       return null;
     }
-    return PasteEvent(
-      String.fromCharCodes(codes.sublist(0, escapeIndex)),
-    );
+    return PasteEvent(String.fromCharCodes(codes.sublist(0, escapeIndex)));
   }
 
   /// Creates a paste event with the given [text].

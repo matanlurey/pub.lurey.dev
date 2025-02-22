@@ -21,9 +21,7 @@ void main() {
   });
 
   test('JsonObject.parse invalid', () {
-    check(
-      () => JsonObject.parse('invalid'),
-    ).throws<FormatException>();
+    check(() => JsonObject.parse('invalid')).throws<FormatException>();
   });
 
   test('JsonObject.parseUtf8', () {
@@ -45,26 +43,24 @@ void main() {
 
   test('operator[] returns a JsonAny', () {
     final object = JsonObject({'key': JsonString('value')});
-    check(object['key'])
-        .has((a) => a.string(), 'string()')
-        .equals(JsonString('value'));
+    check(
+      object['key'],
+    ).has((a) => a.string(), 'string()').equals(JsonString('value'));
   });
 
   test('operator[]= sets a JsonValue', () {
     final object = JsonObject({'key': JsonString('value')});
     object['key'] = JsonNumber(42);
-    check(object['key'])
-        .has((a) => a.number(), 'number()')
-        .equals(JsonNumber(42));
+    check(
+      object['key'],
+    ).has((a) => a.number(), 'number()').equals(JsonNumber(42));
   });
 
   test('deepGet returns a value at a path', () {
     // Nested object with "a": {"b": {"c": 42}}
     final object = JsonObject({
       'a': JsonObject({
-        'b': JsonObject({
-          'c': const JsonNumber(42),
-        }),
+        'b': JsonObject({'c': const JsonNumber(42)}),
       }),
     });
     check(object.deepGet(['a', 'b', 'c']).number()).equals(JsonNumber(42));
@@ -78,9 +74,7 @@ void main() {
     // Nested object with "a": {"b": {"c": 42}}
     final object = JsonObject({
       'a': JsonObject({
-        'b': JsonObject({
-          'c': const JsonNumber(42),
-        }),
+        'b': JsonObject({'c': const JsonNumber(42)}),
       }),
     });
     check(
@@ -93,24 +87,18 @@ void main() {
     // Nested object with "a": {"b": {"c": 42}}
     final object = JsonObject({
       'a': JsonObject({
-        'b': JsonObject({
-          'c': const JsonNumber(42),
-        }),
+        'b': JsonObject({'c': const JsonNumber(42)}),
       }),
     });
-    check(() => object.deepGet(['a', 'f', 'c', 'd']))
-        .throws<ArgumentError>()
-        .which((e) {
+    check(
+      () => object.deepGet(['a', 'f', 'c', 'd']),
+    ).throws<ArgumentError>().which((e) {
       e.has((e) => e.message, 'message').equals('At a->f: f is not an object.');
     });
   });
 
   test('convert multiple fields to another object', () {
-    final ({
-      String name,
-      int age,
-      bool student,
-    }) person;
+    final ({String name, int age, bool student}) person;
     final object = JsonObject({
       'name': JsonString('John Doe'),
       'age': JsonNumber(42),
@@ -123,13 +111,7 @@ void main() {
         student: fields['student'].as(),
       ),
     );
-    check(person).equals(
-      (
-        name: 'John Doe',
-        age: 42,
-        student: false,
-      ),
-    );
+    check(person).equals((name: 'John Doe', age: 42, student: false));
   });
 
   test('convert refuses async work', () {
@@ -142,6 +124,8 @@ void main() {
       // Intentionally not awaited.
       // ignore: discarded_futures
       () => object.convert(
+        // Intentionally async.
+        // ignore: unnecessary_async
         (fields) async => (
           name: fields['name'].as<String>(),
           age: fields['age'].as<int>(),

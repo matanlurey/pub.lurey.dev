@@ -29,9 +29,8 @@ abstract mixin class Pattern2d {
   /// final pattern = Pattern2d.from((x, y) => x + y);
   /// print(pattern.get(1, 2)); // 3.0
   /// ```
-  const factory Pattern2d.from(
-    double Function(double x, double y) get,
-  ) = _DelegatePattern2d;
+  const factory Pattern2d.from(double Function(double x, double y) get) =
+      _DelegatePattern2d;
 
   /// Returns the value of the pattern at the given fixed-point coordinates.
   ///

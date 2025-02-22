@@ -33,6 +33,8 @@ mixin Pathfinder<E> implements PathfinderBase<E> {
   /// final path = depthFirst.findPath(graph, 1, Goal.node(3));
   /// print(path); // Path([1, 2, 3])
   /// ```
+  // Intentionally unsafe variance.
+  // ignore: unsafe_variance
   Path<T> findPath<T extends E>(
     WalkableBase<T> graph,
     T start,
@@ -70,6 +72,8 @@ mixin Pathfinder<E> implements PathfinderBase<E> {
   /// final cycle = depthFirst.findPathExclusive(graph, 1, Goal.node(1));
   /// print(cycle); // Path([1, 2, 1])
   /// ```
+  // Intentionally unsafe variance.
+  // ignore: unsafe_variance
   Path<T> findPathExclusive<T extends E>(
     WalkableBase<T> graph,
     T start,

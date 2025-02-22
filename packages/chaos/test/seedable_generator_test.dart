@@ -12,14 +12,10 @@ void main() {
     check(random).has((a) => a.seed, 'seed').equals(42);
   });
 
-  test(
-    'implements fromRandom (Random.secure)',
-    () {
-      final generator = _TestSeedableRandom();
-      check(generator.fromRandom).returnsNormally();
-    },
-    testOn: '!node',
-  );
+  test('implements fromRandom (Random.secure)', () {
+    final generator = _TestSeedableRandom();
+    check(generator.fromRandom).returnsNormally();
+  }, testOn: '!node');
 
   test('implements fromRandom (provided)', () {
     final generator = _TestSeedableRandom();

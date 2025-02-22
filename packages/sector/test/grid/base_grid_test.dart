@@ -3,27 +3,21 @@ import '../src/naive_grid.dart';
 
 void main() {
   test('should return the length', () {
-    final grid = NaiveGrid(
-      [
-        [0, 1, 2, 3, 4],
-        [1, 2, 3, 4, 5],
-        [2, 3, 4, 5, 6],
-      ],
-      empty: 0,
-    );
+    final grid = NaiveGrid([
+      [0, 1, 2, 3, 4],
+      [1, 2, 3, 4, 5],
+      [2, 3, 4, 5, 6],
+    ], empty: 0);
 
     check(grid.length).equals(15);
   });
 
   test('should return rows', () {
-    final grid = NaiveGrid(
-      [
-        [0, 1, 2, 3, 4],
-        [1, 2, 3, 4, 5],
-        [2, 3, 4, 5, 6],
-      ],
-      empty: 0,
-    );
+    final grid = NaiveGrid([
+      [0, 1, 2, 3, 4],
+      [1, 2, 3, 4, 5],
+      [2, 3, 4, 5, 6],
+    ], empty: 0);
 
     check(grid.rows).deepEquals([
       [0, 1, 2, 3, 4],
@@ -33,14 +27,11 @@ void main() {
   });
 
   test('should return columns', () {
-    final grid = NaiveGrid(
-      [
-        [0, 1, 2, 3, 4],
-        [1, 2, 3, 4, 5],
-        [2, 3, 4, 5, 6],
-      ],
-      empty: 0,
-    );
+    final grid = NaiveGrid([
+      [0, 1, 2, 3, 4],
+      [1, 2, 3, 4, 5],
+      [2, 3, 4, 5, 6],
+    ], empty: 0);
 
     check(grid.columns).deepEquals([
       [0, 1, 2],
@@ -52,14 +43,11 @@ void main() {
   });
 
   test('should return toString()', () {
-    final grid = NaiveGrid(
-      [
-        [0, 1, 2, 3, 4],
-        [1, 2, 3, 4, 5],
-        [2, 3, 4, 5, 6],
-      ],
-      empty: 0,
-    );
+    final grid = NaiveGrid([
+      [0, 1, 2, 3, 4],
+      [1, 2, 3, 4, 5],
+      [2, 3, 4, 5, 6],
+    ], empty: 0);
 
     check(grid.toString()).equals(
       '#....\n'
@@ -69,14 +57,11 @@ void main() {
   });
 
   test('.rows should have efficient iterable access', () {
-    final grid = NaiveGrid(
-      [
-        [0, 1, 2, 3, 4],
-        [1, 2, 3, 4, 5],
-        [2, 3, 4, 5, 6],
-      ],
-      empty: 0,
-    );
+    final grid = NaiveGrid([
+      [0, 1, 2, 3, 4],
+      [1, 2, 3, 4, 5],
+      [2, 3, 4, 5, 6],
+    ], empty: 0);
 
     final rows = grid.rows;
 
@@ -111,9 +96,9 @@ void main() {
 
     check(rows.join()).equals('(0, 1, 2, 3, 4)(1, 2, 3, 4, 5)(2, 3, 4, 5, 6)');
 
-    check(rows.reduce((value, element) => [...value, ...element])).deepEquals(
-      [0, 1, 2, 3, 4, 1, 2, 3, 4, 5, 2, 3, 4, 5, 6],
-    );
+    check(
+      rows.reduce((value, element) => [...value, ...element]),
+    ).deepEquals([0, 1, 2, 3, 4, 1, 2, 3, 4, 5, 2, 3, 4, 5, 6]);
 
     check(
       rows.fold<int>(
@@ -151,14 +136,11 @@ void main() {
   });
 
   test('should fill the full grid', () {
-    final grid = NaiveGrid<int>(
-      [
-        [0, 1, 2, 3, 4],
-        [1, 2, 3, 4, 5],
-        [2, 3, 4, 5, 6],
-      ],
-      empty: 0,
-    );
+    final grid = NaiveGrid<int>([
+      [0, 1, 2, 3, 4],
+      [1, 2, 3, 4, 5],
+      [2, 3, 4, 5, 6],
+    ], empty: 0);
     grid.fill(7);
     check(grid.rows).deepEquals([
       [7, 7, 7, 7, 7],
@@ -168,14 +150,11 @@ void main() {
   });
 
   test('should fill a part of the grid', () {
-    final grid = NaiveGrid<int>(
-      [
-        [0, 1, 2, 3, 4],
-        [1, 2, 3, 4, 5],
-        [2, 3, 4, 5, 6],
-      ],
-      empty: 0,
-    );
+    final grid = NaiveGrid<int>([
+      [0, 1, 2, 3, 4],
+      [1, 2, 3, 4, 5],
+      [2, 3, 4, 5, 6],
+    ], empty: 0);
     grid.fill(7, Rect.fromLTWH(1, 1, 3, 2));
     check(grid.rows).deepEquals([
       [0, 1, 2, 3, 4],
@@ -185,14 +164,11 @@ void main() {
   });
 
   test('should clamp when filling part of the grid', () {
-    final grid = NaiveGrid<int>(
-      [
-        [0, 1, 2, 3, 4],
-        [1, 2, 3, 4, 5],
-        [2, 3, 4, 5, 6],
-      ],
-      empty: 0,
-    );
+    final grid = NaiveGrid<int>([
+      [0, 1, 2, 3, 4],
+      [1, 2, 3, 4, 5],
+      [2, 3, 4, 5, 6],
+    ], empty: 0);
     grid.fill(7, Rect.fromLTWH(1, 1, 5, 5));
     check(grid.rows).deepEquals([
       [0, 1, 2, 3, 4],

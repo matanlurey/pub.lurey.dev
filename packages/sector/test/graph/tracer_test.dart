@@ -27,10 +27,9 @@ void main() {
     a.onSkip(2);
     a.onSkip(2);
 
-    check(a.events.toSet()).containsInOrder([
-      TraceEvent.onVisit(1),
-      TraceEvent.onSkip(2),
-    ]);
+    check(
+      a.events.toSet(),
+    ).containsInOrder([TraceEvent.onVisit(1), TraceEvent.onSkip(2)]);
   });
 
   group('events', () {

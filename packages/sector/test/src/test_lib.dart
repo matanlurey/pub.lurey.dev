@@ -16,7 +16,7 @@ extension TestWalkableBase<T> on WalkableBase<T> {
     if (this is WeightedWalkable<T>) {
       throw StateError('This walkable is already weighted');
     }
-    return asUnweighted().asWeighted(weight ?? (_, __) => 1.0);
+    return asUnweighted().asWeighted(weight ?? (_, _) => 1.0);
   }
 }
 
@@ -119,9 +119,7 @@ extension SplayTreeGridChecks<E> on Subject<SplayTreeGrid<E>> {
 }
 
 final class TestTracer<E> with Tracer<E> {
-  TestTracer({
-    this.expectRepeatedVisits = false,
-  }) {
+  TestTracer({this.expectRepeatedVisits = false}) {
     addTearDown(_printEventsOnFailure);
   }
 
@@ -259,9 +257,10 @@ extension PathTupleChecks<T> on Subject<(Path<T>, double)> {
 
   void pathEquals(Iterable<T> expected, [double? cost]) {
     context.expect(() => ['path $expected with cost $cost'], (actual) {
-      cost ??= expected.isEmpty
-          ? double.infinity
-          : (actual.$1.nodes.length - 1).toDouble();
+      cost ??=
+          expected.isEmpty
+              ? double.infinity
+              : (actual.$1.nodes.length - 1).toDouble();
       if (actual.$1.isFound &&
           _inOrderEquals(actual.$1.nodes, expected) &&
           actual.$2 == cost) {

@@ -50,11 +50,12 @@ Future<io.Directory> createPackage(
 
   // Run dart pub add --dev test.
   {
-    final result = await io.Process.run(
-      dartBin.binPath,
-      ['pub', 'add', '--dev', 'test'],
-      workingDirectory: package.path,
-    );
+    final result = await io.Process.run(dartBin.binPath, [
+      'pub',
+      'add',
+      '--dev',
+      'test',
+    ], workingDirectory: package.path);
     if (result.exitCode != 0) {
       fail('Failed to add test package: ${result.stderr}');
     }

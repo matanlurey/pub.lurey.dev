@@ -33,10 +33,9 @@ void main() {
     });
 
     test('should have edges', () {
-      check(edges.edges).unorderedEquals([
-        WeightedEdge(1, 2, 3),
-        WeightedEdge(2, 3, 6),
-      ]);
+      check(
+        edges.edges,
+      ).unorderedEquals([WeightedEdge(1, 2, 3), WeightedEdge(2, 3, 6)]);
     });
 
     test('should have successors', () {
@@ -60,11 +59,12 @@ void main() {
 
   group('generated walkable', () {
     final generated = WeightedWalkable.generate(
-      successors: (node) => switch (node) {
-        1 => [(2, 3)],
-        2 => [(3, 6)],
-        _ => const [],
-      },
+      successors:
+          (node) => switch (node) {
+            1 => [(2, 3)],
+            2 => [(3, 6)],
+            _ => const [],
+          },
       roots: () => [1, 2],
     );
 
@@ -74,10 +74,9 @@ void main() {
     });
 
     test('should have edges', () {
-      check(generated.edges).unorderedEquals([
-        WeightedEdge(1, 2, 3),
-        WeightedEdge(2, 3, 6),
-      ]);
+      check(
+        generated.edges,
+      ).unorderedEquals([WeightedEdge(1, 2, 3), WeightedEdge(2, 3, 6)]);
     });
 
     test('should have successors', () {
@@ -100,14 +99,16 @@ void main() {
   });
 
   group('as unweighted walkable', () {
-    final graph = WeightedWalkable.generate(
-      successors: (node) => switch (node) {
-        1 => [(2, 3)],
-        2 => [(3, 6)],
-        _ => const [],
-      },
-      roots: () => [1, 2],
-    ).asUnweighted();
+    final graph =
+        WeightedWalkable.generate(
+          successors:
+              (node) => switch (node) {
+                1 => [(2, 3)],
+                2 => [(3, 6)],
+                _ => const [],
+              },
+          roots: () => [1, 2],
+        ).asUnweighted();
 
     test('should not be empty', () {
       check(graph).isNotEmpty();
@@ -115,10 +116,7 @@ void main() {
     });
 
     test('should have edges', () {
-      check(graph.edges).unorderedEquals([
-        Edge(1, 2),
-        Edge(2, 3),
-      ]);
+      check(graph.edges).unorderedEquals([Edge(1, 2), Edge(2, 3)]);
     });
 
     test('should have successors', () {
@@ -147,10 +145,12 @@ void main() {
     });
 
     test('hashCode', () {
-      check(WeightedEdge(1, 2, 3).hashCode)
-          .equals(WeightedEdge(1, 2, 3).hashCode);
-      check(WeightedEdge(1, 2, 3).hashCode)
-          .not((p) => p.equals(WeightedEdge(1, 2, 6).hashCode));
+      check(
+        WeightedEdge(1, 2, 3).hashCode,
+      ).equals(WeightedEdge(1, 2, 3).hashCode);
+      check(
+        WeightedEdge(1, 2, 3).hashCode,
+      ).not((p) => p.equals(WeightedEdge(1, 2, 6).hashCode));
     });
 
     test('toString', () {

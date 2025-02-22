@@ -28,22 +28,12 @@ extension type const Direction._(Pos _) implements Pos {
   /// Horizontal or vertical directions: [north], [east], [south], [west].
   ///
   /// This list is unmodifiable.
-  static const cardinal = [
-    north,
-    east,
-    south,
-    west,
-  ];
+  static const cardinal = [north, east, south, west];
 
   /// Diagonal directions: [northEast], [southEast], [southWest], [northWest].
   ///
   /// This list is unmodifiable.
-  static const ordinal = [
-    northEast,
-    southEast,
-    southWest,
-    northWest,
-  ];
+  static const ordinal = [northEast, southEast, southWest, northWest];
 
   /// All eight cardinal and ordinal directions, in clockwise order.
   ///

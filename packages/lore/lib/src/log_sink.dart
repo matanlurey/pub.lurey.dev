@@ -104,8 +104,8 @@ final class _BinaryLogSink implements LogSink {
     this._sink, {
     Encoding encoding = utf8,
     Future<void> Function()? flush,
-  })  : _encoding = encoding,
-        _flush = flush;
+  }) : _encoding = encoding,
+       _flush = flush;
 
   @override
   Future<void> flush() async {
@@ -136,8 +136,8 @@ final class _StringLogSink implements LogSink {
     this._sink, {
     Converter<List<int>, String> encoder = const Base64Encoder(),
     Future<void> Function()? flush,
-  })  : _encoder = encoder,
-        _flush = flush;
+  }) : _encoder = encoder,
+       _flush = flush;
 
   @override
   Future<void> flush() async {

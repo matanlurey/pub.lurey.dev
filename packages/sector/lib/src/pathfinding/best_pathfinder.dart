@@ -59,6 +59,8 @@ mixin BestPathfinder<E> implements PathfinderBase<E> {
   /// print(path); // Path(['a', 'c', 'd'])
   /// print(cost); // 6.0
   /// ```
+  // Intentionally unsafe variance.
+  // ignore: unsafe_variance
   (Path<T> path, double cost) findBestPath<T extends E>(
     WeightedWalkable<T> graph,
     T start,
@@ -106,6 +108,8 @@ mixin BestPathfinder<E> implements PathfinderBase<E> {
   /// final (cycle, _) = bestFirst.findBestPathExclusive(graph, 'a', Goal.node('a'));
   /// print(cycle); // Path(['a', 'c', 'a'])
   /// ```
+  // Intentionally unsafe variance.
+  // ignore: unsafe_variance
   (Path<T> path, double cost) findBestPathExclusive<T extends E>(
     WeightedWalkable<T> graph,
     T start,

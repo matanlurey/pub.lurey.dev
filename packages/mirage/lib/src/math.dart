@@ -38,16 +38,17 @@ double cubicInterpolate(double a, double b, double c, double d, double t) {
 Vec2 gradient2d(int index) {
   const diag = sqrt1_2;
   return switch (index % 8) {
-    0 => const (1.0, 0.0),
-    1 => const (-1.0, 0.0),
-    2 => const (0.0, 1.0),
-    3 => const (0.0, -1.0),
-    4 => const (diag, diag),
-    5 => const (-diag, diag),
-    6 => const (diag, -diag),
-    7 => const (-diag, -diag),
-    _ => throw StateError('Unreachable'),
-  } as Vec2;
+        0 => const (1.0, 0.0),
+        1 => const (-1.0, 0.0),
+        2 => const (0.0, 1.0),
+        3 => const (0.0, -1.0),
+        4 => const (diag, diag),
+        5 => const (-diag, diag),
+        6 => const (diag, -diag),
+        7 => const (-diag, -diag),
+        _ => throw StateError('Unreachable'),
+      }
+      as Vec2;
 }
 
 final _reinterpretBuffer = ByteData(8);

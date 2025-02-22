@@ -1,8 +1,5 @@
 final class Blob {
-  Blob({
-    required this.metadata,
-    required this.sensorData,
-  });
+  Blob({required this.metadata, required this.sensorData});
 
   final Metadata metadata;
   final SensorData sensorData;
@@ -51,21 +48,14 @@ final class SensorData {
 }
 
 final class Temperature {
-  Temperature({
-    required this.celcius,
-    required this.fahrenheit,
-  });
+  Temperature({required this.celcius, required this.fahrenheit});
 
   final double celcius;
   final double fahrenheit;
 }
 
 final class Acceleration {
-  Acceleration({
-    required this.x,
-    required this.y,
-    required this.z,
-  });
+  Acceleration({required this.x, required this.y, required this.z});
 
   final double x;
   final double y;

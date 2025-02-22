@@ -39,10 +39,7 @@ void main() {
       }
 
       // Assert the number of true booleans is within a reasonable range.
-      check(
-        trueCount,
-        because: 'Within 1%',
-      ).isCloseTo(5000, 100);
+      check(trueCount, because: 'Within 1%').isCloseTo(5000, 100);
     });
 
     test('generates doubles that are well distributed', () {
@@ -75,10 +72,7 @@ void main() {
       // Assert the distribution is somewhat uniform.
       final mean = sum / 10000;
       final variance = sum2 / 10000 - mean * mean;
-      check(
-        variance,
-        because: 'Within 1%',
-      ).isCloseTo(1 / 12, 1 / 1200);
+      check(variance, because: 'Within 1%').isCloseTo(1 / 12, 1 / 1200);
     });
   });
 
@@ -117,10 +111,7 @@ void main() {
       }
 
       // Assert the number of true booleans is within a reasonable range.
-      check(
-        trueCount,
-        because: 'Within 1%',
-      ).isCloseTo(5000, 150);
+      check(trueCount, because: 'Within 1%').isCloseTo(5000, 150);
     });
 
     test('generates doubles that are well distributed', () {
@@ -153,10 +144,7 @@ void main() {
       // Assert the distribution is somewhat uniform.
       final mean = sum / 10000;
       final variance = sum2 / 10000 - mean * mean;
-      check(
-        variance,
-        because: 'Within 1%',
-      ).isCloseTo(1 / 12, 3 / 1200);
+      check(variance, because: 'Within 1%').isCloseTo(1 / 12, 3 / 1200);
     });
   });
 }

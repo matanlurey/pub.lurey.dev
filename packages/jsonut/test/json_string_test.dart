@@ -13,14 +13,13 @@ void main() {
   });
 
   test('JsonString.parse invalid', () {
-    check(
-      () => JsonString.parse('invalid'),
-    ).throws<FormatException>();
+    check(() => JsonString.parse('invalid')).throws<FormatException>();
   });
 
   test('JsonString.parseUtf8', () {
-    check(JsonString.parseUtf8(utf8.encode('"hello"')))
-        .equals(JsonString('hello'));
+    check(
+      JsonString.parseUtf8(utf8.encode('"hello"')),
+    ).equals(JsonString('hello'));
   });
 
   test('JsonString.parseUtf8 invalid', () {

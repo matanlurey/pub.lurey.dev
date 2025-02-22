@@ -2,7 +2,8 @@ import 'dart:convert';
 
 import 'package:meta/meta.dart';
 import 'package:proc/src/impl/_null.dart'
-    if (dart.library.io) 'package:proc/src/impl/_io.dart' as impl;
+    if (dart.library.io) 'package:proc/src/impl/_io.dart'
+    as impl;
 import 'package:proc/src/process.dart';
 import 'package:proc/src/process_run_mode.dart';
 import 'package:proc/src/process_signal.dart';

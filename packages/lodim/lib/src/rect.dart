@@ -31,27 +31,15 @@ part of '../lodim.dart';
 @immutable
 final class Rect {
   /// Creates a rectangle from its left, top, right, and bottom edges.
-  const Rect.fromLTRB(
-    this.left,
-    this.top,
-    this.right,
-    this.bottom,
-  );
+  const Rect.fromLTRB(this.left, this.top, this.right, this.bottom);
 
   /// Creates a rectangle from its left and top edges, and its width and height.
-  const Rect.fromLTWH(
-    int left,
-    int top,
-    int width,
-    int height,
-  ) : this.fromLTRB(left, top, left + width, top + height);
+  const Rect.fromLTWH(int left, int top, int width, int height)
+    : this.fromLTRB(left, top, left + width, top + height);
 
   /// Creates an origin-based rectangle from its [width] and [height].
-  Rect.fromWH(
-    int width,
-    int height, {
-    Pos offset = Pos.zero,
-  }) : this.fromLTWH(offset.x, offset.y, width, height);
+  Rect.fromWH(int width, int height, {Pos offset = Pos.zero})
+    : this.fromLTWH(offset.x, offset.y, width, height);
 
   /// Creates a rectangle from its top-left and bottom-right corners.
   ///
@@ -59,10 +47,8 @@ final class Rect {
   /// ```dart
   /// Rect.fromLTRB(topLeft.x, topLeft.y, bottomRight.x, bottomRight.y);
   /// ```
-  Rect.fromTLBR(
-    Pos topLeft,
-    Pos bottomRight,
-  ) : this.fromLTRB(topLeft.x, topLeft.y, bottomRight.x, bottomRight.y);
+  Rect.fromTLBR(Pos topLeft, Pos bottomRight)
+    : this.fromLTRB(topLeft.x, topLeft.y, bottomRight.x, bottomRight.y);
 
   /// Creates the smallest rectangle that encloses the two provided positions.
   ///

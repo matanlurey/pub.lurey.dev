@@ -17,9 +17,7 @@ void main() {
     });
 
     test('.checkInvalid should throw on invalid text', () {
-      check(
-        () => Print.checkInvalid('hello\x1B'),
-      ).throws<FormatException>()
+      check(() => Print.checkInvalid('hello\x1B')).throws<FormatException>()
         ..has((e) => e.offset, 'offset').equals(5)
         ..has((e) => e.message, 'message').contains('Contains')
         ..has((e) => e.source, 'source').equals('hello\x1B');
@@ -27,27 +25,26 @@ void main() {
 
     test('.checkInvalid should throw on invalid text (allowAscii: true)', () {
       check(
-        () => Print.checkInvalid('hello\x1B', allowAscii: true),
-      ).throws<FormatException>()
+          () => Print.checkInvalid('hello\x1B', allowAscii: true),
+        ).throws<FormatException>()
         ..has((e) => e.offset, 'offset').equals(5)
         ..has((e) => e.message, 'message').contains('Contains')
         ..has((e) => e.source, 'source').equals('hello\x1B');
     });
 
     test('.checkInvalid should allow ASCII codes', () {
-      check(Print.checkInvalid('hello\x07', allowAscii: true))
-          .writesAnsiString
-          .equals('hello\x07');
+      check(
+        Print.checkInvalid('hello\x07', allowAscii: true),
+      ).writesAnsiString.equals('hello\x07');
     });
 
     test('.checkInvalid with allowAscii: false disallows ASCII codes', () {
-      check(
-        () => Print.checkInvalid('hello\n'),
-      ).throws<FormatException>()
+      check(() => Print.checkInvalid('hello\n')).throws<FormatException>()
         ..has((e) => e.offset, 'offset').equals(5)
-        ..has((e) => e.message, 'message').contains(
-          'Contains control character',
-        )
+        ..has(
+          (e) => e.message,
+          'message',
+        ).contains('Contains control character')
         ..has((e) => e.source, 'source').equals('hello\n');
     });
 
@@ -84,10 +81,14 @@ void main() {
     test('== hashCode toString() with offset', () {
       check(Unknown('\x1B[3W', offset: 5))
         ..equals(Unknown('\x1b[3W', offset: 5))
-        ..has((p) => p.hashCode, 'hashCode')
-            .equals(Unknown('\x1b[3W', offset: 5).hashCode)
-        ..has((p) => p.toString(), 'toString')
-            .equals(r'Unknown(\x1b[3W, offset: 5)');
+        ..has(
+          (p) => p.hashCode,
+          'hashCode',
+        ).equals(Unknown('\x1b[3W', offset: 5).hashCode)
+        ..has(
+          (p) => p.toString(),
+          'toString',
+        ).equals(r'Unknown(\x1b[3W, offset: 5)');
     });
   });
 }

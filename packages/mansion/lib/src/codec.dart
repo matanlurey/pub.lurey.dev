@@ -37,9 +37,7 @@ String encodeAnsi(List<Sequence> input) => ansi.encode(input);
 final class AnsiCodec extends Codec<List<Sequence>, String> {
   /// Creates an ANSI codec.
   @literal
-  const AnsiCodec({
-    this.allowInvalid = false,
-  });
+  const AnsiCodec({this.allowInvalid = false});
 
   /// Whether to allow malformed input.
   ///
@@ -72,9 +70,7 @@ final class AnsiCodec extends Codec<List<Sequence>, String> {
 final class AnsiEncoder extends Converter<List<Sequence>, String> {
   /// Creates an ANSI encoder.
   @literal
-  const AnsiEncoder({
-    this.allowInvalid = false,
-  });
+  const AnsiEncoder({this.allowInvalid = false});
 
   /// Whether to allow malformed input.
   ///
@@ -137,9 +133,7 @@ final class AnsiEncoder extends Converter<List<Sequence>, String> {
 final class AnsiDecoder extends Converter<String, List<Sequence>> {
   /// Creates an ANSI decoder.
   @literal
-  const AnsiDecoder({
-    this.allowInvalid = false,
-  });
+  const AnsiDecoder({this.allowInvalid = false});
 
   /// Whether to allow malformed input.
   ///
@@ -173,18 +167,13 @@ final class AnsiDecoder extends Converter<String, List<Sequence>> {
 
   @override
   Sink<String> startChunkedConversion(Sink<List<Sequence>> sink) {
-    return _ChunkedAnsiDecoder(
-      sink,
-      allowMalformed: allowInvalid,
-    );
+    return _ChunkedAnsiDecoder(sink, allowMalformed: allowInvalid);
   }
 }
 
 final class _ChunkedAnsiDecoder implements Sink<String> {
-  _ChunkedAnsiDecoder(
-    this._sink, {
-    required bool allowMalformed,
-  }) : _allowMalformed = allowMalformed;
+  _ChunkedAnsiDecoder(this._sink, {required bool allowMalformed})
+    : _allowMalformed = allowMalformed;
 
   final Sink<List<Sequence>> _sink;
   final bool _allowMalformed;

@@ -79,9 +79,9 @@ void main() {
 
       sink.writeBytes([1, 2, 3, 4, 5]);
 
-      check(buffer.toString()).equals(
-        '${ascii.decoder.convert([1, 2, 3, 4, 5])}\n',
-      );
+      check(
+        buffer.toString(),
+      ).equals('${ascii.decoder.convert([1, 2, 3, 4, 5])}\n');
     });
 
     test('flushes buffered data', () async {

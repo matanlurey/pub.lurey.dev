@@ -161,10 +161,8 @@ sealed class TraceEvent<E> {
   const factory TraceEvent.onSkip(E node) = SkipEvent<E>;
 
   /// Creates a [TraceEvent] for [Tracer.pushScalar].
-  const factory TraceEvent.pushScalar(
-    TraceKey key,
-    double value,
-  ) = ScalarEvent<E>;
+  const factory TraceEvent.pushScalar(TraceKey key, double value) =
+      ScalarEvent<E>;
 }
 
 /// A captured [Tracer.onVisit] event.
