@@ -73,11 +73,9 @@ linter:
     - prefer_single_quotes
     - public_member_api_docs
     - sort_pub_dependencies
-    - strict_top_level_inference
     - throw_in_finally
     - unawaited_futures
     - unintended_html_in_doc_comment
-    - unnecessary_async
     - unnecessary_await_in_return
     - unnecessary_breaks
     - unnecessary_lambdas
@@ -86,7 +84,6 @@ linter:
     - unnecessary_parenthesis
     - unnecessary_raw_strings
     - unnecessary_statements
-    - unnecessary_underscores
     - unreachable_from_main
     - unsafe_variance
     - use_if_null_to_convert_nulls_to_bools
