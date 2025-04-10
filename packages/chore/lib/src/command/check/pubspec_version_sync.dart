@@ -5,6 +5,7 @@ import 'package:chore/src/environment.dart';
 import 'package:chore/src/package.dart';
 import 'package:path/path.dart' as p;
 import 'package:pub_semver/pub_semver.dart';
+import 'package:yaml/yaml.dart' as yaml;
 
 /// Ensures the `version: ...` field in `pubspec.yaml` matches `CHANGELOG.md`.
 final class PubspecVersionSync extends Checker {
@@ -23,6 +24,14 @@ final class PubspecVersionSync extends Checker {
     // Find the `pubspec.yaml` file.
     final pubspecFile = File(p.join(package.path, 'pubspec.yaml'));
     if (!await pubspecFile.exists()) {
+      return false;
+    }
+
+    // If publish_to: none, skip this check.
+    final pubspecContents = await pubspecFile.readAsString();
+    final pubspecDocument = yaml.loadYaml(pubspecContents);
+    if (pubspecDocument case final yaml.YamlMap map
+        when map['publish_to'] == 'none') {
       return false;
     }
 
@@ -47,7 +56,7 @@ final class PubspecVersionSync extends Checker {
 
     // If it's fixable, update the `version` field in `pubspec.yaml`.
     if (fix) {
-      var contents = await pubspecFile.readAsString();
+      var contents = pubspecContents;
       contents = contents.replaceFirst(
         _pubspecVersion,
         'version: $changelogVersion',
