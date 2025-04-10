@@ -21,6 +21,7 @@ jobs:
       - run: dart pub get
       - run: ./dev.sh setup --packages packages/strink
       - run: ./dev.sh check --packages packages/strink
+      - run: ./dev.sh generate --fail-on-changed --packages packages/strink
       - run: ./dev.sh test --packages packages/strink
       - run: ./dev.sh coverage --packages packages/strink
       - uses: codecov/codecov-action@v4.6.0

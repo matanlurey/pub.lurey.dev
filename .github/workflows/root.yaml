@@ -1,0 +1,19 @@
+name: pub.lurey.dev
+
+on:
+  # Post-submit.
+  push:
+    branches: [ main ]
+
+  # Pre-submit.
+  pull_request:
+    branches: [ main ]
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4.2.0
+      - uses: dart-lang/setup-dart@v1.6.5
+      - run: dart pub get
+      - run: ./dev.sh generate --no-packages --fail-on-changed 

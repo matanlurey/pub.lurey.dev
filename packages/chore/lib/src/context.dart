@@ -46,6 +46,11 @@ final class Context {
     required Iterable<String> packages,
     bool verbose = false,
   }) {
+    parser.addFlag(
+      'no-packages',
+      negatable: false,
+      help: 'Whether to skip package-specific commands.',
+    );
     parser.addMultiOption(
       'packages',
       abbr: 'p',
@@ -66,7 +71,10 @@ final class Context {
   final Level logLevel;
 
   /// Resolves the context from the command-line arguments.
-  Future<List<Package>> resolve(ArgResults topLevelArgs) {
+  Future<List<Package>> resolve(ArgResults topLevelArgs) async {
+    if (topLevelArgs.flag('no-packages')) {
+      return [];
+    }
     final packages = topLevelArgs.multiOption('packages');
     return Future.wait(packages.map(Package.resolve));
   }

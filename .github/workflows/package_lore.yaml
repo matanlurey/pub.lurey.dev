@@ -21,6 +21,7 @@ jobs:
       - run: dart pub get
       - run: ./dev.sh setup --packages packages/lore
       - run: ./dev.sh check --packages packages/lore
+      - run: ./dev.sh generate --fail-on-changed --packages packages/lore
       - run: ./dev.sh test --packages packages/lore
       - run: ./dev.sh coverage --packages packages/lore
       - uses: codecov/codecov-action@v4.6.0
@@ -29,15 +30,3 @@ jobs:
           flags: lore
           file: packages/lore/coverage/lcov.info
           fail_ci_if_error: true
-  publish:
-    if: github.event_name == 'push'
-    needs: build
-    runs-on: ubuntu-latest
-    steps:
-      - uses: actions/checkout@v4.2.0
-      - uses: dart-lang/setup-dart@v1.6.5
-      - run: dart pub get
-        working-directory: packages/lore
-      - run: ./dev.sh publish --packages packages/lore
-        env:
-          PUB_CREDENTIALS: ${{ secrets.PUB_CREDENTIALS }}

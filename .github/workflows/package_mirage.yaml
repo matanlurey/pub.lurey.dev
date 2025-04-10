@@ -21,6 +21,7 @@ jobs:
       - run: dart pub get
       - run: ./dev.sh setup --packages packages/mirage
       - run: ./dev.sh check --packages packages/mirage
+      - run: ./dev.sh generate --fail-on-changed --packages packages/mirage
       - run: ./dev.sh test --packages packages/mirage
       - run: ./dev.sh coverage --packages packages/mirage
       - uses: codecov/codecov-action@v4.6.0

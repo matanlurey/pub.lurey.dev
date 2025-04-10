@@ -52,16 +52,16 @@ String generateGithubPackageWorkflow({
   writer.endObjectOrList();
 
   writer.writeListValue('run: ./dev.sh check --packages packages/$package');
+  writer.writeListValue(
+    'run: ./dev.sh generate --fail-on-changed --packages packages/$package',
+  );
   writer.writeListValue('run: ./dev.sh test --packages packages/$package');
 
   if (uploadCoverage) {
     writer.writeListValue(
       'run: ./dev.sh coverage --packages packages/$package',
     );
-    writer.writeListObject(
-      'uses',
-      'codecov/codecov-action@v4.6.0',
-    );
+    writer.writeListObject('uses', 'codecov/codecov-action@v4.6.0');
     writer.startObjectOrList('with');
     writer.writeKeyValue('token', r'${{ secrets.CODECOV_TOKEN }}');
     writer.writeKeyValue('flags', package);

@@ -21,6 +21,7 @@ jobs:
       - run: dart pub get
       - run: ./dev.sh setup --packages packages/mansion
       - run: ./dev.sh check --packages packages/mansion
+      - run: ./dev.sh generate --fail-on-changed --packages packages/mansion
       - run: ./dev.sh test --packages packages/mansion
       - run: ./dev.sh coverage --packages packages/mansion
       - uses: codecov/codecov-action@v4.6.0

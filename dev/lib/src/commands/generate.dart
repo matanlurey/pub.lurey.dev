@@ -13,11 +13,13 @@ import 'package:path/path.dart' as p;
 final class Generate extends BaseCommand {
   /// Creates a new generate command.
   Generate(super.context, super.environment) {
-    argParser.addFlag(
-      'root',
-      help: 'Whether to also generate repository-level files.',
-      defaultsTo: true,
-    );
+    argParser
+      ..addFlag(
+        'root',
+        help: 'Whether to also generate repository-level files.',
+        defaultsTo: true,
+      )
+      ..addFlag('fail-if-changed', help: 'Fail if any files were changed.');
   }
 
   @override
@@ -41,24 +43,38 @@ final class Generate extends BaseCommand {
     if (genRoot) {
       await _writeRepoFiles();
     }
+
+    // If --fail-if-changed is set, check if any files were changed.
+    if (argResults!.flag('fail-if-changed')) {
+      // Use git to check for changes.
+      final result = await io.Process.run('git', [
+        'diff-index',
+        '--quiet',
+        'HEAD',
+      ], workingDirectory: context.rootDir);
+      if (result.exitCode != 0) {
+        io.stderr.writeln(
+          '❌ Generators are out of date. Run ./dev.sh generate',
+        );
+        io.exitCode = 1;
+      } else {
+        io.stderr.writeln('✅ Generators are up to date');
+      }
+    }
   }
 
   Future<void> _runForPackage(String root, Package package) async {
     // Generate the workflow file.
     final workflowFile = io.File(
-      p.join(
-        root,
-        '.github',
-        'workflows',
-        'package_${package.name}.yaml',
-      ),
+      p.join(root, '.github', 'workflows', 'package_${package.name}.yaml'),
     );
     await workflowFile.writeAsString(
       generateGithubPackageWorkflow(
         package: package.name,
         publishable: package.isPublishable,
         usesChrome: package.testDependencies.contains(TestDependency.chrome),
-        usesFlutter: package.isFlutterPackage ||
+        usesFlutter:
+            package.isFlutterPackage ||
             package.nestedPackages.any((p) => p.isFlutterPackage),
         uploadCoverage: package.supportsCoverage,
       ),
