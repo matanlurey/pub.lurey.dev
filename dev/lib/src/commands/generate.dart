@@ -36,6 +36,23 @@ final class Generate extends BaseCommand {
     // Check for arguments, each positional argument is a package name.
     final genRoot = argResults!.flag('root');
 
+    // If --fail-if-changed is set, check if any files were changed.
+    if (argResults!.flag('fail-if-changed')) {
+      // If we start with a dirty state, this command will always fail.
+      final result = await io.Process.run('git', [
+        'status',
+        '--porcelain',
+      ], workingDirectory: context.rootDir);
+      if (result.stdout.toString().isNotEmpty) {
+        io.stderr.writeln(
+          '❌ Cannot use --fail-if-changed with a dirty state. Please commit '
+          'or stash your changes.',
+        );
+        io.exitCode = 1;
+        return;
+      }
+    }
+
     for (final package in await context.resolve(globalResults!)) {
       await _runForPackage(context.rootDir, package);
     }
@@ -48,22 +65,21 @@ final class Generate extends BaseCommand {
     if (argResults!.flag('fail-if-changed')) {
       // Use git to check for changes.
       final result = await io.Process.run('git', [
-        'diff-index',
-        '--quiet',
-        'HEAD',
+        'status',
+        '--porcelain',
       ], workingDirectory: context.rootDir);
-      if (result.exitCode != 0) {
+      if (result.stdout.toString().isNotEmpty) {
         io.stderr.writeln(
           '❌ Generators are out of date. Run ./dev.sh generate',
         );
 
         // Print out which files were changed.
         final diffResult = await io.Process.run('git', [
-          'diff-index',
+          'diff',
           '--name-only',
           'HEAD',
         ], workingDirectory: context.rootDir);
-        io.stderr.writeln('Changed files:');
+        io.stderr.writeln('Uncomitted files:');
         for (final line in diffResult.stdout.toString().split('\n')) {
           if (line.isNotEmpty) {
             io.stderr.writeln('  - $line');
