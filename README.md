@@ -19,7 +19,7 @@ A wide but independent collection of Dart packages and projects.
 | [`mansion`](./packages/mansion) | [![Pub version for package/mansion](https://img.shields.io/pub/v/mansion?label=%20)](https://pub.dev/packages/mansion) | Create and parse ANSI escape codes. |
 | [`mirage`](./packages/mirage) | [![Pub version for package/mirage](https://img.shields.io/pub/v/mirage?label=%20)](https://pub.dev/packages/mirage) | Noise and pattern generation. |
 | [`oath`](./packages/oath) | [![Pub version for package/oath](https://img.shields.io/pub/v/oath?label=%20)](https://pub.dev/packages/oath) | Strict linting for Dart packages. |
-| [`omen`](./packages/omen) | _Unreleased_ | Random odds-based sampling |
+| [`omen`](./packages/omen) | [![Pub version for package/omen](https://img.shields.io/pub/v/omen?label=%20)](https://pub.dev/packages/omen) | Random odds-based sampling |
 | [`proc`](./packages/proc) | [![Pub version for package/proc](https://img.shields.io/pub/v/proc?label=%20)](https://pub.dev/packages/proc) | Extensible process management. |
 | [`quirk`](./packages/quirk) | [![Pub version for package/quirk](https://img.shields.io/pub/v/quirk?label=%20)](https://pub.dev/packages/quirk) | Common utilities. |
 | [`sdk`](./packages/sdk) | _Unreleased_ | Dart SDK utilities. |
