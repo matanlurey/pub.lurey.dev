@@ -53,7 +53,7 @@ String generateGithubPackageWorkflow({
 
   writer.writeListValue('run: ./dev.sh check --packages packages/$package');
   writer.writeListValue(
-    'run: ./dev.sh generate --fail-on-changed --packages packages/$package',
+    'run: ./dev.sh generate --fail-if-changed --packages packages/$package',
   );
   writer.writeListValue('run: ./dev.sh test --packages packages/$package');
 
