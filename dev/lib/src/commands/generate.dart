@@ -56,6 +56,20 @@ final class Generate extends BaseCommand {
         io.stderr.writeln(
           '❌ Generators are out of date. Run ./dev.sh generate',
         );
+
+        // Print out which files were changed.
+        final diffResult = await io.Process.run('git', [
+          'diff-index',
+          '--name-only',
+          'HEAD',
+        ], workingDirectory: context.rootDir);
+        io.stderr.writeln('Changed files:');
+        for (final line in diffResult.stdout.toString().split('\n')) {
+          if (line.isNotEmpty) {
+            io.stderr.writeln('  - $line');
+          }
+        }
+
         io.exitCode = 1;
       } else {
         io.stderr.writeln('✅ Generators are up to date');
