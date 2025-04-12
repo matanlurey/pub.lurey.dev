@@ -6,7 +6,7 @@ name: omen
 # store an unofficial shorter description as `short_description` which tools
 # can optionally use.
 description: |-
-  Simulate odds-based mechanics and random sampling of finite elememts.
+  Simulate odds-based mechanics and random sampling of finite elements.
 short_description: Random odds-based sampling
 
 version: 0.1.0-alpha

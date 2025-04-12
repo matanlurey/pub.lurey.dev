@@ -1,7 +1,7 @@
 <!-- #region(HEADER) -->
 # `omen`
 
-Simulate odds-based mechanics and random sampling of finite elememts.
+Simulate odds-based mechanics and random sampling of finite elements.
 
 | ✅ Health | 🚀 Release | 📝 Docs | ♻️ Maintenance |
 |:----------|:-----------|:--------|:--------------|
