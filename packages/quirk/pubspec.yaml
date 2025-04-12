@@ -2,18 +2,11 @@
 
 name: quirk
 
-# However, a shorter description is often better for a quick summary, so we
-# store an unofficial shorter description as `short_description` which tools
-# can optionally use.
-#
-# However, a shorter description is often better for a quick summary, so we
-# store an unofficial shorter description as `short_description` which tools
-# can optionally use.
+short_description: Common utilities.
 description: |-
   Common utilities, patterns, and extensions for Dart and Flutter.
-short_description: Common utilities.
 
-version: 0.1.1
+version: 0.1.2
 
 homepage: https://github.com/matanlurey/pub.lurey.dev/tree/main/packages/quirk
 issue_tracker: https://github.com/matanlurey/pub.lurey.dev/labels/pkg-quirk

@@ -1,6 +1,6 @@
-import 'package:checks/checks.dart';
 import 'package:quirk/quirk.dart';
-import 'package:test/test.dart';
+
+import '_prelude.dart';
 
 void main() {
   group('capitalize', () {

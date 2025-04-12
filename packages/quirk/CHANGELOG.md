@@ -8,6 +8,12 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 <!-- #endregion -->
 
+## 0.1.2
+
+- Added `assertionsEnabled`.
+- Added `assertPositive`, `checkNonNegative`, and `assertNonNegative`.
+- Removed `SetExtension` in favor of optimizations in `IterableExtension`.
+
 ## 0.1.1
 
 - Bumped Dart to `^3.7.0`.

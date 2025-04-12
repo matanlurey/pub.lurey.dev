@@ -167,13 +167,29 @@ extension IterableExtension<T> on Iterable<T> {
     if (identical(this, other)) {
       return true;
     }
+    if (other is Set<T>) {
+      return _containsOnlyIndeterminateSet(other);
+    }
     final iterator = other.iterator;
     for (final element in this) {
       if (!iterator.moveNext() || element != iterator.current) {
         return false;
       }
     }
-    return !iterator.moveNext();
+    // coverage:ignore-start
+    throw StateError('Unreachable');
+    // coverage:ignore-end
+  }
+
+  bool _containsOnlyIndeterminateSet(Set<T> other) {
+    var found = 0;
+    for (final element in other) {
+      if (!contains(element)) {
+        return false;
+      }
+      found++;
+    }
+    return found == length;
   }
 
   /// Returns whether `this` contains only the elements in [other] in any order.

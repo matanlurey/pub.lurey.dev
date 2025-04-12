@@ -1,6 +1,6 @@
-import 'package:checks/checks.dart';
 import 'package:quirk/quirk.dart';
-import 'package:test/test.dart';
+
+import '_prelude.dart';
 
 void main() {
   group('containsAllAtLeastOnce', () {
@@ -63,6 +63,30 @@ void main() {
       final list = [1, 2, 3];
       final other = [2, 3, 4];
       check(list.containsOnly(other)).isFalse();
+    });
+
+    group('set optimization', () {
+      test('returns true if the same instance', () {
+        final set = {1, 2, 3};
+        check(set.containsOnly(set)).isTrue();
+      });
+
+      test('returns true if the same elements', () {
+        final set = {1, 2, 3};
+        check(set.containsOnly({...set})).isTrue();
+      });
+
+      test('returns false if elements are contained but extra exist', () {
+        final list = [1, 2, 3, 3];
+        final other = {2, 3};
+        check(list.containsOnly(other)).isFalse();
+      });
+
+      test('returns false if elements not contained at least once', () {
+        final list = [1, 2, 3];
+        final other = {2, 3, 4};
+        check(list.containsOnly(other)).isFalse();
+      });
     });
   });
 
