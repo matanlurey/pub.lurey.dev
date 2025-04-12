@@ -83,9 +83,12 @@ import 'dart:math' as math;
 
 import 'package:lodim/src/path/line_bresenham.dart';
 import 'package:meta/meta.dart';
+import 'package:quirk/quirk.dart';
 
 export 'package:lodim/src/path/line_bresenham.dart';
 export 'package:lodim/src/path/line_vector.dart';
+export 'package:quirk/quirk.dart'
+    show assertNonNegative, assertPositive, checkNonNegative, checkPositive;
 
 part 'src/check.dart';
 part 'src/direction.dart';
@@ -96,13 +99,6 @@ part 'src/math.dart';
 part 'src/octant.dart';
 part 'src/pos.dart';
 part 'src/rect.dart';
-
-/// Whether assertions are enabled.
-bool get _assertionsEnabled {
-  var enabled = false;
-  assert(enabled = true, 'Always true when assertions are enabled');
-  return enabled;
-}
 
 /// Whether the runtime is JS (Dart2JS or DDC).
 const _isJs = identical(1, 1.0);

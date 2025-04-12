@@ -123,7 +123,7 @@ final class Pos {
   /// print(a); // => Pos(30, 40)
   /// ```
   factory Pos.fromListUnsafe(List<int> list, [int start = 0]) {
-    if (_assertionsEnabled && list.length - start < 2) {
+    if (assertionsEnabled && list.length - start < 2) {
       throw RangeError('List must have at least two elements');
     }
     return Pos._fromListUnsafe(list, start);
@@ -1021,7 +1021,7 @@ final class Pos {
   /// ```
   List<int> toListUnsafe([List<int>? output, int index = 0]) {
     if (output == null) {
-      if (_assertionsEnabled && index != 0) {
+      if (assertionsEnabled && index != 0) {
         throw ArgumentError.value(
           index,
           'index',

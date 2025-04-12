@@ -8,6 +8,10 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 <!-- #endregion -->
 
+## 0.1.6+4
+
+- Exposed some functions through `package:quirk`.
+
 ## 0.1.6+3
 
 - Bumped Dart to `^3.7.0`.
