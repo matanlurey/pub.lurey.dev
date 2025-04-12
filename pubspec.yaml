@@ -25,6 +25,7 @@ workspace:
   - packages/mansion
   - packages/mirage
   - packages/oath
+  - packages/omen
   - packages/proc
   - packages/quirk
   - packages/sector
