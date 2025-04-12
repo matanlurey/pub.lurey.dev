@@ -1,8 +1,3 @@
-.dart_tool/
-doc/api/
-coverage/
-pubspec.lock
-
 tool/**/*.o
 CMakeCache.txt
 CMakeFiles

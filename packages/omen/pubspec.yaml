@@ -1,0 +1,29 @@
+# Format: https://dart.dev/tools/pub/pubspec
+
+name: omen
+
+# However, a shorter description is often better for a quick summary, so we
+# store an unofficial shorter description as `short_description` which tools
+# can optionally use.
+description: |-
+  Simulate odds-based mechanics and random sampling of finite elements.
+short_description: Random odds-based sampling
+
+version: 0.1.0-alpha
+publish_to: none
+
+homepage: https://github.com/matanlurey/pub.lurey.dev/tree/main/packages/omen
+issue_tracker: https://github.com/matanlurey/pub.lurey.dev/labels/pkg-omen
+
+resolution: workspace
+
+environment:
+  sdk: ^3.7.0
+
+dependencies:
+  meta: ^1.15.0
+
+dev_dependencies:
+  chaos: ^0.1.2+2
+  checks: ^0.3.0
+  test: ^1.25.7
