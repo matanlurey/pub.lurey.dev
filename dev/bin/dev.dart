@@ -19,13 +19,10 @@ void main(List<String> args) async {
 
   await Runner(
     name: 'dev',
-    Context(rootDir: root),
+    Context(rootDir: root, allPossiblePackages: available),
     systemEnvironment,
-    availablePackages: available,
     commands: (context, env) {
-      return [
-        Generate(context, env),
-      ];
+      return [Generate(context, env)];
     },
   ).run(args);
 }

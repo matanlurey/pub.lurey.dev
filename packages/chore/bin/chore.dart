@@ -25,8 +25,8 @@ void main(List<String> args) async {
           args.any((arg) => arg == '--verbose' || arg == '-v')
               ? Level.debug
               : Level.status,
+      allPossiblePackages: available,
     ),
     systemEnvironment,
-    availablePackages: available,
   ).run(args);
 }

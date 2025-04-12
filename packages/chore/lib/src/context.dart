@@ -62,13 +62,22 @@ final class Context {
   }
 
   /// Creates a new context.
-  Context({required this.rootDir, this.logLevel = Level.status});
+  Context({
+    required this.rootDir,
+    required Iterable<String> allPossiblePackages,
+    this.logLevel = Level.status,
+  }) : allPossiblePackages = List.unmodifiable(allPossiblePackages);
 
   /// The root directory of the repository.
   final String rootDir;
 
   /// What log level to use.
   final Level logLevel;
+
+  /// All possible packages in the repository.
+  ///
+  /// This list is unmodifiable.
+  final List<String> allPossiblePackages;
 
   /// Resolves the context from the command-line arguments.
   Future<List<Package>> resolve(ArgResults topLevelArgs) async {

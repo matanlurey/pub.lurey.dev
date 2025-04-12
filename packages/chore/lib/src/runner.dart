@@ -13,7 +13,6 @@ final class Runner extends CommandRunner<void> {
   factory Runner(
     Context context,
     Environment environment, {
-    required Iterable<String> availablePackages,
     String name = 'chore',
     String description = 'A repository maintenance tool.',
     Iterable<Command<void>> Function(Context, Environment)? commands,
@@ -28,7 +27,7 @@ final class Runner extends CommandRunner<void> {
         Test(context, environment),
         ...?commands?.call(context, environment),
       ]..sort((a, b) => a.name.compareTo(b.name)),
-      availablePackages: availablePackages,
+      availablePackages: context.allPossiblePackages,
       context: context,
       name: name,
       description: description,

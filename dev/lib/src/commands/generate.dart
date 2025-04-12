@@ -95,7 +95,9 @@ final class Generate extends BaseCommand {
 
   Future<void> _writeRepoFiles() async {
     // Find all the packages in the repository.
-    final packages = await context.resolve(globalResults!);
+    final packages = await Future.wait(
+      context.allPossiblePackages.map(Package.resolve),
+    );
     packages.sort((a, b) => a.name.compareTo(b.name));
 
     // Generate parts of the root README file.
