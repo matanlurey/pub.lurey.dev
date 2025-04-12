@@ -21,7 +21,7 @@ jobs:
       - run: dart pub get
       - run: ./dev.sh setup --packages packages/lodim
       - run: ./dev.sh check --packages packages/lodim
-      - run: ./dev.sh generate --fail-on-changed --packages packages/lodim
+      - run: ./dev.sh generate --fail-if-changed --packages packages/lodim
       - run: ./dev.sh test --packages packages/lodim
       - run: ./dev.sh coverage --packages packages/lodim
       - uses: codecov/codecov-action@v4.6.0

@@ -21,7 +21,7 @@ jobs:
       - run: dart pub get
       - run: ./dev.sh setup --packages packages/jsonut
       - run: ./dev.sh check --packages packages/jsonut
-      - run: ./dev.sh generate --fail-on-changed --packages packages/jsonut
+      - run: ./dev.sh generate --fail-if-changed --packages packages/jsonut
       - run: ./dev.sh test --packages packages/jsonut
       - run: ./dev.sh coverage --packages packages/jsonut
       - uses: codecov/codecov-action@v4.6.0
