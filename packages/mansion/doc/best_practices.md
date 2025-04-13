@@ -54,11 +54,11 @@ import 'dart:io';
 import 'package:mansion/mansion.dart';
 
 void main() {
-  stdout.writeAnsi(AsciiControl.enterAlternateScreen);
+  stdout.writeAnsi(AlternateScreen.enter);
   try {
     // ... your app ...
   } finally {
-    stdout.writeAnsi(AsciiControl.leaveAlternateScreen);
+    stdout.writeAnsi(AlternateScreen.leave);
   }
 }
 ```
