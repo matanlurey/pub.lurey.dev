@@ -2,6 +2,22 @@ import 'dart:math';
 
 import 'package:meta/meta.dart';
 
+/// Cuts the list at the given [index].
+///
+/// The cards before the cut are moved to the end of the list, and the cards
+/// after the cut are moved to the front.
+///
+/// [index] must be a valid index in the list.
+void cut<T>(List<T> list, {required int index}) {
+  RangeError.checkValidRange(index, 0, list.length);
+  if (index == 0 || index == list.length - 1) {
+    return;
+  }
+  final cut = list.sublist(index);
+  list.removeRange(index, list.length);
+  list.insertAll(0, cut);
+}
+
 /// A default instance of [Shuffler] that uses [List.shuffle].
 ///
 /// This is the default instance used by the library, and is suitable for most

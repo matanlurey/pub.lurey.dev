@@ -34,4 +34,5 @@ workspace:
   - packages/sector
   - packages/sdk
   - packages/strink
+  - packages/trove
   - packages/webby
