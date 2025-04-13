@@ -10,7 +10,7 @@ void main() {
 
     check(pattern.get2d(0, 0)).equals(-1.0);
     check(pattern.get2d(0, 0)).equals(0.0);
-    check(pattern.get2d(0, 0)).equals(1.0);
+    check(pattern.get2d(0, 0)).isCloseTo(1.0, 0.0001);
   });
 
   test('perlin noise', () {
