@@ -21,7 +21,7 @@ jobs:
       - run: dart pub get
       - run: ./dev.sh setup --packages packages/quirk
       - run: ./dev.sh check --packages packages/quirk
-      - run: ./dev.sh generate --fail-if-changed --packages packages/quirk
+      - run: ./dev.sh generate --no-root --fail-if-changed --packages packages/quirk
       - run: ./dev.sh test --packages packages/quirk
       - run: ./dev.sh coverage --packages packages/quirk
       - uses: codecov/codecov-action@v4.6.0

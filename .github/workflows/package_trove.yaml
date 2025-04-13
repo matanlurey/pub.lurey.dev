@@ -1,4 +1,4 @@
-name: package/omen
+name: package/trove
 
 on:
   # Post-submit.
@@ -9,8 +9,8 @@ on:
   pull_request:
     branches: [ main ]
     paths:
-      - .github/workflows/package_omen.yaml
-      - packages/omen/**
+      - .github/workflows/package_trove.yaml
+      - packages/trove/**
 
 jobs:
   build:
@@ -19,16 +19,16 @@ jobs:
       - uses: actions/checkout@v4.2.0
       - uses: dart-lang/setup-dart@v1.6.5
       - run: dart pub get
-      - run: ./dev.sh setup --packages packages/omen
-      - run: ./dev.sh check --packages packages/omen
-      - run: ./dev.sh generate --no-root --fail-if-changed --packages packages/omen
-      - run: ./dev.sh test --packages packages/omen
-      - run: ./dev.sh coverage --packages packages/omen
+      - run: ./dev.sh setup --packages packages/trove
+      - run: ./dev.sh check --packages packages/trove
+      - run: ./dev.sh generate --no-root --fail-if-changed --packages packages/trove
+      - run: ./dev.sh test --packages packages/trove
+      - run: ./dev.sh coverage --packages packages/trove
       - uses: codecov/codecov-action@v4.6.0
         with:
           token: ${{ secrets.CODECOV_TOKEN }}
-          flags: omen
-          file: packages/omen/coverage/lcov.info
+          flags: trove
+          file: packages/trove/coverage/lcov.info
           fail_ci_if_error: true
   publish:
     if: github.event_name == 'push'
@@ -38,7 +38,7 @@ jobs:
       - uses: actions/checkout@v4.2.0
       - uses: dart-lang/setup-dart@v1.6.5
       - run: dart pub get
-        working-directory: packages/omen
-      - run: ./dev.sh publish --packages packages/omen
+        working-directory: packages/trove
+      - run: ./dev.sh publish --packages packages/trove
         env:
           PUB_CREDENTIALS: ${{ secrets.PUB_CREDENTIALS }}

@@ -21,7 +21,7 @@ jobs:
       - run: dart pub get
       - run: ./dev.sh setup --packages packages/chaos
       - run: ./dev.sh check --packages packages/chaos
-      - run: ./dev.sh generate --fail-if-changed --packages packages/chaos
+      - run: ./dev.sh generate --no-root --fail-if-changed --packages packages/chaos
       - run: ./dev.sh test --packages packages/chaos
       - run: ./dev.sh coverage --packages packages/chaos
       - uses: codecov/codecov-action@v4.6.0
