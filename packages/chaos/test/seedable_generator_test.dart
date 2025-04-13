@@ -25,25 +25,25 @@ void main() {
     check(seeded).has((a) => a.seed, 'seed').equals(707406378);
   });
 
-  group('defaultRandom', () {
+  group('systemRandom', () {
     test('fromSeed', () {
-      final random = defaultRandom.fromSeed(Uint8List.fromList([0, 0, 0, 42]));
+      final random = systemRandom.fromSeed(Uint8List.fromList([0, 0, 0, 42]));
       check(random.nextInt(100)).equals(87);
     });
 
     test('fromSeed32', () {
-      final random = defaultRandom.fromSeed32(42);
+      final random = systemRandom.fromSeed32(42);
       check(random.nextInt(100)).equals(87);
     });
 
     test('fromRandom (default)', () {
-      final seeded = defaultRandom.fromRandom();
+      final seeded = systemRandom.fromRandom();
       check(() => seeded.nextInt(100)).returnsNormally();
     });
 
     test('fromRandom (provided)', () {
       final random = _FakeRandom(42);
-      final seeded = defaultRandom.fromRandom(random);
+      final seeded = systemRandom.fromRandom(random);
       check(seeded.nextInt(100)).equals(87);
     });
   });

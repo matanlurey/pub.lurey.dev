@@ -70,25 +70,6 @@ final class SequenceRandom implements PersistentRandom {
     return SequenceRandom(const []);
   }
 
-  /// Creates a new instance of [SequenceRandom] with the given sequence.
-  ///
-  /// Any numbers out of range will be normalized to the range [0, 1).
-  factory SequenceRandom(List<double> sequence, {bool terminal = false}) {
-    final s = Float64List(sequence.length);
-    for (var i = 0; i < sequence.length; i++) {
-      final r = sequence[i];
-      if (r < 0.0) {
-        s[i] = 1.0 - (-r % 1.0);
-      } else if (r >= 1.0) {
-        s[i] = r % 1.0;
-      } else {
-        s[i] = r;
-      }
-      s[i] = r;
-    }
-    return SequenceRandom._(s, terminal: terminal);
-  }
-
   /// Creates a new instance of [SequenceRandom] with the given `int` sequence.
   ///
   /// This is a convenience constructor that converts the `int` values to
@@ -129,7 +110,7 @@ final class SequenceRandom implements PersistentRandom {
       s[i] = (sequence[i] - iMin) / (iMax - iMin);
     }
 
-    return SequenceRandom._(s, terminal: terminal);
+    return SequenceRandom(s, terminal: terminal);
   }
 
   /// Creates a new instance of [SequenceRandom] with the given `bool` sequence.
@@ -141,9 +122,9 @@ final class SequenceRandom implements PersistentRandom {
   factory SequenceRandom.bools(List<bool> sequence, {bool terminal = false}) {
     final s = Float64List(sequence.length);
     for (var i = 0; i < sequence.length; i++) {
-      s[i] = sequence[i] ? 1.0 : 0.0;
+      s[i] = sequence[i] ? _maxExclusiveDobule : 0.0;
     }
-    return SequenceRandom._(s, terminal: terminal);
+    return SequenceRandom(s, terminal: terminal);
   }
 
   /// Creates a new instance of [SequenceRandom] with an uniform distribution.
@@ -166,7 +147,7 @@ final class SequenceRandom implements PersistentRandom {
     for (var i = 0; i < size; i++) {
       s[i] = i / (size - 1);
     }
-    return SequenceRandom._(s, terminal: terminal);
+    return SequenceRandom(s, terminal: terminal);
   }
 
   /// Creates a new instance of [SequenceRandom] with a linear distribution.
@@ -193,12 +174,35 @@ final class SequenceRandom implements PersistentRandom {
     for (var i = 0; i < length; i++) {
       s[i] = start + (end - start) * i / (length - 1);
     }
+    return SequenceRandom(s, terminal: terminal);
+  }
+
+  static const _maxExclusiveDobule = 0.9999999999999999;
+
+  /// Creates a new instance of [SequenceRandom] with the given sequence.
+  ///
+  /// Any numbers out of range will be normalized to the range [0, 1).
+  factory SequenceRandom(List<double> sequence, {bool terminal = false}) {
+    final s = Float64List(sequence.length);
+    for (var i = 0; i < sequence.length; i++) {
+      final r = sequence[i];
+      if (r < 0.0) {
+        s[i] = 0.0;
+      } else if (r >= 1.0) {
+        s[i] = _maxExclusiveDobule;
+      } else {
+        s[i] = r;
+      }
+    }
     return SequenceRandom._(s, terminal: terminal);
   }
 
-  SequenceRandom._(this._sequence, {required bool terminal})
-    : _terminal = terminal;
+  SequenceRandom._(
+    this._sequence, { //
+    required bool terminal,
+  }) : _terminal = terminal;
   final Float64List _sequence;
+
   var _index = 0;
   bool _terminal;
 
@@ -214,6 +218,7 @@ final class SequenceRandom implements PersistentRandom {
       }
       _index = 0;
     }
+    assert(i >= 0.0 && i < 1.0, 'Must be in range [0, 1), got $i');
     return i;
   }
 
@@ -226,7 +231,12 @@ final class SequenceRandom implements PersistentRandom {
   @override
   int nextInt(int max) {
     Uint32.checkRange(max);
-    return (nextDouble() * max).floor();
+    final result = (nextDouble() * max).floor();
+    assert(
+      result >= 0 && result < max,
+      'Must be in range [0, $max), got $result',
+    );
+    return result;
   }
 
   /// Generates a random boolean value.

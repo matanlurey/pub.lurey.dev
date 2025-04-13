@@ -1,4 +1,5 @@
 import 'dart:math';
+import 'dart:typed_data';
 
 import 'package:meta/meta.dart';
 
@@ -48,4 +49,80 @@ final class _GeneratorDistribution<T> with Distribution<T> {
 
   @override
   T sample(Random random) => _generator(random);
+}
+
+/// A [Distribution] that produces a random element from a list of elements.
+final class ListDistribution<T> with Distribution<T> {
+  /// Creates a [ListDistribution] from a `const` list of elements.
+  ///
+  /// It is undefined behavior to use a `const` list of elements that is empty.
+  const ListDistribution(@mustBeConst this._elements);
+
+  /// Creates a [ListDistribution] by copying an iterable of elements.
+  ///
+  /// The list must not be empty.
+  factory ListDistribution.from(Iterable<T> elements) {
+    if (elements.isEmpty) {
+      throw ArgumentError.value(
+        elements,
+        'elements',
+        'Must have at least one element',
+      );
+    }
+    return ListDistribution._([...elements]);
+  }
+
+  const ListDistribution._(this._elements);
+  final List<T> _elements;
+
+  @override
+  T sample(Random random) {
+    final index = random.nextInt(_elements.length);
+    return _elements[index];
+  }
+}
+
+/// Random alphanumeric code points from the range `0-9`, `a-z`, and `A-Z`.
+const alphanumeric = CodeUnitDistribution(
+  '0123456789abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ',
+);
+
+/// A [Distribution] that produces a random code point from a string.
+final class CodeUnitDistribution with Distribution<int> {
+  /// Creates a [CodeUnitDistribution] from a `const` string.
+  const CodeUnitDistribution(
+    @mustBeConst this._string, //
+  ) : assert(_string.length > 0, 'Must have at least one code point');
+
+  /// Creates a [CodeUnitDistribution] from a string.
+  ///
+  /// The string must not be empty.
+  factory CodeUnitDistribution.from(String string) {
+    if (string.isEmpty) {
+      throw ArgumentError.value(
+        string,
+        'string',
+        'Must have at least one code point',
+      );
+    }
+    return CodeUnitDistribution._(string);
+  }
+
+  const CodeUnitDistribution._(this._string);
+  final String _string;
+
+  @override
+  int sample(Random random) {
+    final index = random.nextInt(_string.length);
+    return _string.codeUnitAt(index);
+  }
+
+  /// Returns a random string of the given [length] using `this` distribution.
+  String sampleString(Random random, {required int length}) {
+    final codeUnits = Uint16List(length);
+    for (var i = 0; i < length; i++) {
+      codeUnits[i] = sample(random);
+    }
+    return String.fromCharCodes(codeUnits);
+  }
 }

@@ -49,6 +49,12 @@ final class PubspecVersionSync extends Checker {
       return false;
     }
 
+    // If the changelog version is `[Unreleased]`, skip this check
+    // (this is a common pattern for packages that are in development).
+    if (match[1] == '[Unreleased]') {
+      return false;
+    }
+
     final changelogVersion = Version.parse(match[1]!);
     if (package.version == changelogVersion.toString()) {
       return false;
@@ -73,6 +79,8 @@ final class PubspecVersionSync extends Checker {
     return true;
   }
 
-  static final _changelogVersion = RegExp(r'## (\d+\.\d+\.\d+.*)');
+  static final _changelogVersion = RegExp(
+    r'## ((\d+\.\d+\.\d+.*)\[Unreleased\])',
+  );
   static final _pubspecVersion = RegExp(r'version: (\d+\.\d+\.\d+.*)');
 }

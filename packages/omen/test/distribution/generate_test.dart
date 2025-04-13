@@ -10,6 +10,6 @@ void main() {
 
     check(items.sample(random)).equals(0);
     check(items.sample(random)).equals(50);
-    check(items.sample(random)).equals(100);
+    check(items.sample(random)).equals(99);
   });
 }

@@ -5,7 +5,7 @@ import '../_prelude.dart';
 
 void main() {
   test('const string', () {
-    final random = SequenceRandom.ints([0, 1, 2]);
+    final random = SequenceRandom.uniform(3);
     const items = CodeUnitDistribution('ABC');
 
     check(items.sample(random)).equals(0x41);
@@ -14,7 +14,7 @@ void main() {
   });
 
   test('non-const string', () {
-    final random = SequenceRandom.ints([0, 1, 2]);
+    final random = SequenceRandom.uniform(3);
     final items = CodeUnitDistribution.from('ABC');
 
     check(items.sample(random)).equals(0x41);

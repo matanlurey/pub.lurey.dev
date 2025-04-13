@@ -20,7 +20,11 @@ import 'package:meta/meta.dart';
 /// // Equivalent to Random(42), but with a consistent factory API.
 /// final random = defaultRandom.fromSeed32(42);
 /// ```
-const SeedableGenerator<Random> defaultRandom = _DefaultSeedableRandom();
+const SeedableGenerator<Random> systemRandom = _SystemSeedableRandom();
+
+/// A default instance of [SeedableGenerator] that uses [Random] as the PRNG.
+@Deprecated('Use systemRandom instead')
+const SeedableGenerator<Random> defaultRandom = systemRandom;
 
 /// A factory class that creates [Random] instances of [T] that can be seeded.
 ///
@@ -191,8 +195,8 @@ abstract mixin class SeedableGenerator<T extends Random> {
   }
 }
 
-final class _DefaultSeedableRandom with SeedableGenerator<Random> {
-  const _DefaultSeedableRandom();
+final class _SystemSeedableRandom with SeedableGenerator<Random> {
+  const _SystemSeedableRandom();
 
   @override
   Uint8List defaultZeroSeed() => Uint8List(16);

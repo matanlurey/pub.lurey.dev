@@ -9,7 +9,7 @@ description: |-
   Simulate odds-based mechanics and random sampling of finite elements.
 short_description: Random odds-based sampling
 
-version: 0.1.0-alpha
+version: 0.1.1-alpha
 
 homepage: https://github.com/matanlurey/pub.lurey.dev/tree/main/packages/omen
 issue_tracker: https://github.com/matanlurey/pub.lurey.dev/labels/pkg-omen
@@ -21,8 +21,11 @@ environment:
 
 dependencies:
   meta: ^1.15.0
+  quirk: ^0.1.2
 
 dev_dependencies:
-  chaos: ^0.1.2+2
+  # TODO: Use a publicly available version of this package.
+  chaos:
+    path: ../chaos
   checks: ^0.3.0
   test: ^1.25.7

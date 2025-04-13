@@ -5,7 +5,7 @@ import '../_prelude.dart';
 
 void main() {
   test('const list', () {
-    final random = SequenceRandom.ints([0, 1, 2]);
+    final random = SequenceRandom.uniform(3);
     const items = ListDistribution(['A', 'B', 'C']);
 
     check(items.sample(random)).equals('A');
@@ -14,7 +14,7 @@ void main() {
   });
 
   test('iterable', () {
-    final random = SequenceRandom.ints([0, 1, 2]);
+    final random = SequenceRandom.uniform(3);
     final items = ListDistribution.from(['A', 'B', 'C']);
 
     check(items.sample(random)).equals('A');

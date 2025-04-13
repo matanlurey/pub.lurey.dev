@@ -8,6 +8,25 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 <!-- #endregion -->
 
+## 0.1.2+3
+
+**Bug fixes**:
+
+- `SequenceRandom` no longer returns `max` for `nextInt(max)` or `1.0` for
+  `nextDouble()`:
+
+  ```dart
+  final sequence = SequenceRandom([0.0, 0.5, 1.0]);
+
+  check(sequence.nextDouble()).equals(0.0);
+  check(sequence.nextDouble()).equals(0.5);
+  check(sequence.nextDouble()).isCloseTo(1.0, 0.0001);
+  ```
+
+**Deprecations**:
+
+- Deprecated `defaultRandom` in favor of `systemRandom`.
+
 ## 0.1.2+2
 
 - Bumped Dart to `^3.7.0`.
