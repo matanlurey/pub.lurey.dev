@@ -6,7 +6,7 @@ description: |-
   Fast and high quality pseudo-random number generators (PRNGs) with cloneable state.
 short_description: High quality PRNGs
 
-version: 0.1.2+2
+version: 0.1.2+3
 
 homepage: https://github.com/matanlurey/pub.lurey.dev/tree/main/packages/chaos
 issue_tracker: https://github.com/matanlurey/pub.lurey.dev/labels/pkg-chaos

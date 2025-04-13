@@ -11,7 +11,7 @@ environment:
   sdk: ^3.7.0
 
 dependencies:
-  chaos: ^0.1.2+2
+  chaos: ^0.1.2+3
 
 dev_dependencies:
   oath:
