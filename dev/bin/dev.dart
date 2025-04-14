@@ -3,7 +3,6 @@
 import 'dart:io' as io;
 
 import 'package:chore/chore.dart';
-import 'package:dev/src/commands/generate.dart';
 
 void main(List<String> args) async {
   // Find the root directory of the repository.
@@ -21,8 +20,14 @@ void main(List<String> args) async {
     name: 'dev',
     Context(rootDir: root, allPossiblePackages: available),
     systemEnvironment,
-    commands: (context, env) {
-      return [Generate(context, env)];
-    },
+    commands: [
+      Check.new,
+      Coverage.new,
+      Dartdoc.new,
+      Generate.new,
+      Publish.new,
+      Setup.new,
+      Test.new,
+    ],
   ).run(args);
 }

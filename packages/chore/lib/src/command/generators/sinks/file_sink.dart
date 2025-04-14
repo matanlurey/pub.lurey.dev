@@ -9,10 +9,7 @@ interface class FileSink {
   final String _baseDir;
 
   /// Writes the given string content as the file at the given relative path.
-  Future<void> write(
-    String relativePath,
-    String content,
-  ) async {
+  Future<void> write(String relativePath, String content) async {
     final file = io.File(p.join(_baseDir, relativePath));
     await file.writeAsString(content);
   }

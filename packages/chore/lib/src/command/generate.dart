@@ -2,11 +2,11 @@ import 'dart:async';
 import 'dart:io' as io;
 
 import 'package:chore/chore.dart';
-import 'package:dev/src/generators/changelog_header.dart';
-import 'package:dev/src/generators/github_package_workflow.dart';
-import 'package:dev/src/generators/package_readme.dart';
-import 'package:dev/src/generators/root_readme.dart';
-import 'package:dev/src/sinks/file_sink.dart';
+import 'package:chore/src/command/generators/changelog_header.dart';
+import 'package:chore/src/command/generators/github_package_workflow.dart';
+import 'package:chore/src/command/generators/package_readme.dart';
+import 'package:chore/src/command/generators/root_readme.dart';
+import 'package:chore/src/command/generators/sinks/file_sink.dart';
 import 'package:path/path.dart' as p;
 
 /// A command that generates output files.

@@ -1,6 +1,10 @@
 export 'src/command/base.dart' show BaseCommand;
 export 'src/command/check.dart' show Check;
 export 'src/command/coverage.dart' show Coverage;
+export 'src/command/dartdoc.dart' show Dartdoc;
+export 'src/command/generate.dart' show Generate;
+export 'src/command/publish.dart' show Publish;
+export 'src/command/setup.dart' show Setup;
 export 'src/command/test.dart' show Test;
 export 'src/context.dart' show Context, findRootDir;
 export 'src/environment.dart' show Environment, systemEnvironment;
