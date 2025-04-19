@@ -8,6 +8,7 @@ export 'src/command/setup.dart' show Setup;
 export 'src/command/test.dart' show Test;
 export 'src/context.dart' show Context, findRootDir;
 export 'src/environment.dart' show Environment, systemEnvironment;
+export 'src/interactive.dart' show startInteractive;
 export 'src/package.dart' show Package, Workspace;
 export 'src/preview.dart' show preview;
 export 'src/runner.dart' show Runner;

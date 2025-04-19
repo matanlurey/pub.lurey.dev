@@ -61,21 +61,24 @@ final class Dartdoc extends BaseCommand {
     Package package, {
     required int? port,
   }) async {
-    final process = await environment.processHost.start(
-      dartBin,
-      ['doc'],
-      workingDirectory: package.path,
-      runMode: ProcessRunMode.inheritStdio,
-    );
-    if ((await process.exitCode).isFailure) {
-      io.exitCode = 1;
-      io.stderr.writeln(await process.stderrText.join('\n'));
-      io.stderr.writeln('❌ Failed to generate dartdoc.');
-    } else {
-      io.stderr.writeln('✅ Generated dartdoc.');
+    Future<void> generate() async {
+      final process = await environment.processHost.start(
+        dartBin,
+        ['doc'],
+        workingDirectory: package.path,
+        runMode: ProcessRunMode.inheritStdio,
+      );
+      if ((await process.exitCode).isFailure) {
+        io.exitCode = 1;
+        io.stderr.writeln(await process.stderrText.join('\n'));
+        io.stderr.writeln('❌ Failed to generate dartdoc.');
+      } else {
+        io.stderr.writeln('✅ Generated dartdoc.');
+      }
     }
 
     if (port == null) {
+      await generate();
       return;
     }
 
@@ -86,7 +89,7 @@ final class Dartdoc extends BaseCommand {
     io.stdout.writeln('📚 Previewing dartdoc at $url');
 
     // Wait for the user to stop the server.
-    await environment.processHost.watch(ProcessSignal.sigint).first;
+    await startInteractive(generate, environment: environment);
     await close();
   }
 }

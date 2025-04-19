@@ -27,6 +27,8 @@ dependencies:
   jsonut: ^0.4.1+2
   lore:
     path: ../lore
+  mansion:
+    path: ../mansion
   meta: ^1.16.0
   path: ^1.9.0
   proc: ^0.2.0+1
