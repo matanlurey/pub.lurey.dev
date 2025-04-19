@@ -21,6 +21,9 @@ abstract base class Environment {
   /// Hosts the current process and provides access to start processes.
   ProcessHost get processHost;
 
+  /// The current process's standard input stream.
+  io.Stdin get stdin;
+
   /// Returns the current Dart SDK.
   ///
   /// If the Dart SDK cannot be determined, returns `null`.
@@ -53,6 +56,9 @@ final class _SystemEnvironment extends Environment {
   @override
   ProcessHost get processHost => _defaultHost;
   static final _defaultHost = ProcessHost();
+
+  @override
+  io.Stdin get stdin => io.stdin;
 
   @override
   DartSdk? getDartSdk() {

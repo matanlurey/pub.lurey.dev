@@ -2,7 +2,6 @@ import 'dart:io' as io;
 
 import 'package:chore/chore.dart';
 import 'package:path/path.dart' as p;
-import 'package:proc/proc.dart';
 import 'package:sdk/sdk.dart';
 
 /// A command that collects and reports code coverage.
@@ -134,7 +133,9 @@ final class Coverage extends BaseCommand {
 
     // genhtml coverage/lcov.info -o coverage/html
     io.stderr.writeln('Generating HTML coverage report for ${package.name}...');
-    {
+
+    Future<void> generate() async {
+      io.stderr.writeln();
       final process = await environment.processHost.start('genhtml', [
         p.join(package.path, 'coverage', 'lcov.info'),
         '-o',
@@ -152,6 +153,7 @@ final class Coverage extends BaseCommand {
 
     // preview if requested
     if (port == null) {
+      await generate();
       return;
     }
 
@@ -159,10 +161,10 @@ final class Coverage extends BaseCommand {
       directory: p.join(package.path, 'coverage', 'html'),
       port: port,
     );
-    io.stdout.writeln('📚 Previewing coverage report at $url');
 
-    // Wait for the user to stop the server.
-    await environment.processHost.watch(ProcessSignal.sigint).first;
+    io.stdout.writeln('📚 Previewing coverage report at $url');
+    await startInteractive(generate, environment: environment);
+
     await close();
   }
 }

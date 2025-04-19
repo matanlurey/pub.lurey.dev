@@ -59,6 +59,13 @@ final class Context {
       defaultsTo: packages.length == 1 ? [packages.first] : packages,
       hide: !verbose && packages.length <= 1,
     );
+    parser.addMultiOption(
+      'match-package-regex',
+      abbr: 'x',
+      help: 'Regex that can match a package name. Cannot use with --packages.',
+      defaultsTo: [],
+      hide: !verbose,
+    );
   }
 
   /// Creates a new context.
@@ -84,7 +91,28 @@ final class Context {
     if (topLevelArgs.flag('no-packages')) {
       return [];
     }
-    final packages = topLevelArgs.multiOption('packages');
+
+    // Check if --match-package-regex is used.
+    final List<String> packages;
+    if (topLevelArgs.multiOption('match-package-regex') case [
+      ...final rx,
+    ] when rx.isNotEmpty) {
+      // Make sure that packages are not used.
+      if (topLevelArgs.wasParsed('packages')) {
+        throw StateError('Cannot use --match-package-regex with --packages.');
+      }
+
+      // Find packages that match at least one regex.
+      final regexes = [...rx.map(RegExp.new)];
+      packages = [
+        for (final package in allPossiblePackages)
+          if (regexes.any((regex) => regex.hasMatch(package))) package,
+      ];
+    } else {
+      // Get the packages from the command line.
+      packages = topLevelArgs.multiOption('packages');
+    }
+
     return Future.wait(packages.map(Package.resolve));
   }
 
