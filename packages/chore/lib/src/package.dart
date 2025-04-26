@@ -153,8 +153,8 @@ sealed class Package {
         shortDescription == other.shortDescription &&
         isPublishable == other.isPublishable &&
         isFlutterPackage == other.isFlutterPackage &&
-        testDependencies.containsOnlyUnordered(other.testDependencies) &&
-        nestedPackages.containsOnlyUnordered(other.nestedPackages) &&
+        testDependencies.containsOnly(other.testDependencies) &&
+        nestedPackages.containsOnly(other.nestedPackages) &&
         supportsCoverage == other.supportsCoverage;
   }
 
@@ -231,7 +231,7 @@ final class Workspace extends _Package {
     if (other is! Workspace || super != other) {
       return false;
     }
-    return packages.containsOnly(other.packages);
+    return packages.containsOnlyOrdered(other.packages);
   }
 
   @override

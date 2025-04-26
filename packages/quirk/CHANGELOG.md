@@ -8,6 +8,22 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 <!-- #endregion -->
 
+## 0.2.0
+
+**New features**:
+
+- Added `MapExtension`, with similar functionality to `IterableExtension`.
+- Added `IterableOrNullExtension` and `MapOrNullExtension`.
+
+**Breaking changes**:
+
+- Methods labeled `*Unordered` are now `*`, and the inverse are `*Ordered`.
+
+**Bug fixes**:
+
+- Many methods had slightly incorrect implementations, which have been fixed
+  and better tests added.
+
 ## 0.1.2
 
 - Added `assertionsEnabled`.

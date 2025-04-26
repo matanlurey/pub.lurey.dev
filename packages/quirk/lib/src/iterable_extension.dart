@@ -23,8 +23,8 @@ extension IterableExtension<T> on Iterable<T> {
   /// print(list.containsAllAtLeastOnce(other)); // true
   /// ```
   bool containsAllAtLeastOnce(Iterable<T> other) {
-    if (length < other.length) {
-      return false;
+    if (other.isEmpty) {
+      return true;
     }
     return containsAllAtLeastOnceIndeterminate(other);
   }
@@ -50,7 +50,13 @@ extension IterableExtension<T> on Iterable<T> {
     if (identical(this, other)) {
       return true;
     }
-    return other.every(contains);
+    final missing = {...other};
+    for (final element in this) {
+      if (missing.remove(element) && missing.isEmpty) {
+        return true;
+      }
+    }
+    return false;
   }
 
   /// Returns whether `this` contains every element in [other] the same number
@@ -117,10 +123,146 @@ extension IterableExtension<T> on Iterable<T> {
     return true;
   }
 
+  /// Returns whether `this` contains every element in [other] in the same
+  /// order.
+  ///
+  /// The elements must be equal (as determined by [Object.==]).
+  ///
+  /// ## Performance
+  ///
+  /// This method assumes that [length] can be efficiently computed for both
+  /// `this` and [other] in order to early exit if [other] is longer than
+  /// `this`; otherwise, it will iterate over [other] to check if every element
+  /// is contained in `this`. Use [containsAllOrderedIndeterminate] if you
+  /// cannot guarantee that [length] can be efficiently computed for both
+  /// [other] and `this`.
+  ///
+  /// ## Example
+  ///
+  /// ```dart
+  /// final list = [1, 2, 3];
+  /// final other = [2, 3];
+  /// print(list.containsAllOrdered(other)); // true
+  /// ```
+  bool containsAllOrdered(Iterable<T> other) {
+    if (length < other.length) {
+      return false;
+    }
+    return containsAllOrderedIndeterminate(other);
+  }
+
+  /// Returns whether `this` contains every element in [other] in the same
+  /// order.
+  ///
+  /// The elements must be equal (as determined by [Object.==]).
+  ///
+  /// ## Performance
+  ///
+  /// This method will iterate over [other] to check if every element is
+  /// contained in `this`. Use [containsAllOrdered] if you can guarantee
+  /// that [length] can be efficiently computed for both `this` and
+  /// [other].
+  ///
+  /// ## Example
+  ///
+  /// ```dart
+  /// final list = [1, 2, 3];
+  /// final other = [2, 3];
+  /// print(list.containsAllOrderedIndeterminate(other)); // true
+  /// ```
+  bool containsAllOrderedIndeterminate(Iterable<T> other) {
+    if (identical(this, other)) {
+      return true;
+    }
+    // Iterate through `this` and `other` simultaneously, looking for the first
+    // element in `this` that matches the first element in `other`, and then try
+    // to match the rest of `other` in order.
+    final iterator = other.iterator;
+    if (!iterator.moveNext()) {
+      return true;
+    }
+    for (final element in this) {
+      if (element == iterator.current) {
+        if (!iterator.moveNext()) {
+          return true;
+        }
+      } else if (iterator.current == null) {
+        return false;
+      }
+    }
+    // If we reach here, it means we have exhausted `this` without finding a
+    // match for the last element in `other`.
+    return false;
+  }
+
   /// Returns whether `this` contains only the elements in [other].
   ///
   /// The elements must be equal (as determined by [Object.==]) and the order
   /// must be the same.
+  ///
+  /// ## Performance
+  ///
+  /// This method assumes that [length] can be efficiently computed for both
+  /// `this` and [other] in order to early exit if [other] is longer than
+  /// `this`; otherwise, it will iterate over [other] to check if every element
+  /// is contained in `this`. Use [containsOnlyOrderedIndeterminate] if you
+  /// cannot guarantee that [length] can be efficiently computed for both
+  /// [other] and `this`.
+  ///
+  /// ## Example
+  ///
+  /// ```dart
+  /// final list = [1, 2, 3];
+  /// final other = [1, 2, 3];
+  /// print(list.containsOnly(other)); // true
+  /// ```
+  bool containsOnlyOrdered(Iterable<T> other) {
+    if (length != other.length) {
+      return false;
+    }
+    return containsOnlyOrderedIndeterminate(other);
+  }
+
+  /// Returns whether `this` contains only the elements in [other].
+  ///
+  /// The elements must be equal (as determined by [Object.==]) and the order
+  /// must be the same.
+  ///
+  /// ## Performance
+  ///
+  /// This method will iterate over [other] to check if every element is
+  /// contained in `this`. Use [containsOnlyOrdered] if you can guarantee that
+  /// [length] can be efficiently computed for both `this` and [other].
+  ///
+  /// ## Example
+  ///
+  /// ```dart
+  /// final list = [1, 2, 3];
+  /// final other = [1, 2, 3];
+  /// print(list.containsOnlyIndeterminate(other)); // true
+  /// ```
+  bool containsOnlyOrderedIndeterminate(Iterable<T> other) {
+    if (identical(this, other)) {
+      return true;
+    }
+    final iterator = other.iterator;
+    if (!iterator.moveNext()) {
+      return true;
+    }
+    for (final element in this) {
+      if (element != iterator.current) {
+        return false;
+      }
+      if (!iterator.moveNext()) {
+        return true;
+      }
+    }
+    return false;
+  }
+
+  /// Returns whether `this` contains only the elements in [other] in any order.
+  ///
+  /// The elements must be equal (as determined by [Object.==]).
   ///
   /// ## Performance
   ///
@@ -135,8 +277,8 @@ extension IterableExtension<T> on Iterable<T> {
   ///
   /// ```dart
   /// final list = [1, 2, 3];
-  /// final other = [1, 2, 3];
-  /// print(list.containsOnly(other)); // true
+  /// final other = [3, 2, 1];
+  /// print(list.containsOnlyUnordered(other)); // true
   /// ```
   bool containsOnly(Iterable<T> other) {
     if (length != other.length) {
@@ -145,10 +287,9 @@ extension IterableExtension<T> on Iterable<T> {
     return containsOnlyIndeterminate(other);
   }
 
-  /// Returns whether `this` contains only the elements in [other].
+  /// Returns whether `this` contains only the elements in [other] in any order.
   ///
-  /// The elements must be equal (as determined by [Object.==]) and the order
-  /// must be the same.
+  /// The elements must be equal (as determined by [Object.==]).
   ///
   /// ## Performance
   ///
@@ -160,8 +301,8 @@ extension IterableExtension<T> on Iterable<T> {
   ///
   /// ```dart
   /// final list = [1, 2, 3];
-  /// final other = [1, 2, 3];
-  /// print(list.containsOnlyIndeterminate(other)); // true
+  /// final other = [3, 2, 1];
+  /// print(list.containsOnlyUnorderedIndeterminate(other)); // true
   /// ```
   bool containsOnlyIndeterminate(Iterable<T> other) {
     if (identical(this, other)) {
@@ -169,76 +310,6 @@ extension IterableExtension<T> on Iterable<T> {
     }
     if (other is Set<T>) {
       return _containsOnlyIndeterminateSet(other);
-    }
-    final iterator = other.iterator;
-    for (final element in this) {
-      if (!iterator.moveNext() || element != iterator.current) {
-        return false;
-      }
-    }
-    // coverage:ignore-start
-    throw StateError('Unreachable');
-    // coverage:ignore-end
-  }
-
-  bool _containsOnlyIndeterminateSet(Set<T> other) {
-    var found = 0;
-    for (final element in other) {
-      if (!contains(element)) {
-        return false;
-      }
-      found++;
-    }
-    return found == length;
-  }
-
-  /// Returns whether `this` contains only the elements in [other] in any order.
-  ///
-  /// The elements must be equal (as determined by [Object.==]).
-  ///
-  /// ## Performance
-  ///
-  /// This method assumes that [length] can be efficiently computed for both
-  /// `this` and [other] in order to early exit if [other] is longer than
-  /// `this`; otherwise, it will iterate over [other] to check if every element
-  /// is contained in `this`. Use [containsOnlyUnorderedIndeterminate] if you
-  /// cannot guarantee that [length] can be efficiently computed for both
-  /// [other] and `this`.
-  ///
-  /// ## Example
-  ///
-  /// ```dart
-  /// final list = [1, 2, 3];
-  /// final other = [3, 2, 1];
-  /// print(list.containsOnlyUnordered(other)); // true
-  /// ```
-  bool containsOnlyUnordered(Iterable<T> other) {
-    if (length != other.length) {
-      return false;
-    }
-    return containsOnlyUnorderedIndeterminate(other);
-  }
-
-  /// Returns whether `this` contains only the elements in [other] in any order.
-  ///
-  /// The elements must be equal (as determined by [Object.==]).
-  ///
-  /// ## Performance
-  ///
-  /// This method will iterate over [other] to check if every element is
-  /// contained in `this`. Use [containsOnlyUnordered] if you can guarantee that
-  /// [length] can be efficiently computed for both `this` and [other].
-  ///
-  /// ## Example
-  ///
-  /// ```dart
-  /// final list = [1, 2, 3];
-  /// final other = [3, 2, 1];
-  /// print(list.containsOnlyUnorderedIndeterminate(other)); // true
-  /// ```
-  bool containsOnlyUnorderedIndeterminate(Iterable<T> other) {
-    if (identical(this, other)) {
-      return true;
     }
     final counts = HashMap<T, int>();
     for (final element in this) {
@@ -252,6 +323,17 @@ extension IterableExtension<T> on Iterable<T> {
       counts[element] = count - 1;
     }
     return true;
+  }
+
+  bool _containsOnlyIndeterminateSet(Set<T> other) {
+    var found = 0;
+    for (final element in other) {
+      if (!contains(element)) {
+        return false;
+      }
+      found++;
+    }
+    return found == length;
   }
 
   /// Returns `this` as a [Set].
@@ -311,5 +393,24 @@ extension IterableExtension<T> on Iterable<T> {
       );
     }
     return set;
+  }
+}
+
+/// Extension for nullable [Iterable]s.
+extension IterableOrNullExtension<T> on Iterable<T>? {
+  /// Returns whether `this` is null or empty.
+  bool get isNullOrEmpty {
+    if (this case final iterable?) {
+      return iterable.isEmpty;
+    }
+    return true;
+  }
+
+  /// Returns an empty iterable if `this` is null.
+  Iterable<T> get orEmpty {
+    if (this case final iterable?) {
+      return iterable;
+    }
+    return const Iterable.empty();
   }
 }
