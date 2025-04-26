@@ -99,7 +99,9 @@ final class Coverage extends BaseCommand {
 
     // dart pub global run coverage:format_coverage -i coverage
     io.stderr.writeln('Collecting coverage for ${package.name}...');
-    {
+
+    Future<void> collectCoverage() async {
+      io.stderr.writeln();
       final process = await environment.processHost.start(dart.binPath, [
         'pub',
         'global',
@@ -126,6 +128,8 @@ final class Coverage extends BaseCommand {
       }
     }
 
+    await collectCoverage();
+
     // Generate HTML coverage report if requested.
     if (!genHtml) {
       return;
@@ -134,7 +138,7 @@ final class Coverage extends BaseCommand {
     // genhtml coverage/lcov.info -o coverage/html
     io.stderr.writeln('Generating HTML coverage report for ${package.name}...');
 
-    Future<void> generate() async {
+    Future<void> generateHtml() async {
       io.stderr.writeln();
       final process = await environment.processHost.start('genhtml', [
         p.join(package.path, 'coverage', 'lcov.info'),
@@ -153,7 +157,7 @@ final class Coverage extends BaseCommand {
 
     // preview if requested
     if (port == null) {
-      await generate();
+      await generateHtml();
       return;
     }
 
@@ -163,7 +167,10 @@ final class Coverage extends BaseCommand {
     );
 
     io.stdout.writeln('📚 Previewing coverage report at $url');
-    await startInteractive(generate, environment: environment);
+    await startInteractive(() async {
+      await collectCoverage();
+      await generateHtml();
+    }, environment: environment);
 
     await close();
   }

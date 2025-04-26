@@ -1,3 +1,5 @@
+import 'dart:io' as io;
+
 import 'package:shelf/shelf_io.dart';
 import 'package:shelf_static/shelf_static.dart';
 
@@ -6,6 +8,7 @@ Future<(Future<void> Function(), Uri)> preview({
   required String directory,
   required int port,
 }) async {
+  io.Directory(directory).createSync(recursive: true);
   final handler = createStaticHandler(directory, defaultDocument: 'index.html');
   final server = await serve(handler, 'localhost', port);
   return (server.close, Uri.http('${server.address.host}:${server.port}'));
