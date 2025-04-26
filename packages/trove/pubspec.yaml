@@ -9,7 +9,7 @@ description: |-
   A collection of tools and components around playing cards and tabletop games
 short_description: Tools for tabletop games
 
-version: 0.1.0-alpha
+version: 0.1.0-alpha+1
 
 homepage: https://github.com/matanlurey/pub.lurey.dev/tree/main/packages/trove
 issue_tracker: https://github.com/matanlurey/pub.lurey.dev/labels/pkg-trove
@@ -22,7 +22,7 @@ environment:
 dependencies:
   meta: ^1.15.0
   omen: ^0.1.1-alpha
-  quirk: ^0.1.2
+  quirk: ">=0.1.2 <0.3.0"
 
 dev_dependencies:
   chaos: ^0.1.2+3

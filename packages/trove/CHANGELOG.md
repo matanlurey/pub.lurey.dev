@@ -8,6 +8,12 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 <!-- #endregion -->
 
+## 0.1.0-alpha+1
+
+**Maintenance**:
+
+- Update depedency ranges.
+
 ## 0.1.0-alpha
 
 Initial pre-release of the `trove` package.
