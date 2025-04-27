@@ -30,7 +30,7 @@ sealed class Package {
         isFlutterPackage: pubspec.dependencies.contains('flutter'),
         description: pubspec.description,
         shortDescription: pubspec.shortDescription,
-        packages: packages.toSetRejectDuplicates(),
+        packages: packages.toSet(),
       );
     }
 
@@ -153,8 +153,8 @@ sealed class Package {
         shortDescription == other.shortDescription &&
         isPublishable == other.isPublishable &&
         isFlutterPackage == other.isFlutterPackage &&
-        testDependencies.containsOnly(other.testDependencies) &&
-        nestedPackages.containsOnly(other.nestedPackages) &&
+        testDependencies.unorderedEquals(other.testDependencies) &&
+        nestedPackages.unorderedEquals(other.nestedPackages) &&
         supportsCoverage == other.supportsCoverage;
   }
 
@@ -231,7 +231,7 @@ final class Workspace extends _Package {
     if (other is! Workspace || super != other) {
       return false;
     }
-    return packages.containsOnlyOrdered(other.packages);
+    return packages.unorderedEquals(other.packages);
   }
 
   @override
