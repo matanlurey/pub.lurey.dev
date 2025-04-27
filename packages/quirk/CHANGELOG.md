@@ -8,7 +8,15 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 <!-- #endregion -->
 
+## 0.2.1
+
+**New features**:
+
 ## 0.2.0
+
+- Added `Delegating*` classes for `Iterable`, `List`, `Set` and `Map`.
+- Added `CopyOnWrite*` classes for `List`, `Set` and `Map`.
+- Added `ListExtension` and `SetExtension`.
 
 **New features**:
 
