@@ -14,4 +14,11 @@ void main() {
       check(list.orEmpty).deepEquals([1, 2, 3]);
     });
   });
+
+  test('asUnmodifiable', () {
+    final list = [1, 2, 3];
+    final unmodifiableList = list.asUnmodifiable();
+    check(unmodifiableList).deepEquals([1, 2, 3]);
+    check(() => unmodifiableList.add(4)).throws<UnsupportedError>();
+  });
 }

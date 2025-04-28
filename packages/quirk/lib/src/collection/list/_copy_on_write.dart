@@ -4,13 +4,18 @@ part of '../../collection.dart';
 abstract final class CopyOnWriteList<E> implements List<E> {
   /// Creates a list that copies the underlying list on modification.
   factory CopyOnWriteList(List<E> delegate) = _CopyOnWriteList<E>;
+
+  @override
+  CopyOnWriteList<R> cast<R>();
 }
 
 final class _CopyOnWriteList<E>
     with
         _DelegatingIterableMixin<E>, //
         _DelegatingListReadMixin<E>
-    implements CopyOnWriteList<E> {
+    implements
+        CopyOnWriteList<E>, //
+        ReadOnlyList<E> {
   _CopyOnWriteList(this._delegate);
 
   @override
@@ -22,6 +27,11 @@ final class _CopyOnWriteList<E>
       _isOriginal = false;
       _delegate = [..._delegate];
     }
+  }
+
+  @override
+  _CopyOnWriteList<R> cast<R>() {
+    return _CopyOnWriteList<R>(_delegate.cast<R>());
   }
 
   @override
