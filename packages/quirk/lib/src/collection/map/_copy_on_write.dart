@@ -4,6 +4,9 @@ part of '../../collection.dart';
 abstract final class CopyOnWriteMap<K, V> implements Map<K, V> {
   /// Creates a map that copies the underlying map on modification.
   factory CopyOnWriteMap(Map<K, V> delegate) = _CopyOnWriteMap<K, V>;
+
+  @override
+  CopyOnWriteMap<RK, RV> cast<RK, RV>();
 }
 
 final class _CopyOnWriteMap<K, V>
@@ -20,6 +23,11 @@ final class _CopyOnWriteMap<K, V>
       _isOriginal = false;
       _delegate = {..._delegate};
     }
+  }
+
+  @override
+  CopyOnWriteMap<RK, RV> cast<RK, RV>() {
+    return _CopyOnWriteMap<RK, RV>(_delegate.cast());
   }
 
   @override

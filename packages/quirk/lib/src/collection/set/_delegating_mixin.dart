@@ -3,7 +3,7 @@ part of '../../collection.dart';
 /// An internal mixin that delegates all read operations to [_delegate].
 ///
 /// Used as an implementation detail for other classes in this library.
-base mixin _DelegatingSetReadMixin<E> implements Set<E> {
+base mixin _DelegatingSetReadMixin<E> implements ReadOnlySet<E> {
   /// All operations are delegated to this set.
   Set<E> get _delegate;
 
@@ -35,6 +35,11 @@ base mixin _DelegatingSetReadMixin<E> implements Set<E> {
   @override
   Set<E> difference(Set<Object?> other) {
     return _delegate.difference(other);
+  }
+
+  @override
+  Set<E> asSet() {
+    return _delegate.asUnmodifiable();
   }
 }
 

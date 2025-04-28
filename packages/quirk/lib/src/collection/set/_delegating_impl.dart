@@ -5,7 +5,7 @@ abstract final class DelegatingSet<E> implements Set<E> {
   /// Creates a delegating set.
   ///
   /// Can be used to hide the implementation of a set.
-  const factory DelegatingSet(
+  const factory DelegatingSet.view(
     Set<E> delegate, //
   ) = _DelegatingSet<E>;
 }

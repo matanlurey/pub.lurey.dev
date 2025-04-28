@@ -3,63 +3,52 @@ part of '../../collection.dart';
 /// An internal mixin that delegates all read operations to [_delegate].
 ///
 /// Used as an implementation detail for other classes in this library.
-base mixin _DelegatingListReadMixin<E> implements List<E> {
+base mixin _DelegatingListReadMixin<E> {
   /// All operations are delegated to this list.
   List<E> get _delegate;
 
-  @override
-  List<R> cast<R>() {
-    return _delegate.cast();
-  }
-
-  @override
   E operator [](int index) {
     return _delegate[index];
   }
 
-  @override
   Iterable<E> get reversed {
     return _delegate.reversed;
   }
 
-  @override
   int indexOf(E element, [int start = 0]) {
     return _delegate.indexOf(element, start);
   }
 
-  @override
   int indexWhere(bool Function(E element) test, [int start = 0]) {
     return _delegate.indexWhere(test, start);
   }
 
-  @override
   int lastIndexOf(E element, [int? start]) {
     return _delegate.lastIndexOf(element, start);
   }
 
-  @override
   int lastIndexWhere(bool Function(E element) test, [int? start]) {
     return _delegate.lastIndexWhere(test, start);
   }
 
-  @override
   List<E> operator +(List<E> other) {
     return _delegate + other;
   }
 
-  @override
   List<E> sublist(int start, [int? end]) {
     return _delegate.sublist(start, end);
   }
 
-  @override
   Iterable<E> getRange(int start, int end) {
     return _delegate.getRange(start, end);
   }
 
-  @override
   Map<int, E> asMap() {
     return _delegate.asMap();
+  }
+
+  List<E> asList() {
+    return _delegate.asUnmodifiable();
   }
 
   @override

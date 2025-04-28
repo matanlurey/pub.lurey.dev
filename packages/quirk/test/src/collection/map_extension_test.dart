@@ -14,4 +14,13 @@ void main() {
       check(map.orEmpty).deepEquals({1: 'a', 2: 'b', 3: 'c'});
     });
   });
+
+  test('asUnmodifiable', () {
+    final map = {1: 'a', 2: 'b', 3: 'c'};
+    final unmodifiableMap = map.asUnmodifiable();
+
+    check(unmodifiableMap).deepEquals({1: 'a', 2: 'b', 3: 'c'});
+    check(() => unmodifiableMap[1] = 'd').throws<UnsupportedError>();
+    check(() => unmodifiableMap.remove(1)).throws<UnsupportedError>();
+  });
 }
