@@ -3,68 +3,56 @@ part of '../../collection.dart';
 /// An internal mixin that delegates all read operations to [_delegate].
 ///
 /// Used as an implementation detail for other classes in this library.
-base mixin _DelegatingMapReadMixin<K, V> implements Map<K, V> {
+base mixin _DelegatingMapReadMixin<K, V> {
   /// All operations are delegated to this map.
   Map<K, V> get _delegate;
 
-  @override
-  Map<RK, RV> cast<RK, RV>() {
-    return _delegate.cast();
-  }
-
-  @override
   bool containsValue(Object? value) {
     return _delegate.containsValue(value);
   }
 
-  @override
   bool containsKey(Object? key) {
     return _delegate.containsKey(key);
   }
 
-  @override
   V? operator [](Object? key) {
     return _delegate[key];
   }
 
-  @override
   Iterable<MapEntry<K, V>> get entries {
     return _delegate.entries;
   }
 
-  @override
   Map<K2, V2> map<K2, V2>(MapEntry<K2, V2> Function(K key, V value) convert) {
     return _delegate.map(convert);
   }
 
-  @override
   void forEach(void Function(K key, V value) f) {
     _delegate.forEach(f);
   }
 
-  @override
   Iterable<K> get keys {
     return _delegate.keys;
   }
 
-  @override
   Iterable<V> get values {
     return _delegate.values;
   }
 
-  @override
   int get length {
     return _delegate.length;
   }
 
-  @override
   bool get isEmpty {
     return _delegate.isEmpty;
   }
 
-  @override
   bool get isNotEmpty {
     return _delegate.isNotEmpty;
+  }
+
+  Map<K, V> asMap() {
+    return _delegate.asUnmodifiable();
   }
 }
 

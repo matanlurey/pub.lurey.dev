@@ -15,4 +15,9 @@ final class _DelegatingMap<K, V>
     implements DelegatingMap<K, V> {
   const _DelegatingMap(this._delegate);
   final Map<K, V> _delegate;
+
+  @override
+  _DelegatingMap<RK, RV> cast<RK, RV>() {
+    return _DelegatingMap<RK, RV>(_delegate.cast());
+  }
 }
