@@ -9,8 +9,18 @@ final class OptionalValue implements Value {
   final Value? value;
 
   @override
-  OptionalValue clone() => OptionalValue(value?.clone());
+  OptionalValue clone() {
+    if (value case final v?) {
+      return OptionalValue(v.clone());
+    }
+    return this;
+  }
 
   @override
   ValueKind get kind => ValueKind.optional;
+
+  @override
+  String toString() {
+    return '$value';
+  }
 }

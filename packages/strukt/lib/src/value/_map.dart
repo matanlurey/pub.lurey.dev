@@ -15,4 +15,9 @@ final class MapValue implements Value {
 
   @override
   ValueKind get kind => ValueKind.map;
+
+  @override
+  String toString() {
+    return '$value';
+  }
 }

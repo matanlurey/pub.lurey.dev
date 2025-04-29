@@ -1,3 +1,4 @@
+import 'dart:convert';
 import 'dart:typed_data';
 
 import 'package:meta/meta.dart';
@@ -35,6 +36,31 @@ sealed class Value {
   ///
   /// This is a recursive hash code that will include all nested values.
   static int hash(Value value) => _deepHashCode(value);
+
+  /// Creates a [Value] from a [bool].
+  // ignore: avoid_positional_boolean_parameters
+  const factory Value.bool(bool value) = BoolValue;
+
+  /// Creates a [Value] from a [double].
+  const factory Value.double(double value) = DoubleValue;
+
+  /// Creates a [Value] from an [int].
+  const factory Value.int(int value) = IntValue;
+
+  /// Creates a [Value] from a [String].
+  const factory Value.string(String value) = StringValue;
+
+  /// Creates a [Value] from a [Uint8List].
+  const factory Value.bytes(Uint8List value) = BytesValue;
+
+  /// Creates a [Value] from a [List].
+  const factory Value.list(List<Value> value) = ListValue;
+
+  /// Creates a [Value] from a [Map].
+  const factory Value.map(Map<String, Value> value) = MapValue;
+
+  /// Creates a [Value] from an optional [Value].
+  const factory Value.optional(Value? value) = OptionalValue;
 
   /// Creates a clone of this value.
   ///

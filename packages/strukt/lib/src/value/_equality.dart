@@ -45,17 +45,18 @@ bool _deepEqualsNullable(Value? a, Value? b) {
 
 int _deepHashCode(Value value) {
   return switch (value) {
-    BoolValue(:final value) => value.hashCode,
+    // Primitive values
+    BoolValue(:final Object value) ||
+    DoubleValue(:final Object value) ||
+    IntValue(:final Object value) ||
+    StringValue(:final Object value) => value.hashCode,
+
     BytesValue(:final value) => Object.hashAll(value),
-    DoubleValue(:final value) => value.hashCode,
-    IntValue(:final value) => value.hashCode,
     ListValue(:final value) => Object.hashAll(value.map(_deepHashCode)),
     MapValue(:final value) => Object.hashAll(
-      value.entries.map((e) {
-        return Object.hash(e.key, _deepHashCode(e.value));
-      }),
+      value.entries.expand((e) => [e.key, _deepHashCode(e.value)]),
     ),
+
     OptionalValue(:final value) => value == null ? 0 : _deepHashCode(value),
-    StringValue(:final value) => value.hashCode,
   };
 }

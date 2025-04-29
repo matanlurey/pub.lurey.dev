@@ -10,8 +10,13 @@ final class BoolValue implements Value {
   final bool value;
 
   @override
-  BoolValue clone() => BoolValue(value);
+  BoolValue clone() => this;
 
   @override
   ValueKind get kind => ValueKind.boolean;
+
+  @override
+  String toString() {
+    return '$value';
+  }
 }

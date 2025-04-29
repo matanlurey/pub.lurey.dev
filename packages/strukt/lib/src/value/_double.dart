@@ -9,8 +9,13 @@ final class DoubleValue implements Value {
   final double value;
 
   @override
-  DoubleValue clone() => DoubleValue(value);
+  DoubleValue clone() => this;
 
   @override
   ValueKind get kind => ValueKind.double;
+
+  @override
+  String toString() {
+    return '$value';
+  }
 }

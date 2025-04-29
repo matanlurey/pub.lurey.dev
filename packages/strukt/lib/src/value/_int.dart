@@ -9,8 +9,13 @@ final class IntValue implements Value {
   final int value;
 
   @override
-  IntValue clone() => IntValue(value);
+  IntValue clone() => this;
 
   @override
   ValueKind get kind => ValueKind.integer;
+
+  @override
+  String toString() {
+    return '$value';
+  }
 }

@@ -13,4 +13,7 @@ final class BytesValue implements Value {
 
   @override
   ValueKind get kind => ValueKind.bytes;
+
+  @override
+  String toString() => base64Encode(value);
 }

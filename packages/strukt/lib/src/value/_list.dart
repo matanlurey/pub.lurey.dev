@@ -13,4 +13,9 @@ final class ListValue implements Value {
 
   @override
   ValueKind get kind => ValueKind.list;
+
+  @override
+  String toString() {
+    return '$value';
+  }
 }

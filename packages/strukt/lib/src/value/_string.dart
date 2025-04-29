@@ -9,8 +9,13 @@ final class StringValue implements Value {
   final String value;
 
   @override
-  StringValue clone() => StringValue(value);
+  StringValue clone() => this;
 
   @override
   ValueKind get kind => ValueKind.string;
+
+  @override
+  String toString() {
+    return value;
+  }
 }
