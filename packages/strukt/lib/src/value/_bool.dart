@@ -13,7 +13,7 @@ final class BoolValue implements Value {
   BoolValue clone() => this;
 
   @override
-  ValueKind get kind => ValueKind.boolean;
+  ValueKind get kind => ValueKind.bool;
 
   @override
   String toString() {

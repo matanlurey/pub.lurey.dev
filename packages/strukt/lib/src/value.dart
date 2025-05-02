@@ -80,19 +80,16 @@ sealed class Value {
 /// Describes a kind of [Value].
 enum ValueKind {
   /// A boolean value.
-  boolean,
+  bool,
 
   /// A byte array.
   bytes,
-
-  /// A composite value.
-  composite,
 
   /// A double-precision floating-point number.
   double,
 
   /// An integer.
-  integer,
+  int,
 
   /// A list of values.
   list,

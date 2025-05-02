@@ -12,7 +12,7 @@ final class IntValue implements Value {
   IntValue clone() => this;
 
   @override
-  ValueKind get kind => ValueKind.integer;
+  ValueKind get kind => ValueKind.int;
 
   @override
   String toString() {

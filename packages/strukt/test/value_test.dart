@@ -19,7 +19,7 @@ void main() {
 
     test('kind', () {
       final wrapper = Value.bool(true);
-      check(wrapper).has((w) => w.kind, 'kind').equals(ValueKind.boolean);
+      check(wrapper).has((w) => w.kind, 'kind').equals(ValueKind.bool);
     });
 
     test('toString', () {
@@ -63,7 +63,7 @@ void main() {
 
     test('kind', () {
       final wrapper = Value.int(1);
-      check(wrapper).has((w) => w.kind, 'kind').equals(ValueKind.integer);
+      check(wrapper).has((w) => w.kind, 'kind').equals(ValueKind.int);
     });
 
     test('toString', () {
