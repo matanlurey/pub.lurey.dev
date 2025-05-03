@@ -40,3 +40,16 @@ extension StringExtension on String {
   // Matches a word in a camel case string.
   static final _camelCase = RegExp('[A-Z]?[a-z]+');
 }
+
+/// Extension methods for [String] or `null`.
+extension NullableStringExtension on String? {
+  /// Returns an empty string if `this` is `null`.
+  ///
+  /// ## Example
+  ///
+  /// ```dart
+  /// print(null.orEmpty); // ''
+  /// print('hello'.orEmpty); // 'hello'
+  /// ```
+  String get orEmpty => this ?? '';
+}

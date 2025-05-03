@@ -22,4 +22,14 @@ void main() {
       check(''.splitCamelCase()).isEmpty();
     });
   });
+
+  group('orEmpty', () {
+    test('returns empty string if null', () {
+      check((null as String?).orEmpty).equals('');
+    });
+
+    test('returns original string if not null', () {
+      check('hello'.orEmpty).equals('hello');
+    });
+  });
 }

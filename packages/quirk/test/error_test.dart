@@ -92,4 +92,132 @@ void main() {
     check(assertNonNegative(0)).equals(0);
     check(() => assertNonNegative(-1)).throws<RangeError>();
   });
+
+  group('checkNotEmpty', () {
+    test('returns the iterable if not empty', () {
+      final iterable = [1, 2, 3];
+      check(checkNotEmpty(iterable)).deepEquals(iterable);
+    });
+
+    test('throws an error if empty', () {
+      check(() => checkNotEmpty(<int>[])).throws<ArgumentError>();
+    });
+
+    test('throws an error with default name', () {
+      check(
+        () => checkNotEmpty(<int>[]),
+      ).throws<ArgumentError>().has((e) => e.name, 'name').equals('iterable');
+    });
+
+    test('throws an error with default message', () {
+      check(() => checkNotEmpty(<int>[]))
+          .throws<ArgumentError>()
+          .has((e) => e.message, 'message')
+          .equals('must not be empty');
+    });
+
+    test('throws an error with custom name', () {
+      check(
+        () => checkNotEmpty(<int>[], 'foo'),
+      ).throws<ArgumentError>().has((e) => e.name, 'name').equals('foo');
+    });
+
+    test('throws an error with custom message', () {
+      check(
+        () => checkNotEmpty(<int>[], 'foo', 'bar'),
+      ).throws<ArgumentError>().has((e) => e.message, 'message').equals('bar');
+    });
+  });
+
+  test('assertNotEmpty', () {
+    final iterable = [1, 2, 3];
+    check(assertNotEmpty(iterable)).deepEquals(iterable);
+    check(() => assertNotEmpty(<int>[])).throws<ArgumentError>();
+  });
+
+  group('checkStringNotEmpty', () {
+    test('returns the string if not empty', () {
+      final string = 'hello';
+      check(checkStringNotEmpty(string)).equals(string);
+    });
+
+    test('throws an error if empty', () {
+      check(() => checkStringNotEmpty('')).throws<ArgumentError>();
+    });
+
+    test('throws an error with default name', () {
+      check(
+        () => checkStringNotEmpty(''),
+      ).throws<ArgumentError>().has((e) => e.name, 'name').equals('string');
+    });
+
+    test('throws an error with default message', () {
+      check(() => checkStringNotEmpty(''))
+          .throws<ArgumentError>()
+          .has((e) => e.message, 'message')
+          .equals('must not be empty');
+    });
+
+    test('throws an error with custom name', () {
+      check(
+        () => checkStringNotEmpty('', 'foo'),
+      ).throws<ArgumentError>().has((e) => e.name, 'name').equals('foo');
+    });
+
+    test('throws an error with custom message', () {
+      check(
+        () => checkStringNotEmpty('', 'foo', 'bar'),
+      ).throws<ArgumentError>().has((e) => e.message, 'message').equals('bar');
+    });
+  });
+
+  test('assertStringNotEmpty', () {
+    final string = 'hello';
+    check(assertStringNotEmpty(string)).equals(string);
+    check(() => assertStringNotEmpty('')).throws<ArgumentError>();
+  });
+
+  group('checkStringNotBlank', () {
+    test('returns the string if not blank', () {
+      final string = 'hello';
+      check(checkStringNotBlank(string)).equals(string);
+    });
+
+    test('throws an error if blank', () {
+      check(() => checkStringNotBlank('')).throws<ArgumentError>();
+      check(() => checkStringNotBlank('   ')).throws<ArgumentError>();
+    });
+
+    test('throws an error with default name', () {
+      check(
+        () => checkStringNotBlank(''),
+      ).throws<ArgumentError>().has((e) => e.name, 'name').equals('string');
+    });
+
+    test('throws an error with default message', () {
+      check(() => checkStringNotBlank(''))
+          .throws<ArgumentError>()
+          .has((e) => e.message, 'message')
+          .equals('must not be empty or whitespace');
+    });
+
+    test('throws an error with custom name', () {
+      check(
+        () => checkStringNotBlank('', 'foo'),
+      ).throws<ArgumentError>().has((e) => e.name, 'name').equals('foo');
+    });
+
+    test('throws an error with custom message', () {
+      check(
+        () => checkStringNotBlank('', 'foo', 'bar'),
+      ).throws<ArgumentError>().has((e) => e.message, 'message').equals('bar');
+    });
+  });
+
+  test('assertStringNotBlank', () {
+    final string = 'hello';
+    check(assertStringNotBlank(string)).equals(string);
+    check(() => assertStringNotBlank('')).throws<ArgumentError>();
+    check(() => assertStringNotBlank('   ')).throws<ArgumentError>();
+  });
 }
