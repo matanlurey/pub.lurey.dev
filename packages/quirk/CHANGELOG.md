@@ -11,7 +11,10 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 ## 0.3.0-alpha+1
 
 - Added `checkNotEmpty` and `assertNotEmpty`
--
+- Added `checkStringNotEmpty` and `assertStringNotEmpty`
+- Added `checkNotBlank` and `assertNotBlank`
+- Added `NullableStringExtension`
+- Added `orderedEquals` and `unorderedEquals` to `MapExtension`
 
 ## 0.3.0-alpha
 
