@@ -10,7 +10,7 @@ part 'value/_equality.dart';
 part 'value/_int.dart';
 part 'value/_list.dart';
 part 'value/_map.dart';
-part 'value/_optional.dart';
+part 'value/_none.dart';
 part 'value/_string.dart';
 
 /// The base type for values that are supported by the Acorn database model.
@@ -28,7 +28,7 @@ sealed class Value {
   /// Will recursively check the equality of all nested values, and expect the
   /// same types, in the same order.
   ///
-  /// An [OptionalValue] is unwrapped and compared to its value, if it is not
+  /// An [NoneValue] is unwrapped and compared to its value, if it is not
   /// `null`.
   static bool equals(Value a, Value b) => _deepEqualsNullable(a, b);
 
@@ -51,7 +51,7 @@ sealed class Value {
   const factory Value.string(String value) = StringValue;
 
   /// Creates a [Value] from a [Uint8List].
-  const factory Value.bytes(Uint8List value) = BytesValue;
+  const factory Value.bytes(ByteData value) = BytesValue;
 
   /// Creates a [Value] from a [List].
   const factory Value.list(List<Value> value) = ListValue;
@@ -59,8 +59,8 @@ sealed class Value {
   /// Creates a [Value] from a [Map].
   const factory Value.map(Map<String, Value> value) = MapValue;
 
-  /// Creates a [Value] from an optional [Value].
-  const factory Value.optional(Value? value) = OptionalValue;
+  /// Creates a [Value] that is `null`.
+  const factory Value.none() = NoneValue;
 
   /// Creates a clone of this value.
   ///
@@ -97,8 +97,8 @@ enum ValueKind {
   /// A map of values.
   map,
 
-  /// An optional value.
-  optional,
+  /// An absent (null) value.
+  none,
 
   /// A string value.
   string,

@@ -1,18 +1,18 @@
 part of '../value.dart';
 
 bool _deepEqualsNullable(Value? a, Value? b) {
-  if (a is OptionalValue) {
-    a = a.value;
+  if (a is NoneValue) {
+    return b is NoneValue;
   }
-  if (b is OptionalValue) {
-    b = b.value;
+  if (b is NoneValue) {
+    return false;
   }
   if (a is BytesValue) {
-    if (b is! BytesValue || a.value.length != b.value.length) {
+    if (b is! BytesValue || a.value.lengthInBytes != b.value.lengthInBytes) {
       return false;
     }
-    for (var i = 0; i < a.value.length; i++) {
-      if (a.value[i] != b.value[i]) {
+    for (var i = 0; i < a.value.lengthInBytes; i++) {
+      if (a.value.getUint8(i) != b.value.getUint8(i)) {
         return false;
       }
     }
@@ -46,17 +46,16 @@ bool _deepEqualsNullable(Value? a, Value? b) {
 int _deepHashCode(Value value) {
   return switch (value) {
     // Primitive values
-    BoolValue(:final Object value) ||
-    DoubleValue(:final Object value) ||
-    IntValue(:final Object value) ||
-    StringValue(:final Object value) => value.hashCode,
+    BoolValue(:final Object? value) ||
+    DoubleValue(:final Object? value) ||
+    IntValue(:final Object? value) ||
+    StringValue(:final Object? value) ||
+    NoneValue(:final Object? value) => value.hashCode,
 
-    BytesValue(:final value) => Object.hashAll(value),
+    BytesValue(:final value) => Object.hashAll(value.buffer.asUint8List()),
     ListValue(:final value) => Object.hashAll(value.map(_deepHashCode)),
     MapValue(:final value) => Object.hashAll(
       value.entries.expand((e) => [e.key, _deepHashCode(e.value)]),
     ),
-
-    OptionalValue(:final value) => value == null ? 0 : _deepHashCode(value),
   };
 }

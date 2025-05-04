@@ -1,5 +1,16 @@
+import 'dart:core';
+import 'dart:core' as core show bool;
+
 import 'package:meta/meta.dart';
 import 'package:quirk/quirk.dart';
+import 'package:strukt/src/value.dart';
+
+part 'descriptor/_indexed.dart';
+part 'descriptor/_keyed.dart';
+part 'descriptor/_list.dart';
+part 'descriptor/_map.dart';
+part 'descriptor/_one_of.dart';
+part 'descriptor/_optional.dart';
 
 /// Describes the type a value can be in a struct.
 ///
@@ -51,9 +62,24 @@ sealed class Descriptor {
   factory Descriptor.oneOf(
     List<Descriptor> values, //
   ) = OneOfDescriptor;
+
+  /// Returns whether the provided [value] is valid for this descriptor.
+  core.bool matches(Value value);
 }
 
-enum _Descriptor implements Descriptor {
+mixin _MatchesOptional implements Descriptor {
+  @override
+  core.bool matches(Value value) {
+    if (value case NoneValue(value: final inner) when inner != null) {
+      value = inner;
+    }
+    return _matchesUnwrappedOptional(value);
+  }
+
+  core.bool _matchesUnwrappedOptional(Value value);
+}
+
+enum _Descriptor with _MatchesOptional implements Descriptor {
   bool,
   bytes,
   double,
@@ -61,191 +87,18 @@ enum _Descriptor implements Descriptor {
   string;
 
   @override
+  core.bool _matchesUnwrappedOptional(Value value) {
+    return switch (this) {
+      bytes => value is BytesValue,
+      bool => value is BoolValue,
+      double => value is DoubleValue,
+      int => value is IntValue,
+      string => value is StringValue,
+    };
+  }
+
+  @override
   String toString() {
     return 'Descriptor.$name';
-  }
-}
-
-/// Describes a value that is optional.
-final class OptionalDescriptor implements Descriptor {
-  /// Creates a [Descriptor] that is optional.
-  const OptionalDescriptor(this.value);
-
-  /// The value this can be if not `null`.
-  final Descriptor value;
-
-  @override
-  bool operator ==(Object other) {
-    if (other is! OptionalDescriptor) {
-      return false;
-    }
-    return value == other.value;
-  }
-
-  @override
-  int get hashCode => value.hashCode;
-
-  @override
-  String toString() {
-    return 'Descriptor.optional($value)';
-  }
-}
-
-/// Describes a value that is a list of values.
-final class ListDescriptor implements Descriptor {
-  /// Creates a [Descriptor] that is a list of values.
-  const ListDescriptor(this.value);
-
-  /// The value this can be if not `null`.
-  final Descriptor value;
-
-  @override
-  bool operator ==(Object other) {
-    if (other is! ListDescriptor) {
-      return false;
-    }
-    return value == other.value;
-  }
-
-  @override
-  int get hashCode => value.hashCode;
-
-  @override
-  String toString() {
-    return 'Descriptor.list($value)';
-  }
-}
-
-/// Describes a value that is a map of string keys to values.
-final class MapDescriptor implements Descriptor {
-  /// Creates a [Descriptor] that is a map of values.
-  const MapDescriptor(this.value);
-
-  /// The value type of the map.
-  final Descriptor value;
-
-  @override
-  bool operator ==(Object other) {
-    if (other is! MapDescriptor) {
-      return false;
-    }
-    return value == other.value;
-  }
-
-  @override
-  int get hashCode => value.hashCode;
-
-  @override
-  String toString() {
-    return 'Descriptor.map($value)';
-  }
-}
-
-/// Describes a value that is a map of string keys to specific values.
-final class KeyedDescriptor implements Descriptor {
-  /// Creates a [Descriptor] that is a map of values.
-  KeyedDescriptor(
-    Map<String, Descriptor> values, //
-  ) : values = Map.unmodifiable(values);
-
-  /// The value type of the map.
-  ///
-  /// This map is unmodifiable.
-  final Map<String, Descriptor> values;
-
-  @override
-  bool operator ==(Object other) {
-    if (other is! KeyedDescriptor || other.values.length != values.length) {
-      return false;
-    }
-
-    // TODO: https://github.com/matanlurey/pub.lurey.dev/issues/28.
-    for (final entry in values.entries) {
-      if (other.values[entry.key] != entry.value) {
-        return false;
-      }
-    }
-    return true;
-  }
-
-  @override
-  int get hashCode {
-    return Object.hashAll(values.entries.expand((e) => [e.key, e.value]));
-  }
-
-  @override
-  String toString() {
-    return 'Descriptor.keyed($values)';
-  }
-}
-
-/// Describes a value that is a struct of indexed values.
-final class IndexedDescriptor implements Descriptor {
-  /// Creates a [Descriptor] that is a struct of indexed values.
-  IndexedDescriptor(
-    List<Descriptor> values, //
-  ) : values = List.unmodifiable(values);
-
-  /// The value types this can be.
-  ///
-  /// This list is unmodifiable.
-  final List<Descriptor> values;
-
-  @override
-  bool operator ==(Object other) {
-    if (other is! IndexedDescriptor) {
-      return false;
-    }
-
-    return values.orderedEquals(other.values);
-  }
-
-  @override
-  int get hashCode {
-    return Object.hashAll(values);
-  }
-
-  @override
-  String toString() {
-    return 'Descriptor.indexed($values)';
-  }
-}
-
-/// Describes a value that can be one-of multiple values.
-final class OneOfDescriptor implements Descriptor {
-  /// Creates a [Descriptor] that is one of multiple values.
-  ///
-  /// Must be non-empty.
-  OneOfDescriptor(
-    List<Descriptor> values, //
-  ) : values = List.unmodifiable(values) {
-    // TODO: https://github.com/matanlurey/pub.lurey.dev/issues/29.
-    if (values.isEmpty) {
-      throw ArgumentError.value(values, 'values', 'Must be non-empty.');
-    }
-  }
-
-  /// The value types this can be.
-  ///
-  /// This list is unmodifiable.
-  final List<Descriptor> values;
-
-  @override
-  bool operator ==(Object other) {
-    if (other is! OneOfDescriptor) {
-      return false;
-    }
-
-    return values.orderedEquals(other.values);
-  }
-
-  @override
-  int get hashCode {
-    return Object.hashAll(values);
-  }
-
-  @override
-  String toString() {
-    return 'Descriptor.oneOf($values)';
   }
 }
