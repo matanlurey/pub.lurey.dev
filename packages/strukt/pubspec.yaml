@@ -21,7 +21,7 @@ environment:
 
 dependencies:
   meta: ^1.16.0
-  quirk: ">=0.3.0-alpha <=0.3.0-alpha+1"
+  quirk: ^0.3.0-alpha+1
 
 dev_dependencies:
   checks: ^0.3.0

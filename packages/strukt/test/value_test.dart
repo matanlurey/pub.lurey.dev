@@ -96,24 +96,32 @@ void main() {
 
   group('BytesValue', () {
     test('value', () {
-      final wrapper = Value.bytes(Uint8List.fromList([1, 2, 3]));
-      check(wrapper).has((w) => w.value as List, 'value').deepEquals([1, 2, 3]);
+      final wrapper = BytesValue.viewBytes(Uint8List.fromList([1, 2, 3]));
+      check(wrapper)
+          .has(
+            (w) => w.value.buffer.asUint8List(),
+            'value.buffer.asUint8List()',
+          )
+          .deepEquals([1, 2, 3]);
     });
 
     test('clone (deep copy)', () {
-      final wrapper = Value.bytes(Uint8List.fromList([1, 2, 3]));
+      final wrapper = BytesValue.viewBytes(Uint8List.fromList([1, 2, 3]));
       check(wrapper).has((w) => w.clone(), 'clone()')
         ..not((a) => a.identicalTo(wrapper))
-        ..has((a) => a.value as List, 'clone().value').deepEquals([1, 2, 3]);
+        ..has(
+          (a) => a.value.buffer.asUint8List(),
+          'clone().value.buffer.asUint8List()',
+        ).deepEquals([1, 2, 3]);
     });
 
     test('kind', () {
-      final wrapper = Value.bytes(Uint8List.fromList([1, 2, 3]));
+      final wrapper = BytesValue.viewBytes(Uint8List.fromList([1, 2, 3]));
       check(wrapper).has((w) => w.kind, 'kind').equals(ValueKind.bytes);
     });
 
     test('toString', () {
-      final wrapper = Value.bytes(Uint8List.fromList([1, 2, 3]));
+      final wrapper = BytesValue.viewBytes(Uint8List.fromList([1, 2, 3]));
       check(wrapper)
           .has((w) => w.toString(), 'toString()')
           .equals(base64Encode(Uint8List.fromList([1, 2, 3])));
@@ -192,65 +200,55 @@ void main() {
     });
   });
 
-  group('OptionalValue', () {
+  group('NoneValue', () {
     test('value', () {
-      final wrapper = Value.optional(Value.int(1));
-      check(wrapper)
-          .has((w) => w.value, 'value')
-          .isA<Value>()
-          .has((v) => v.value, 'value')
-          .equals(1);
+      final wrapper = Value.none();
+      check(wrapper).has((w) => w.value, 'value').isNull();
     });
 
     test('clone', () {
-      final wrapper = Value.optional(Value.int(1));
-      check(wrapper)
-          .has((w) => w.clone().value, 'clone().value')
-          .isA<Value>()
-          .has((v) => v.value, 'value')
-          .equals(1);
-    });
-
-    test('clone (null)', () {
-      final wrapper = Value.optional(null);
-      check(wrapper).has((w) => w.clone().value, 'clone().value').isNull();
+      final wrapper = Value.none();
+      check(wrapper).has((w) => w.clone(), 'clone()').identicalTo(wrapper);
     });
 
     test('kind', () {
-      final wrapper = Value.optional(Value.int(1));
-      check(wrapper).has((w) => w.kind, 'kind').equals(ValueKind.optional);
+      final wrapper = Value.none();
+      check(wrapper).has((w) => w.kind, 'kind').equals(ValueKind.none);
     });
 
     test('toString', () {
-      final wrapper = Value.optional(Value.int(1));
-      check(wrapper).has((w) => w.toString(), 'toString()').equals('1');
+      final wrapper = Value.none();
+      check(wrapper).has((w) => w.toString(), 'toString()').equals('null');
     });
   });
 
   group('Value.equals', () {
     test('null == null', () {
-      check(Value.equals(Value.optional(null), Value.optional(null))).isTrue();
+      check(Value.equals(Value.none(), Value.none())).isTrue();
     });
 
     test('null != non-null', () {
-      check(Value.equals(Value.optional(null), Value.int(1))).isFalse();
+      check(Value.equals(Value.none(), Value.int(1))).isFalse();
     });
 
     test('non-null != null', () {
-      check(Value.equals(Value.int(1), Value.optional(null))).isFalse();
+      check(Value.equals(Value.int(1), Value.none())).isFalse();
     });
 
     test('bytes != non-bytes', () {
       check(
-        Value.equals(Value.bytes(Uint8List.fromList([1, 2, 3])), Value.int(1)),
+        Value.equals(
+          BytesValue.viewBytes(Uint8List.fromList([1, 2, 3])),
+          Value.int(1),
+        ),
       ).isFalse();
     });
 
     test('bytes != bytes of different length', () {
       check(
         Value.equals(
-          Value.bytes(Uint8List.fromList([1, 2, 3])),
-          Value.bytes(Uint8List.fromList([1, 2])),
+          BytesValue.viewBytes(Uint8List.fromList([1, 2, 3])),
+          BytesValue.viewBytes(Uint8List.fromList([1, 2])),
         ),
       ).isFalse();
     });
@@ -258,8 +256,8 @@ void main() {
     test('bytes == bytes of same length', () {
       check(
         Value.equals(
-          Value.bytes(Uint8List.fromList([1, 2, 3])),
-          Value.bytes(Uint8List.fromList([1, 2, 3])),
+          BytesValue.viewBytes(Uint8List.fromList([1, 2, 3])),
+          BytesValue.viewBytes(Uint8List.fromList([1, 2, 3])),
         ),
       ).isTrue();
     });
@@ -323,7 +321,7 @@ void main() {
 
   group('Value.hash', () {
     test('null', () {
-      check(Value.hash(Value.optional(null))).equals(0);
+      check(Value.hash(Value.none())).equals(null.hashCode);
     });
 
     test('bool', () {
@@ -344,7 +342,7 @@ void main() {
 
     test('bytes', () {
       check(
-        Value.hash(Value.bytes(Uint8List.fromList([1, 2, 3]))),
+        Value.hash(BytesValue.viewBytes(Uint8List.fromList([1, 2, 3]))),
       ).equals(Object.hashAll([1, 2, 3]));
     });
 
@@ -375,7 +373,7 @@ void main() {
     });
 
     test('optional', () {
-      check(Value.hash(Value.optional(Value.int(1)))).equals(1.hashCode);
+      check(Value.hash(Value.none())).equals(null.hashCode);
     });
   });
 }
