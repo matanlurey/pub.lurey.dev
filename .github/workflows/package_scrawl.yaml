@@ -1,0 +1,32 @@
+name: package/scrawl
+
+on:
+  # Post-submit.
+  push:
+    branches: [ main ]
+
+  # Pre-submit.
+  pull_request:
+    branches: [ main ]
+    paths:
+      - .github/workflows/package_scrawl.yaml
+      - packages/scrawl/**
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4.2.0
+      - uses: dart-lang/setup-dart@v1.6.5
+      - run: dart pub get
+      - run: ./dev.sh setup --packages packages/scrawl
+      - run: ./dev.sh check --packages packages/scrawl
+      - run: ./dev.sh generate --no-root --fail-if-changed --packages packages/scrawl
+      - run: ./dev.sh test --packages packages/scrawl
+      - run: ./dev.sh coverage --packages packages/scrawl
+      - uses: codecov/codecov-action@v4.6.0
+        with:
+          token: ${{ secrets.CODECOV_TOKEN }}
+          flags: scrawl
+          file: packages/scrawl/coverage/lcov.info
+          fail_ci_if_error: true

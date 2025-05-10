@@ -31,9 +31,9 @@ workspace:
   - packages/omen
   - packages/proc
   - packages/quirk
+  - packages/scrawl
   - packages/sector
   - packages/sdk
   - packages/strink
-  - packages/strukt
   - packages/trove
   - packages/webby

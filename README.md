@@ -22,10 +22,10 @@ A wide but independent collection of Dart packages and projects.
 | [`omen`](./packages/omen) | [![Pub version for package/omen](https://img.shields.io/pub/v/omen?label=%20)](https://pub.dev/packages/omen) | Random odds-based sampling |
 | [`proc`](./packages/proc) | [![Pub version for package/proc](https://img.shields.io/pub/v/proc?label=%20)](https://pub.dev/packages/proc) | Extensible process management. |
 | [`quirk`](./packages/quirk) | [![Pub version for package/quirk](https://img.shields.io/pub/v/quirk?label=%20)](https://pub.dev/packages/quirk) | Common utilities. |
+| [`scrawl`](./packages/scrawl) | _Unreleased_ | Structured messages. |
 | [`sdk`](./packages/sdk) | _Unreleased_ | Dart SDK utilities. |
 | [`sector`](./packages/sector) | [![Pub version for package/sector](https://img.shields.io/pub/v/sector?label=%20)](https://pub.dev/packages/sector) | 2D data structures. |
 | [`strink`](./packages/strink) | _Unreleased_ | Structured string output. |
-| [`strukt`](./packages/strukt) | [![Pub version for package/strukt](https://img.shields.io/pub/v/strukt?label=%20)](https://pub.dev/packages/strukt) | Structured data. |
 | [`trove`](./packages/trove) | [![Pub version for package/trove](https://img.shields.io/pub/v/trove?label=%20)](https://pub.dev/packages/trove) | Tools for tabletop games |
 | [`webby`](./packages/webby) | [![Pub version for package/webby](https://img.shields.io/pub/v/webby?label=%20)](https://pub.dev/packages/webby) | Hand-crafted interop for web apps. |
 
