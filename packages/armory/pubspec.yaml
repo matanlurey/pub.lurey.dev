@@ -1,6 +1,6 @@
 # Format: https://dart.dev/tools/pub/pubspec
 
-name: rune
+name: armory
 
 description: |-
   An extended and curated set of data structures and algorithms.
@@ -8,8 +8,8 @@ short_description: More data structures
 
 version: 0.1.0-alpha
 
-homepage: https://github.com/matanlurey/pub.lurey.dev/tree/main/packages/rune
-issue_tracker: https://github.com/matanlurey/pub.lurey.dev/labels/pkg-rune
+homepage: https://github.com/matanlurey/pub.lurey.dev/tree/main/packages/armory
+issue_tracker: https://github.com/matanlurey/pub.lurey.dev/labels/pkg-armory
 
 resolution: workspace
 

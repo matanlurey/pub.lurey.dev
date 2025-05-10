@@ -19,6 +19,7 @@ dev_dependencies:
 
 workspace:
   - dev
+  - packages/armory
   - packages/chaos
   - packages/chore
   - packages/iota
@@ -31,7 +32,6 @@ workspace:
   - packages/omen
   - packages/proc
   - packages/quirk
-  - packages/rune
   - packages/sector
   - packages/sdk
   - packages/strink
