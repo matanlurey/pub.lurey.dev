@@ -21,5 +21,14 @@ final class MapValue with _NestedValue {
   }
 
   @override
-  int get hashCode => Object.hashAll(value);
+  int get hashCode {
+    return Object.hashAll(
+      value.entries.map((e) => Object.hash(e.key, e.value)),
+    );
+  }
+
+  @override
+  Object? toJson() {
+    return {for (final entry in value.entries) entry.key: entry.value.toJson()};
+  }
 }

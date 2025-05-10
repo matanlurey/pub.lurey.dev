@@ -11,7 +11,6 @@ part 'value/_int.dart';
 part 'value/_list.dart';
 part 'value/_map.dart';
 part 'value/_none.dart';
-part 'value/_record.dart';
 part 'value/_string.dart';
 
 /// A wrapper representing all low-level wire-compatible types.
@@ -35,6 +34,31 @@ part 'value/_string.dart';
 /// This is a trade-off between performance and safety.
 @immutable
 sealed class Value {
+  /// Wraps a boolean value.
+  // ignore: avoid_positional_boolean_parameters
+  const factory Value.bool(bool value) = BoolValue;
+
+  /// Wraps a buffer of bytes.
+  const factory Value.bytes(Uint8List bytes) = BytesValue;
+
+  /// Wraps a double value.
+  const factory Value.double(double value) = DoubleValue;
+
+  /// Wraps an integer value.
+  const factory Value.int(int value) = IntValue;
+
+  /// Wraps a list of values.
+  const factory Value.list(List<Value> values) = ListValue;
+
+  /// Wraps a map of values.
+  const factory Value.map(Map<String, Value> values) = MapValue;
+
+  /// Returns a value representing no value.
+  const factory Value.none() = NoneValue;
+
+  /// Wraps a string value.
+  const factory Value.string(String value) = StringValue;
+
   /// Returns a JSON representation of this value.
   ///
   /// The returned result should not be modified, as it may be a shared view
@@ -65,7 +89,7 @@ base mixin _ScalarValue<T> implements Value {
 
   @override
   @nonVirtual
-  String toString() => jsonEncode(value);
+  String toString() => jsonEncode(toJson());
 }
 
 /// A value representing a nested value rather than a single indivisible value.
@@ -75,5 +99,5 @@ base mixin _NestedValue implements Value {
 
   @override
   @nonVirtual
-  String toString() => jsonEncode(value);
+  String toString() => const JsonEncoder.withIndent('  ').convert(toJson());
 }

@@ -24,5 +24,7 @@ final class ListValue with _NestedValue {
   int get hashCode => Object.hashAll(value);
 
   @override
-  Object? toJson() => value;
+  Object? toJson() {
+    return [for (final v in value) v.toJson()];
+  }
 }

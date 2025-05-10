@@ -3,9 +3,7 @@ part of '../value.dart';
 /// A sequence of bytes often used to represent binary data.
 final class BytesValue with _NestedValue {
   /// Wraps a buffer of bytes.
-  BytesValue(
-    TypedData bytes, //
-  ) : value = bytes.buffer.asUint8List();
+  const BytesValue(this.value);
 
   /// Sequence of bytes.
   @override
