@@ -13,6 +13,7 @@ A wide but independent collection of Dart packages and projects.
 | [`armory`](./packages/armory) | [![Pub version for package/armory](https://img.shields.io/pub/v/armory?label=%20)](https://pub.dev/packages/armory) | More data structures |
 | [`chaos`](./packages/chaos) | [![Pub version for package/chaos](https://img.shields.io/pub/v/chaos?label=%20)](https://pub.dev/packages/chaos) | High quality PRNGs |
 | [`chore`](./packages/chore) | _Unreleased_ | Opinionated project management. |
+| [`codex`](./packages/codex) | _Unreleased_ | Structured messages. |
 | [`iota`](./packages/iota) | [![Pub version for package/iota](https://img.shields.io/pub/v/iota?label=%20)](https://pub.dev/packages/iota) | Minimalist file system API. |
 | [`jsonut`](./packages/jsonut) | [![Pub version for package/jsonut](https://img.shields.io/pub/v/jsonut?label=%20)](https://pub.dev/packages/jsonut) | Minimal JSON utilities. |
 | [`lodim`](./packages/lodim) | [![Pub version for package/lodim](https://img.shields.io/pub/v/lodim?label=%20)](https://pub.dev/packages/lodim) | Fixed-point 2D geometry. |
@@ -23,7 +24,6 @@ A wide but independent collection of Dart packages and projects.
 | [`omen`](./packages/omen) | [![Pub version for package/omen](https://img.shields.io/pub/v/omen?label=%20)](https://pub.dev/packages/omen) | Random odds-based sampling |
 | [`proc`](./packages/proc) | [![Pub version for package/proc](https://img.shields.io/pub/v/proc?label=%20)](https://pub.dev/packages/proc) | Extensible process management. |
 | [`quirk`](./packages/quirk) | [![Pub version for package/quirk](https://img.shields.io/pub/v/quirk?label=%20)](https://pub.dev/packages/quirk) | Common utilities. |
-| [`scrawl`](./packages/scrawl) | _Unreleased_ | Structured messages. |
 | [`sdk`](./packages/sdk) | _Unreleased_ | Dart SDK utilities. |
 | [`sector`](./packages/sector) | [![Pub version for package/sector](https://img.shields.io/pub/v/sector?label=%20)](https://pub.dev/packages/sector) | 2D data structures. |
 | [`strink`](./packages/strink) | _Unreleased_ | Structured string output. |
