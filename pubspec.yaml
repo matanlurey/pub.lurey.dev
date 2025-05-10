@@ -19,6 +19,7 @@ dev_dependencies:
 
 workspace:
   - dev
+  - packages/armory
   - packages/chaos
   - packages/chore
   - packages/codex

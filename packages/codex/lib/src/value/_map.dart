@@ -6,6 +6,7 @@ final class MapValue with _NestedValue {
   const MapValue(this.value);
 
   /// The map of string keys to values.
+  @override
   final Map<String, Value> value;
 
   @override

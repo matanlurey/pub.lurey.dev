@@ -10,6 +10,7 @@ A wide but independent collection of Dart packages and projects.
 
 | Project | Release | Description |
 |:--------|:--------|:------------|
+| [`armory`](./packages/armory) | [![Pub version for package/armory](https://img.shields.io/pub/v/armory?label=%20)](https://pub.dev/packages/armory) | More data structures |
 | [`chaos`](./packages/chaos) | [![Pub version for package/chaos](https://img.shields.io/pub/v/chaos?label=%20)](https://pub.dev/packages/chaos) | High quality PRNGs |
 | [`chore`](./packages/chore) | _Unreleased_ | Opinionated project management. |
 | [`iota`](./packages/iota) | [![Pub version for package/iota](https://img.shields.io/pub/v/iota?label=%20)](https://pub.dev/packages/iota) | Minimalist file system API. |
