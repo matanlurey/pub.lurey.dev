@@ -329,4 +329,88 @@ void main() {
       );
     });
   });
+
+  group('ValueTag', () {
+    test('ValueTag. | ValueTag.', () {
+      final tag1 = ValueTag.bool | ValueTag.int;
+      final tag2 = ValueTag.int | ValueTag.bool;
+
+      check(tag1).equals(tag2);
+      check(tag1.hashCode).equals(tag2.hashCode);
+    });
+
+    test('ValueTag. | ValueTag. | ValueTag.', () {
+      final tag1 = ValueTag.bool | ValueTag.int | ValueTag.string;
+      final tag2 = ValueTag.string | ValueTag.int | ValueTag.bool;
+
+      check(tag1).equals(tag2);
+      check(tag1.hashCode).equals(tag2.hashCode);
+    });
+
+    test('ValueTag.optional = ValueTag. | ValueTag.none', () {
+      final tag1 = ValueTag.optional(ValueTag.int);
+      final tag2 = ValueTag.int | ValueTag.none;
+
+      check(tag1).equals(tag2);
+      check(tag1.hashCode).equals(tag2.hashCode);
+    });
+
+    test('ValueTag. | ValueTag.union', () {
+      final tag1 = ValueTag.int | ValueTag.union({ValueTag.string});
+      final tag2 = ValueTag.union({ValueTag.string}) | ValueTag.int;
+
+      check(tag1).equals(tag2);
+      check(tag1.hashCode).equals(tag2.hashCode);
+    });
+
+    test('ValueTag.union |', () {
+      final tag1 = ValueTag.union({ValueTag.int, ValueTag.string});
+      final tag2 = ValueTag.union({ValueTag.string, ValueTag.int});
+
+      check(tag1 | tag2).equals(tag2 | tag1);
+      check(
+        tag1.hashCode | tag2.hashCode,
+      ).equals(tag2.hashCode | tag1.hashCode);
+    });
+
+    test('ValueTag.optional | ValueTag.union', () {
+      final tag1 = ValueTag.optional(ValueTag.int);
+      final tag2 = ValueTag.union({ValueTag.string}) | ValueTag.int;
+
+      check(tag1 | tag2).equals(tag2 | tag1);
+      check(
+        tag1.hashCode | tag2.hashCode,
+      ).equals(tag2.hashCode | tag1.hashCode);
+    });
+
+    test('ValueTag.optional | ValueTag.', () {
+      final tag1 = ValueTag.optional(ValueTag.int);
+      final tag2 = ValueTag.bool;
+
+      check(tag1 | tag2).equals(tag2 | tag1);
+      check(
+        tag1.hashCode | tag2.hashCode,
+      ).equals(tag2.hashCode | tag1.hashCode);
+    });
+
+    test('ValueTag.optional .runtimeType and .toString()', () {
+      final tag = ValueTag.optional(ValueTag.int);
+      check(tag.runtimeType).equals(UnionValueTag);
+      check(tag.toString()).equals('ValueTag.optional(ValueTag.int)');
+    });
+
+    test('ValueTag.string .runtimeType and .toString()', () {
+      final tag = ValueTag.string;
+      check(tag.runtimeType).equals(ValueTag);
+      check(tag.toString()).equals('ValueTag.string');
+    });
+
+    test('ValueTAg.union .runtimeType and .toString()', () {
+      final tag = ValueTag.union({ValueTag.int, ValueTag.string});
+      check(tag.runtimeType).equals(UnionValueTag);
+      check(
+        tag.toString(),
+      ).equals('ValueTag.union({ValueTag.int, ValueTag.string})');
+    });
+  });
 }
