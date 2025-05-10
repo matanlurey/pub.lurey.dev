@@ -10,7 +10,7 @@ part of '../iterable.dart';
 @immutable
 abstract final class ImmutableList<E> implements ReadOnlyList<E> {
   /// Creates an immutable list by copying [elements].
-  factory ImmutableList.from(Iterable<E> elements) = _ImmutableList<E>.copyFrom;
+  factory ImmutableList(Iterable<E> elements) = _ImmutableList<E>.copyFrom;
 
   /// Creates an immutable list by wrapping an existing [list].
   ///
@@ -18,7 +18,10 @@ abstract final class ImmutableList<E> implements ReadOnlyList<E> {
   ///
   /// The list is **not** copied, so it is unsafe and may lead to undefined
   /// behavior if the list is modified after this call.
-  factory ImmutableList.unsafeView(List<E> list) = _ExternalImmutableList<E>;
+  factory ImmutableList.unsafe(List<E> list) = _ExternalImmutableList<E>;
+
+  @protected
+  List<E> get _delegate;
 
   @override
   ImmutableList<R> cast<R>();
@@ -42,23 +45,18 @@ base mixin _DelegatingImmutableList<E> implements ImmutableList<E> {
         hashCode != other.hashCode) {
       return false;
     }
-    for (var i = 0; i < length; i++) {
-      if (_delegate[i] != other[i]) {
-        return false;
-      }
-    }
-    return true;
+    return _delegate._deepEqualsList(other._delegate);
   }
 
   @override
   late final hashCode = Object.hashAll(_delegate);
+
+  @override
+  Type get runtimeType => ImmutableList;
 }
 
 final class _ImmutableList<E>
-    with
-        _DelegatingIterable<E>,
-        _ReadOnlyListView<E>,
-        _DelegatingImmutableList<E>
+    with _DelegatingIterable<E>, _ReadOnlyList<E>, _DelegatingImmutableList<E>
     implements ImmutableList<E> {
   _ImmutableList.copyFrom(Iterable<E> elements) : _delegate = [...elements];
 
@@ -67,10 +65,7 @@ final class _ImmutableList<E>
 }
 
 final class _ExternalImmutableList<E>
-    with
-        _DelegatingIterable<E>,
-        _ReadOnlyListView<E>,
-        _DelegatingImmutableList<E>
+    with _DelegatingIterable<E>, _ReadOnlyList<E>, _DelegatingImmutableList<E>
     implements ImmutableList<E> {
   _ExternalImmutableList(this._delegate);
 

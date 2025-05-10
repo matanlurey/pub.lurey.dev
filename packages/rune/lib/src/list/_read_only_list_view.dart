@@ -1,10 +1,10 @@
 part of '../iterable.dart';
 
-/// A read-only view of another list.
+/// A read-only view of a list.
 base class ReadOnlyListView<E>
     with
         _DelegatingIterable<E>, //
-        _ReadOnlyListView<E>
+        _ReadOnlyList<E>
     implements ReadOnlyList<E> {
   /// Creates a wrapper that forwards all operations to the given list.
   const ReadOnlyListView(this._delegate);
@@ -18,7 +18,7 @@ base class ReadOnlyListView<E>
   }
 }
 
-base mixin _ReadOnlyListView<E> {
+base mixin _ReadOnlyList<E> /* implements ReadOnlyList<E> */ {
   List<E> get _delegate;
 
   E operator [](int index) {
@@ -59,6 +59,10 @@ base mixin _ReadOnlyListView<E> {
 
   List<E> toList({bool growable = true}) {
     return _delegate.toList(growable: growable);
+  }
+
+  List<E> asList() {
+    return UnmodifiableListView(_delegate);
   }
 
   @override

@@ -5,11 +5,14 @@ part of '../iterable.dart';
 /// If the list is not modified, no copy of the list is made.
 abstract final class CopyOnWriteList<E> implements List<E> {
   /// Creates a copy-on-write view of an existing [list].
-  factory CopyOnWriteList.view(List<E> list) = _CopyOnWriteList<E>;
+  factory CopyOnWriteList(List<E> list) = _CopyOnWriteList<E>;
+
+  @override
+  CopyOnWriteList<R> cast<R>();
 }
 
 final class _CopyOnWriteList<E>
-    with _DelegatingIterable<E>, _ReadOnlyListView<E>
+    with _DelegatingIterable<E>, _ReadOnlyList<E>
     implements CopyOnWriteList<E> {
   _CopyOnWriteList(this._delegate);
 
@@ -26,7 +29,7 @@ final class _CopyOnWriteList<E>
   }
 
   @override
-  List<R> cast<R>() {
+  CopyOnWriteList<R> cast<R>() {
     return _CopyOnWriteList(_delegate.cast());
   }
 

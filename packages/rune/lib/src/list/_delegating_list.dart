@@ -2,7 +2,7 @@ part of '../iterable.dart';
 
 /// A [List] that forwards all operations to a base list.
 base class DelegatingList<E>
-    with _DelegatingIterable<E>, _DelegatingList<E>
+    with _DelegatingIterable<E>, _ReadOnlyList<E>, _DelegatingList<E>
     implements List<E> {
   /// Creates a wrapper that forwards all operations to the given list.
   const DelegatingList(this._delegate);
@@ -25,11 +25,6 @@ base mixin _DelegatingList<E> implements List<E> {
   }
 
   @override
-  E operator [](int index) {
-    return _delegate[index];
-  }
-
-  @override
   void operator []=(int index, E value) {
     _delegate[index] = value;
   }
@@ -42,11 +37,6 @@ base mixin _DelegatingList<E> implements List<E> {
   @override
   void addAll(Iterable<E> iterable) {
     _delegate.addAll(iterable);
-  }
-
-  @override
-  Map<int, E> asMap() {
-    return _delegate.asMap();
   }
 
   @override
@@ -65,21 +55,6 @@ base mixin _DelegatingList<E> implements List<E> {
   }
 
   @override
-  Iterable<E> getRange(int start, int end) {
-    return _delegate.getRange(start, end);
-  }
-
-  @override
-  int indexOf(E element, [int start = 0]) {
-    return _delegate.indexOf(element, start);
-  }
-
-  @override
-  int indexWhere(bool Function(E element) test, [int start = 0]) {
-    return _delegate.indexWhere(test, start);
-  }
-
-  @override
   void insert(int index, E element) {
     _delegate.insert(index, element);
   }
@@ -92,16 +67,6 @@ base mixin _DelegatingList<E> implements List<E> {
   @override
   set last(E value) {
     _delegate.last = value;
-  }
-
-  @override
-  int lastIndexOf(E element, [int? start]) {
-    return _delegate.lastIndexOf(element, start);
-  }
-
-  @override
-  int lastIndexWhere(bool Function(E element) test, [int? start]) {
-    return _delegate.lastIndexWhere(test, start);
   }
 
   @override
@@ -145,11 +110,6 @@ base mixin _DelegatingList<E> implements List<E> {
   }
 
   @override
-  Iterable<E> get reversed {
-    return _delegate.reversed;
-  }
-
-  @override
   void setAll(int index, Iterable<E> iterable) {
     _delegate.setAll(index, iterable);
   }
@@ -167,10 +127,5 @@ base mixin _DelegatingList<E> implements List<E> {
   @override
   void sort([int Function(E a, E b)? compare]) {
     _delegate.sort(compare);
-  }
-
-  @override
-  List<E> sublist(int start, [int? end]) {
-    return _delegate.sublist(start, end);
   }
 }

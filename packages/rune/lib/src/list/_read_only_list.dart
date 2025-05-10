@@ -19,7 +19,7 @@ abstract interface class ReadOnlyList<E> implements Iterable<E> {
   /// must be non-negative and less than [length].
   E operator [](int index);
 
-  /// An [Iterable] of tghe objects in this list in reverse order.
+  /// An [Iterable] of the objects in this list in reverse order.
   ///
   /// See [List.reversed].
   Iterable<E> get reversed;
@@ -58,4 +58,10 @@ abstract interface class ReadOnlyList<E> implements Iterable<E> {
   ///
   /// See [List.asMap].
   Map<int, E> asMap();
+
+  /// An unmodifiable [List] view of this list.
+  ///
+  /// Adapts the [ReadOnlyList] to a [List] where all operations that modify the
+  /// list throw an [UnsupportedError].
+  List<E> asList();
 }
