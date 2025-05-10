@@ -21,6 +21,7 @@ workspace:
   - dev
   - packages/chaos
   - packages/chore
+  - packages/codex
   - packages/iota
   - packages/jsonut
   - packages/lodim
@@ -31,7 +32,6 @@ workspace:
   - packages/omen
   - packages/proc
   - packages/quirk
-  - packages/scrawl
   - packages/sector
   - packages/sdk
   - packages/strink
