@@ -10,6 +10,7 @@ A wide but independent collection of Dart packages and projects.
 
 | Project | Release | Description |
 |:--------|:--------|:------------|
+| [`armory`](./packages/armory) | [![Pub version for package/armory](https://img.shields.io/pub/v/armory?label=%20)](https://pub.dev/packages/armory) | More data structures |
 | [`chaos`](./packages/chaos) | [![Pub version for package/chaos](https://img.shields.io/pub/v/chaos?label=%20)](https://pub.dev/packages/chaos) | High quality PRNGs |
 | [`chore`](./packages/chore) | _Unreleased_ | Opinionated project management. |
 | [`iota`](./packages/iota) | [![Pub version for package/iota](https://img.shields.io/pub/v/iota?label=%20)](https://pub.dev/packages/iota) | Minimalist file system API. |
@@ -25,7 +26,6 @@ A wide but independent collection of Dart packages and projects.
 | [`sdk`](./packages/sdk) | _Unreleased_ | Dart SDK utilities. |
 | [`sector`](./packages/sector) | [![Pub version for package/sector](https://img.shields.io/pub/v/sector?label=%20)](https://pub.dev/packages/sector) | 2D data structures. |
 | [`strink`](./packages/strink) | _Unreleased_ | Structured string output. |
-| [`strukt`](./packages/strukt) | [![Pub version for package/strukt](https://img.shields.io/pub/v/strukt?label=%20)](https://pub.dev/packages/strukt) | Structured data. |
 | [`trove`](./packages/trove) | [![Pub version for package/trove](https://img.shields.io/pub/v/trove?label=%20)](https://pub.dev/packages/trove) | Tools for tabletop games |
 | [`webby`](./packages/webby) | [![Pub version for package/webby](https://img.shields.io/pub/v/webby?label=%20)](https://pub.dev/packages/webby) | Hand-crafted interop for web apps. |
 
