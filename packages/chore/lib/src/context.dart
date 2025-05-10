@@ -64,7 +64,7 @@ final class Context {
       abbr: 'x',
       help: 'Regex that can match a package name. Cannot use with --packages.',
       defaultsTo: [],
-      hide: !verbose,
+      hide: !verbose && packages.length <= 1,
     );
   }
 

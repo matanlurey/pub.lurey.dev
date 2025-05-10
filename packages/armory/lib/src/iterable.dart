@@ -1,9 +1,11 @@
 import 'dart:collection';
 import 'dart:math';
+import 'dart:math' as math;
 
 import 'package:meta/meta.dart';
 
 part 'iterable/_delegating_iterable.dart';
+part 'iterable/_efficient_access_iterable.dart';
 part 'iterable/_iterable_extension.dart';
 
 part 'list/_copy_on_write_list.dart';
