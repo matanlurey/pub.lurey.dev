@@ -10,6 +10,9 @@ final class BytesValue with _NestedValue {
   final Uint8List value;
 
   @override
+  BytesValue clone() => BytesValue(Uint8List.fromList(value));
+
+  @override
   bool operator ==(Object other) {
     if (other is! BytesValue) {
       return false;

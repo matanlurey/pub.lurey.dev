@@ -10,6 +10,9 @@ final class ListValue with _NestedValue {
   final List<Value> value;
 
   @override
+  ListValue clone() => ListValue([for (final v in value) v.clone()]);
+
+  @override
   bool operator ==(Object other) {
     if (other is! ListValue) {
       return false;

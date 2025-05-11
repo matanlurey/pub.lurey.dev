@@ -7,4 +7,7 @@ final class IntValue with _ScalarValue<int> {
 
   @override
   final int value;
+
+  @override
+  IntValue clone() => this;
 }

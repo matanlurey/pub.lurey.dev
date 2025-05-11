@@ -8,4 +8,7 @@ final class NoneValue with _ScalarValue<Null> {
 
   @override
   Null get value => null;
+
+  @override
+  NoneValue clone() => this;
 }

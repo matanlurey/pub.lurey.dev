@@ -8,4 +8,7 @@ final class StringValue with _ScalarValue<String> {
   /// The value of this [StringValue].
   @override
   final String value;
+
+  @override
+  StringValue clone() => this;
 }

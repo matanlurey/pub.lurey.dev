@@ -39,6 +39,11 @@ void main() {
       final value = Value.bool(true);
       check(value.toString()).equals('true');
     });
+
+    test('clone', () {
+      final value = Value.bool(true);
+      check(value.clone()).equals(value);
+    });
   });
 
   group('DoubleValue', () {
@@ -74,6 +79,11 @@ void main() {
       final value = Value.double(3.14);
       check(value.toString()).equals('3.14');
     });
+
+    test('clone', () {
+      final value = Value.double(3.14);
+      check(value.clone()).equals(value);
+    });
   });
 
   group('IntValue', () {
@@ -108,6 +118,11 @@ void main() {
     test('toString', () {
       final value = Value.int(42);
       check(value.toString()).equals('42');
+    });
+
+    test('clone', () {
+      final value = Value.int(42);
+      check(value.clone()).equals(value);
     });
   });
 
@@ -146,6 +161,11 @@ void main() {
       final value = Value.string('Hello, world!');
       check(value.toString()).equals('"Hello, world!"');
     });
+
+    test('clone', () {
+      final value = Value.string('Hello, world!');
+      check(value.clone()).equals(value);
+    });
   });
 
   group('NoneValue', () {
@@ -176,6 +196,11 @@ void main() {
     test('toString', () {
       final value = Value.none();
       check(value.toString()).equals('null');
+    });
+
+    test('clone', () {
+      final value = Value.none();
+      check(value.clone()).equals(value);
     });
   });
 
@@ -214,6 +239,11 @@ void main() {
     test('toString', () {
       final value = Value.bytes(Uint8List.fromList([1, 2, 3]));
       check(value.toString()).equals('"AQID"');
+    });
+
+    test('clone', () {
+      final value = Value.bytes(Uint8List.fromList([1, 2, 3]));
+      check(value.clone()).equals(value);
     });
   });
 
@@ -257,6 +287,11 @@ void main() {
         '  "test"\n'
         ']',
       );
+    });
+
+    test('clone', () {
+      final value = Value.list([Value.int(1), Value.string('test')]);
+      check(value.clone()).equals(value);
     });
   });
 
@@ -328,89 +363,69 @@ void main() {
         '}',
       );
     });
+
+    test('clone', () {
+      final value = Value.map({
+        'key1': Value.int(1),
+        'key2': Value.string('test'),
+      });
+      check(value.clone()).equals(value);
+    });
   });
 
   group('ValueTag', () {
-    test('ValueTag. | ValueTag.', () {
-      final tag1 = ValueTag.bool | ValueTag.int;
-      final tag2 = ValueTag.int | ValueTag.bool;
-
-      check(tag1).equals(tag2);
-      check(tag1.hashCode).equals(tag2.hashCode);
+    test('bool', () {
+      check(ValueTag.bool.name).equals('bool');
     });
 
-    test('ValueTag. | ValueTag. | ValueTag.', () {
-      final tag1 = ValueTag.bool | ValueTag.int | ValueTag.string;
-      final tag2 = ValueTag.string | ValueTag.int | ValueTag.bool;
-
-      check(tag1).equals(tag2);
-      check(tag1.hashCode).equals(tag2.hashCode);
+    test('bytes', () {
+      check(ValueTag.bytes.name).equals('bytes');
     });
 
-    test('ValueTag.optional = ValueTag. | ValueTag.none', () {
-      final tag1 = ValueTag.optional(ValueTag.int);
-      final tag2 = ValueTag.int | ValueTag.none;
-
-      check(tag1).equals(tag2);
-      check(tag1.hashCode).equals(tag2.hashCode);
+    test('double', () {
+      check(ValueTag.double.name).equals('double');
     });
 
-    test('ValueTag. | ValueTag.union', () {
-      final tag1 = ValueTag.int | ValueTag.union({ValueTag.string});
-      final tag2 = ValueTag.union({ValueTag.string}) | ValueTag.int;
-
-      check(tag1).equals(tag2);
-      check(tag1.hashCode).equals(tag2.hashCode);
+    test('int', () {
+      check(ValueTag.int.name).equals('int');
     });
 
-    test('ValueTag.union |', () {
-      final tag1 = ValueTag.union({ValueTag.int, ValueTag.string});
-      final tag2 = ValueTag.union({ValueTag.string, ValueTag.int});
-
-      check(tag1 | tag2).equals(tag2 | tag1);
-      check(
-        tag1.hashCode | tag2.hashCode,
-      ).equals(tag2.hashCode | tag1.hashCode);
+    test('list', () {
+      check(ValueTag.list.name).equals('list');
     });
 
-    test('ValueTag.optional | ValueTag.union', () {
-      final tag1 = ValueTag.optional(ValueTag.int);
-      final tag2 = ValueTag.union({ValueTag.string}) | ValueTag.int;
-
-      check(tag1 | tag2).equals(tag2 | tag1);
-      check(
-        tag1.hashCode | tag2.hashCode,
-      ).equals(tag2.hashCode | tag1.hashCode);
+    test('map', () {
+      check(ValueTag.map.name).equals('map');
     });
 
-    test('ValueTag.optional | ValueTag.', () {
-      final tag1 = ValueTag.optional(ValueTag.int);
-      final tag2 = ValueTag.bool;
-
-      check(tag1 | tag2).equals(tag2 | tag1);
-      check(
-        tag1.hashCode | tag2.hashCode,
-      ).equals(tag2.hashCode | tag1.hashCode);
+    test('none', () {
+      check(ValueTag.none.name).equals('none');
     });
 
-    test('ValueTag.optional .runtimeType and .toString()', () {
-      final tag = ValueTag.optional(ValueTag.int);
-      check(tag.runtimeType).equals(UnionValueTag);
-      check(tag.toString()).equals('ValueTag.optional(ValueTag.int)');
+    test('string', () {
+      check(ValueTag.string.name).equals('string');
     });
 
-    test('ValueTag.string .runtimeType and .toString()', () {
-      final tag = ValueTag.string;
-      check(tag.runtimeType).equals(ValueTag);
-      check(tag.toString()).equals('ValueTag.string');
+    test('runtimeType', () {
+      check(ValueTag.bool.runtimeType).equals(ValueTag);
+      check(ValueTag.bytes.runtimeType).equals(ValueTag);
+      check(ValueTag.double.runtimeType).equals(ValueTag);
+      check(ValueTag.int.runtimeType).equals(ValueTag);
+      check(ValueTag.list.runtimeType).equals(ValueTag);
+      check(ValueTag.map.runtimeType).equals(ValueTag);
+      check(ValueTag.none.runtimeType).equals(ValueTag);
+      check(ValueTag.string.runtimeType).equals(ValueTag);
     });
 
-    test('ValueTAg.union .runtimeType and .toString()', () {
-      final tag = ValueTag.union({ValueTag.int, ValueTag.string});
-      check(tag.runtimeType).equals(UnionValueTag);
-      check(
-        tag.toString(),
-      ).equals('ValueTag.union({ValueTag.int, ValueTag.string})');
+    test('toString', () {
+      check(ValueTag.bool.toString()).equals('ValueTag.bool');
+      check(ValueTag.bytes.toString()).equals('ValueTag.bytes');
+      check(ValueTag.double.toString()).equals('ValueTag.double');
+      check(ValueTag.int.toString()).equals('ValueTag.int');
+      check(ValueTag.list.toString()).equals('ValueTag.list');
+      check(ValueTag.map.toString()).equals('ValueTag.map');
+      check(ValueTag.none.toString()).equals('ValueTag.none');
+      check(ValueTag.string.toString()).equals('ValueTag.string');
     });
   });
 }

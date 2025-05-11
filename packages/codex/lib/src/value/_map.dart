@@ -10,6 +10,11 @@ final class MapValue with _NestedValue {
   final Map<String, Value> value;
 
   @override
+  MapValue clone() => MapValue({
+    for (final entry in value.entries) entry.key: entry.value.clone(),
+  });
+
+  @override
   bool operator ==(Object other) {
     if (other is! MapValue) {
       return false;

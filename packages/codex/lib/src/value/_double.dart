@@ -7,4 +7,7 @@ final class DoubleValue with _ScalarValue<double> {
 
   @override
   final double value;
+
+  @override
+  DoubleValue clone() => this;
 }

@@ -8,4 +8,7 @@ final class BoolValue with _ScalarValue<bool> {
 
   @override
   final bool value;
+
+  @override
+  BoolValue clone() => this;
 }
