@@ -22,7 +22,7 @@ homepage: https://github.com/matanlurey/pub.lurey.dev/tree/main/packages/lore
 issue_tracker: https://github.com/matanlurey/pub.lurey.dev/labels/pkg-lore
 
 environment:
-  sdk: ^3.7.0
+  sdk: ^3.8.0
 
 dependencies:
   meta: ^1.15.0

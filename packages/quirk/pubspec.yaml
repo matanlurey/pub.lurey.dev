@@ -6,7 +6,7 @@ short_description: Common utilities.
 description: |-
   Common utilities, patterns, and extensions for Dart and Flutter.
 
-version: 0.3.0-alpha+1
+version: 0.3.0-alpha+2
 
 homepage: https://github.com/matanlurey/pub.lurey.dev/tree/main/packages/quirk
 issue_tracker: https://github.com/matanlurey/pub.lurey.dev/labels/pkg-quirk
@@ -14,7 +14,7 @@ issue_tracker: https://github.com/matanlurey/pub.lurey.dev/labels/pkg-quirk
 resolution: workspace
 
 environment:
-  sdk: ^3.7.0
+  sdk: ^3.8.0
 
 dependencies:
   meta: ^1.16.0

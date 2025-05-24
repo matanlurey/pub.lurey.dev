@@ -5,7 +5,6 @@ import 'package:chore/src/internal/pubspec.dart';
 import 'package:chore/src/test_deps.dart';
 import 'package:meta/meta.dart';
 import 'package:path/path.dart' as p;
-import 'package:quirk/quirk.dart';
 
 /// Represents a package within a repository.
 ///
@@ -145,35 +144,6 @@ sealed class Package {
   final Set<Package> nestedPackages;
 
   @override
-  bool operator ==(Object other) {
-    return other is Package &&
-        name == other.name &&
-        version == other.version &&
-        description == other.description &&
-        shortDescription == other.shortDescription &&
-        isPublishable == other.isPublishable &&
-        isFlutterPackage == other.isFlutterPackage &&
-        testDependencies.unorderedEquals(other.testDependencies) &&
-        nestedPackages.unorderedEquals(other.nestedPackages) &&
-        supportsCoverage == other.supportsCoverage;
-  }
-
-  @override
-  int get hashCode {
-    return Object.hash(
-      name,
-      version,
-      description,
-      shortDescription,
-      isPublishable,
-      isFlutterPackage,
-      Object.hashAllUnordered(testDependencies),
-      Object.hashAllUnordered(nestedPackages),
-      supportsCoverage,
-    );
-  }
-
-  @override
   @mustBeOverridden
   String toString();
 }
@@ -225,19 +195,6 @@ final class Workspace extends _Package {
   ///
   /// The paths are relative to [path].
   final Set<String> packages;
-
-  @override
-  bool operator ==(Object other) {
-    if (other is! Workspace || super != other) {
-      return false;
-    }
-    return packages.unorderedEquals(other.packages);
-  }
-
-  @override
-  int get hashCode {
-    return Object.hash(super.hashCode, Object.hashAllUnordered(packages));
-  }
 
   @override
   String toString() {

@@ -13,7 +13,11 @@ void main() {
   test('throws if no level is enabled', () {
     final enabler = _TestLevelEnabler((level) => false);
     check(enabler)
-        .has((l) => () => l.currentLevel, 'currentLevel')
+        .has(
+          (l) =>
+              () => l.currentLevel,
+          'currentLevel',
+        )
         .throws<StateError>()
         .has((e) => e.message, 'message')
         .contains('No enabled logging level found');

@@ -10,7 +10,7 @@ name: oath
 description: Swear a Paladin's Oath to code righteousness by enforcing lints.
 short_description: Strict linting for Dart packages.
 
-version: 0.4.0
+version: 0.4.1
 
 homepage: https://github.com/matanlurey/pub.lurey.dev/tree/main/packages/oath
 issue_tracker: https://github.com/matanlurey/pub.lurey.dev/labels/pkg-oath
@@ -18,7 +18,7 @@ issue_tracker: https://github.com/matanlurey/pub.lurey.dev/labels/pkg-oath
 resolution: workspace
 
 environment:
-  sdk: ^3.7.0
+  sdk: ^3.8.0
 
 dependencies:
   lints: ^5.1.0

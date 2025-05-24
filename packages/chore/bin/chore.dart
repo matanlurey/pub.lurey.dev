@@ -21,10 +21,9 @@ void main(List<String> args) async {
   await Runner(
     Context(
       rootDir: root,
-      logLevel:
-          args.any((arg) => arg == '--verbose' || arg == '-v')
-              ? Level.debug
-              : Level.status,
+      logLevel: args.any((arg) => arg == '--verbose' || arg == '-v')
+          ? Level.debug
+          : Level.status,
       allPossiblePackages: available,
     ),
     systemEnvironment,

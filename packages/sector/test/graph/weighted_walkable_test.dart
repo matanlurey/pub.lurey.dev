@@ -59,12 +59,11 @@ void main() {
 
   group('generated walkable', () {
     final generated = WeightedWalkable.generate(
-      successors:
-          (node) => switch (node) {
-            1 => [(2, 3)],
-            2 => [(3, 6)],
-            _ => const [],
-          },
+      successors: (node) => switch (node) {
+        1 => [(2, 3)],
+        2 => [(3, 6)],
+        _ => const [],
+      },
       roots: () => [1, 2],
     );
 
@@ -99,16 +98,14 @@ void main() {
   });
 
   group('as unweighted walkable', () {
-    final graph =
-        WeightedWalkable.generate(
-          successors:
-              (node) => switch (node) {
-                1 => [(2, 3)],
-                2 => [(3, 6)],
-                _ => const [],
-              },
-          roots: () => [1, 2],
-        ).asUnweighted();
+    final graph = WeightedWalkable.generate(
+      successors: (node) => switch (node) {
+        1 => [(2, 3)],
+        2 => [(3, 6)],
+        _ => const [],
+      },
+      roots: () => [1, 2],
+    ).asUnweighted();
 
     test('should not be empty', () {
       check(graph).isNotEmpty();

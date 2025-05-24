@@ -8,6 +8,12 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 <!-- #endregion -->
 
+## 0.5.0
+
+- Bumped Dart to `^3.8.0`.
+- Added [`use_null_aware_elements`](https://dart.dev/tools/linter-rules/use_null_aware_elements) to all rule sets.
+- Added [`unnecessary_ignore`](https://dart.dev/tools/linter-rules/unnecessary_ignore) to all rule sets.
+
 ## 0.4.0
 
 - Bumped Dart to `^3.7.0`.

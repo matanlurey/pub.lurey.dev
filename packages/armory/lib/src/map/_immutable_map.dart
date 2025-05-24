@@ -37,6 +37,7 @@ abstract final class ImmutableMap<K, V> implements ReadOnlyMap<K, V> {
 }
 
 base mixin _DelegatingImmutableMap<K, V> implements ImmutableMap<K, V> {
+  @override
   Map<K, V> get _delegate;
 
   @override

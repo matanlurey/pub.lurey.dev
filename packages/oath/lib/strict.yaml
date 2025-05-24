@@ -80,6 +80,7 @@ linter:
     - unnecessary_async
     - unnecessary_await_in_return
     - unnecessary_breaks
+    - unnecessary_ignore
     - unnecessary_lambdas
     - unnecessary_library_directive
     - unnecessary_library_name
@@ -92,5 +93,6 @@ linter:
     - use_if_null_to_convert_nulls_to_bools
     - use_is_even_rather_than_modulo
     - use_named_constants
+    - use_null_aware_elements
     - use_raw_strings
     - use_truncating_division
