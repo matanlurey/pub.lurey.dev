@@ -1,6 +1,3 @@
-// Make the tests more readable.
-// ignore_for_file: prefer_const_constructors
-
 import 'dart:convert' show utf8;
 
 import 'package:checks/checks.dart';
@@ -121,8 +118,6 @@ void main() {
       'student': JsonBoolean(false),
     });
     check(
-      // Intentionally not awaited.
-      // ignore: discarded_futures
       () => object.convert(
         // Intentionally async.
         // ignore: unnecessary_async

@@ -39,10 +39,9 @@ final class GridWalkable<E> with WeightedWalkable<Pos> {
     double Function(E, E, Pos) weight = _defaultWeight,
     Iterable<Pos> directions = Direction.cardinal,
   }) {
-    final list =
-        identical(directions, Direction.cardinal)
-            ? Direction.cardinal
-            : List.of(directions);
+    final list = identical(directions, Direction.cardinal)
+        ? Direction.cardinal
+        : List.of(directions);
     return GridWalkable._(grid, list, weight);
   }
 

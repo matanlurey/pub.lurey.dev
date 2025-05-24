@@ -12,7 +12,7 @@ description: |-
   Artisnal hand-crafted interopability library for the web platform.
 short_description: Hand-crafted interop for web apps.
 
-version: 0.1.0-alpha+1
+version: 0.1.0-alpha+2
 
 homepage: https://github.com/matanlurey/pub.lurey.dev/tree/main/packages/webby
 issue_tracker: https://github.com/matanlurey/pub.lurey.dev/labels/pkg-webby
@@ -20,7 +20,7 @@ issue_tracker: https://github.com/matanlurey/pub.lurey.dev/labels/pkg-webby
 resolution: workspace
 
 environment:
-  sdk: ^3.7.0
+  sdk: ^3.8.0
 
 dependencies:
   meta: ^1.15.0

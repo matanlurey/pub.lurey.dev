@@ -25,9 +25,6 @@ interface class Dart {
   /// Analyze Dart code using `dart analyze`.
   Stream<Diagnostic> analyze(String directory, {ProcessHost? host}) {
     host ??= ProcessHost();
-
-    // Using StreamCompleter.
-    // ignore: discarded_futures
     return StreamCompleter.fromFuture(_analyze(directory, host: host));
   }
 
@@ -73,8 +70,6 @@ interface class Dart {
   /// default will be used.
   Stream<String> formatCheck(Iterable<String> paths, {ProcessHost? host}) {
     host ??= ProcessHost();
-    // Using StreamCompleter.
-    // ignore: discarded_futures
     final future = _formatCheck(paths, host: host);
     return StreamCompleter.fromFuture(future)
         .where((line) {

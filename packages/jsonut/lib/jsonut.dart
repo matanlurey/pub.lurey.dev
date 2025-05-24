@@ -308,7 +308,6 @@ extension type JsonAny._(Object? _value) implements JsonValue {
   /// Returns the value as an array, or an empty array if it is not an array.
   @pragma('vm:prefer-inline')
   // The result must be mutable.
-  // ignore: prefer_const_constructors
   JsonArray arrayOrEmpty() => arrayOrNull() ?? JsonArray._([]);
 
   /// Whether the value is an array.
@@ -328,7 +327,6 @@ extension type JsonAny._(Object? _value) implements JsonValue {
   /// Returns the value as an object, or an empty object if it is not an object.
   @pragma('vm:prefer-inline')
   // The result must be mutable.
-  // ignore: prefer_const_constructors
   JsonObject objectOrEmpty() => objectOrNull() ?? JsonObject._({});
 
   /// Whether the value is an object.

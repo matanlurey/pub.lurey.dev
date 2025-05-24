@@ -8,6 +8,11 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 <!-- #endregion -->
 
+## 0.3.0-alpha+2
+
+- Bumped Dart to `^3.8.0`.
+- Removed all collection-based APIs, which were moved into `package:armory`.
+
 ## 0.3.0-alpha+1
 
 - Added `checkNotEmpty` and `assertNotEmpty`

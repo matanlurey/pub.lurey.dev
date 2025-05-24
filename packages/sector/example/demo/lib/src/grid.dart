@@ -139,30 +139,24 @@ final class _GridPainter extends CustomPainter {
   final Animation<double>? animation;
 
   static final _paintGrid = Paint()..style = PaintingStyle.stroke;
-  static final _paintFill =
-      Paint()
-        ..color = Colors.black
-        ..style = PaintingStyle.fill;
-  static final _paintStart =
-      Paint()
-        ..color = Colors.green
-        ..style = PaintingStyle.fill;
-  static final _paintEnd =
-      Paint()
-        ..color = Colors.red
-        ..style = PaintingStyle.fill;
-  static final _paintPath =
-      Paint()
-        ..color = Colors.blue
-        ..style = PaintingStyle.fill;
-  static final _paintVisit =
-      Paint()
-        ..color = Colors.grey.shade300
-        ..style = PaintingStyle.fill;
-  static final _paintSkip =
-      Paint()
-        ..color = Colors.grey.shade100
-        ..style = PaintingStyle.fill;
+  static final _paintFill = Paint()
+    ..color = Colors.black
+    ..style = PaintingStyle.fill;
+  static final _paintStart = Paint()
+    ..color = Colors.green
+    ..style = PaintingStyle.fill;
+  static final _paintEnd = Paint()
+    ..color = Colors.red
+    ..style = PaintingStyle.fill;
+  static final _paintPath = Paint()
+    ..color = Colors.blue
+    ..style = PaintingStyle.fill;
+  static final _paintVisit = Paint()
+    ..color = Colors.grey.shade300
+    ..style = PaintingStyle.fill;
+  static final _paintSkip = Paint()
+    ..color = Colors.grey.shade100
+    ..style = PaintingStyle.fill;
 
   @override
   void paint(Canvas canvas, Size size) {
@@ -246,9 +240,10 @@ final class _GridPainter extends CustomPainter {
       final events = (trace.length * animation).round();
 
       // Draw the events. Skips are grey, paths are blue.
-      for (final event in trace
-          .where((e) => e is VisitEvent || e is SkipEvent)
-          .take(events)) {
+      for (final event
+          in trace
+              .where((e) => e is VisitEvent || e is SkipEvent)
+              .take(events)) {
         final Pos pos;
         Paint paint;
         switch (event) {

@@ -9,10 +9,20 @@ void main() {
     check(queue).has((p) => p.length, 'length').equals(0);
     check(queue).has((p) => p.isEmpty, 'isEmpty').isTrue();
     check(queue).has((p) => p.isNotEmpty, 'isNotEmpty').isFalse();
-    check(queue).has((p) => () => p.first, 'first').throws<StateError>();
-    check(
-      queue,
-    ).has((p) => () => p.removeFirst(), 'pop()').throws<StateError>();
+    check(queue)
+        .has(
+          (p) =>
+              () => p.first,
+          'first',
+        )
+        .throws<StateError>();
+    check(queue)
+        .has(
+          (p) =>
+              () => p.removeFirst(),
+          'pop()',
+        )
+        .throws<StateError>();
   });
 
   test('should be non-empty', () {

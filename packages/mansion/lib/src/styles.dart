@@ -328,18 +328,7 @@ final class SetStyles implements Escape {
     Style? h,
     Style? i,
     Style? j,
-  ]) : styles = {
-         a,
-         if (b != null) b,
-         if (c != null) c,
-         if (d != null) d,
-         if (e != null) e,
-         if (f != null) f,
-         if (g != null) g,
-         if (h != null) h,
-         if (i != null) i,
-         if (j != null) j,
-       };
+  ]) : styles = {a, ?b, ?c, ?d, ?e, ?f, ?g, ?h, ?i, ?j};
 
   /// The styles to set.
   ///

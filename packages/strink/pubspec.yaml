@@ -21,7 +21,7 @@ issue_tracker: https://github.com/matanlurey/pub.lurey.dev/labels/pkg-strink
 resolution: workspace
 
 environment:
-  sdk: ^3.7.0
+  sdk: ^3.8.0
 
 dev_dependencies:
   checks: ^0.3.0

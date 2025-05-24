@@ -28,6 +28,7 @@ abstract final class ImmutableList<E> implements ReadOnlyList<E> {
 }
 
 base mixin _DelegatingImmutableList<E> implements ImmutableList<E> {
+  @override
   List<E> get _delegate;
 
   @override

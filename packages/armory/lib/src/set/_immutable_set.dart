@@ -28,6 +28,7 @@ abstract final class ImmutableSet<E> implements ReadOnlySet<E> {
 }
 
 base mixin _DelegatingImmutableSet<E> implements ImmutableSet<E> {
+  @override
   Set<E> get _delegate;
 
   @override

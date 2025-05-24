@@ -135,8 +135,10 @@ final class Path<T> {
     for (var i = 0; i < nodes.length - 1; i++) {
       final node = nodes[i];
       final next = nodes[i + 1];
-      final moveCost =
-          graph.successors(node).firstWhere((e) => e.$1 == next).$2;
+      final moveCost = graph
+          .successors(node)
+          .firstWhere((e) => e.$1 == next)
+          .$2;
       if (moveCost == double.infinity) {
         return (false, double.infinity);
       }

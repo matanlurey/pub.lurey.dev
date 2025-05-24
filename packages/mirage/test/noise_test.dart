@@ -17,12 +17,11 @@ void main() {
     final pattern = Perlin(NoiseTable.fromSeed(0xDEADBEEF));
 
     // Generate an 4x4 grid of perlin noise values in a flat list.
-    final grid =
-        Iterable.generate(4 * 4, (i) {
-          final x = i % 4;
-          final y = i ~/ 4;
-          return pattern.get2d(x, y);
-        }).toList();
+    final grid = Iterable.generate(4 * 4, (i) {
+      final x = i % 4;
+      final y = i ~/ 4;
+      return pattern.get2d(x, y);
+    }).toList();
 
     check(grid).deepEquals([
       0.0,
@@ -48,12 +47,11 @@ void main() {
     final pattern = Simplex(NoiseTable.fromSeed(0xDEADBEEF));
 
     // Generate an 4x4 grid of simplex noise values in a flat list.
-    final grid =
-        Iterable.generate(4 * 4, (i) {
-          final x = i % 4;
-          final y = i ~/ 4;
-          return pattern.get2d(x, y);
-        }).toList();
+    final grid = Iterable.generate(4 * 4, (i) {
+      final x = i % 4;
+      final y = i ~/ 4;
+      return pattern.get2d(x, y);
+    }).toList();
 
     check(grid).deepEquals([
       0.0,
@@ -79,12 +77,11 @@ void main() {
     final pattern = Value(NoiseTable.fromSeed(0xDEADBEEF));
 
     // Generate an 4x4 grid of value noise values in a flat list.
-    final grid =
-        Iterable.generate(4 * 4, (i) {
-          final x = i % 4;
-          final y = i ~/ 4;
-          return pattern.get2d(x, y);
-        }).toList();
+    final grid = Iterable.generate(4 * 4, (i) {
+      final x = i % 4;
+      final y = i ~/ 4;
+      return pattern.get2d(x, y);
+    }).toList();
 
     check(grid).deepEquals([
       0.15294117647058814,
@@ -110,12 +107,11 @@ void main() {
     final pattern = Worley.distance(hasher: NoiseTable.fromSeed(0xDEADBEEF));
 
     // Generate an 4x4 grid of worley distance values in a flat list.
-    final grid =
-        Iterable.generate(4 * 4, (i) {
-          final x = i % 4;
-          final y = i ~/ 4;
-          return pattern.get2d(x, y);
-        }).toList();
+    final grid = Iterable.generate(4 * 4, (i) {
+      final x = i % 4;
+      final y = i ~/ 4;
+      return pattern.get2d(x, y);
+    }).toList();
 
     check(grid).deepEquals([
       -0.4193548387096774,
@@ -141,12 +137,11 @@ void main() {
     final pattern = Worley.value(hasher: NoiseTable.fromSeed(0xDEADBEEF));
 
     // Generate an 4x4 grid of worley value values in a flat list.
-    final grid =
-        Iterable.generate(4 * 4, (i) {
-          final x = i % 4;
-          final y = i ~/ 4;
-          return pattern.get2d(x, y);
-        }).toList();
+    final grid = Iterable.generate(4 * 4, (i) {
+      final x = i % 4;
+      final y = i ~/ 4;
+      return pattern.get2d(x, y);
+    }).toList();
 
     check(grid).deepEquals([
       0.15294117647058814,

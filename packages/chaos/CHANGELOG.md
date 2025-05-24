@@ -8,6 +8,10 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 <!-- #endregion -->
 
+## 0.1.2+4
+
+- Bumped Dart to `^3.8.0`.
+
 ## 0.1.2+3
 
 **Bug fixes**:

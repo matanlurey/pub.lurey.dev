@@ -257,10 +257,9 @@ extension PathTupleChecks<T> on Subject<(Path<T>, double)> {
 
   void pathEquals(Iterable<T> expected, [double? cost]) {
     context.expect(() => ['path $expected with cost $cost'], (actual) {
-      cost ??=
-          expected.isEmpty
-              ? double.infinity
-              : (actual.$1.nodes.length - 1).toDouble();
+      cost ??= expected.isEmpty
+          ? double.infinity
+          : (actual.$1.nodes.length - 1).toDouble();
       if (actual.$1.isFound &&
           _inOrderEquals(actual.$1.nodes, expected) &&
           actual.$2 == cost) {

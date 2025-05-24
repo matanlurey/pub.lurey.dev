@@ -9,28 +9,26 @@ import 'package:path/path.dart' as p;
 /// Runs benchmarks for the project.
 void main(List<String> args) async {
   // Lookup all possible benchmarks.
-  final allBenchmarks =
-      io.Directory('benchmark')
-          .listSync()
-          .whereType<io.Directory>()
-          .map((dir) => p.basename(dir.path))
-          .where((name) => name != 'src')
-          .toList();
+  final allBenchmarks = io.Directory('benchmark')
+      .listSync()
+      .whereType<io.Directory>()
+      .map((dir) => p.basename(dir.path))
+      .where((name) => name != 'src')
+      .toList();
 
-  final parser =
-      ArgParser(allowTrailingOptions: false)
-        ..addFlag(
-          'help',
-          abbr: 'h',
-          help: 'Prints this help message.',
-          negatable: false,
-        )
-        ..addMultiOption(
-          'benchmark',
-          abbr: 'b',
-          help: 'Which benchmark to run.',
-          allowed: allBenchmarks,
-        );
+  final parser = ArgParser(allowTrailingOptions: false)
+    ..addFlag(
+      'help',
+      abbr: 'h',
+      help: 'Prints this help message.',
+      negatable: false,
+    )
+    ..addMultiOption(
+      'benchmark',
+      abbr: 'b',
+      help: 'Which benchmark to run.',
+      allowed: allBenchmarks,
+    );
 
   final results = parser.parse(args);
   if (results.flag('help')) {
@@ -65,11 +63,10 @@ void main(List<String> args) async {
       }
 
       // Parse the output as lines.
-      final lines =
-          await process.stdout
-              .transform(const Utf8Decoder())
-              .transform(const LineSplitter())
-              .toList();
+      final lines = await process.stdout
+          .transform(const Utf8Decoder())
+          .transform(const LineSplitter())
+          .toList();
 
       // Parse the output as results.
       final results = <_BenchmarkResult>[];

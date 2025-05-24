@@ -58,15 +58,14 @@ final class _Add1kEntriesBenchmark<C> extends BenchmarkBase {
   _Add1kEntriesBenchmark(String name, this._suite)
     : super('$name:Add1kEntries');
 
-  static final Uint32List _entries =
-      (() {
-        final entries = Uint32List(1000);
-        for (var i = 0; i < 1000; i++) {
-          entries[i] = i;
-        }
-        entries.shuffle(Random(0));
-        return entries;
-      })();
+  static final Uint32List _entries = (() {
+    final entries = Uint32List(1000);
+    for (var i = 0; i < 1000; i++) {
+      entries[i] = i;
+    }
+    entries.shuffle(Random(0));
+    return entries;
+  })();
 
   @override
   void setup() {
@@ -88,15 +87,14 @@ final class _Pop1kEntriesBenchmark<C> extends BenchmarkBase {
   _Pop1kEntriesBenchmark(String name, this._suite)
     : super('$name:Pop1kEntries');
 
-  static final Uint32List _entries =
-      (() {
-        final entries = Uint32List(1000);
-        for (var i = 0; i < 1000; i++) {
-          entries[i] = i;
-        }
-        entries.shuffle(Random(0));
-        return entries;
-      })();
+  static final Uint32List _entries = (() {
+    final entries = Uint32List(1000);
+    for (var i = 0; i < 1000; i++) {
+      entries[i] = i;
+    }
+    entries.shuffle(Random(0));
+    return entries;
+  })();
 
   late C _queue;
   C _createQueue() {

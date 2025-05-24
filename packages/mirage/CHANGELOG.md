@@ -8,6 +8,10 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 <!-- #endregion -->
 
+## 0.2.0+4
+
+- Bumped Dart to `^3.8.0`.
+
 ## 0.2.0+3
 
 - Bumps `chaos` to `^0.1.2+2` to fix a random generation bug in tests.
