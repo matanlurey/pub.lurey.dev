@@ -13,6 +13,7 @@ A wide but independent collection of Dart packages and projects.
 | [`armory`](./packages/armory) | [![Pub version for package/armory](https://img.shields.io/pub/v/armory?label=%20)](https://pub.dev/packages/armory) | More data structures |
 | [`chaos`](./packages/chaos) | [![Pub version for package/chaos](https://img.shields.io/pub/v/chaos?label=%20)](https://pub.dev/packages/chaos) | High quality PRNGs |
 | [`chore`](./packages/chore) | _Unreleased_ | Opinionated project management. |
+| [`examine`](./packages/examine) | [![Pub version for package/examine](https://img.shields.io/pub/v/examine?label=%20)](https://pub.dev/packages/examine) | More test expectations. |
 | [`iota`](./packages/iota) | [![Pub version for package/iota](https://img.shields.io/pub/v/iota?label=%20)](https://pub.dev/packages/iota) | Minimalist file system API. |
 | [`jsonut`](./packages/jsonut) | [![Pub version for package/jsonut](https://img.shields.io/pub/v/jsonut?label=%20)](https://pub.dev/packages/jsonut) | Minimal JSON utilities. |
 | [`lodim`](./packages/lodim) | [![Pub version for package/lodim](https://img.shields.io/pub/v/lodim?label=%20)](https://pub.dev/packages/lodim) | Fixed-point 2D geometry. |
