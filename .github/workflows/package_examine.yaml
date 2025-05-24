@@ -1,0 +1,44 @@
+name: package/examine
+
+on:
+  # Post-submit.
+  push:
+    branches: [ main ]
+
+  # Pre-submit.
+  pull_request:
+    branches: [ main ]
+    paths:
+      - .github/workflows/package_examine.yaml
+      - packages/examine/**
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4.2.0
+      - uses: dart-lang/setup-dart@v1.6.5
+      - run: dart pub get
+      - run: ./dev.sh setup --packages packages/examine
+      - run: ./dev.sh check --packages packages/examine
+      - run: ./dev.sh generate --no-root --fail-if-changed --packages packages/examine
+      - run: ./dev.sh test --packages packages/examine
+      - run: ./dev.sh coverage --packages packages/examine
+      - uses: codecov/codecov-action@v4.6.0
+        with:
+          token: ${{ secrets.CODECOV_TOKEN }}
+          flags: examine
+          file: packages/examine/coverage/lcov.info
+          fail_ci_if_error: true
+  publish:
+    if: github.event_name == 'push'
+    needs: build
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4.2.0
+      - uses: dart-lang/setup-dart@v1.6.5
+      - run: dart pub get
+        working-directory: packages/examine
+      - run: ./dev.sh publish --packages packages/examine
+        env:
+          PUB_CREDENTIALS: ${{ secrets.PUB_CREDENTIALS }}

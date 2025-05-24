@@ -1,0 +1,23 @@
+# Format: https://dart.dev/tools/pub/pubspec
+
+name: examine
+description: |-
+  Aditional assertions and expectations for the `checks` package.
+short_description: More test expectations.
+
+version: 0.1.0-alpha
+
+homepage: https://github.com/matanlurey/pub.lurey.dev/tree/main/packages/examine
+issue_tracker: https://github.com/matanlurey/pub.lurey.dev/labels/pkg-examine
+
+resolution: workspace
+
+environment:
+  sdk: ^3.8.0
+
+dependencies:
+  checks: ^0.3.0
+  meta: ^1.16.0
+
+dev_dependencies:
+  test: ^1.25.7
